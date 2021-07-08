@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+/* 로그인 */
+.login_join_box {
+	text-align: center;
+}
+
+.login_join_inner {
+	max-width: 400px;
+    margin: auto;
+}
+
+.login_join_title {
+	font-size: 20px;
+	font-weight: 600;
+    margin: 30px 0;
+}
+
+.loginForm {
+	list-style: none;
+    padding: 0;
+}
+
+.loginForm li {
+	margin-bottom: 20px;
+}
+
+.loginForm_txt {
+	border: none;
+	border-radius: 10px;
+    background: #fafafa;
+    width: 100%;
+    padding: 15px;
+}
+
+.pwd_search {
+	float: right;
+    color: #aaaaaa;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+	width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.another_loginBox {
+	margin-top: 30px;
+	color: #aaaaaa;
+}
+
+.another_btnBox {
+	margin-top: 30px;
+}
+
+.another_btn {
+	border-style: none;
+	margin: 0 15px;
+	background-color: #fff;
+}
+
+.another_btn_img {
+	width: 55px;
+}
+
+/* 회원가입 */
+.joinForm {
+	list-style: none;
+    padding: 0;
+    margin-bottom: 50px;
+}
+
+.joinForm li {
+	margin-bottom: 20px;
+}
+
+.joinForm_txt {
+	border: none;
+	border-radius: 10px;
+    background: #fafafa;
+    width: 100%;
+    padding: 15px;
+}
+
+.join_pwd_notice {
+	font-size: 12px;
+    letter-spacing: -0.36px;
+    color: #aaaaaa;
+    float: left;
+    line-height: 40px;
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

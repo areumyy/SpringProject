@@ -36,4 +36,17 @@ public class HomeController {
 		return "home";
 	}
 	
+	
+	@RequestMapping("login.do")
+	public String login() {
+		
+		return "../views/loginForm";
+	}
+	
+	@RequestMapping("join.do")
+	public String join() {
+		
+		return "../views/joinForm";
+	}
+	
 }
