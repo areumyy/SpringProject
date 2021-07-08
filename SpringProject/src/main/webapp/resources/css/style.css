@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+#app {
+	background-color: white;
+	min-height: 100%;
+	min-width: 100%;
+}
+
+.main {
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	min-height: 100vh;
+}
+
+.article {
+	min-height: 1px;
+}

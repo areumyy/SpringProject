@@ -13,33 +13,24 @@
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-<link href="<%=request.getContextPath() %>/resources/css/test.css" rel="stylesheet"/>
+<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <script src="${path}/resources/js/test.js"></script>
 </head>
 <body>
 
-	<%-- <jsp:include page="../include/side.jsp" /> --%>
 	
-	<div align="center">
-		<hr width="50%" color="yellow">
-		<h3 class="test">프립</h3>
-		<hr width="50%" color="yellow">
-
-		<button class="btn btn-danger">확인하기</button>
-		<br> <br>
-
-		<div class="dropdown">
-			<button class="btn btn-secondary dropdown-toggle" type="button"
-				id="dropdownMenuButton1" data-bs-toggle="dropdown"
-				aria-expanded="false">Dropdown button</button>
-			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-				<li><a class="dropdown-item" href="#">Action</a></li>
-				<li><a class="dropdown-item" href="#">Another action</a></li>
-				<li><a class="dropdown-item" href="#">Something else here</a></li>
-			</ul>
+	<div id="app">
+		<div class="main">
+			<%-- <jsp:include page="../include/side.jsp" /> --%>
+			<div class="article">
+			
+			
+			
+				
+			</div>
+			<%-- <jsp:include page="../include/fo.jsp" /> --%>
 		</div>
 	</div>
-
-	<%-- <jsp:include page="../include/fo.jsp" /> --%>
+	
 </body>
 </html>
