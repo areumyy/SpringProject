@@ -30,4 +30,9 @@ public class MarketController {
 	public String noticeList() {
 		return "notice_list";
 	}
+	
+	@RequestMapping("category_list.do")
+	public String cateList() {
+		return "category_list";
+	}
 }
