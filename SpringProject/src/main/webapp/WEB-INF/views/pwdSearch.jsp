@@ -34,16 +34,15 @@
 							<h3 class="login_join_title">비밀번호 찾기</h3>
 						</div>
 						
-						<form method="post" action="<%=request.getContextPath() %>/login_ok.do">
-							<ul class="loginForm">
+						<form method="post" action="<%=request.getContextPath() %>/pwd_search_ok.do">
+							<ul class="pwdSearchForm">
 								<li>
-									<input type="text" name="memId" class="loginForm_txt" placeholder="아이디" required>
+									<input type="text" name="memId" class="pwdSearchForm_txt" placeholder="아이디(이메일)" required>
+									<span class="notice">재설정하려는 비밀번호의 아이디(이메일)를 입력해주세요.</span>
 								</li>
-								<li>
-									
-								</li>
+								<li><input type="text" name="memName" class="pwdSearchForm_txt" placeholder="이름" required></li>
 							</ul>
-							<input type="submit" value="이메일 발송" class="login_btn">		
+							<input type="submit" value="비밀번호 찾기" class="submit_btn">		
 						</form>
 					</div>
 				</div>
@@ -51,6 +50,9 @@
 			<jsp:include page="../include/footer.jsp" />
 		</div>
 	</div>
+	
+	<!-- js 파일 -->
+	<script src="./resources/js/login.js"></script>
 
 </body>
 </html>
