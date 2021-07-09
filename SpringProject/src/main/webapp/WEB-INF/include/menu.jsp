@@ -39,10 +39,10 @@
 					<button type="button" class="btn btn-secondary logout">로그아웃</button> -->
 					
 					
-					<a class="qna_link" href="#">
+					<a class="qna_link" href="<%=request.getContextPath() %>/qna_list.do">
 						<div class="qna_div">자주 묻는 질문</div>
 					</a>
-					<a class="qna_link" href="#">
+					<a class="qna_link" href="<%=request.getContextPath() %>/notice_list.do">
 						<div class="qna_div">공지사항</div>
 					</a>
 				</div>

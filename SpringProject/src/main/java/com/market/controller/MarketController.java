@@ -8,16 +8,26 @@ public class MarketController {
 
 	@RequestMapping("join.do")
 	public String join() {
-		return "../views/joinForm";
+		return "joinForm";
 	}
 
 	@RequestMapping("pwd_search.do")
 	public String pwdSearch() {
-		return "../views/pwdSearch";
+		return "pwdSearch";
 	}
 
 	@RequestMapping("login.do")
 	public String login() {
-		return "../views/loginForm";
+		return "loginForm";
+	}
+
+	@RequestMapping("qna_list.do")
+	public String qnaList() {
+		return "qna_list";
+	}
+
+	@RequestMapping("notice_list.do")
+	public String noticeList() {
+		return "notice_list";
 	}
 }
