@@ -21,12 +21,24 @@
 					</a>
 				</div>
 				<div class="info_btn">
-					<a class="name_link" href="#">
+					<!-- 로그인 전 -->
+					<a class="qna_link" href="<%=request.getContextPath() %>/join.do">
+						<div class="qna_div">회원가입</div>
+					</a>
+					<a class="qna_link" href="<%=request.getContextPath() %>/login.do">
+						<div class="qna_div">로그인</div>
+					</a>
+					
+					
+					<!-- 로그인 후 -->
+					<!-- <a class="name_link" href="#">
 						<div class="name_div">
 							<span>이성욱</span>님
 						</div>
 					</a>
-					<button type="button" class="btn btn-secondary logout">로그아웃</button>
+					<button type="button" class="btn btn-secondary logout">로그아웃</button> -->
+					
+					
 					<a class="qna_link" href="#">
 						<div class="qna_div">자주 묻는 질문</div>
 					</a>
@@ -96,7 +108,7 @@
 						</ul>
 					</div>
 					<span class="bound_line"></span>
-					<a class="menu_link" href="#">
+					<a class="menu_link" href="<%= request.getContextPath() %>/">
 						<img src="<%=request.getContextPath() %>/resources/image/menu/logo.svg" class="logo_img">
 					</a>
 					<div class="search">

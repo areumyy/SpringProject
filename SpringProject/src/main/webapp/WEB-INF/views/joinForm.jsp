@@ -26,7 +26,7 @@
 
 	<div id="app">
 		<div class="main">
-			<%-- <jsp:include page="../include/side.jsp" /> --%>
+			<jsp:include page="../include/menu.jsp" />
 			<div class="article">
 				<div class="login_join_box">
 					<div class="login_join_inner">
@@ -52,7 +52,7 @@
 					</div>
 				</div>
 			</div>
-			<%-- <jsp:include page="../include/fo.jsp" /> --%>
+			<jsp:include page="../include/footer.jsp" />
 		</div>
 	</div>
 	

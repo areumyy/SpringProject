@@ -26,7 +26,7 @@
 	
 	<div id="app">
 		<div class="main">
-			<%-- <jsp:include page="../include/side.jsp" /> --%>
+			<jsp:include page="../include/menu.jsp" />
 			<div class="article">
 				<div class="login_join_box">
 					<div class="login_join_inner">
@@ -43,7 +43,7 @@
 									<input type="password" name="memPwd" class="loginForm_txt" placeholder="비밀번호" required>
 								</li>
 							</ul>
-							<a href="<%=request.getContextPath() %>/pwd_search.do %>" class="pwd_search">비밀번호 찾기</a><br>
+							<a href="<%=request.getContextPath() %>/pwd_search.do" class="pwd_search">비밀번호 찾기</a><br>
 							<input type="submit" value="로그인" class="login_btn">		
 						</form>
 						
@@ -57,7 +57,7 @@
 					</div>
 				</div>
 			</div>
-			<%-- <jsp:include page="../include/fo.jsp" /> --%>
+			<jsp:include page="../include/footer.jsp" />
 		</div>
 	</div>
 
