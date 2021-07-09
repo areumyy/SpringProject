@@ -49,4 +49,9 @@ public class HomeController {
 		return "../views/joinForm";
 	}
 	
+	@RequestMapping("pwd_search.do")
+	public String pwdSearch() {
+		
+		return "../views/pwdSearch";
+	}
 }

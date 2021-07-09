@@ -33,16 +33,29 @@
     padding: 15px;
 }
 
+.loginForm_txt:focus {
+	background: #fafafa;
+	border: 2px solid #0075EF;
+	outline: none;
+}
+
 .pwd_search {
 	float: right;
     color: #aaaaaa;
     margin-bottom: 30px;
 }
 
-.btn-primary {
+.login_btn {
 	width: 100%;
-    padding: 15px;
+	border: none;
     border-radius: 10px;
+    background-color: #B5C5D6;
+    color: #F4F4F4;
+    padding: 15px;
+}
+
+.login_btn.on {
+	background-color: #0075EF;
 }
 
 .another_loginBox {
@@ -83,6 +96,12 @@
     padding: 15px;
 }
 
+.joinForm_txt:focus {
+	background: #fafafa;
+	border: 2px solid #0075EF;
+	outline: none;
+}
+
 .join_pwd_notice {
 	font-size: 12px;
     letter-spacing: -0.36px;
@@ -93,8 +112,18 @@
     margin-bottom: 10px;
 }
 
+.join_btn {
+	width: 100%;
+	border: none;
+    border-radius: 10px;
+    background-color: #B5C5D6;
+    color: #F4F4F4;
+    padding: 15px;
+}
 
-
+.join_btn.on {
+	background-color: #0075EF;
+}
 
 
 

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+
 <!-- 반응형 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 부트스트랩 -->
@@ -19,6 +20,7 @@
 <!-- CSS 파일 -->
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/login.css" rel="stylesheet"/>
+
 </head>
 <body>
 
@@ -32,7 +34,7 @@
 							<h3 class="login_join_title">회원가입</h3>
 						</div>
 						
-						<form method="post" action="<%=request.getContextPath() %>/login_ok.do">
+						<form method="post" action="<%=request.getContextPath() %>/join_ok.do">
 							<ul class="joinForm">
 								<li><input type="text" name="memId" class="joinForm_txt" placeholder="아이디" required></li>
 								<li>
@@ -40,12 +42,12 @@
 									<span class="join_pwd_notice">대/소문자, 숫자, 특수문자 중 2가지 이상의 조합으로 10자 이상</span>
 								</li>
 								<li><input type="password" name="memPwd_confirm" class="joinForm_txt" placeholder="비밀번호 확인" required></li>
-								<li><input type="password" name="memName" class="joinForm_txt" placeholder="이름" required></li>
-								<li><input type="password" name="memNickname" class="joinForm_txt" placeholder="닉네임" required></li>
-								<li><input type="password" name="memEmail" class="joinForm_txt" placeholder="이메일"></li>
-								<li><input type="password" name="memPhone" class="joinForm_txt" placeholder="핸드폰 번호" required></li>
+								<li><input type="text" name="memName" class="joinForm_txt" placeholder="이름" required></li>
+								<li><input type="text" name="memNickname" class="joinForm_txt" placeholder="닉네임" required></li>
+								<li><input type="text" name="memEmail" class="joinForm_txt" placeholder="이메일"></li>
+								<li><input type="text" name="memPhone" class="joinForm_txt" placeholder="핸드폰 번호" required></li>
 							</ul>
-							<input type="submit" value="회원가입" class="btn btn-primary">
+							<input type="submit" value="회원가입" class="join_btn">
 						</form>
 					</div>
 				</div>
@@ -53,6 +55,8 @@
 			<%-- <jsp:include page="../include/fo.jsp" /> --%>
 		</div>
 	</div>
+	
+	<script src="./resources/js/login.js"></script>
 
 </body>
 </html>
