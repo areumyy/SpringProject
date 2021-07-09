@@ -52,9 +52,66 @@ a {
     -webkit-text-decoration-skip: objects;
 }
 
+button {
+    cursor: pointer;
+}
+
+button {
+    appearance: auto;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+
+button, select {
+    text-transform: none;
+}
+
+button, input {
+    overflow: visible;
+}
+
+button, input, select, textarea {
+    background-color: transparent;
+    border-style: none;
+    color: inherit;
+    font-size: 1em;
+    margin: 0;
+}
+
+audio, canvas, iframe, img, svg, video {
+    vertical-align: middle;
+}
+
 a, area, button, input, label, select, textarea, [tabindex] {
     -ms-touch-action: manipulation;
     touch-action: manipulation;
+}
+
+button, html [type="button"], [type="reset"], [type="submit"] {
+    -webkit-appearance: button;
+}
+
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+    display: block;
 }
 
 a:-webkit-any-link {
@@ -62,17 +119,34 @@ a:-webkit-any-link {
     cursor: pointer;
 }
 
+img {
+    border-style: none;
+}
+
+img[Attributes Style] {
+    width: 192px;
+}
+
+* {
+    outline: none;
+    font-family: inherit;
+}
+/* 
 * {
     outline: none;
     outline-color: initial;
     outline-style: none;
     outline-width: initial;
     font-family: inherit;
-}
+} */
 
 *, ::before, ::after {
     background-repeat: no-repeat;
     box-sizing: inherit;
+}
+
+section {
+    display: block;
 }
 
 div {
@@ -90,18 +164,18 @@ body {
     font-family: "UI Frip", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.article {
+.bScXKt {
     display: flex;
     flex-flow: column nowrap;
     align-content: flex-start;
     margin: 0px auto;
-    max-width: 808px;
+    max-width: 768px;
     width: 100%;
     padding: 0px 20px;
     min-height: 1px;
 }
 
-.Category_Nav {
+.koasSX {
     width: auto;
     height: auto;
     transition: opacity 200ms ease-in-out 0s;
@@ -111,7 +185,18 @@ body {
     min-height: 1px;
 }
 
-.small_Category {
+.gAfjFB {
+    line-height: 20px;
+    padding: 20px 0px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.cZxCtg {
+    margin-right: 6px;
+}
+
+.jEQWdY {
     box-sizing: content-box;
     padding-bottom: 20px;
     font-size: 12px;
@@ -119,11 +204,15 @@ body {
     white-space: nowrap;
 }
 
-.small_Category > * {
+.jEQWdY > * {
     margin-right: 20px;
 }
 
-.Category_Filter {
+.eqAEeH {
+    position: relative;
+}
+
+.gRnEmw {
     display: flex;
     padding-top: 5px;
     padding-bottom: 40px;
@@ -131,22 +220,22 @@ body {
     white-space: nowrap;
 }
 
-.Category_Filter > * {
+.gRnEmw > * {
     margin-right: 16px;
 }
 
-.FilterDate {
+.gymLjt {
     display: flex;
 }
 
-.FilterButton {
+.NVKNq {
     display: flex;
     position: relative;
     -webkit-box-align: center;
     align-items: center;
 }
 
-.Filter_btn {
+.fFBpBV {
     width: auto;
     height: auto;
     line-height: 14px;
@@ -161,10 +250,260 @@ body {
     font-weight: 500;
 }
 
-.FilterLocation {
+.gYwztB {
     display: inline;
     position: relative;
 }
+
+.dqWjUS {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    line-height: 18px;
+    font-size: 14px;
+}
+
+.eQGBlA {
+    display: flex;
+    max-width: calc(100% - 62px);
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.jskoxd {
+    display: block;
+    margin-right: 8px;
+    font-weight: bold;
+    color: black;
+    font-size: inherit;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ddzcOT {
+    font-weight: 300;
+}
+
+.iQnPKA {
+    min-width: 52px;
+}
+
+.haoyHh {
+    color: black;
+    width: 52px;
+}
+
+.jUxAIa {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 1px;
+    padding-bottom: 18px;
+}
+
+.gbEqzo {
+	display: flex;
+	flex-flow: row wrap;
+	min-height: 1px;
+}
+
+.gbEqzo > * {
+    margin-right: 15px;
+    margin-bottom: 30px;
+    width: calc(25% - 11.25px) !important;
+}
+
+.gbEqzo > :nth-child(4n) {
+    margin-right: 0px;
+}
+
+.juqTGK {
+	display: flex;
+	flex-flow: column nowrap;
+	width: 100%;
+	background-color: white;
+	min-height: 1px;
+}
+
+.lQqkn {
+    min-height: 1px;
+}
+
+.qhbyT {
+    overflow: hidden;
+}
+
+.kzeAqh {
+    position: relative;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    min-height: 1px;
+    border-radius: 5px;
+    background-color: rgb(250, 250, 250);
+}
+
+.kQQiqE {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 10px;
+    z-index: 1;
+}
+
+.cvPkEK {
+    margin: 2px 0px 0px 2px;
+    height: 10px;
+    color: white;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 10px;
+    text-shadow: rgb(0 0 0 / 30%) 0px 0px 10px;
+}
+
+.dXNbSn {
+    width: 24px;
+    height: 24px;
+    line-height: normal;
+    padding: 0px;
+    background-color: transparent;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+}
+
+.gDuKGF {
+    min-height: 1px;
+}
+
+.bUFcfh {
+    display: none !important;
+}
+
+.VUNpu {
+    display: initial;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+.cgNYxX {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
+    padding: 15px;
+}
+
+.jtLeBm {
+    width: 57px;
+    height: 27px;
+    border-radius: 5px;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    display: none;
+}
+
+.klQNtF {
+    margin-top: 14px;
+    font-size: 12px;
+    height: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 14px;
+    color: rgb(155, 155, 155);
+}
+
+.kygIWm {
+    margin-top: 10px;
+    height: auto;
+    max-height: 40px;
+    line-height: 20px;
+    font-size: 14px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.dfEgiu {
+    margin-top: 14px;
+    line-height: 14px;
+    height: 14px;
+}
+
+.goIeoc {
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.VbIMy {
+    margin-left: 4px;
+    color: rgb(187, 187, 187);
+    font-size: 12px;
+    text-decoration: line-through;
+}
+
+.jseTtS {
+    margin-top: 14px;
+    display: flex;
+}
+
+.VOrku {
+    font-size: 11px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(187, 187, 187);
+}
+
+.VOrku > img {
+    margin-right: 2px;
+}
+
+.hKIBdE {
+    margin-left: 6px;
+}
+
+.fMHhZd {
+    width: 100%;
+    line-height: 13px;
+    font-size: 13px;
+}
+
+.fMHhZd > * {
+    padding: 18px;
+}
+
+.dBGVbB {
+    display: block;
+    margin: 0px auto 40px;
+    width: 100%;
+    max-width: 450px;
+    line-height: 13px;
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+}
+
+
+
 
 
 
@@ -175,77 +514,686 @@ body {
 
 	<div id="app">
 		<div class="main">
-		
 			<%-- <jsp:include page="../include/side.jsp" /> --%>
-			<div class="article">
-				<div class="Category_Nav" style="opacity: 1; display: block;">
-					<h2>쿠킹</h2>
-				</div>
-				
-				<div>
-					<!-- 소분류 -->
-					<div class="small_Category">
-						<a href="" style="font-weight: bold; color: rgb(51, 151, 255);">전체</a>
-						<a href="">요리</a>
-						<a href="">음료</a>
-						<a href="">베이킹</a>
+
+			<div class="bScXKt">
+				<div class="koasSX" style="opacity: 1; display: block;">
+					<div class="gAfjFB">
+						<span>쿠킹</span>
 					</div>
-				</div>
-				
-				<div>
-					<!-- 필터 -->
-					<div class="Category_Filter">
-						<div class="FilterDate">
-							<div class="FilterButton">
-								<button height="auto" color="initial" font-size="14px"
-									font-weight="500" class="Filter_btn">언제</button>
-							</div>
+					
+					<div>
+						<!-- 소분류 -->
+						<div class="jEQWdY">
+							<a href="" style="font-weight: bold; color: rgb(51, 151, 255);">전체</a>
+							<a href="">요리</a>
+							<a href="">음료</a>
+							<a href="">베이킹</a>
 						</div>
-						<div class="FilterLocation">
-							<div class="FilterButton">
-								<button height="auto" color="initial" font-size="14px"
-									font-weight="500" class="Filter_btn">어디서</button>
+					</div>
+					
+					<div class="eqAEeH">
+						<!-- 필터 -->
+						<div class="gRnEmw">
+							<div class="gymLjt">
+								<div class="NVKNq">
+									<button height="auto" color="initial" font-size="14px"
+										font-weight="500" class="fFBpBV">언제</button>
+								</div>
+							</div>
+							<div class="gYwztB">
+								<div class="NVKNq">
+									<button height="auto" color="initial" font-size="14px"
+										font-weight="500" class="fFBpBV">어디서</button>
+								</div>
+							</div>
+							<div>
+								<div class="NVKNq">
+									<button height="auto" color="initial" font-size="14px"
+										font-weight="500" class="fFBpBV">누구와</button>
+								</div>
+							</div>
+							<div>
+								<div class="NVKNq">
+									<button height="auto" color="initial" font-size="14px"
+										font-weight="500" class="fFBpBV">필터</button>
+								</div>
 							</div>
 						</div>
 						<div>
-							<div class="FilterButton">
-								<button height="auto" color="initial" font-size="14px"
-									font-weight="500" class="Filter_btn">누구와</button>
-							</div>
-						</div>
-						<div class="FilterOthers">
-							<div class="FilterButton">
-								<button height="auto" color="initial" font-size="14px"
-									font-weight="500" class="Filter_btn">필터</button>
-							</div>
-						</div>
-					</div>
-					<div>
-						<!-- 카테고리 리스트 메인부분 -->
-						<div class="Main_Article"
-							style="opacity: 1; display: block;">
-							<div>
+							<!-- 카테고리 리스트 메인부분 -->
+							<div class="koasSX" style="opacity: 1; display: block;">
+								
 								<!-- 인기 쿠킹 -->
 								<div>
+									<div class="dqWjUS" font-size="14px">
+										<div class="eQGBlA" font-size="18">
+											<h2 class="jskoxd">인기 쿠킹</h2>
+											<span class="ddzcOT">181</span>
+										</div>
+										<div class="iQnPKA">
+											<a class="haoyHh" href="">전체 보기</a>
+										</div>
+									</div>
+									
+									<div class="koasSX" style="opacity: 1; display: block;">
+										<section class="jUxAIa">
+											<div class="gbEqzo">
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>마포/서대문구</span></span>
+																	<button class="dXNbSn" width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF">
+																	<img class="bUFcfh" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1624943057862_556589">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio " style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img
+																						alt="[41%▼] [초급] 나만의 칵테일 만들기 원데이 클래스 (예약 가능) 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1624943057862_556589">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">나만의 특별한 칵테일 만들기</div>
+															<div class="kygIWm">[41%▼] [초급] 나만의 칵테일 만들기 원데이 클래스 (예약 가능)</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">23,000원</span>
+																<span class="VbIMy">39,000</span>
+															</div>
+															<div class="jseTtS">
+																<div class="VOrku">
+																	<img
+																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
+																		alt="별점 icon"><span>5.00</span>
+																</div>
+																<img
+																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 30 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='30' height='16' fill='%233397FF' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.25 10.688H9.887L7.87 7.147v3.54H6.5V5h1.371l2.012 3.54V5h1.367v5.688zm4.895-2.41h-2.157v1.355h2.547v1.055h-3.918V5h3.926v1.059h-2.555v1.199h2.157v1.02zM22 8.565L22.652 5h1.36l-1.207 5.688h-1.422l-.762-3.243-.746 3.242h-1.418L17.247 5h1.362l.653 3.566L20.043 5h1.164L22 8.566z'/%3E %3C/g%3E %3C/svg%3E"
+																	class="hKIBdE">
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>동작/관악구</span></span>
+																	<button class="dXNbSn" width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF">
+																	<img class="bUFcfh" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/KakaoTalk_20210630_182825457_03_j1z30k">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio" style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img alt="내만내칵 (내가 만들어서 내가 마시는 칵테일) 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/KakaoTalk_20210630_182825457_03_j1z30k">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">2가지 칵테일 만들어보기</div>
+															<div class="kygIWm">내만내칵 (내가 만들어서 내가 마시는 칵테일)</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">40,000원</span>
+																<span class="VbIMy"></span>
+															</div>
+															<div class="jseTtS">
+																<img
+																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 30 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='30' height='16' fill='%233397FF' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.25 10.688H9.887L7.87 7.147v3.54H6.5V5h1.371l2.012 3.54V5h1.367v5.688zm4.895-2.41h-2.157v1.355h2.547v1.055h-3.918V5h3.926v1.059h-2.555v1.199h2.157v1.02zM22 8.565L22.652 5h1.36l-1.207 5.688h-1.422l-.762-3.243-.746 3.242h-1.418L17.247 5h1.362l.653 3.566L20.043 5h1.164L22 8.566z'/%3E %3C/g%3E %3C/svg%3E"
+																	class="hKIBdE">
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>송파/강동구</span></span>
+																	<button class="dXNbSn" width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF">
+																	<img class="bUFcfh" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/170212_beer_01_1486004849970">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio" style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img alt="술술 놀면서 수제 맥주 만들기 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/170212_beer_01_1486004849970">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">19세이상｜맥주를 즐기는 방법</div>
+															<div class="kygIWm">술술 놀면서 수제 맥주 만들기</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">40,000원</span>
+																<span class="VbIMy"></span>
+															</div>
+															<div class="jseTtS">
+																<div class="VOrku">
+																	<img
+																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
+																		alt="별점 icon"><span>4.80</span>
+																</div>
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>강남/서초구</span></span>
+																	<button class="dXNbSn" width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF">
+																	<img class="bUFcfh" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1622442349266_977596">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio" style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img alt="[강남] 와인 대회 우승 전문가와 함께 하는 원데이 기초 클래스! 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1622442349266_977596">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">19세이상｜와인 첫 시작은 주도락가와 함께</div>
+															<div class="kygIWm">[강남] 와인 대회 우승 전문가와 함께 하는 원데이 기초 클래스!</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">55,000원</span>
+																<span class="VbIMy"></span>
+															</div>
+															<div class="jseTtS">
+																<div class="VOrku">
+																	<img
+																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
+																		alt="별점 icon"><span>5.00</span>
+																</div>
+															</div>
+														</div>
+													</a>
+												</div>
+											</div>
+										</section>
+									</div>
+								</div>
 								
+								<!-- 금주의 쿠킹 -->
+								<div>
+									<div font-size="14px"
+										class="dqWjUS">
+										<div font-size="18" class="eQGBlA">
+											<h2 class="jskoxd">금주의 쿠킹</h2>
+											<span class="ddzcOT">11</span>
+										</div>
+										<div class="iQnPKA">
+											<a class="haoyHh" href="">전체 보기</a>
+										</div>
+									</div>
+									<div class="koasSX" style="opacity: 1; display: block;">
+										<section class="jUxAIa">
+											<div class="gbEqzo">
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>강남/서초구</span></span>
+																	<button class="dXNbSn" width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF">
+																	<img class="bUFcfh" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/1586175181732_bf1jwj">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio" style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img
+																						alt="Tea+Cocktail 차 마시며 배우는 테마가 있는 칵테일 만들기 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/1586175181732_bf1jwj">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">19세이상｜직접 바텐더가 되어 만들어보는</div>
+															<div class="kygIWm">Tea+Cocktail 차 마시며 배우는 테마가 있는 칵테일 만들기</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">43,000원</span>
+																<span class="VbIMy"></span>
+															</div>
+															<div class="jseTtS">
+																<div class="VOrku">
+																	<img
+																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
+																		alt="별점 icon"><span>4.90</span>
+																</div>
+															</div>
+														</div></a>
+												</div>
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>강남/서초구</span></span>
+																	<button class="dXNbSn" width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF">
+																	<img class="bUFcfh" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1622442349266_977596">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio" style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img alt="[강남] 와인 대회 우승 전문가와 함께 하는 원데이 기초 클래스! 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1622442349266_977596">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">19세이상｜와인 첫 시작은 주도락가와 함께</div>
+															<div class="kygIWm">[강남] 와인 대회 우승 전문가와 함께 하는 원데이 기초 클래스!</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">55,000원</span>
+																<span class="VbIMy"></span>
+															</div>
+															<div class="jseTtS">
+																<div class="VOrku">
+																	<img
+																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
+																		alt="별점 icon"><span>5.00</span>
+																</div>
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>강남/서초구</span></span>
+																	<button class="dXNbSn"width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF">
+																	<img class="bUFcfh" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1560603284574_547509">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio" style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img alt="신사 / 가로수길 칵테일 클래스 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1560603284574_547509">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">19세이상｜바 안에서 만드는 칵테일</div>
+															<div class="kygIWm">신사 / 가로수길 칵테일 클래스</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">35,000원</span>
+																<span class="VbIMy">49,000</span>
+															</div>
+															<div class="jseTtS">
+																<div class="VOrku">
+																	<img
+																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
+																		alt="별점 icon"><span>4.91</span>
+																</div>
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>강남/서초구</span></span>
+																	<button class="dXNbSn" width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF">
+																	<img class="bUFcfh" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1565941920026_463598">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio" style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img alt="알록달록 컬러 파스타 만들기 (예약 가능) 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1565941920026_463598">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">기분에 맞춰 건강에 맞춰 다양한 컬러로 요리를!</div>
+															<div class="kygIWm">알록달록 컬러 파스타 만들기 (예약 가능)</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">30,000원</span>
+																<span class="VbIMy"></span>
+															</div>
+															<div class="jseTtS">
+																<div class="VOrku">
+																	<img
+																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
+																		alt="별점 icon"><span>4.89</span>
+																</div>
+															</div>
+														</div>
+													</a>
+												</div>
+											</div>
+										</section>
+									</div>
+								</div>
 								
+								<!-- 신규 쿠킹 -->
+								<div>
+									<div class="dqWjUS" font-size="14px">
+										<div class="eQGBlA" font-size="18">
+											<h2 class="jskoxd">신규 쿠킹</h2>
+											<span class="ddzcOT">6</span>
+										</div>
+										<div class="iQnPKA">
+											<a class="haoyHh" href="">전체 보기</a>
+										</div>
+									</div>
+									<div class="koasSX" style="opacity: 1; display: block;">
+										<section class="jUxAIa">
+											<div class="gbEqzo">
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>동작/관악구</span></span>
+																	<button class="dXNbSn" width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF">
+																	<img class="bUFcfh" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/KakaoTalk_20210630_182825457_03_j1z30k">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio" style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img alt="내만내칵 (내가 만들어서 내가 마시는 칵테일) 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/KakaoTalk_20210630_182825457_03_j1z30k">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">2가지 칵테일 만들어보기</div>
+															<div class="kygIWm">내만내칵 (내가 만들어서 내가 마시는 칵테일)</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">40,000원</span>
+																<span class="VbIMy"></span>
+															</div>
+															<div class="jseTtS">
+																<img
+																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 30 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='30' height='16' fill='%233397FF' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.25 10.688H9.887L7.87 7.147v3.54H6.5V5h1.371l2.012 3.54V5h1.367v5.688zm4.895-2.41h-2.157v1.355h2.547v1.055h-3.918V5h3.926v1.059h-2.555v1.199h2.157v1.02zM22 8.565L22.652 5h1.36l-1.207 5.688h-1.422l-.762-3.243-.746 3.242h-1.418L17.247 5h1.362l.653 3.566L20.043 5h1.164L22 8.566z'/%3E %3C/g%3E %3C/svg%3E"
+																	class="hKIBdE">
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>강릉</span></span>
+																	<button class="dXNbSn" width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF">
+																	<img class="bUFcfh" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1613645925913_343246">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio" style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img alt="[1박 2일] 맛탐방꾼의 전국 노포맛집 찾기 (강릉편) 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1613645925913_343246">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">#19세이상 #미식여행 #로드트립</div>
+															<div class="kygIWm">[1박 2일] 맛탐방꾼의 전국 노포맛집 찾기 (강릉편)</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">199,000원</span>
+																<span class="VbIMy">250,000</span>
+															</div>
+															<div class="jseTtS">
+																<img
+																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 30 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='30' height='16' fill='%233397FF' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.25 10.688H9.887L7.87 7.147v3.54H6.5V5h1.371l2.012 3.54V5h1.367v5.688zm4.895-2.41h-2.157v1.355h2.547v1.055h-3.918V5h3.926v1.059h-2.555v1.199h2.157v1.02zM22 8.565L22.652 5h1.36l-1.207 5.688h-1.422l-.762-3.243-.746 3.242h-1.418L17.247 5h1.362l.653 3.566L20.043 5h1.164L22 8.566z'/%3E %3C/g%3E %3C/svg%3E"
+																	class="hKIBdE">
+																<img
+																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='33' height='16' viewBox='0 0 33 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='33' height='16' fill='%23003471' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.127 8.04c0 .554-.103 1.045-.309 1.472a2.28 2.28 0 0 1-.877.986c-.379.23-.81.346-1.295.346-.484 0-.914-.112-1.289-.334a2.277 2.277 0 0 1-.877-.955c-.21-.414-.32-.89-.33-1.426v-.32c0-.558.102-1.05.307-1.475.204-.426.497-.755.879-.986A2.459 2.459 0 0 1 8.638 5c.482 0 .912.115 1.29.344.377.229.67.555.88.978.21.423.316.908.319 1.455v.262zM9.732 7.8c0-.564-.094-.993-.283-1.286a.908.908 0 0 0-.81-.44c-.688 0-1.051.516-1.09 1.547l-.004.418c0 .557.092.986.277 1.285.185.3.46.45.824.45a.896.896 0 0 0 .8-.442c.188-.294.283-.717.286-1.27v-.261zm7.352 2.966H15.72l-2.015-3.54v3.54h-1.371V5.078h1.37l2.012 3.54v-3.54h1.368v5.688zm2.738-1.055h2.387v1.055H18.45V5.078h1.37v4.633zm4.457-2.164l1.047-2.469h1.48l-1.832 3.645v2.043h-1.39V8.723l-1.829-3.645h1.473l1.05 2.469z'/%3E %3C/g%3E %3C/svg%3E"
+																	class="hKIBdE">
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>송파/강동구</span></span>
+																	<button class="dXNbSn" width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF">
+																	<img class="bUFcfh" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1624940968552_494044">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio" style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img alt="[송파] 직접 로스팅한 원두 추출하기 (예약 가능) 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1624940968552_494044">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">한 잔을 마셔도 정확하게~</div>
+															<div class="kygIWm">[송파] 직접 로스팅한 원두 추출하기 (예약 가능)</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">45,000원</span>
+																<span class="VbIMy"></span>
+															</div>
+															<div class="jseTtS">
+																<img
+																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 30 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='30' height='16' fill='%233397FF' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.25 10.688H9.887L7.87 7.147v3.54H6.5V5h1.371l2.012 3.54V5h1.367v5.688zm4.895-2.41h-2.157v1.355h2.547v1.055h-3.918V5h3.926v1.059h-2.555v1.199h2.157v1.02zM22 8.565L22.652 5h1.36l-1.207 5.688h-1.422l-.762-3.243-.746 3.242h-1.418L17.247 5h1.362l.653 3.566L20.043 5h1.164L22 8.566z'/%3E %3C/g%3E %3C/svg%3E"
+																	class="hKIBdE">
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="juqTGK">
+													<a class="lQqkn" href="">
+														<div class="qhbyT">
+															<div class="kzeAqh">
+																<div class="kQQiqE">
+																	<span class="cvPkEK"><span>송파/강동구</span></span>
+																	<button class="dXNbSn" width="24px" height="24px">
+																		<img
+																			src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='18' viewBox='0 0 16 18'%3E %3Cpath fill='%23FFF' d='M13.24 0c1.517.052 2.713 1.055 2.757 2.279l-.013 13.646-.016 1.55c-.016.126-.093.241-.217.319-.043.027-.092.046-.144.056l-.08.008-2.03-1.361c-4.57-3.048-5.042-3.209-5.355-3.218l-.157.004c-.373.038-1.207.439-7.453 4.717-.084.001-.166-.02-.235-.06-.14-.088-.222-.226-.218-.37l-.013-3.23C.046 10.935.006 6.05.001 3.063L0 2.459C-.008 1.785.308 1.136.88.65 1.324.278 1.916.05 2.546.008L2.756 0H13.24zM2.763 2c-.25 0-.473.078-.588.175-.106.089-.155.165-.17.232L2 2.457l.017 4.385.05 7.691 1.045-.702c3.104-2.07 4.005-2.508 4.867-2.55l.06-.001h.158c.788.022 1.551.36 4.29 2.147l1.503.992.01-8.15L14 2.349l-.01-.015c-.011-.015-.034-.041-.081-.083-.133-.117-.338-.206-.544-.239L13.24 2H2.763z'/%3E %3C/svg%3E"
+																			alt="찜하기">
+																	</button>
+																</div>
+																<div class="gDuKGF" width="192"
+																		src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1624940405214_480229">
+																	<div class="koasSX" style="opacity: 1; display: block;">
+																		<div class="Ratio" style="display: block;">
+																			<div class="Ratio-ratio" style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																				<div class="Ratio-content" style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																					<img alt="[송파] 로스팅 &amp; 핸드드립 (예약 가능) 썸네일"
+																						class="VUNpu" width="192"
+																						src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1624940405214_480229">
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="cgNYxX">
+																	<div class="jtLeBm">판매중</div>
+																</div>
+															</div>
+															<div class="klQNtF">직접 로스팅한 커피 추출~</div>
+															<div class="kygIWm">[송파] 로스팅 &amp; 핸드드립 (예약 가능)</div>
+															<div class="dfEgiu">
+																<span class="goIeoc">45,000원</span>
+																<span class="VbIMy"></span>
+															</div>
+															<div class="jseTtS">
+																<img
+																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 30 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='30' height='16' fill='%233397FF' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.25 10.688H9.887L7.87 7.147v3.54H6.5V5h1.371l2.012 3.54V5h1.367v5.688zm4.895-2.41h-2.157v1.355h2.547v1.055h-3.918V5h3.926v1.059h-2.555v1.199h2.157v1.02zM22 8.565L22.652 5h1.36l-1.207 5.688h-1.422l-.762-3.243-.746 3.242h-1.418L17.247 5h1.362l.653 3.566L20.043 5h1.164L22 8.566z'/%3E %3C/g%3E %3C/svg%3E"
+																	class="hKIBdE">
+															</div>
+														</div>
+													</a>
+												</div>
+											</div>
+										</section>
+									</div>
+								</div>
+								<div class="fMHhZd" font-size="13px">
+									<a class="dBGVbB" href="">181개의 쿠킹 전체보기</a>
 								</div>
 							</div>
-							
-							
 						</div>
 					</div>
-				
-				
-				
-				
-				
-				
 				</div>
 			</div>
-			
-			
-			
+
+
+
+
 			<%-- <jsp:include page="../include/fo.jsp" /> --%>
 		</div>
 	</div>
