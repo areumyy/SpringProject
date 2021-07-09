@@ -20,7 +20,7 @@ function checkInput() {
 	 loginBtn.addClass('on');
   }
   
-}
+} 
 
 // 회원가입 페이지
 $('.joinForm_txt').on('input', checkInput);
