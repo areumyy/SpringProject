@@ -6,14 +6,14 @@
 }
 
 .login_join_inner {
-	max-width: 400px;
+	max-width: 350px;
     margin: auto;
 }
 
 .login_join_title {
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 600;
-    margin: 30px 0;
+    margin: 0 0 50px;
 }
 
 .loginForm {
@@ -30,7 +30,8 @@
 	border-radius: 10px;
     background: #fafafa;
     width: 100%;
-    padding: 15px;
+    padding: 13px 15px;
+    font-size: 15px;
 }
 
 .loginForm_txt:focus {
@@ -41,30 +42,33 @@
 
 .pwd_search {
 	float: right;
+	font-size: 15px;
     color: #aaaaaa;
     margin-bottom: 30px;
 }
 
-.login_btn {
+.submit_btn {
 	width: 100%;
 	border: none;
     border-radius: 10px;
     background-color: #B5C5D6;
     color: #F4F4F4;
-    padding: 15px;
+    padding: 13px 15px;
+    font-size: 15px;s
 }
 
-.login_btn.on {
+.submit_btn.on {
 	background-color: #0075EF;
 }
 
 .another_loginBox {
 	margin-top: 30px;
+	font-size: 15px;
 	color: #aaaaaa;
 }
 
 .another_btnBox {
-	margin-top: 30px;
+	margin-top: 15px;
 }
 
 .another_btn {
@@ -77,11 +81,12 @@
 	width: 55px;
 }
 
+
 /* 회원가입 */
 .joinForm {
 	list-style: none;
     padding: 0;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
 }
 
 .joinForm li {
@@ -93,7 +98,8 @@
 	border-radius: 10px;
     background: #fafafa;
     width: 100%;
-    padding: 15px;
+    padding: 13px 15px;
+    font-size: 15px;
 }
 
 .joinForm_txt:focus {
@@ -102,34 +108,83 @@
 	outline: none;
 }
 
-.join_pwd_notice {
-	font-size: 12px;
+.notice {
+	font-size: 11px;
     letter-spacing: -0.36px;
     color: #aaaaaa;
     float: left;
     line-height: 40px;
-    padding-left: 15px;
+    padding-left: 10px;
     margin-bottom: 10px;
 }
 
-.join_btn {
-	width: 100%;
+
+/* 비밀번호 찾기 */
+.pwdSearchForm {
+	list-style: none;
+    padding: 0;
+    margin-bottom: 70px;
+}
+
+
+.pwdSearchForm li {
+	margin-bottom: 20px;
+}
+
+.pwdSearchForm_txt {
 	border: none;
-    border-radius: 10px;
-    background-color: #B5C5D6;
-    color: #F4F4F4;
-    padding: 15px;
+	border-radius: 10px;
+    background: #fafafa;
+    width: 100%;
+    padding: 13px 15px;
+    font-size: 15px;
 }
 
-.join_btn.on {
-	background-color: #0075EF;
+.pwdSearchForm_txt:focus {
+	background: #fafafa;
+	border: 2px solid #0075EF;
+	outline: none;
 }
 
 
 
 
+/* 
+ * 반응형
+ */
+ 
+@media ( min-width : 768px) {
+	.frip_logo {
+		display: none;
+	}
+	
+	.back_btn {
+		display: none;
+	}
+	
+	.login_join_box {
+		margin-top: 70px;
+		margin-bottom: 250px;
+	}
+}
 
-
-
-
-
+@media ( max-width : 768px) {
+	.frip_logo{
+		margin-bottom: 30px;
+	}
+	
+	.login_join_title {
+		font-size: 18px;
+		font-weight: 600;
+	    margin: 30px 30px 30px 0;
+	}
+	
+	.back_btn {
+		border: none;
+    	background-color: #fff;
+    	float: left;
+	}
+	.main{
+		justify-content: unset;
+	}
+}

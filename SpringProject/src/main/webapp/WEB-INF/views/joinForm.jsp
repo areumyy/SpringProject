@@ -26,7 +26,7 @@
 
 	<div id="app">
 		<div class="main">
-			<%-- <jsp:include page="../include/side.jsp" /> --%>
+			<jsp:include page="../include/menu.jsp" />
 			<div class="article">
 				<div class="login_join_box">
 					<div class="login_join_inner">
@@ -36,26 +36,26 @@
 						
 						<form method="post" action="<%=request.getContextPath() %>/join_ok.do">
 							<ul class="joinForm">
-								<li><input type="text" name="memId" class="joinForm_txt" placeholder="아이디" required></li>
+								<li><input type="text" name="memEmail" class="joinForm_txt" placeholder="아이디(이메일)" required></li>
 								<li>
 									<input type="password" name="memPwd" class="joinForm_txt" placeholder="비밀번호" required>
-									<span class="join_pwd_notice">대/소문자, 숫자, 특수문자 중 2가지 이상의 조합으로 10자 이상</span>
+									<span class="notice">대/소문자, 숫자, 특수문자 중 2가지 이상의 조합으로 10자 이상</span>
 								</li>
 								<li><input type="password" name="memPwd_confirm" class="joinForm_txt" placeholder="비밀번호 확인" required></li>
 								<li><input type="text" name="memName" class="joinForm_txt" placeholder="이름" required></li>
 								<li><input type="text" name="memNickname" class="joinForm_txt" placeholder="닉네임" required></li>
-								<li><input type="text" name="memEmail" class="joinForm_txt" placeholder="이메일"></li>
 								<li><input type="text" name="memPhone" class="joinForm_txt" placeholder="핸드폰 번호" required></li>
 							</ul>
-							<input type="submit" value="회원가입" class="join_btn">
+							<input type="submit" value="회원가입" class="submit_btn">
 						</form>
 					</div>
 				</div>
 			</div>
-			<%-- <jsp:include page="../include/fo.jsp" /> --%>
+			<jsp:include page="../include/footer.jsp" />
 		</div>
 	</div>
 	
+	<!-- js 파일 -->
 	<script src="./resources/js/login.js"></script>
 
 </body>

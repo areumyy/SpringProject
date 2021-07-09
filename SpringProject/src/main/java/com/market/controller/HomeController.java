@@ -40,18 +40,18 @@ public class HomeController {
 	@RequestMapping("login.do")
 	public String login() {
 		
-		return "../views/loginForm";
+		return "loginForm";
 	}
 	
 	@RequestMapping("join.do")
 	public String join() {
 		
-		return "../views/joinForm";
+		return "joinForm";
 	}
 	
 	@RequestMapping("pwd_search.do")
 	public String pwdSearch() {
 		
-		return "../views/pwdSearch";
+		return "pwdSearch";
 	}
 }
