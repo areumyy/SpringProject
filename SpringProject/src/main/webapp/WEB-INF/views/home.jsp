@@ -14,21 +14,20 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
-<script src="${path}/resources/js/test.js"></script>
 </head>
 <body>
 
 	
 	<div id="app">
 		<div class="main">
-			<%-- <jsp:include page="../include/side.jsp" /> --%>
+			<jsp:include page="../include/menu.jsp" />
 			<div class="article">
 			
 			
 			
-				
+							
 			</div>
-			<%-- <jsp:include page="../include/fo.jsp" /> --%>
+			<jsp:include page="../include/footer.jsp" />
 		</div>
 	</div>
 	
