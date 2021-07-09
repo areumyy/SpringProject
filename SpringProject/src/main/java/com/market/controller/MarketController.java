@@ -15,4 +15,13 @@ public class MarketController {
 	public String hostFooter() {
 		return "hostInclude/hostFooter";
 	}
+	
+	@RequestMapping("hostMain.do")
+	public String hostMain() {
+		return "host/hostMain";
+	}
+	@RequestMapping("hostMakeFrip.do")
+	public String hostMakeFrip() {
+		return "host/hostMakeFrip";
+	}
 }

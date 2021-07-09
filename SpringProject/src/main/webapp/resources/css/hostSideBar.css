@@ -1,50 +1,21 @@
 @charset "UTF-8";
-.main {
-	height:100vh;
-}
-.hostMenuBar {
+
+.hostSideBar{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
     position: fixed;
     top: 0px;
     left: 0px;
-    display: flex;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 100%;
-    background-color: rgb(34, 34, 34);
-    color: white;
-    z-index: 2000;
-    height: 64px;
-    padding: 17px 30px;
-}
-
-.homeButton {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    color: white;
-    text-decoration: none;
-}
-.userInfo{
-	
-}
-.userName{
-	color: white;
-	text-decoration: none;
-}
-.hostSideMain{
-	padding-top : 64px;
-	height:100%;
-	width:256px;
-}
-.hostSideBar{
-	width:15%;
-	min-height:100vh;
-	position: fixed;
-}
-.sideMenu{
-
+    width: 256px;
+    height: 100%;
+    color: rgb(74, 74, 74);
+    font-size: 14px;
+    font-weight: normal;
+    background-color: white;
+    opacity: 1;
+    z-index: 500;
+    padding-top: 64px;
 }
 
 .btn-group-vertical{
@@ -113,18 +84,14 @@
 	display:none;
 }
 
-
-
-
-@media (max-width: 768px) {
+@media (max-width: 854px) {
 	
-	.main{
+	.hostSideBar{
 		display:none;
 	}
 	.mobile{
 		display:block;
 	}
-	
 	.hostMenuBar {
 	    position: fixed;
 	    top: 0px;
@@ -207,6 +174,17 @@
 	    font-weight: 400;
 	    border-top: 1px solid rgb(203, 207, 211);
 	}
+	.menuName2 {
+		display: block;
+	    overflow: hidden;
+	    width: 100%;
+	    margin: 0px;
+	    padding: 0px 0px 0px 48px;
+	    height: 160px;
+	    transform-origin: left top;
+	    transform: translateY(0px) scale(1, 1);
+	    transition: height 0.2s ease-in-out 0s, transform 0.2s ease-in-out 0s;
+	}
 	.menuIcon {
 		position: absolute;
 	    top: 8px;
@@ -247,6 +225,11 @@
 	    background-color: rgb(255, 255, 255);
 	    color: rgb(74, 74, 74);
 	    user-select: none;
+	}
+	
+	.menutext a{
+		text-decoration: none;
+		color: rgb(74, 74, 74);
 	}
 	
 	.logout {

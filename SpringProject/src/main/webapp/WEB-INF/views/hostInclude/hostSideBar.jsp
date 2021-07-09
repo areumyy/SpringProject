@@ -23,12 +23,14 @@
 	rel="stylesheet" />
 	
 <script>
+	// 시작시 불필요한 것들 hide
 	$(document).ready(function() {
 		$(".li").hide();
 		$(".mobileNav").hide();
 		$(".black").hide();
 	});
 	
+	// 큰 메뉴 버튼 클릭 이벤트
 	$(function(){
 		 $("button").click(function() {
 			var menuClass = $(this).attr("id");
@@ -46,11 +48,13 @@
 		});
 	});
 	
+	// 모바일에서 메뉴 아이콘 클릭 이벤트
 	function showMenu() {
 		$(".mobileNav").show();
 		$(".black").show();
 	}
 	
+	// 메뉴바 제외한 곳을 눌렀을 때 이벤트
 	$(document).mouseup(function (e){
 	    let sideNav = $(".mobileNav");
 	    if (!sideNav.is(e.target) && sideNav.has(e.target).length === 0) {
@@ -62,20 +66,9 @@
 </script>
 </head>
 <body>
-	<div class="main">
-		<header class="hostMenuBar">
-			<a class="homeButton" href="<%=request.getContextPath()%>/hostMain.do">
-				<img src="<%=request.getContextPath()%>/resources/logo/logo.png"
-				width="80px" height="30px" alt="?"> 호스트 관리 페이지
-			</a>
-			<div class="userInfo">
-				<a class="userName" href="<%=request.getContextPath()%>/hostInfo.do">
-					<!-- 유저 프로필사진 + 닉네임 -->
-				</a>
-			</div>
-		</header>
-		
-		<div class="hostSideMain">
+
+	<!-- 768px 이상 -->
+
 			<div class="hostSideBar">
 				<div class="btn-group-vertical" role="group" aria-label="...">
 					<div id="menuFrame1"class="menubutton">
@@ -85,7 +78,7 @@
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
 						</button>
 						
-						<a type="button" href="#" class="li">
+						<a type="button" href="<%=request.getContextPath() %>/hostMakeFrip.do" class="li">
 							프립 만들기
 						</a>
 						<a type="button" href="#" class="li">
@@ -105,6 +98,12 @@
 						</a>
 						<a type="button" href="#" class="li">
 							 예약 관리
+						</a>
+						<a type="button" href="#" class="li">
+							문의 하기
+						</a>
+						<a type="button" href="#" class="li">
+							 후기 관리
 						</a>
 					</div>
 					
@@ -143,9 +142,10 @@
 					</div>
 	  			</div>  
 			</div>
-		</div>
-	</div>
+		
 	
+	
+	<!-- 768px 이하 -->
 	<div class="mobile">
 		<header class="hostMenuBar">
 			<button onclick="showMenu()">
@@ -173,8 +173,8 @@
 					<span class="glyphicon glyphicon-tent"  aria-hidden="true"></span>
 				</div>
 				<ul class="menuList">
-					<li class="menutext">프립 만들기</li>
-					<li class="menutext">내 프립</li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostMakeFrip.do">프립 만들기</a></li>
+					<li class="menutext"><a href="#">내 프립</a></li>
 				</ul>
 			</div>
 			
@@ -182,11 +182,11 @@
 				<div class="menuIcon">
 					<span class="glyphicon glyphicon-user"  aria-hidden="true"></span>
 				</div>
-				<ul class="menuList">
-					<li class="menutext">출석부</li>
-					<li class="menutext">예약 관리</li>
-					<li class="menutext">후기 관리</li>
-					<li class="menutext">문의하기</li>
+				<ul class="menuList2">
+					<li class="menutext"><a href="#">출석부</a></li>
+					<li class="menutext"><a href="#">예약 관리</a></li>
+					<li class="menutext"><a href="#">후기 관리</a></li>
+					<li class="menutext"><a href="#">문의하기</a></li>
 				</ul>
 			</div>
 			
@@ -195,8 +195,8 @@
 					<span class="glyphicon glyphicon-tent"  aria-hidden="true"></span>
 				</div>
 				<ul class="menuList">
-					<li class="menutext">정산 요청</li>
-					<li class="menutext">정산 완료</li>
+					<li class="menutext"><a href="#">정산 요청</a></li>
+					<li class="menutext"><a href="#">정산 완료</a></li>
 				</ul>
 			</div>
 			
@@ -205,8 +205,8 @@
 					<span class="glyphicon glyphicon-question-sign"  aria-hidden="true"></span>
 				</div>
 				<ul class="menuList">
-					<li class="menutext">공지사항</li>
-					<li class="menutext">자주 묻는 질문</li>
+					<li class="menutext"><a href="#">공지사항</a></li>
+					<li class="menutext"><a href="#">자주 묻는 질문</a></li>
 				</ul>
 			</div>
 			<div class="menuName logout">
@@ -215,8 +215,6 @@
 		</nav>
 		<div class="black">	</div>
 	</div>		 
-	
-	<jsp:include page="hostFooter.jsp"></jsp:include>
 	
 </body>
 </html>
