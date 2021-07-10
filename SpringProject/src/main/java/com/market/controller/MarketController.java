@@ -31,8 +31,15 @@ public class MarketController {
 		return "notice_list";
 	}
 	
+
 	@RequestMapping("like_frip.do")
 	public String likeFrip() {
 		return "like";
+	}
+
+	@RequestMapping("category_list.do")
+	public String cateList() {
+		return "category_list";
+
 	}
 }

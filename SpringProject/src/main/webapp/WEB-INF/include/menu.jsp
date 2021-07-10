@@ -63,7 +63,7 @@
 						<ul class="dropdown-menu category_list" aria-labelledby="category_btn">
 						    <li><a class="dropdown-item" href="#">아웃도어</a>
 						    	<ul>
-						    		<li><a href="#">서핑</a></li>
+						    		<li><a href="<%=request.getContextPath() %>/category_list.do">서핑</a></li>
 						    		<li><a href="#">캠핑</a></li>
 						    		<li><a href="#">등산/트래킹</a></li>
 						    		<li><a href="#">기타</a></li>
