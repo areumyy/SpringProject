@@ -30,4 +30,9 @@ public class MarketController {
 	public String noticeList() {
 		return "notice_list";
 	}
+	
+	@RequestMapping("like_frip.do")
+	public String likeFrip() {
+		return "like";
+	}
 }
