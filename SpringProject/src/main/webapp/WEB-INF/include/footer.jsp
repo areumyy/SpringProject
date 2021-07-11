@@ -15,7 +15,7 @@
 
 	<footer class="footer">
 		<div class="footer1">
-			<div>
+			<div class="footer2">
 				<div class="footer_center">
 					<div class="footer_center_title">고객센터</div>
 					<div class="footer_center_cont">

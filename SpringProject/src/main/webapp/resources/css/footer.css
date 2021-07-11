@@ -9,9 +9,13 @@
 .footer1 {
 	margin: 0px auto;
 	width: 100%;
-	max-width: 768px;
+	max-width: 1240px;
 }
 
+.footer2 {
+	display: flex;
+    justify-content: space-between;
+}
 .footer_center {
 	padding: 10px 0px;
 	border-bottom: 1px solid rgb(221, 221, 221);
