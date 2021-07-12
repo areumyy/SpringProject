@@ -31,10 +31,14 @@ public class MarketController {
 		return "notice_list";
 	}
 	
-
 	@RequestMapping("like_frip.do")
 	public String likeFrip() {
-		return "like";
+		return "like_frip";
+	}
+	
+	@RequestMapping("like_host.do")
+	public String likeHost() {
+		return "like_host";
 	}
 
 	@RequestMapping("category_list.do")
