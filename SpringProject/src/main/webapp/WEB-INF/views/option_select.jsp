@@ -92,6 +92,10 @@
 							</div>
 						</div>
 
+						<div class="next_section">
+							<button class="next_btn">다음</button>
+						</div>
+
 					</div>
 				</div>	
 			</div>
