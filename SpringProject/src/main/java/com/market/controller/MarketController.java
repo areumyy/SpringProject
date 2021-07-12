@@ -30,9 +30,14 @@ public class MarketController {
 	public String noticeList() {
 		return "notice_list";
 	}
-	
+
 	@RequestMapping("category_list.do")
 	public String cateList() {
 		return "category_list";
+	}
+
+	@RequestMapping("option_select.do")
+	public String optionSel() {
+		return "option_select";
 	}
 }
