@@ -20,6 +20,7 @@
 <!-- CSS 파일 -->
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/like.css" rel="stylesheet"/>
+<link href="<%=request.getContextPath() %>/resources/css/q.css" rel="stylesheet"/>
 
 </head>
 <body>
@@ -114,7 +115,7 @@
 						</div>
 					</div>
 					
-					<nav aria-label="Page navigation example" class="like_page_footer">
+					<nav aria-label="Page navigation example" class="qna_list_footer">
 						<ul class="pagination">
 							<li class="page-item"><a class="page-link" href="#"
 								aria-label="Previous" style="color: black;"> <span aria-hidden="true">&laquo;</span>
