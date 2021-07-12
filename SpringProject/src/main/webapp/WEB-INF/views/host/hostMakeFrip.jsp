@@ -154,7 +154,7 @@
 												<br>
 												<input type="text" class="optionText" value="5000" name="price1" placeholder="가격">
 												<span>원</span>
-												<hr width="80%">
+												<hr width="80%"> 
 											</div>
 										</div> 
 										<input type="button" value="옵션 추가하기" class="btn btn-info" onclick="addOption()">
