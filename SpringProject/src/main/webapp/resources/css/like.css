@@ -114,7 +114,7 @@
     margin-bottom: 10px;
 }
 
-.class_star {
+.class_score {
 	font-size: 11px;
     font-weight: bold;
     -webkit-box-align: center;
@@ -209,6 +209,186 @@
 
 .like_btn_img {
 	width: 20px;
+}
+
+
+/* 호스트 별 프립 클래스 */
+.hostInfo_inner {
+	width: 30%;
+}
+
+.hosfInfo_box {
+	width: 100%;
+    margin-bottom: 30px;
+}
+
+.hostInfo_img {
+	width: 20%;
+}
+
+.hostInfo_detail {
+	width: 70%;
+    display: flex;
+    flex-flow: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.hostInfo_like_btn {
+	width: 10%;
+}
+
+.host_introduction {
+	margin-bottom: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+}
+
+.tabmenu{ 
+  position:relative; 
+}
+
+.tabmenu ul{
+	list-style:none;
+	padding: 0;
+}
+
+.tabmenu ul li{
+   display: inline-block;
+   margin-right: 50px;
+   text-align: center;
+}
+.tabmenu label{
+  display:block;
+  width:100%; 
+  height:40px;
+  line-height:40px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tabmenu input{display:none;}
+
+.tabCon{
+  display:none; 
+  width: 100%;
+  text-align:left; 
+  padding: 10px 0;
+  /* position:absolute; */ 
+  left:0; 
+  top:40px; 
+  box-sizing: border-box; 
+}
+
+.tabmenu input:checked ~ label::after {
+	content: "";
+    display: block;
+    margin: 0px auto;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgb(51, 151, 255);
+    cursor: pointer;
+}
+
+.tabmenu input:checked ~ .tabCon{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.host_riview_box {
+	width: 100%;
+    border-bottom: 1px solid #aaa;
+    padding: 30px 0;
+}
+
+.user_info {
+	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user_img_box {
+	flex: 0 0 auto;
+}
+
+.user_img {
+    margin-right: 14px;
+    width: 56px;
+    height: 56px;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.user_detail {
+	-webkit-box-flex: 1;
+    flex: 1 1 auto;
+}
+
+.user_name {
+	font-size: 15px;
+    font-weight: bold;
+}
+
+.review_score {
+	
+}
+
+.review_regdate {
+	font-size: 13px;
+    color: #9b9b9b;
+}
+
+.review_cont {
+	margin-bottom: 20px;
+    white-space: pre-wrap; 	/* 공백 줄바꿈 적용 */
+    font-size: 13px;
+    line-height: 22px;
+}
+
+.booking_info {
+	font-size: 12px;
+    color: #9b9b9b;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+
+.class_name {
+	
+}
+
+.class_startDate {
+	
+}
+
+.review_like {
+	text-align: right;
+	margin-bottom: 20px;
+}
+
+.review_like_btn {
+    border: none;
+    background-color: transparent;
+    font-size: 12px;
+    color: #555;
+}
+
+.review_like_count {
+    vertical-align: bottom;
+}
+
+.review_image_box {
+	
+}
+
+.review_image {
+	width: 120px;
+    border-radius: 10px;
 }
 
 
@@ -323,6 +503,7 @@
 	.likePage_box {
 		padding: 0 20px;
 		margin: 30px auto 60px;
+		min-height: 1146px;
 	}
 	
 	.likePage_list {
