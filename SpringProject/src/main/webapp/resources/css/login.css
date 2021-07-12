@@ -147,12 +147,7 @@
 }
 
 
-
-
-/* 
- * 반응형
- */
- 
+/* 반응형 */ 
 @media ( min-width : 768px) {
 	.frip_logo {
 		display: none;
