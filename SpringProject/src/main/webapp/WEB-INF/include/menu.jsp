@@ -51,94 +51,98 @@
 		<section class="menu2">
 			<div class="menu2-1">
 				<div class="menu2-1-1">
-					<div class="drop_menu">
-						<a class="menu_link" href="#" role="button" id="category_btn" data-bs-toggle="dropdown" aria-expanded="false">
+					<div class="cateBtn">
+						<div class="drop_menu">
+							<a class="menu_link" href="#" role="button" id="category_btn" data-bs-toggle="dropdown" aria-expanded="false">
+								<div class="menu_div">
+									<div class="menu_btn_div">
+										<img src="<%=request.getContextPath() %>/resources/image/menu/category.svg" alt="카테고리-icon">
+									</div>
+									<p class="menu_font">카테고리</p>
+								</div>
+							</a>
+							<ul class="dropdown-menu category_list" aria-labelledby="category_btn">
+							    <li><a class="dropdown-item" href="#">아웃도어</a>
+							    	<ul>
+							    		<li><a href="<%=request.getContextPath() %>/category_list.do">서핑</a></li>
+							    		<li><a href="#">캠핑</a></li>
+							    		<li><a href="#">등산/트래킹</a></li>
+							    		<li><a href="#">기타</a></li>
+							    	</ul>
+							    </li>
+							    <li><a class="dropdown-item" href="#">피트니스</a>
+							    	<ul>
+							    		<li><a href="#">요가</a></li>
+							    		<li><a href="#">필라테스</a></li>
+							    		<li><a href="#">헬스/PT/GX</a></li>
+							    	</ul>
+							    </li>
+							    <li><a class="dropdown-item" href="#">스포츠</a>
+							    	<ul>
+							    		<li><a href="#">서핑</a></li>
+							    		<li><a href="#">캠핑</a></li>
+							    		<li><a href="#">등산/트래킹</a></li>
+							    		<li><a href="#">기타</a></li>
+							    	</ul>
+							    </li>
+							    <li><a class="dropdown-item" href="#">쿠킹</a>
+							    	<ul>
+							    		<li><a href="#">요리</a></li>
+							    		<li><a href="#">음료</a></li>
+							    		<li><a href="#">베이킹</a></li>
+							    	</ul>
+							    </li>
+							    <li><a class="dropdown-item" href="#">공예</a>
+							    	<ul>
+							    		<li><a href="#">도자기</a></li>
+							    		<li><a href="#">비누</a></li>
+							    		<li><a href="#">비즈</a></li>
+							    	</ul>
+							    </li>
+							    <li><a class="dropdown-item" href="#">여행</a>
+							    	<ul>
+							    		<li><a href="#">펜션/풀빌라</a></li>
+							    		<li><a href="#">투어</a></li>
+							    		<li><a href="#">제주여행</a></li>
+							    	</ul>
+							    </li>
+							</ul>
+						</div>
+					</div>
+					<div class="menu2-1-3" style="display: flex;">
+						<span class="bound_line"></span>
+						<a class="menu_link" href="<%= request.getContextPath() %>/">
+							<img src="<%=request.getContextPath() %>/resources/image/menu/logo.svg" class="logo_img">
+						</a>
+						<div class="search">
+							<div class="search-1">
+								<div>
+									<form class="search_form" method="post" action="<%=request.getContextPath() %>/search.do">
+										<img src="<%=request.getContextPath() %>/resources/image/menu/search.svg" class="search_img">
+										<input type="search" placeholder="검색어를 입력해주세요." class="search_input">
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="menu2-1-2">
+						<a class="menu_link" href="<%=request.getContextPath() %>/like_frip.do">
 							<div class="menu_div">
 								<div class="menu_btn_div">
-									<img src="<%=request.getContextPath() %>/resources/image/menu/category.svg" alt="카테고리-icon">
+									<img src="<%=request.getContextPath() %>/resources/image/menu/save.svg" alt="저장-icon">
 								</div>
-								<p class="menu_font">카테고리</p>
+								<p class="menu_font">저장</p>
 							</div>
 						</a>
-						<ul class="dropdown-menu category_list" aria-labelledby="category_btn">
-						    <li><a class="dropdown-item" href="#">아웃도어</a>
-						    	<ul>
-						    		<li><a href="<%=request.getContextPath() %>/category_list.do">서핑</a></li>
-						    		<li><a href="#">캠핑</a></li>
-						    		<li><a href="#">등산/트래킹</a></li>
-						    		<li><a href="#">기타</a></li>
-						    	</ul>
-						    </li>
-						    <li><a class="dropdown-item" href="#">피트니스</a>
-						    	<ul>
-						    		<li><a href="#">요가</a></li>
-						    		<li><a href="#">필라테스</a></li>
-						    		<li><a href="#">헬스/PT/GX</a></li>
-						    	</ul>
-						    </li>
-						    <li><a class="dropdown-item" href="#">스포츠</a>
-						    	<ul>
-						    		<li><a href="#">서핑</a></li>
-						    		<li><a href="#">캠핑</a></li>
-						    		<li><a href="#">등산/트래킹</a></li>
-						    		<li><a href="#">기타</a></li>
-						    	</ul>
-						    </li>
-						    <li><a class="dropdown-item" href="#">쿠킹</a>
-						    	<ul>
-						    		<li><a href="#">요리</a></li>
-						    		<li><a href="#">음료</a></li>
-						    		<li><a href="#">베이킹</a></li>
-						    	</ul>
-						    </li>
-						    <li><a class="dropdown-item" href="#">공예</a>
-						    	<ul>
-						    		<li><a href="#">도자기</a></li>
-						    		<li><a href="#">비누</a></li>
-						    		<li><a href="#">비즈</a></li>
-						    	</ul>
-						    </li>
-						    <li><a class="dropdown-item" href="#">여행</a>
-						    	<ul>
-						    		<li><a href="#">펜션/풀빌라</a></li>
-						    		<li><a href="#">투어</a></li>
-						    		<li><a href="#">제주여행</a></li>
-						    	</ul>
-						    </li>
-						</ul>
+						<a class="menu_link" href="#">
+							<div class="menu_div">
+								<div class="menu_btn_div">
+									<img src="<%=request.getContextPath() %>/resources/image/menu/mypage.svg" alt="마이-icon">
+								</div>
+								<p class="menu_font">마이</p>
+							</div>
+						</a>
 					</div>
-					<span class="bound_line"></span>
-					<a class="menu_link" href="<%= request.getContextPath() %>/">
-						<img src="<%=request.getContextPath() %>/resources/image/menu/logo.svg" class="logo_img">
-					</a>
-					<div class="search">
-						<div class="search-1">
-							<div>
-								<form class="search_form" method="post" action="<%=request.getContextPath() %>/search.do">
-									<img src="<%=request.getContextPath() %>/resources/image/menu/search.svg" class="search_img">
-									<input type="search" placeholder="검색어를 입력해주세요." class="search_input">
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="menu2-1-2">
-					<a class="menu_link" href="<%=request.getContextPath() %>/like_frip.do">
-						<div class="menu_div">
-							<div class="menu_btn_div">
-								<img src="<%=request.getContextPath() %>/resources/image/menu/save.svg" alt="저장-icon">
-							</div>
-							<p class="menu_font">저장</p>
-						</div>
-					</a>
-					<a class="menu_link" href="#">
-						<div class="menu_div">
-							<div class="menu_btn_div">
-								<img src="<%=request.getContextPath() %>/resources/image/menu/mypage.svg" alt="마이-icon">
-							</div>
-							<p class="menu_font">마이</p>
-						</div>
-					</a>
 				</div>
 			</div>
 		</section>

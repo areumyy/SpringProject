@@ -1,0 +1,263 @@
+@charset "UTF-8";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap')
+	;
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+button {
+	border: none;
+}
+
+.option_page1 {
+	margin: 0px auto;
+	width: 100%;
+	max-width: 828px;
+	min-height: 1px;
+}
+
+.option_page2 {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	z-index: 800;
+}
+
+.option_page3 {
+	max-width: 768px;
+	display: flex;
+	flex-flow: column nowrap;
+	width: 100%;
+	height: 100%;
+	margin: 0px auto;
+}
+
+.option_header {
+	padding: 20px;
+}
+
+.option_btn {
+	width: 24px;
+	height: 24px;
+	line-height: 24px;
+	padding: 0px;
+	background-color: transparent;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 14px;
+}
+
+.option_img {
+	display: block;
+}
+
+.option_body {
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+	display: flex;
+	flex-flow: column nowrap;
+	width: 100%;
+	padding: 0px;
+	overflow: auto;
+}
+
+.option_sel_tile {
+	line-height: 14px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 10px 20px 20px;
+	border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.cal_btn {
+	border: 0px;
+	padding: 0px;
+	background-color: transparent;
+	color: black;
+	cursor: pointer;
+	margin: 0px;
+	font-size: 13px;
+	float: right;
+}
+
+.option_select_section {
+	overflow: auto;
+}
+
+.option_arcodion {
+	position: relative;
+	display: block;
+	width: 100%;
+	margin: 0px;
+	color: black;
+	border-top: 1px solid white;
+}
+
+.arcodion_selector {
+	position: relative;
+	width: 100%;
+	height: 60px;
+	line-height: 22px;
+	background-color: white;
+	transition: background-color 0.4s ease 0s;
+	cursor: pointer;
+	text-align: left;
+	border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.arcodion_div {
+	width: 100%;
+	height: 100%;
+	font-size: 13px;
+	user-select: none;
+	line-height: 14px;
+	color: rgb(155, 155, 155);
+	display: flex;
+	flex-flow: column nowrap;
+	-webkit-box-pack: center;
+	justify-content: center;
+	padding: 14px 16px;
+}
+
+.arcodion_btn {
+	display: inline-block;
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	top: 16px;
+	right: 16px;
+	cursor: pointer;
+	opacity: 1;
+	transform-origin: center center;
+	transform: rotate(180deg);
+	transition: opacity 0.2s ease 0s, transform 0.5s ease 0s;
+}
+
+.arcodion_img_up {
+	width: 100%;
+	height: 100%;
+	transform: rotate(90deg);
+}
+
+.arcodion_img_down {
+	width: 100%;
+	height: 100%;
+	transform: rotate(-90deg);
+}
+
+.option_list {
+	display: block;
+	overflow: hidden auto;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	transform-origin: left top;
+	transform: translateY(0px) scale(1, 1);
+}
+
+.option_item {
+	border-bottom: 1px solid rgb(238, 238, 238);
+	padding: 16px;
+	background-color: rgb(249, 249, 249);
+	cursor: pointer;
+}
+
+.option_item_date {
+	line-height: 21px;
+	font-size: 13px;
+}
+
+.option_item_name {
+	margin-top: 8px;
+	line-height: 11px;
+	font-size: 11px;
+	color: rgb(85, 85, 85);
+}
+
+.sel_section {
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+	padding: 20px;
+}
+
+.sel_section>div {
+	margin-bottom: 10px;
+}
+
+.sel_section>div:last-child {
+	margin-bottom: 0px;
+}
+
+.sel_div {
+	position: relative;
+	border: 1px solid rgb(238, 238, 238);
+	border-radius: 5px;
+	padding: 20px;
+}
+
+.sel_cancle_btn {
+	position: absolute;
+	top: 16px;
+	right: 20px;
+	margin-left: auto;
+}
+
+.sel_name {
+	line-height: 12px;
+	font-size: 12px;
+}
+
+.sel_name>div {
+	margin-bottom: 12px;
+}
+
+.sel_name>div:last-child {
+	margin-bottom: 0px;
+}
+
+.sel_title {
+	width: 230px;
+	line-height: 1.5;
+}
+
+.price_ctn_section {
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	margin-top: 28px;
+}
+
+.sel_price {
+	line-height: 18px;
+	color: rgb(51, 151, 255);
+	font-size: 16px;
+}
+
+.sel_cnt {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	color: black;
+}
+
+.sel_cnt_input {
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+	width: 36px;
+	height: 18px;
+	line-height: 12px;
+	font-size: 12px;
+	text-align: center;
+	border: none;
+}
+
+.gray {
+	color: #ced4da;
+}

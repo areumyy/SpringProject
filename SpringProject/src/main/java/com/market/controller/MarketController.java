@@ -30,12 +30,12 @@ public class MarketController {
 	public String noticeList() {
 		return "notice_list";
 	}
-	
+
 	@RequestMapping("like_frip.do")
 	public String likeFrip() {
 		return "like_frip";
 	}
-	
+
 	@RequestMapping("like_host.do")
 	public String likeHost() {
 		return "like_host";
@@ -45,5 +45,10 @@ public class MarketController {
 	public String cateList() {
 		return "category_list";
 
+	}
+
+	@RequestMapping("option_select.do")
+	public String optionSel() {
+		return "option_select";
 	}
 }
