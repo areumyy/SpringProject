@@ -51,8 +51,8 @@
 								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
 								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
 								<div class="class_price">30,000원</div>
-								<div class="class_star">
-									<img alt="class_star" src="<%=request.getContextPath() %>/resources/image/like/star_logo.svg">
+								<div class="class_score">
+									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
 									<span>4.92</span>
 								</div>
 							</a>
@@ -71,8 +71,8 @@
 								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
 								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
 								<div class="class_price">30,000원</div>
-								<div class="class_star">
-									<img alt="class_star" src="<%=request.getContextPath() %>/resources/image/like/star_logo.svg">
+								<div class="class_score">
+									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
 									<span>4.92</span>
 								</div>
 							</a>
@@ -91,8 +91,8 @@
 								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
 								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
 								<div class="class_price">30,000원</div>
-								<div class="class_star">
-									<img alt="class_star" src="<%=request.getContextPath() %>/resources/image/like/star_logo.svg">
+								<div class="class_score">
+									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
 									<span>4.92</span>
 								</div>
 							</a>
@@ -111,8 +111,8 @@
 								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
 								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
 								<div class="class_price">30,000원</div>
-								<div class="class_star">
-									<img alt="class_star" src="<%=request.getContextPath() %>/resources/image/like/star_logo.svg">
+								<div class="class_score">
+									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
 									<span>4.92</span>
 								</div>
 							</a>
@@ -131,8 +131,8 @@
 								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
 								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
 								<div class="class_price">30,000원</div>
-								<div class="class_star">
-									<img alt="class_star" src="<%=request.getContextPath() %>/resources/image/like/star_logo.svg">
+								<div class="class_score">
+									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
 									<span>4.92</span>
 								</div>
 							</a>
@@ -151,8 +151,8 @@
 								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
 								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
 								<div class="class_price">30,000원</div>
-								<div class="class_star">
-									<img alt="class_star" src="<%=request.getContextPath() %>/resources/image/like/star_logo.svg">
+								<div class="class_score">
+									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
 									<span>4.92</span>
 								</div>
 							</a>

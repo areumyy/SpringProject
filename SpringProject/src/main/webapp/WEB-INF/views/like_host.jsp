@@ -40,7 +40,7 @@
 					<div class="likePage_list2">
 						<div class="list_inner2">
 							<div class="inner_box">
-								<a href="#" class="host_link">
+								<a href="<%=request.getContextPath() %>/host_info.do" class="host_link">
 									<div class="host_img">
 										<img alt="host_img" src="<%=request.getContextPath() %>/resources/image/like/host_img.png">
 									</div>

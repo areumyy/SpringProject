@@ -40,6 +40,11 @@ public class MarketController {
 	public String likeHost() {
 		return "like_host";
 	}
+	
+	@RequestMapping("host_info.do")
+	public String hostInfo() {
+		return "host_info";
+	}
 
 	@RequestMapping("category_list.do")
 	public String cateList() {
