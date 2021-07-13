@@ -247,15 +247,16 @@ button {
 	color: black;
 }
 
-.sel_cnt_input {
+.cnt_input {
 	-webkit-box-flex: 1;
 	flex: 1 1 auto;
-	width: 36px;
+	width: 40px;
 	height: 18px;
 	line-height: 12px;
 	font-size: 12px;
 	text-align: center;
 	border: none;
+	pointer-events: none;
 }
 
 .gray {
@@ -282,4 +283,9 @@ button {
 	color: white;
 	font-size: 16px;
 	margin: 0px;
+}
+
+.cnt_btn {
+	padding: 0;
+	background-color: white;
 }

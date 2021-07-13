@@ -84,16 +84,20 @@
 								<div class="price_ctn_section">
 									<div class="sel_price">29,000원</div>
 									<div class="sel_cnt">
-										<i class="far fa-minus-square gray"></i>
-										<input type="number" min="1" class="sel_cnt_input" value="1">
-										<i class="far fa-plus-square"></i>
+										<button class="cnt_btn minus">
+											<i class="far fa-minus-square gray"></i>
+										</button>
+										<input type="number" min="1" class="cnt_input" value="100" min="1" max="10">
+										<button class="cnt_btn plus">
+											<i class="far fa-plus-square"></i>
+										</button>
 									</div>
 								</div>
 							</div>
 						</div>
 
 						<div class="next_section">
-							<button class="next_btn">다음</button>
+							<button class="next_btn" onclick="location.href='payment.do'">다음</button>
 						</div>
 
 					</div>

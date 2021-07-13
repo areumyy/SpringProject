@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.pay_page {
+	display: flex;
+	flex-flow: column nowrap;
+	align-content: flex-start;
+	margin: 0px auto;
+	max-width: 808px;
+	width: 100%;
+	padding: 0px 20px;
+	min-height: 1px;
+}
+
+.pay_header {
+	height: 120px;
+	border-bottom: 1px solid black;
+	padding: 20px 0px;
+	font-size: 20px;
+	font-weight: bold;
+	display: flex;
+	align-items: flex-end;
+}
+
+.pay_body {
+	
+}

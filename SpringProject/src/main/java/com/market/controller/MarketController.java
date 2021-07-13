@@ -51,4 +51,9 @@ public class MarketController {
 	public String optionSel() {
 		return "option_select";
 	}
+
+	@RequestMapping("payment.do")
+	public String pay() {
+		return "payment";
+	}
 }
