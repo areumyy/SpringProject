@@ -1,7 +1,12 @@
 package com.market.controller;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class MarketController {
@@ -24,4 +29,10 @@ public class MarketController {
 	public String hostMakeFrip() {
 		return "host/hostMakeFrip";
 	}
+	@RequestMapping("hostMyFrip.do")
+	public String hostMyFrip() {
+		return "host/hostMyFrip";
+	}
+	
+	
 }

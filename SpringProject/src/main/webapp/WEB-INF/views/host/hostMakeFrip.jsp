@@ -24,8 +24,12 @@
 <link href="<%=request.getContextPath()%>/resources/css/hostMakeFrip.css"
 	rel="stylesheet" />
 <script src="./resources/js/hostMakeFrip.js"></script>
-<!-- 카카오 API -->
+<!-- 카카오 지도 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- 네이버 textarea API -->
+<script	src="./resources/smartEditor/js/HuskyEZCreator.js" 
+	charset="utf-8"></script>
+
 </head>
 <body>
 	<div class="mainFrame">
@@ -37,7 +41,8 @@
 	
 				<div class="Main">
 					<h1 class="Main_title">프립 만들기</h1>
-					<form method="post" action="<%=request.getContextPath()%>/insertFrip.do">
+					<form method="post" action="<%=request.getContextPath()%>/insertFrip.do"
+						 onsubmit="return checkIt();">
 						<!-- 카테고리 선택 -->
 						<div class="Main_line" id="first">
 							<div class="Main_line_1">
@@ -50,7 +55,7 @@
 										<option value="">::: 선택 :::</option>
 										<option value="액티비티">액티비티</option>
 									</select>
-									
+									<br><br>
 									<h4>2차 카테고리</h4>
 									<select class="selectBox" name="secondCategory">
 										<option value="">::: 선택 :::</option>
@@ -76,7 +81,7 @@
 						</div>
 						
 						<!-- 프립명 -->
-						<div class="Main_line">
+						<div class="Main_line_hidden">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									프립을 한 문장으로 <br> 표현해 주세요.
@@ -87,7 +92,7 @@
 								</div>
 								<div class="frip_title">
 									<div class="little_title">프립명</div>
-									<input type="text" class="text" name="fripTitle">
+									<input type="text" id="fripTitleText" class="text" name="fripTitle">
 								</div>
 							</div>
 							
@@ -101,7 +106,7 @@
 						</div>
 						
 						<!-- 이미지 업로드 -->
-						<div class="Main_line">
+						<div class="Main_line_hidden">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									사진을 업로드해주세요.
@@ -129,7 +134,7 @@
 						</div>
 						
 						<!-- 인원 설정 -->
-						<div class="Main_line">
+						<div class="Main_line_hidden">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									인원 및 구매 옵션 설정
@@ -188,7 +193,7 @@
 						</div><!-- 인원설정 end -->
 						
 						<!-- 진행지 -->
-						<div class="Main_line">
+						<div class="Main_line_hidden">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									어디에서 하나요?
@@ -196,11 +201,12 @@
 								<div class="location">
 										<div class="little_title">프립 진행지</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="radio" name="LocationOption" value="myLocation" checked>
+									  <input class="form-check-input" type="radio" name="LocationOption" 
+									  	onclick="myLocationButton()" value="myLocation" checked>
 									  <label class="form-check-label" for="inlineRadio1" >내 장소</label>
 									</div>
 									<div class="form-check form-check-inline">
-									  <input class="form-check-input" type="radio" name="LocationOption" value="online">
+									  <input class="form-check-input" type="radio" name="LocationOption" value="online" onclick="onlineButton()">
 									  <label class="form-check-label" for="inlineRadio2">온라인</label>
 									</div>
 								</div>
@@ -210,7 +216,7 @@
 											name="endArea" placeholder="기본주소" disabled>
 									<input type="button" class="findAddress"
 											value="주소 찾기" onclick="findAddr()" >	
-									<input type="text" id="detailAddress" class="detailAddress" 
+									<input type="text" class="detailAddress" 
 											name="endArea_detail" placeholder="상세주소">
 								</div>
 								<div class="little_title">집결지<small>선택사항</small></div>
@@ -219,7 +225,7 @@
 											name="startArea" placeholder="기본주소" disabled>
 									<input type="button" class="findAddress"
 											value="주소 찾기" onclick="findAddr2()" >	
-									<input type="text" id="detailAddress2" class="detailAddress" 
+									<input type="text" class="detailAddress" 
 											name="startArea_detail" placeholder="상세주소">
 								</div>
 							</div>
@@ -235,19 +241,17 @@
 						</div><!-- 진행지 end -->
 						
 						<!-- 상세 일정 -->
-						<div class="Main_line">
+						<div class="Main_line_hidden">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									자세한 일정을 알려주세요
 								</div>
 								<div class="timeTable">
 									<div class="little_title">상세 일정</div>
-									<input type="button" value="세부 일정 추가" 
-										class="btn btn-info" onclick="addSckedule()">
 								</div> 
 								<div class="timeTableCont">
-									<input type="text" class="nameText" name="time1" placeholder="00분">
-									<input type="text" class="contText" name="cont1" placeholder="세부 일정">
+									<textarea rows="20" cols="60" 
+									placeholder="예시) 30분 집결 및 간단한 소개" name="plan"></textarea>
 								</div>
 								
 							</div>
@@ -263,11 +267,219 @@
 									30분 마무리 및 뒤풀이
 								</div>
 							</div>
-						</div><!-- 상세 일정 -->
+						</div><!-- 상세 일정 end-->
+						
+						<!-- 포함 사항 -->
+						<div class="Main_line_hidden">
+							<div class="Main_line_1">
+								<div class="Main_line_title">
+									무엇을 제공하나요?
+								</div>
+								<div class="timeTable">
+									<div class="little_title">포함사항</div>
+								</div> 
+								<div class="timeTableCont">
+									<textarea rows="10" cols="60" placeholder="포함사항을 입력해주세요" name="include"></textarea>
+								</div>
+								<br><br>
+								<div class="timeTable">
+									<div class="little_title">불포함사항</div>
+								</div> 
+								<div class="timeTableCont">
+									<textarea rows="10" cols="60" placeholder="불포함사항을 입력해주세요" name="exclude"></textarea>
+								</div>
+
+							</div>
+							<div class="Main_line_2">
+								<div class="MakeTip">
+									프립 상세페이지에 노출시킬 포함/불포함사항을 입력해 주세요.
+
+									예시) 가이드비 / 장비 대여비 / 장소 이용료 / 안전 보험료 / 차량 / 
+									식사 / 입장료 / 물 / 간식 / 주차장 / 강습비 / 탈의실 / 샤워실 / 
+									운동복 / 짐 보관 / 숙소 / 픽업 / 리프트권 / 행동식 / 기념품 / 
+									안주 / 음료 / 완주증 / 기록 측정 / 운동화 / 기사비 / 차량 보험료 / 
+									교재비 / 컨설팅
+								</div>
+							</div>
+						</div><!-- 포함 사항 end -->
+						
+						<!-- 준비물 -->
+						<div class="Main_line_hidden">
+							<div class="Main_line_1">
+								<div class="Main_line_title">
+									준비물 및 유의사항 <small>선택사항</small>
+								</div>
+								<div class="timeTable">
+									<div class="little_title">준비물</div>
+								</div> 
+								<div class="timeTableCont">
+									<textarea rows="10" cols="60" placeholder="준비물 가이드를 참고하여 작성해주세요."></textarea>
+								</div>
+								<br><br>
+								<div class="timeTable">
+									<div class="little_title">유의사항</div>
+								</div> 
+								<div class="timeTableCont">
+									<textarea rows="10" cols="60" placeholder="유의사항 및 신청시 유의사항을 가이드를 참고하여 작성해 주세요"></textarea>
+								</div>
+
+							</div>
+							<div class="Main_line_2">
+								<div class="MakeTip">
+									<Strong>준비물</Strong>
+									<br>
+									<Strong>유의사항</Strong>
+									- 1인당 최대 구매 가능 수량
+									<br>
+									<br>
+									예)
+									- 1인당 최대 구매 가능 수량 : 1인 3매 or 제한없음(최대인원으로 설정)
+								</div>
+							</div>
+						</div><!-- 준비물 end -->
+						
+						<!-- 프립을 소개해 주세요 -->
+						<div class="Main_line_hidden" id="last">
+							<div class="Main_line_1">
+								<div class="Main_line_title">
+								 	프립을 소개해주세요!
+								</div>
+								<div class="timeTableCont">
+									<textarea name="naverEditor" id="naverEditor"></textarea>
+								</div>
+							</div>
+							<div class="Main_line_2">
+								<div class="MakeTip">
+									클래스에 대해 소개해주세요.<br>
+									[필수]<br>
+									· 이미지 5장 이상 (이미지별 콘텐츠 설명 1~2줄)<br>
+									· 참여 시 얻을 수 있는 효과<br>
+									· 진행 종목에 대한 소개<br>
+									· 난이도 설명을 해주세요. (ex. 초급, 중급, 고급)<br>
+									<br>
+									[선택]
+									· 강사 소개나 자격증은 신뢰도를 높일 수 있어요<br>
+									· 정규 클래스/다회차 클래스일 경우 각 회차별 세부 커리큘럼을 기재해주세요.<br>
+									<br>
+									- 개인 연락처, 카카오톡 ID, 오픈카톡, SNS 주소, 외부링크 등은 기재가 불가합니다.<br>
+									- 프립을 통해서가 아닌 외부로 접근한 대원이 호스트님과 직접 현장결제 혹은 구매할 경우, 보호할 수 없으니 참고 부탁드립니다.<br>
+									(* 대원이 프립App/Web을 통해 상품을 확인하고 결제하면, 호스트 관리페이지를 통해 확인 및 원활한 운영이 가능하니 참고 부탁드립니다)<br>
+									- 사용하는 사진은 저작권 및 상표권에 문제가 없어야 합니다.<br>
+									- 너무 많은 사진과 텍스트는 가독성이 떨어져 프립 매력도가 떨어집니다. 사진 10장 이내, 적당한 텍스트 기재를 추천 드립니다.<br>
+									- 텍스트 컬러, 배경색 컬러는 불가하오니, 텍스트는 검정색으로 통일 부탁드립니다.
+								</div>
+							</div>
+						</div><!-- 프립 소개 end -->
+						
+						<!-- 프립을 소개해 주세요 -->
+						<div class="Main_line_hidden" id="final">
+							<div class="Main_line_1">
+								<div class="Main_line_title">
+								 	최종확인
+								</div>
+								<div class="final_confirm">
+									<div class="final_confirm_frame">
+										<div class="confirm_img">
+											<img src="<%=request.getContextPath() %>/resources/logo/logo.png" 
+												name="confirm_img" alt="이미지 없음" width="100%">
+										</div>
+										<div class="final_frip_info">
+											<section class="info_section">
+												<div class="info_title" id="fripTitle">
+													
+												</div>
+												<div class="info_price">
+													34% 123,456원
+												</div>
+											</section>
+											<section class="info_section1">
+												<div class="info_hostInfo">
+													<img width="56px" height="42px"src="<%=request.getContextPath() %>/resources/logo/logo.png">
+													<div class="info_hostInfo_text">
+														dsa13 ><br>
+														프립 13 | 후기 14 | 저장 342
+													</div>
+												</div>
+												
+												<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' viewBox='0 0 32 32'%3E %3Cpath fill='%23F4F4F4' stroke='%23CCC' stroke-width='1.5' d='M15.043 19.962l-.029.02-.026.021-7.571 6.384V5.827c0-1.273 1.155-2.41 2.73-2.41h11.706c1.569 0 2.73 1.138 2.73 2.41v20.56l-7.572-6.384-.026-.022-.028-.02c-.292-.203-.634-.293-.957-.293-.324 0-.666.09-.957.294z'/%3E %3C/svg%3E" alt="상품 저장 아이콘">
+											</section>
+											
+											<section class="info_section2">
+												<div>
+													<Strong>아직 후기가 없어요.</Strong><br>
+													첫 후기를 남기고 1,000에너지 받아가세요.
+												</div>
+											</section>
+											
+											<section class="info_section3">
+												<div class="info_title">
+													프립소개
+												</div>
+												<div id="fripInfo">
+													
+												</div>
+											</section>
+											
+											<section class="info_section3">
+												<div class="info_title">
+													포함 사항
+												</div>
+												<div id="include">
+													
+												</div>
+											</section>
+											
+											<section class="info_section3">
+												<div class="info_title">
+													불포함 사항
+												</div>
+												<div id="exclude">
+													
+												</div>
+											</section>
+											
+											<section class="info_section3">
+												<div class="info_title">
+													세부일정
+												</div>
+												<div id="plan">
+													
+												</div>
+											</section>
+											
+											<section class="info_section3">
+												<div class="info_title">
+													유의 사항
+												</div>
+												<div class="notice">
+													<p>프립에서 구매하시지 않는 경우, 환불 거부, 서비스 불이행 등의 문제가 생길 수 있습니다.</p>
+												</div>
+											</section>
+											
+											<section class="info_section3">
+												<div class="info_title">
+													진행 장소
+												</div>
+												<div id="location">
+													
+												</div>
+											</section>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="Main_line_2">
+								<div class="MakeTip">
+									프립 앱에서 보이는 상품 상세 레이아웃입니다.<br>
+									입력한 사항을 최종 확인해 주세요.<br>
+									가격 및 저장 등의 숫자들은 참조용입니다.
+								</div>
+							</div>
+						</div><!-- 프립 소개 end -->
+						<input type="button" value="이전" class="btn btn-light prevButton" onclick="prevSelect()">
+						<input type="button" value="다음" class="btn btn-primary nextButton" onclick="nextSelect()">
 					</form>
 					<div>
-					<button value="다음" class="nextButton" onclick="prevSelect()">이전</button>
-					<button value="다음" class="nextButton" onclick="nextSelect()">다음</button>
 					</div>
 				</div>
 			</div>

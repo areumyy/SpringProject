@@ -1,23 +1,49 @@
+//이전 버튼
 function prevSelect() {
- 		console.log($(".Main_line").attr("id"));
  		if($(".Main_line").attr("id") == "first"){
  			return;
+ 		}else if($(".nextButton").length == 0) {
+ 			$(".submitButton").remove();
+ 			$("form").append("<input type='button' value='다음' class='btn btn-primary nextButton' onclick='nextSelect()'>");
+ 			
+ 			var nextNode = $(".Main_line").prev();
+			$(".Main_line").attr("class", "Main_line_hidden");
+			nextNode.attr("class", "Main_line");
  		}else {
 	 		var nextNode = $(".Main_line").prev();
 			$(".Main_line").attr("class", "Main_line_hidden");
 			nextNode.attr("class", "Main_line");
  		}
  	}
-
+//다음 버튼
 function nextSelect() {
 	if($(".Main_line").attr("id") == "last"){
-		return;
+		$(".nextButton").remove();
+		var nextNode = $(".Main_line").next();
+		$(".Main_line").attr("class", "Main_line_hidden");
+		nextNode.attr("class", "Main_line");
+		$("form").append("<input type='submit' class='btn btn-primary submitButton' value='제출'>");
+		
+		var fripInfo = $("[name=fripTitle]").val();
+		var include = $("[name=include]").val();
+		var exclude  = $("[name=exclude]").val();
+		var plan = $("[name=plan]").val();
+		var end_area = $("[name=endArea]").val();
+		var endArea_detail = $("[name=endArea_detail]").val();
+		
+		$("#fripTitle").text(fripInfo);
+		$("#include").text(include);
+		$("#exclude").text(exclude);
+		$("#plan").text(plan);
+		$("#location").text(end_area +""+endArea_detail);
 	}else {
 		var nextNode = $(".Main_line").next();
 		$(".Main_line").attr("class", "Main_line_hidden");
 		nextNode.attr("class", "Main_line");
+
 	}
 }
+
 //옵션추가하기 버튼 눌렀을 때 함수
 function addOption() {
 	var Qtt = parseInt($(".optionQtt").val())+1;
@@ -49,6 +75,25 @@ function deleteOption(obj) {
 		}
 	}
 }
+
+// 내장소 버튼을 눌렀을 때 이벤트
+function myLocationButton() {
+	$(".findAddress").attr("disabled", false);
+	$(".detailAddress").attr("disabled", false);
+	$(".detailAddress2").attr("disabled", false);
+	$(".address").attr("placeholder", '기본주소');
+	$(".detailAddress").attr("placeholder", '상세주소');
+}
+
+// 온라인 버튼을 눌렀을 때 이벤트
+function onlineButton() {
+	$(".findAddress").attr("disabled", true);
+	$(".detailAddress").attr("disabled", true);
+	$(".detailAddress2").attr("disabled", true);
+	$(".address").attr("placeholder", '온라인 프립');
+	$(".detailAddress").attr("placeholder", '');
+}
+		
 
 //프립 진행지 API
 function findAddr() {
@@ -115,7 +160,6 @@ function findAddr2() {
             } else { // 사용자가 지번 주소를 선택했을 경우(J)
                 addr = data.jibunAddress;
             }
-            console.log(addr);
             // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
             if(data.userSelectedType === 'R'){
                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -144,4 +188,41 @@ function findAddr2() {
             document.getElementById("detailAddress2").focus();
         }
     }).open();
+}
+
+//네이버 에디터
+$(document).ready(function() {
+	var oEditors=[];
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder:"naverEditor",
+		sSkinURI:"./resources/smartEditor/SmartEditor2Skin.html",
+		fCreator: "createSEditor2",
+		htParams : 	{ 
+			bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
+			bUseVerticalResizer : false, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
+			bUseModeChanger : false, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
+			//aAdditionalFontList : aAdditionalFontSet, // 추가 글꼴 목록 
+			/*fOnBeforeUnload : function() { 
+				alert("완료!"); 
+				} */
+			}, //boolean 
+			
+			fOnAppLoad : function() { 
+				// Editor 에 값 셋팅 
+				oEditors.getById["naverEditor"].exec("PASTE_HTML", [""]); 
+			}, 
+				
+	});
+});
+
+//유효성 검사 및 제출 확인 (유효성 추가해야됨)
+function checkIt() {
+
+	if(confirm('제출하시겠습니까?')){
+		return true;
+	}else {
+		alert("실패");
+		return false;
+	}
 }

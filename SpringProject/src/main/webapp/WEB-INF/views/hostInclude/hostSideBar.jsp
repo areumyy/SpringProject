@@ -81,7 +81,7 @@
 						<a type="button" href="<%=request.getContextPath() %>/hostMakeFrip.do" class="li">
 							프립 만들기
 						</a>
-						<a type="button" href="#" class="li">
+						<a type="button" href="<%=request.getContextPath() %>/hostMyFrip.do" class="li">
 							 내 프립
 						</a>
 					</div>
