@@ -44,13 +44,9 @@
 							</div>
 							<div class="option_select_section">
 								<div class="option_arcodion">
-									<button class="arcodion_selector" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									<button class=" accordion-button collapsed arcodion_selector" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 										<div class="arcodion_div">
 											<div>일정</div>
-										</div>
-										<div class="arcodion_btn">
-											<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath d='M18 0H0v18h18z'/%3E %3Cpath stroke='%23000' stroke-width='1.5' d='M7 5l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"
-												class="arcodion_img_up">
 										</div>
 									</button>
 									<div class="option_list accordion-collapse collapse" id="collapseOne">

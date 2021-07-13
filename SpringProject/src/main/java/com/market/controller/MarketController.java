@@ -61,4 +61,9 @@ public class MarketController {
 	public String pay() {
 		return "payment";
 	}
+	
+	@RequestMapping("payment_ok.do")
+	public String payOk() {
+		return "payment_ok";
+	}
 }
