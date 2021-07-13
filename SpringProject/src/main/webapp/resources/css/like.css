@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/* 프립 찜하기 */
+/* 프립 찜하기 페이지 */
 .likePage_box {
 	max-width: 1240px;
 	min-height: 1000px;
@@ -123,7 +123,7 @@
 }
 
 
-/* 호스트 찜하기 */
+/* 호스트 찜하기 페이지 */
 .likePage_list2 {
 	display: flex;
     flex-flow: row wrap;
@@ -212,7 +212,11 @@
 }
 
 
-/* 호스트 별 프립 클래스 */
+/* 호스트 상세 페이지 */
+.host_box {
+	margin-bottom: 30px;
+}
+
 .hostInfo_inner {
 	width: 30%;
 }
@@ -236,56 +240,52 @@
 
 .hostInfo_like_btn {
 	width: 10%;
+	text-align: right;
 }
 
 .host_introduction {
-	margin-bottom: 30px;
+    position: relative;
+    margin-bottom: 20px;
+    height: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    white-space: pre-line;
     font-size: 14px;
-    font-weight: bold;
-    color: #555;
+    line-height: 24px;
+    max-height: 110px;
+    -webkit-line-clamp: 5;
 }
 
-.tabmenu{ 
-  position:relative; 
+.host_introduction_more {
+	color: rgb(51, 151, 255);
+    font-size: 12px;
+    cursor: pointer;
+    position: relative;
+    top: -15px;
 }
 
-.tabmenu ul{
-	list-style:none;
-	padding: 0;
+input[type="radio"] {
+	display: none;
 }
 
-.tabmenu ul li{
-   display: inline-block;
-   margin-right: 50px;
-   text-align: center;
-}
-.tabmenu label{
-  display:block;
-  width:100%; 
-  height:40px;
-  line-height:40px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
+input[type="radio"] + label {
+	display: inline-block;
+    font-size: 20px;
+    padding-right: 50px;
+    margin-bottom: 30px;
+    cursor: pointer;
 }
 
-.tabmenu input{display:none;}
-
-.tabCon{
-  display:none; 
-  width: 100%;
-  text-align:left; 
-  padding: 10px 0;
-  /* position:absolute; */ 
-  left:0; 
-  top:40px; 
-  box-sizing: border-box; 
+input[type="radio"]:checked + label {
+	font-weight: bold;
 }
 
-.tabmenu input:checked ~ label::after {
+input[type="radio"]:checked + label::after {
 	content: "";
     display: block;
-    margin: 0px auto;
+    margin: 9px auto 0;
     width: 5px;
     height: 5px;
     border-radius: 50%;
@@ -293,9 +293,37 @@
     cursor: pointer;
 }
 
-.tabmenu input:checked ~ .tabCon{
-    display: flex;
+.contbox {
+	display: none;
+}
+
+input[id="tab01"]:checked ~ .cont01 {
+	display: flex;
+    flex-flow: row wrap;    
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    right: 0px;
+}
+
+input[id="tab02"]:checked ~ .cont02 {
+	display: flex;
     flex-flow: row wrap;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    right: 0px;
+}
+
+.review_search_option {
+    display: none;
+}
+
+input[id="tab02"]:checked ~ .review_search_option {
+    display: block;
+    word-wrap: normal;
+    margin-top: 5px;
+    float: right;
+    border: none;
+    font-size: 15px;
 }
 
 .host_riview_box {
@@ -560,6 +588,24 @@
 	
 	.inner_box {
     	margin-right: 0px;
+	}
+	
+    /* 호스트 상세 */
+	.hostInfo_inner {
+		width: 100%
+	}
+	
+	.hostInfo_detail {
+	    width: 80%;
+	}
+	
+	.hostInfo_like_btn {
+	    width: 10%;
+	}
+	
+	.list_inner:nth-child(5n) {
+		margin-right: 10px;
+	}
 }
 
 
