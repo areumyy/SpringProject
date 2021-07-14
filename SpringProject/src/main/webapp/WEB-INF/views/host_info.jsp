@@ -299,6 +299,7 @@
 					 	</div>
 					</div>
 					
+					<!-- 페이징 처리 -->
 					<nav aria-label="Page navigation example" class="like_page_footer">
 						<ul class="pagination">
 							<li class="page-item"><a class="page-link" href="#"

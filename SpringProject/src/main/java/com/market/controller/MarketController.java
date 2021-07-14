@@ -49,11 +49,16 @@ public class MarketController {
 	@RequestMapping("category_list.do")
 	public String cateList() {
 		return "category_list";
-
 	}
 
 	@RequestMapping("option_select.do")
 	public String optionSel() {
 		return "option_select";
 	}
+	
+	@RequestMapping("admin_frip_pass.do")
+	public String fripPass() {
+		return "admin_frip_pass";
+	}
+	
 }
