@@ -40,7 +40,7 @@ public class MarketController {
 	public String likeHost() {
 		return "like_host";
 	}
-	
+
 	@RequestMapping("host_info.do")
 	public String hostInfo() {
 		return "host_info";
@@ -61,9 +61,39 @@ public class MarketController {
 	public String pay() {
 		return "payment";
 	}
-	
+
 	@RequestMapping("payment_ok.do")
 	public String payOk() {
 		return "payment_ok";
+	}
+
+	@RequestMapping("hostSideBar.do")
+	public String hostSideBar() {
+		return "hostInclude/hostSideBar";
+	}
+
+	@RequestMapping("hostFooter.do")
+	public String hostFooter() {
+		return "hostInclude/hostFooter";
+	}
+
+	@RequestMapping("hostMain.do")
+	public String hostMain() {
+		return "host/hostMain";
+	}
+
+	@RequestMapping("hostMakeFrip.do")
+	public String hostMakeFrip() {
+		return "host/hostMakeFrip";
+	}
+
+	@RequestMapping("hostMyFrip.do")
+	public String hostMyFrip() {
+		return "host/hostMyFrip";
+	}
+	
+	@RequestMapping("hostCalculateReq.do")
+	public String hostCalReq() {
+		return"host/hostCalculateReq";
 	}
 }
