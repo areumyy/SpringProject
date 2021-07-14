@@ -283,6 +283,9 @@ a {
 	.menu1 {
 		display: none;
 	}
+	.menu2-1-1 {
+		justify-content: center;
+	}
 	.menu2-1-2 {
 		display: none;
 	}
@@ -303,7 +306,7 @@ a {
 		padding: 11px 20px;
 		margin-top: 0;
 	}
-	.drop_menu{
+	.drop_menu {
 		display: none;
 	}
 }

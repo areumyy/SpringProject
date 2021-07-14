@@ -7,18 +7,6 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-<link
 	href="<%=request.getContextPath()%>/resources/css/hostSideBar.css"
 	rel="stylesheet" />
 	
@@ -117,7 +105,7 @@
 						<a type="button" href="<%=request.getContextPath() %>/hostCalculateReq.do" class="li">
 							정산 요청
 						</a>
-						<a type="button" href="#" class="li">
+						<a type="button" href="<%=request.getContextPath() %>/hostCalculateOk.do" class="li">
 							 정산 완료
 						</a>
 					</div>
@@ -129,10 +117,10 @@
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
 						</button>  
 						
-						<a type="button" href="#" class="li">
+						<a type="button" href="<%=request.getContextPath() %>/hostNotice_list.do" class="li">
 							공지사항
 						</a>
-						<a type="button" href="#" class="li">
+						<a type="button" href="<%=request.getContextPath() %>/hostQna_list.do" class="li">
 							 자주 묻는 질문
 						</a>
 					</div>

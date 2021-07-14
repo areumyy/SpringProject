@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+.cal_page {
+	margin-top: 10px;
+	padding: 0px;
+	overflow: hidden;
+	width: 100%;
+	margin-left: 0px;
+}
+
+.cal_header {
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
+	margin-bottom: 17px;
+}
+
+.cal_title {
+	line-height: 18px;
+	font-weight: bold;
+}
+
+.cal_select>option {
+	font-size: 16px;
+}
+
+.cal_select:focus{
+	box-shadow: none;
+}
+.cal_body {
+	background-color: white;
+}
+
+.cal_cate {
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-box-align: center;
+	align-items: center;
+	padding: 15px 0px;
+	font-size: 14px;
+	line-height: 18px;
+	justify-content: space-around;
+	font-weight: bold;
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.cal_cate div {
+	text-align: center;
+}
+
+.cal_item {
+	display: flex;
+	-webkit-box-pack: justify;
+	-webkit-box-align: center;
+	align-items: center;
+	padding: 15px 0px;
+	font-size: 14px;
+	line-height: 18px;
+	justify-content: space-around;
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.cal_item div {
+	text-align: center;
+}
+
+.item_title {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* 라인수 */
+	-webkit-box-orient: vertical;
+	margin-top: 10px;
+	line-height: 20px;
+	font-size: 14px;
+}
+
+.item_title p {
+	word-break: break-all;
+	margin: 0;
+}
+
+.cal_body div div:first-child {
+	width: 20%;
+}
+.cal_body div div:nth-child(2) {
+	width: 20%;
+}
+.cal_body div div:nth-child(n+3):nth-child(-n+7) {
+	width: 5%;
+}
+.cal_body div div:nth-child(n+8) {
+	width: 7%;
+}
+.cal_body div div:nth-child(n+9) {
+	width: 12%;
+}

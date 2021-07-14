@@ -91,9 +91,19 @@ public class MarketController {
 	public String hostMyFrip() {
 		return "host/hostMyFrip";
 	}
-	
+
 	@RequestMapping("hostCalculateReq.do")
 	public String hostCalReq() {
-		return"host/hostCalculateReq";
+		return "host/hostCalculateReq";
+	}
+
+	@RequestMapping("hostNotice_list.do")
+	public String hostNotice() {
+		return "host/hostNotice_list";
+	}
+
+	@RequestMapping("hostQna_list.do")
+	public String hostQna() {
+		return "host/hostQna_list";
 	}
 }
