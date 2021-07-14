@@ -134,7 +134,7 @@
 								<p class="menu_font">저장</p>
 							</div>
 						</a>
-						<a class="menu_link" href="#">
+						<a class="menu_link" href="<%=request.getContextPath() %>/mypage.do">
 							<div class="menu_div">
 								<div class="menu_btn_div">
 									<img src="<%=request.getContextPath() %>/resources/image/menu/mypage.svg" alt="마이-icon">

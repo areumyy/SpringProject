@@ -8,18 +8,9 @@
 
 <!-- 반응형 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 부트스트랩 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <!-- CSS -->
 <link href="<%=request.getContextPath()%>/resources/css/adminSideBar.css" rel="stylesheet" />
-	
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
 	// 시작시 불필요한 것들 hide
 	$(document).ready(function() {
