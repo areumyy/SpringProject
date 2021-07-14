@@ -47,7 +47,8 @@
 							    <tr>
 							      <th scope="col">#</th>
 							      <th scope="col">문의자</th>
-							      <th scope="col" colspan="2">제목</th>
+							      <th scope="col" class="table_title">내용</th>
+							      <th scope="col"></th>
 							    </tr>
 							  </thead>
 							  <tbody>
@@ -56,28 +57,39 @@
 							      <td>홍길동</td>
 							      <td>
 								      <div class="option_arcodion">
-										<button class=" accordion-button collapsed arcodion_selector" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+										<button class=" accordion-button collapsed arcodion_selector askTitle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 											<div class="arcodion_div">
-												<div>일정</div>
+												<div class="arcodion_title">언제 진행하나요?</div>
 											</div>
 										</button>
 										<div class="option_list accordion-collapse collapse" id="collapseOne">
 											<div class="option_item">
-												<div class="option_item_date">2021년 7월 17일(토요일) 06:50</div>
-												<div class="option_item_name">1 / 4명 | 신청 마감 7월 16일 14:00</div>
-											</div>
-											<div class="option_item">
-												<div class="option_item_date">2021년 7월 17일(토요일) 06:50</div>
-												<div class="option_item_name">1 / 4명 | 신청 마감 7월 16일 14:00</div>
-											</div>
-											<div class="option_item">
-												<div class="option_item_date">2021년 7월 17일(토요일) 06:50</div>
-												<div class="option_item_name">1 / 4명 | 신청 마감 7월 16일 14:00</div>
+												<div class="option_item_cont">언제 진행하나요?</div>
 											</div>
 										</div>
 									</div>
 								</td>
-							      <td><a href="#">답변하기</a></td>
+							      <td class="answerButton"><a href="#">답변하기</a></td>
+							    </tr>
+							    
+							    <tr>
+							      <th scope="row">1</th>
+							      <td>홍길동</td>
+							      <td>
+								      <div class="option_arcodion">
+										<button class=" accordion-button collapsed arcodion_selector askTitle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+											<div class="arcodion_div">
+												<div class="arcodion_title">언제 진행하나요?</div>
+											</div>
+										</button>
+										<div class="option_list accordion-collapse collapse" id="collapseTwo">
+											<div class="option_item">
+												<div class="option_item_cont">언제 진행하나요?</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							      <td class="answerButton"><a href="#">답변하기</a></td>
 							    </tr>
 							  </tbody>
 							</table>

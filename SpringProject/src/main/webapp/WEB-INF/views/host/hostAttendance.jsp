@@ -41,9 +41,9 @@
 						    <tr>
 						      <th scope="row">1</th>
 						      <!-- hostAttendance_member로 클래스번호가지고 이동 -->
-						      <td><a href="#">하루에 필사 한 문장</a></td>
+						      <td>하루에 필사 한 문장</td>
 						      <td>2021-07-14 14시</td>
-						      <td><button>출결 관리</button></td>
+						      <td><a href="#">출결 관리</a></td>
 						    </tr>
 						  </tbody>
 						</table>

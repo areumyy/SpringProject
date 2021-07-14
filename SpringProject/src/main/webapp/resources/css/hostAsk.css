@@ -252,6 +252,24 @@
 	border-color:white;
 }
 
+.askTitle{
+	height:20px;
+	width:80%;
+}
+
+.option_item_cont{
+	margin-top:20px;
+	text-align:left;
+}
+
+.table td, th{
+	vertical-align:middle;
+	text-align:center;
+}
+
+.option_arcodion{
+	margin-left:120px;
+}
 
 @media (max-width: 768px){
 	.MainFrame{
