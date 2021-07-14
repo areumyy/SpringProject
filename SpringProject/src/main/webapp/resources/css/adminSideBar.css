@@ -1,0 +1,254 @@
+@charset "UTF-8";
+
+.hostSideBar{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 256px;
+    height: 100%;
+    color: rgb(74, 74, 74);
+    font-size: 14px;
+    font-weight: normal;
+    background-color: white;
+    opacity: 1;
+    z-index: 500;
+    padding-top: 64px;
+}
+
+.btn-group-vertical{
+	width:100%;
+}
+.menuFrame{
+	width:100%;
+}
+
+.menubutton {
+	border-bottom:0.5px solid gray;
+}
+
+.ul{
+	background-color:white;
+	border: 0px solid white;
+	width:100%;
+	height: 56px;
+	font-size: 18px;
+	text-align:left;
+}
+.ul1{
+	background-color:white;
+	border: 0px solid white;
+	width:100%;
+	height: 56px;
+	font-size: 18px;
+	text-align:left;
+}
+.icon{
+	float:right;
+	opacity:0.3;
+}
+
+.hostSideBar a {
+	text-decoration: none;
+	color: black;
+}
+.logout {
+	padding-top:20px;
+	text-align:left;
+	padding-left:20px;
+}
+.logout button {
+	background-color: white;
+	border: 0px solid white;
+}
+.li{
+	width:100%;
+	background-color:white;
+	border: 0px solid white;
+	padding-left:35px;
+	text-align:left;
+	font-size:15px;
+	margin-top:5px;
+	margin-bottom:5px;
+	text-decoration: none;
+	text-color: white;
+}
+
+.li:hover {
+	background-color:#c8ffff;
+}
+
+.mobile{
+	display:none;
+}
+
+@media (max-width: 768px) {
+	
+	.hostSideBar{
+		display:none;
+	}
+	.mobile{
+		display:block;
+	}
+	.hostMenuBar {
+	    position: fixed;
+	    top: 0px;
+	    left: 0px;
+	    display: flex;
+	    -webkit-box-pack: justify;
+	    justify-content: space-between;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    width: 100%;
+	    background-color: rgb(34, 34, 34);
+	    color: white;
+	    z-index: 2000;
+	    height: 64px;
+	    padding: 17px 30px;
+	}
+	.hostMenuBar button {
+		background-color:rgb(34, 34, 34);
+		border: 0px solid white;
+	}
+	
+	.mobileNav {
+		display: flex;
+	    flex-direction: column;
+	    position: fixed;
+	    top: 0px;
+	    left: 0px;
+	    width: 256px;
+	    height: 100%;
+	    color: rgb(74, 74, 74);
+	    font-size: 12px;
+	    font-weight: normal;
+	    background-color: white;
+	    opacity: 1;
+	    z-index: 2500;
+	    padding-top: 0px;
+	}
+	
+	.mobileLogo {
+		width:100%;
+		display: flex;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    color: white;
+	    text-decoration: none;
+	}
+	.mobileLogo img{
+		margin-left:40%;
+	}
+	.escape {
+		width: 100%;
+	}
+	
+	.escape button{
+		width:30px;
+		float:right;
+		background-color:white;
+		border: 0px solid white;
+	}
+	.menuBarHeader {
+		height: 50px;
+   	 	padding: 14px 20px;
+    	font-size: 12px;
+	}
+	.homeButton {
+	    height: 100%;
+	    color: rgb(51, 153, 255);
+	    text-decoration: none;
+	    vertical-align: -5px;
+	}
+	.homeButton img{
+		margin-right:10px;
+	}
+	.menuName {
+		position: relative;
+	    display: block;
+	    width: 100%;
+	    margin: 0px;
+	    color: rgb(74, 74, 74);
+	    font-weight: 400;
+	    border-top: 1px solid rgb(203, 207, 211);
+	}
+	.menuName2 {
+		display: block;
+	    overflow: hidden;
+	    width: 100%;
+	    margin: 0px;
+	    padding: 0px 0px 0px 48px;
+	    height: 160px;
+	    transform-origin: left top;
+	    transform: translateY(0px) scale(1, 1);
+	    transition: height 0.2s ease-in-out 0s, transform 0.2s ease-in-out 0s;
+	}
+	.menuIcon {
+		position: absolute;
+	    top: 8px;
+	    left: 16px;
+	    display: inline-block;
+	    width: 24px;
+	    height: 24px;
+	    margin-right: 16px;
+	    overflow: hidden;
+	    z-index: 2;
+	}
+	
+	.menuList {
+		display: block;
+	    overflow: hidden;
+	    width: 100%;
+	    margin: 0px;
+	    padding: 0px 0px 0px 20px;
+	    height: 80px;
+	    transform-origin: left top;
+	    transform: translateY(0px) scale(1, 1);
+	    transition: height 0.2s ease-in-out 0s, transform 0.2s ease-in-out 0s;
+	}
+	
+	.menutext{
+		display: flex;
+	    -webkit-box-pack: justify;
+	    justify-content: space-between;
+	    -webkit-box-align: center;
+	    align-items: center;
+	    width: 100%;
+	    height: 40px;
+	    margin: 0px;
+	    padding: 8px 20px 8px 56px;
+	    line-height: 24px;
+	    list-style-type: none;
+	    cursor: pointer;
+	    background-color: rgb(255, 255, 255);
+	    color: rgb(74, 74, 74);
+	    user-select: none;
+	}
+	
+	.menutext a{
+		text-decoration: none;
+		color: rgb(74, 74, 74);
+	}
+	
+	.logout {
+		padding-top:20px;
+		text-align:left;
+	}
+	.logout button {
+		padding-left:24%;
+		background-color: white;
+		border: 0px solid white;
+	}
+	.black {
+		position: fixed;
+	    top: 0px;
+	    left: 0px;
+	    width: 100vw;
+	    height: 100vh;
+	    background-color: black;
+	    opacity: 0.5;
+	    z-index: 2499;
+	}
+}
