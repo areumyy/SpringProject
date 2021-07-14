@@ -14,7 +14,7 @@
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-<link href="<%=request.getContextPath()%>/resources/css/hostExam.css"
+<link href="<%=request.getContextPath()%>/resources/css/hostAttendance.css"
 	rel="stylesheet" />
 </head>
 <body>
@@ -26,10 +26,30 @@
 				<jsp:include page="../hostInclude/hostSideBar.jsp"></jsp:include>
 	
 				<div class="Main">
-					<!-- 여기에 페이지에 맞게 내용 작성 -->
+					<h1 class="Main_title">출석부</h1>
+					<div class="cont_frame">
+						<table class="table">
+						  <thead>
+						    <tr>
+						      <th scope="col">#</th>
+						      <th scope="col">클래스 제목</th>
+						      <th scope="col">일시</th>
+						      <th scope="col">출결 관리</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+						      <th scope="row">1</th>
+						      <!-- hostAttendance_member로 클래스번호가지고 이동 -->
+						      <td><a href="#">하루에 필사 한 문장</a></td>
+						      <td>2021-07-14 14시</td>
+						      <td><button>출결 관리</button></td>
+						    </tr>
+						  </tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-	
 		</div>
 		
 	<jsp:include page="../hostInclude/hostFooter.jsp"></jsp:include>

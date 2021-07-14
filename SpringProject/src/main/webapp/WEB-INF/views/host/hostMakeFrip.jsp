@@ -4,18 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>hostMain</title>
+<title>hostMakeFrip</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -29,7 +22,7 @@
 <!-- 네이버 textarea API -->
 <script	src="./resources/smartEditor/js/HuskyEZCreator.js" 
 	charset="utf-8"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 </head>
 <body>
 	<div class="mainFrame">
@@ -132,6 +125,50 @@
 								</div>
 							</div>
 						</div>
+						
+						<!-- 진행일 -->
+						<div class="Main_line_hidden">
+							<div class="Main_line_1">
+								<div class="Main_line_title">
+									진행일 설정
+								</div>
+								<div class="schedule">
+									<div>
+										<div class="little_title">시작일</div>
+										<input type="date" name="startDate">
+									</div>
+									<br><br><br><br>
+									<div>
+										<div class="little_title">종료일<small>(선택사항)</small></div>
+										<input type="date" name="startDate">
+									</div>
+								</div>
+							</div>
+							<div class="Main_line_2">
+								<div class="MakeTip">
+									<strong>일정별 인원</strong>
+									<br>
+									예) 마카롱 원데이 클래스의 인원을 일정별로<br>
+									최소 1명 ~ 최대 10명으로 설정하여<br>
+									해당 일정에 구매 옵션 상관없이 10명의 신청을 받을 수 있습니다.
+									<br><br>
+									<strong>예약 확정</strong>
+									<br>
+									구매후 대원과 호스트가 예약날짜를 확정한 시점을 기준으로 환불 불가로 바뀌며 노쇼를 방지하기 위한 기능
+									<br><br>
+									<strong>옵션명</strong>
+									<br>
+									예) 참가비 (1인) / 참가비(2인)<br>
+									기본 옵션 / 선물 포장<br>
+									헬스장 이용권 / 헬스장 이용+PT 10회
+									<br><br>									
+									<strong>가격</strong><br>
+									가격은 추가 금액이 아닌 최종 결제 금액입니다.<br>
+									예) 1회 이용권 | 30,000원<br>
+									10회 이용권 | 280,000원<br>
+								</div>
+							</div>
+						</div><!-- 진행일 end -->
 						
 						<!-- 인원 설정 -->
 						<div class="Main_line_hidden">

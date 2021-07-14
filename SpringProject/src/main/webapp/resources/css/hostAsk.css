@@ -247,6 +247,12 @@
 	margin-left:45%;
 	margin-top:10px;
 }
+
+.menuButton {
+	border-color:white;
+}
+
+
 @media (max-width: 768px){
 	.MainFrame{
 	    display: flex;

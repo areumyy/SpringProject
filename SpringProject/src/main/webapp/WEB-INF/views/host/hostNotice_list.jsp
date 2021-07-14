@@ -14,7 +14,6 @@
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-	
 <link href="<%=request.getContextPath()%>/resources/css/hostExam.css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/resources/css/hostNotice_list.css" rel="stylesheet" />
 </head>

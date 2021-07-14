@@ -1,7 +1,12 @@
 package com.market.controller;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class MarketController {
@@ -67,16 +72,6 @@ public class MarketController {
 		return "payment_ok";
 	}
 
-	@RequestMapping("hostSideBar.do")
-	public String hostSideBar() {
-		return "hostInclude/hostSideBar";
-	}
-
-	@RequestMapping("hostFooter.do")
-	public String hostFooter() {
-		return "hostInclude/hostFooter";
-	}
-
 	@RequestMapping("hostMain.do")
 	public String hostMain() {
 		return "host/hostMain";
@@ -90,6 +85,21 @@ public class MarketController {
 	@RequestMapping("hostMyFrip.do")
 	public String hostMyFrip() {
 		return "host/hostMyFrip";
+	}
+
+	@RequestMapping("hostAttendance.do")
+	public String hostAttendance() {
+		return "host/hostAttendance";
+	}
+
+	@RequestMapping("hostAttendance_member.do")
+	public String hostAttendance_member() {
+		return "host/hostAttendance_member";
+	}
+
+	@RequestMapping("hostAsk.do")
+	public String hostAsk() {
+		return "host/hostAsk";
 	}
 
 	@RequestMapping("hostCalculateReq.do")

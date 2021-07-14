@@ -216,6 +216,7 @@ $(document).ready(function() {
 	});
 });
 
+
 //유효성 검사 및 제출 확인 (유효성 추가해야됨)
 function checkIt() {
 
