@@ -124,7 +124,7 @@
     color: rgb(187, 187, 187);
 }
 
-@media (max-width: 854px){
+@media (max-width: 768px){
 	.MainFrame{
 	    display: flex;
 	    flex-flow: column nowrap;

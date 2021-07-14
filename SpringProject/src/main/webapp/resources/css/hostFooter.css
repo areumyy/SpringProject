@@ -33,7 +33,7 @@
     cursor: pointer;
 }
 
-@media (max-width: 854px) {
+@media (max-width: 768px) {
 	.footer{
 		display: flex;
 	    background-color: rgb(51, 51, 51);

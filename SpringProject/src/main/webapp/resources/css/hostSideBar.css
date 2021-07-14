@@ -84,7 +84,7 @@
 	display:none;
 }
 
-@media (max-width: 854px) {
+@media (max-width: 768px) {
 	
 	.hostSideBar{
 		display:none;
