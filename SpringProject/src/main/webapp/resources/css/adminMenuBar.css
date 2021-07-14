@@ -29,7 +29,7 @@
 	text-decoration: none;
 }
 
-@media (max-width: 854px) {
+@media (max-width: 768px) {
 	.hostMenuBar{
 		display:none;
 	}

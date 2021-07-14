@@ -5,22 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- 반응형 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 부트스트랩 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-<link
-	href="<%=request.getContextPath()%>/resources/css/adminSideBar.css"
-	rel="stylesheet" />
+<!-- CSS -->
+<link href="<%=request.getContextPath()%>/resources/css/adminSideBar.css" rel="stylesheet" />
 	
 <script>
 	// 시작시 불필요한 것들 hide
@@ -71,39 +69,19 @@
 			<div class="hostSideBar">
 				<div class="btn-group-vertical" role="group" aria-label="...">
 					<div id="menuFrame1"class="menubutton">
-						<button type="button" id="1" class="ul">
+						<button type="button" id="1" class="ul" onclick="location.href='admin_frip_pass.do'">
 							<span class="glyphicon glyphicon-tent"  aria-hidden="true"></span>
 							 프립 승인
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
 						</button>
-						
-						<a type="button" href="<%=request.getContextPath() %>/hostMakeFrip.do" class="li">
-							프립 만들기
-						</a>
-						<a type="button" href="#" class="li">
-							 내 프립
-						</a>
 					</div>
 					
 					<div id="menuFrame2"class="menubutton">
-						<button type="button" id="2" class="ul">
+						<button type="button" id="2" class="ul" onclick="location.href='admin_cal_pass.do'">
 							<span class="glyphicon glyphicon-user"  aria-hidden="true"></span>
 							정산 승인
 								<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
 						</button>
-						
-						<a type="button" href="#" class="li">
-							출석부
-						</a>
-						<a type="button" href="#" class="li">
-							 예약 관리
-						</a>
-						<a type="button" href="#" class="li">
-							문의 하기
-						</a>
-						<a type="button" href="#" class="li">
-							 후기 관리
-						</a>
 					</div>
 					
 					<div id="menuFrame3"class="menubutton">
@@ -112,13 +90,6 @@
 							공지사항 관리
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
 						</button>
-						
-						<a type="button" href="#" class="li">
-							정산 요청
-						</a>
-						<a type="button" href="#" class="li">
-							 정산 완료
-						</a>
 					</div>
 					
 					<div id="menuFrame4" class="menubutton">
@@ -127,13 +98,6 @@
 							회원 조회
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
 						</button>  
-						
-						<a type="button" href="#" class="li">
-							공지사항
-						</a>
-						<a type="button" href="#" class="li">
-							 자주 묻는 질문
-						</a>
 					</div>
 					
 					<div class="ul logout">

@@ -60,6 +60,11 @@ public class MarketController {
 	public String fripPass() {
 		return "admin_frip_pass";
 	}
+	
+	@RequestMapping("admin_cal_pass.do")
+	public String calPass() {
+		return "admin_cal_pass";
+	}
 
 	@RequestMapping("payment.do")
 	public String pay() {
