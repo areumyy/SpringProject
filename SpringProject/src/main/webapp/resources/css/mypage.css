@@ -1,0 +1,245 @@
+@charset "UTF-8";
+
+.my_page {
+	display: flex;
+	flex-flow: column nowrap;
+	align-content: flex-start;
+	margin: 0px auto;
+	max-width: 808px;
+	/* max-width: 1240px; */
+	width: 100%;
+	padding: 0px 20px;
+	min-height: 1px;
+}
+
+/* customer_info */
+.mypage_info_wrapper {
+	width: 100%;
+	padding: 34px 0px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.customer_info_wrapper {
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	flex-direction: row;
+	-webkit-box-flex: 1;
+	flex: 1 1 50%;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+.customer_info {
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+	line-height: 12px;
+	font-size: 11px;
+	color: rgb(85, 85, 85);
+	margin-right: 10px;
+	min-width: 0px;
+	width: 100%;
+}
+
+.customer_name {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	margin-bottom: 20px;
+	color: black;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.customer_name_txt {
+	max-width: 200px;
+	text-overflow: ellipsis;
+	line-height: 32px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.customer_more {
+	margin-left: 12px;
+}
+
+.customer_account_type {
+	font-size: inherit;
+}
+
+/* profile_img */
+.mypage_profile_img {
+	position: relative;
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	width: 62px;
+	height: 62px;
+	cursor: pointer;
+}
+
+.mypage_img_wrapper {
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.img_style {
+	display: initial;
+	border-radius: 5px;
+	width: 100%;
+	height: 100%;
+}
+
+.img_modify {
+	position: absolute;
+	width: 30%;
+	right: 0px;
+	bottom: 0px;
+}
+
+/* customer_membershipCard */
+.customer_membershipCard {
+	margin-top: 30px;
+	border-radius: 5px;
+	background-color: rgb(51, 151, 255);
+	color: white;
+	-webkit-box-flex: 1;
+	flex: 1 1 100%;
+}
+
+.customer_box_wrapper {
+	display: flex;
+	justify-content: space-around;
+}
+
+.customer_info_box {
+	-webkit-box-flex: 1;
+	flex: 1 1 50%;
+	line-height: 18px;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 13px 15px;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: white;
+}
+
+.customer_txt_style:hover {
+	color: white;
+}
+
+.customer_info_box:nth-child(1), .customer_info_box:nth-child(2) {
+	border-right: 1px solid rgb(34, 133, 240);
+}
+
+.customer_box_txt {
+	margin-bottom: 2px;
+	line-height: 11px;
+	font-size: 11px;
+	font-weight: 300;
+}
+
+.box_arrow {
+	display: inline-block;
+	vertical-align: top;
+	width: 14px;
+	height: 13px;
+}
+
+/* mypage_nav */
+.mypage_nav_wrapper {
+	display: flex;
+	width: 100%;
+	margin-bottom: 60px;
+}
+
+.mypage_route_container {
+	-webkit-box-flex: 1;
+	flex: 1 1 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.mypage_nav_list {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	margin: 0px 0px 20px;
+}
+
+.mypage_nav_list>* {
+	margin-right: 0px;
+	-webkit-box-flex: 1;
+	flex: 1 1 auto;
+	width: calc(33.3333%);
+}
+
+.nav_button {
+	width: 100%;
+	height: 60px;
+	line-height: 14px;
+	padding: 16px 0px 15px;
+	background-color: transparent;
+	text-align: center;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	-webkit-box-align: center;
+	align-items: center;
+	border-radius: 0px;
+	border: 0px;
+	outline: 0px;
+}
+
+.nav_cont {
+	margin-left: 5px;
+	font-weight: bold;
+	position: absolute;
+	color: rgb(5, 116, 230);
+}
+
+.mypage_nav_cont {
+	width: auto;
+	height: auto;
+	transition: opacity 200ms ease-in-out 0s;
+	min-width: 0px;
+	min-height: 1px;
+}
+
+/* pgCard */
+.pagination {
+	-webkit-box-pack: center;
+	justify-content: center;
+	padding: 30px 0px;
+}
+
+.additionalInfo_icon {
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	margin-right: 5px;
+	width: 18px;
+	height: 18px;
+}
+
+.additionalInfo_wrapper {
+	display: flex;
+	line-height: 18px;
+	font-size: 12px;
+	margin-top: 20px;
+}
+
+.mypage_footer_txt {
+	margin-top: 12px;
+}
+
+.mypage_footer_txt_bottom{
+	margin-bottom: 12px;
+}
