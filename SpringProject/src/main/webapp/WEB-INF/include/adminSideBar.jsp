@@ -103,9 +103,8 @@
 	<div class="mobile">
 		<header class="hostMenuBar">
 			<button onclick="showMenu()">
-				<span class="glyphicon glyphicon-list"  aria-hidden="true"></span>
+				<i class="fa fa-align-justify" aria-hidden="true" style="color:white;"></i>
 			</button>
-			
 			<a class="mobileLogo" href="<%=request.getContextPath()%>/hostMain.do">
 				<img src="<%=request.getContextPath()%>/resources/logo/logo.png"
 				width="80px" height="30px" alt="?">

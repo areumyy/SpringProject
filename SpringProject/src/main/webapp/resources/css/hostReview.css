@@ -1,0 +1,197 @@
+@charset "UTF-8";
+
+.mainFrame{
+	display: flex;
+    flex-flow: column nowrap;
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    padding-top: 64px;
+    min-height:100vh;
+    background-color: rgb(242 242 242);
+}
+.Frame {
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: calc(89vh - 64px);
+}
+.Frame_Frame{
+	display: flex;
+    flex-flow: column nowrap;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    padding-left: 256px;
+}
+.Main {
+	-webkit-box-flex: 1;
+    flex: 1 1 auto;
+    padding: 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: flex-start;
+}
+
+.Main_title_box {
+	display: flex;
+	-webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.review_header {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.Main_title {
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 7px 0px 18px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 24px;
+}
+.info_frame{
+	-webkit-box-flex: 1;
+    flex: 1 1 auto;
+    background-color: white;
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100%;
+    margin-top:30px;
+}
+
+
+.host_review_box {
+	width: 100%;
+}
+
+.user_info {
+	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.user_img_box {
+	flex: 0 0 auto;
+}
+
+.user_img {
+    margin-right: 14px;
+    width: 56px;
+    height: 56px;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.user_detail {
+	-webkit-box-flex: 1;
+    flex: 1 1 auto;
+}
+
+.user_name {
+	font-size: 15px;
+    font-weight: bold;
+}
+
+.review_score {
+	
+}
+
+.review_regdate {
+	font-size: 13px;
+    color: #9b9b9b;
+}
+
+.review_cont {
+	margin-bottom: 20px;
+    white-space: pre-wrap; 	/* 공백 줄바꿈 적용 */
+    font-size: 13px;
+    line-height: 22px;
+}
+
+.booking_info {
+	font-size: 12px;
+    color: #9b9b9b;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+
+.class_name {
+	
+}
+
+.class_startDate {
+	
+}
+
+.review_like {
+	text-align: right;
+	margin-bottom: 20px;
+}
+
+.review_like_btn {
+    border: none;
+    background-color: transparent;
+    font-size: 12px;
+    color: #555;
+}
+
+.review_like_count {
+    vertical-align: bottom;
+}
+
+.review_image_box {
+	
+}
+
+.review_image {
+	width: 120px;
+    border-radius: 10px;
+}
+
+
+
+
+/* 반응형 */
+@media (max-width: 768px){
+	.MainFrame{
+	    display: flex;
+	    flex-flow: column nowrap;
+	    -webkit-box-flex: 1;
+	    flex: 1 1 auto;
+	    padding-top: 50px;
+	}
+	.Frame{
+		display: flex;
+	    flex-flow: column nowrap;
+	    min-height: calc(100vh - 50px);
+	}
+	.Frame_Frame{
+    	padding: 0px 10px;
+	    display: flex;
+	    flex-flow: column nowrap;
+	    -webkit-box-align: stretch;
+	    align-items: stretch;
+	    -webkit-box-flex: 1;
+	    flex-grow: 1;
+	    width:100%;
+	}
+	.Main {
+		-webkit-box-flex: 1;
+	    flex: 1 1 auto;
+	    padding: 0px;
+	    display: flex;
+	    flex-flow: column nowrap;
+	    align-content: flex-start;
+	}
+}

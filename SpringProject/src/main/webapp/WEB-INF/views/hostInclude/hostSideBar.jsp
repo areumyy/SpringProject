@@ -87,7 +87,7 @@
 						<a type="button" href="<%=request.getContextPath() %>/hostAsk.do" class="li">
 							문의 하기
 						</a>
-						<a type="button" href="#" class="li">
+						<a type="button" href="<%=request.getContextPath() %>/hostReview.do" class="li">
 							 후기 관리
 						</a>
 					</div>

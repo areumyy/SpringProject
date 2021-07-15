@@ -1,0 +1,300 @@
+@charset "UTF-8";
+
+.mainFrame{
+	display: flex;
+    flex-flow: column nowrap;
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    padding-top: 64px;
+    min-height:100vh;
+    background-color: rgb(242 242 242);
+}
+.Frame {
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: calc(89vh - 64px);
+}
+.Frame_Frame{
+	display: flex;
+    flex-flow: column nowrap;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    padding-left: 256px;
+}
+.Main {
+	-webkit-box-flex: 1;
+    flex: 1 1 auto;
+    padding: 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: flex-start;
+}
+
+.pass_box {
+	min-height: 38vh;
+    max-height: 38vh;
+    overflow: auto;
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 30px;
+}
+
+
+.pass_box_title {
+	font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-left: 5px;
+}
+
+.pass_count {
+	font-size: 13px;
+    padding-left: 10px;
+}
+
+.table {
+	background-color: #fff;
+}
+
+.table_title {
+	border-top: 1px solid;
+}
+
+.table th {
+	text-align: center;
+	vertical-align: middle;
+}
+.table th:nth-child(1) {
+	width: 3%;
+}
+.table th:nth-child(2) { 
+	width: 7%;
+}
+.table th:nth-child(3) { 
+	width: 7%;
+}
+.table th:nth-child(n+6):nth-child(-n+9) {
+	width: 7%;
+}
+
+.table th:nth-child(4) {
+	width: 13%;
+}
+.table th:nth-child(5) {
+	width: 30%;
+}
+.table th:nth-child(10) {
+	width: 5%;
+}
+.table th:nth-child(11) { 
+	width: 7%;
+}
+
+.table td {
+	text-align: center;
+	vertical-align: middle;
+}
+.table td:nth-child(5) {
+	text-align: left;
+}
+
+.cal_modal {
+	max-width: 766px;
+
+}
+
+.section01 {
+	display: flex;
+    justify-content: space-around;
+    padding: 10px 10px 30px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.frip_img {
+	width: 200px;
+}
+
+.frip_info {
+	text-align: left;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1 1 auto;
+}
+
+.frip_no {
+	font-size: 18px;
+    font-weight: bold;
+}
+
+.frip_title {
+	font-size: 20px;
+    font-weight: bold;
+}
+
+.frip_period {
+	font-size: 15px;
+    font-weight: 500;
+}
+
+.section02 {
+	padding: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.option_box1 {
+	width: 100%;
+    position: relative;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+.option {
+    text-align: left;
+    font-size: 12px;
+    /* font-weight: bold; */
+    margin-bottom: 5px;
+    color: #9b9b9b;
+}
+
+.option_box2 {
+	width: 100%;
+    position: relative;
+    padding: 20px 0;
+}
+
+.option_box_inner {
+	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.option_name {
+	text-align: left;
+}
+
+.option_price {
+	
+}
+
+.frip_attendee {
+	text-align: right;
+	font-size: 15px;
+}
+
+.section03 {
+	padding: 10px;
+}
+
+.cal_info_box {
+	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 20px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cal_title {
+	
+}
+
+.cal_price {
+	
+}
+
+.section04 {
+	height: 55px;
+	background-image: linear-gradient(277deg, rgb(98, 201, 255), rgb(51, 151, 255));
+    color: white;
+    border-radius: 10px;
+}
+
+.final_cal {
+	text-align: center;
+    line-height: 55px;
+    font-size: 20px;
+}
+
+.btn-primary {
+	background-color: #3397FF;
+	border-color: #3397FF;
+}
+
+/* 반응형 */
+@media (max-width: 768px){
+	.MainFrame{
+	    display: flex;
+	    flex-flow: column nowrap;
+	    -webkit-box-flex: 1;
+	    flex: 1 1 auto;
+	    padding-top: 50px;
+	}
+	.Frame{
+		display: flex;
+	    flex-flow: column nowrap;
+	    min-height: calc(100vh - 50px);
+	}
+	.Frame_Frame{
+    	padding: 0px 10px;
+	    display: flex;
+	    flex-flow: column nowrap;
+	    -webkit-box-align: stretch;
+	    align-items: stretch;
+	    -webkit-box-flex: 1;
+	    flex-grow: 1;
+	    width:100%;
+	}
+	.Main {
+		-webkit-box-flex: 1;
+	    flex: 1 1 auto;
+	    padding: 0px;
+	    display: flex;
+	    flex-flow: column nowrap;
+	    align-content: flex-start;
+	}
+	
+	.pass_box {
+		min-height: 43vh;
+	    max-height: 43vh;
+	}
+	
+	.frip_img {
+		width: 150px;
+	}
+	
+	.frip_no {
+		font-size: 15px;
+	}
+	
+	.frip_title {
+		font-size: 15px;
+		word-break:break-all;
+	}
+	
+	.frip_period {
+		font-size: 12px;
+	}
+	
+	.option_box_inner {
+	    font-size: 14px;
+	}
+	
+	.cal_info_box {
+	    font-size: 14px;
+	}
+	
+	.frip_attendee {
+		font-size: 12px;
+	}
+	
+	.final_cal {
+	    font-size: 15px;
+	}
+}
+

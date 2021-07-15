@@ -154,6 +154,11 @@ public class MarketController {
 	public String hostQna() {
 		return "host/hostQna_list";
 	}
+	
+	@RequestMapping("hostReview.do")
+	public String hostReview() {
+		return "host/hostReview";
+	}
 
 	@RequestMapping("mypage.do")
 	public String myPage() {
