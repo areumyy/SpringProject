@@ -45,7 +45,7 @@
 							<div>4.96 (총 2개)</div>
 						</div>
 						
-						<!-- 아코디언 -->
+						<!-- 아코디언 --> 
 						<div>
 							<div class="accordion" id="accordionExample">
 							  <div class="accordion-item">
