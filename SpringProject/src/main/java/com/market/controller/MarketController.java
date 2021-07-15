@@ -1,14 +1,48 @@
 package com.market.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.market.model.MemberDAO;
+import com.market.model.MemberDTO;
 
 @Controller
 public class MarketController {
 
+	@Autowired
+	private MemberDAO memberDao;
+
 	@RequestMapping("join.do")
 	public String join() {
 		return "joinForm";
+	}
+
+	@RequestMapping("join_ok.do")
+	public void joinOk(MemberDTO dto, HttpServletResponse response, @RequestParam("mem_pwd_check") String mem_pwd_check)
+			throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+
+		int emailCheck = this.memberDao.checkEmail(dto.getMem_email());
+		if (emailCheck > 1) {
+			out.println("<script>");
+			out.println("alert('중복된 아이디(이메일)입니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('아이디 사용 가능')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
 	}
 
 	@RequestMapping("pwd_search.do")

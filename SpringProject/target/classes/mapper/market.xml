@@ -3,6 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.market.model.SampleDAO">
+<mapper namespace="com.market.model.MemberDAO">
 
+	<select id="check_email" parameterType="String" resultType="int">
+		select count(*) from frip_member where mem_email = #{mem_email}
+	</select>
 </mapper>

@@ -9,4 +9,9 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+	@Override
+	public int checkEmail(String mem_email) {
+		return this.sqlSession.selectOne("check_email", mem_email);
+	}
 }
