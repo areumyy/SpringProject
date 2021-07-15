@@ -1,14 +1,48 @@
 package com.market.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.market.model.MemberDAO;
+import com.market.model.MemberDTO;
 
 @Controller
 public class MarketController {
 
+	@Autowired
+	private MemberDAO memberDao;
+
 	@RequestMapping("join.do")
 	public String join() {
 		return "joinForm";
+	}
+
+	@RequestMapping("join_ok.do")
+	public void joinOk(MemberDTO dto, HttpServletResponse response, @RequestParam("mem_pwd_check") String mem_pwd_check)
+			throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+
+		int emailCheck = this.memberDao.checkEmail(dto.getMem_email());
+		if (emailCheck > 1) {
+			out.println("<script>");
+			out.println("alert('중복된 아이디(이메일)입니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('아이디 사용 가능')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
 	}
 
 	@RequestMapping("pwd_search.do")
@@ -55,12 +89,12 @@ public class MarketController {
 	public String optionSel() {
 		return "option_select";
 	}
-	
+
 	@RequestMapping("admin_frip_pass.do")
 	public String fripPass() {
 		return "admin_frip_pass";
 	}
-	
+
 	@RequestMapping("admin_cal_pass.do")
 	public String calPass() {
 		return "admin_cal_pass";
@@ -130,24 +164,34 @@ public class MarketController {
 	public String myPage() {
 		return "mypage";
 	}
-	
+
 	@RequestMapping("mypage_edit.do")
 	public String myPageEdit() {
 		return "mypage_edit";
 	}
-	
+
 	@RequestMapping("mypage_coupon.do")
 	public String myPageCoupon() {
 		return "mypage_coupon";
 	}
-	
+
 	@RequestMapping("mypage_purchases.do")
 	public String myPagePurchases() {
 		return "mypage_purchases";
 	}
-	
+
 	@RequestMapping("mypage_energy.do")
 	public String myPageEnergy() {
 		return "mypage_energy";
+	}
+
+	@RequestMapping("admin_notice.do")
+	public String adminNotice() {
+		return "admin_notice";
+	}
+
+	@RequestMapping("admin_member_list.do")
+	public String adminMember() {
+		return "admin_member_list";
 	}
 }
