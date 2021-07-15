@@ -108,5 +108,19 @@ public class MarketController {
 	public String hostAsk() {
 		return "host/hostAsk";
 	}
+	@RequestMapping("hostAsk_answer.do")
+	public String hostAsk_answer() {
+		return "host/hostAsk_answer";
+	}
+	
+	@RequestMapping("hostReviewManagement.do")
+	public String hostReviewManagement() {
+		return "host/hostReviewManagement";
+	}
+	
+	@RequestMapping("hostUpdateFrip.do")
+	public String hostUpdateFrip() {
+		return "host/hostUpdateFrip";
+	}
 }
 

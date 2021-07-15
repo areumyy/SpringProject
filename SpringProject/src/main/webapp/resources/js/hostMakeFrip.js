@@ -23,11 +23,11 @@ function nextSelect() {
 		$(".Main_line").attr("class", "Main_line_hidden");
 		nextNode.attr("class", "Main_line");
 		$("form").append("<input type='submit' class='btn btn-primary submitButton' value='제출'>");
-		
-		var fripInfo = $("[name=fripTitle]").val();
-		var include = $("[name=include]").val();
-		var exclude  = $("[name=exclude]").val();
-		var plan = $("[name=plan]").val();
+		console.log($("[name=class_title]").val());
+		var fripInfo = $("[name=class_title]").val();
+		var include = $("[name=class_include]").val();
+		var exclude  = $("[name=class_exclude]").val();
+		var plan = $("[name=class_plan]").val();
 		var end_area = $("[name=endArea]").val();
 		var endArea_detail = $("[name=endArea_detail]").val();
 		
@@ -49,11 +49,11 @@ function addOption() {
 	var Qtt = parseInt($(".optionQtt").val())+1;
 	$(".optionTextDiv").append
 		("<div class='"+Qtt+"'><input type='text' class='optionText' value='참가비 (1인)' " +
-				"name='option"+Qtt+"'> <div class='deleteButton' " +
+				"name='option_name"+Qtt+"'> <div class='deleteButton' " +
 				"name='"+Qtt+"' onclick='deleteOption(this)'>삭제</div>" +
 				"<br>" +
 				"<input type='text' class='optionText'" +
-				"value='5000' name='price"+Qtt+"' placeholder='가격'>" +
+				"value='5000' name='option_price"+Qtt+"' placeholder='가격'>" +
 				"<span>원</span>" +
 				"<hr width='80%'></div>");
 	$(".optionQtt").val(Qtt);
@@ -69,9 +69,9 @@ function deleteOption(obj) {
 	for(var i=su; i<=Qtt; i++) {
 		if($("."+i).length != 0) {
 			$("."+i).attr("class", i-1);
-			$("[name=option"+i+"]").attr("name", "option"+(i-1));
+			$("[name=option_name"+i+"]").attr("name", "option_name"+(i-1));
 			$("[name="+i+"]").attr("name", i-1);
-			$("[name=price"+i+"]").attr("name", "price"+(i-1));
+			$("[name=option_price"+i+"]").attr("name", "option_price"+(i-1));
 		}
 	}
 }

@@ -56,7 +56,7 @@
 } 
 
 
-@media (max-width: 854px){
+@media (max-width: 768px){
 	.MainFrame{
 	    display: flex;
 	    flex-flow: column nowrap;

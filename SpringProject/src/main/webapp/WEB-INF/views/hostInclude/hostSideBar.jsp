@@ -84,7 +84,7 @@
 						<a type="button" href="<%=request.getContextPath() %>/hostAsk.do" class="li">
 							문의 하기
 						</a>
-						<a type="button" href="#" class="li">
+						<a type="button" href="<%=request.getContextPath() %>/hostReviewManagement.do" class="li">
 							 후기 관리
 						</a>
 					</div>
@@ -147,7 +147,7 @@
 				</div>
 				<ul class="menuList">
 					<li class="menutext"><a href="<%=request.getContextPath() %>/hostMakeFrip.do">프립 만들기</a></li>
-					<li class="menutext"><a href="#">내 프립</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostMyFrip.do">내 프립</a></li>
 				</ul>
 			</div>
 			
@@ -156,10 +156,9 @@
 					<span class="glyphicon glyphicon-user"  aria-hidden="true"></span>
 				</div>
 				<ul class="menuList2">
-					<li class="menutext"><a href="#">출석부</a></li>
-					<li class="menutext"><a href="#">예약 관리</a></li>
-					<li class="menutext"><a href="#">후기 관리</a></li>
-					<li class="menutext"><a href="#">문의하기</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostAttendance.do">출석부</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostAsk.do">문의하기</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostReviewManagement.do">후기 관리</a></li>
 				</ul>
 			</div>
 			
