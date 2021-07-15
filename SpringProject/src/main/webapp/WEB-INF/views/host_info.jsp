@@ -201,7 +201,7 @@
 					 	
 					 	<!-- 후기 탭 -->
 					 	<div class="contbox cont02">
-					 		<div class="host_riview_box">
+					 		<div class="host_review_box">
 					      		<div class="user_info">
 					      			<div class="user_img_box">
 					      				<img alt="user_img" src="<%=request.getContextPath() %>/resources/image/like/user_img.jpg" class="user_img">
@@ -233,7 +233,7 @@
 					      		</div>
 					      	</div>
 					      	
-					      	<div class="host_riview_box">
+					      	<div class="host_review_box">
 					      		<div class="user_info">
 					      			<div class="user_img_box">
 					      				<img alt="user_img" src="<%=request.getContextPath() %>/resources/image/like/user_img.jpg" class="user_img">
@@ -265,7 +265,7 @@
 					      		</div>
 					      	</div>
 					      	
-					      	<div class="host_riview_box">
+					      	<div class="host_review_box">
 					      		<div class="user_info">
 					      			<div class="user_img_box">
 					      				<img alt="user_img" src="<%=request.getContextPath() %>/resources/image/like/user_img.jpg" class="user_img">

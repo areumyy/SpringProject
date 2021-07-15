@@ -326,7 +326,7 @@ input[id="tab02"]:checked ~ .review_search_option {
     font-size: 15px;
 }
 
-.host_riview_box {
+.host_review_box {
 	width: 100%;
     border-bottom: 1px solid #aaa;
     padding: 30px 0;

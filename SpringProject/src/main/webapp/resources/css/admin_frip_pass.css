@@ -32,11 +32,10 @@
     align-content: flex-start;
 }
 
-/* 프립 승인 페이지 */
 .pass_box {
 	min-height: 38vh;
     max-height: 38vh;
-    overflow: scroll;
+    overflow: auto;
     border-bottom: 1px solid #aaa;
     margin-bottom: 30px;
 }
@@ -49,6 +48,11 @@
     padding-left: 5px;
 }
 
+.pass_count {
+	font-size: 13px;
+    padding-left: 10px;
+}
+
 .table {
 	background-color: #fff;
 }
@@ -59,6 +63,7 @@
 
 .table th {
 	text-align: center;
+	vertical-align: middle;
 }
 .table th:nth-child(1) {
 	width: 5%;
@@ -90,16 +95,13 @@
 
 .table td {
 	text-align: center;
+	vertical-align: middle;
 }
 .table td:nth-child(4) {
 	text-align: left;
 }
 
-/* 프립 승인 페이지 - 상세보기 모달창  */
-.viewDetail_btn {
-	background-color: #ccc;
-}
-
+/* 상세보기 모달창  */
 .final_confirm{
 	width: 100%;
     margin-top: 40px;
@@ -189,17 +191,10 @@
 	color:red;
 }
 
-.pass_btn {
-	padding: 5px 10px;
-    margin: 10px 20px;
+.btn-primary {
+	background-color: #3397FF;
+	border-color: #3397FF;
 }
-/* 프립 승인 페이지 - 상세보기 모달창  end */
-
-/* 정산 승인 페이지 */
-.table table-hover table_cal_pass {
-	background-color: #aaa;
-}
-
 
 /* 반응형 */
 @media (max-width: 768px){
@@ -234,7 +229,6 @@
 	    align-content: flex-start;
 	}
 	
-	/* 프립 승인 페이지 */
 	.pass_box {
 		min-height: 43vh;
 	    max-height: 43vh;

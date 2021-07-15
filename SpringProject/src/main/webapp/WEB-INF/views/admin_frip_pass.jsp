@@ -18,10 +18,11 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <!-- CSS 파일 -->
-<link href="<%=request.getContextPath()%>/resources/css/admin.css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/resources/css/admin_frip_pass.css" rel="stylesheet" />
 
 </head>
 <body>
+
 	<div class="mainFrame">
 	<jsp:include page="../include/adminMenuBar.jsp"></jsp:include>
 	
@@ -32,7 +33,10 @@
 				<div class="Main">
 					<!-- 승인 대기 -->
 					<div class="pass_box">
-						<div class="pass_box_title">승인 대기</div>
+						<div class="pass_box_title">
+							승인 대기
+							<span class="pass_count"> 5개</span>
+						</div>
 						<table class="table table-hover table_cal_pass">
 						  <thead class="table_title">
 						    <tr>
@@ -43,16 +47,16 @@
 						      <th scope="col">1차 카테고리</th>
 						      <th scope="col">2차 카테고리</th>
 						      <th scope="col">신청일자</th>
-						      <th scope="col">승인상태</th>
+						      <th scope="col">상태</th>
 						      <th scope="col"></th>
 						    </tr>
 						  </thead>
 						  <tbody>
 						    <tr>
-						      <th scope="row">12344</th>
+						      <th scope="row">1</th>
 						      <td>15</td>
 						      <td>라이언</td>
-						      <td>[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈rgtsregargsregesrgesrgesrger</td>
+						      <td>[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</td>
 						      <td>아웃도어</td>
 						      <td>서핑</td>
 						      <td>2021-07-01</td>
@@ -62,7 +66,7 @@
 								<button type="button" class="viewDetail_btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">상세보기</button>
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered modal-xl">
+									<div class="modal-dialog modal-dialog-centered modal-lg">
 										<div class="modal-content">
 											<div>
 												<div class="modal-header">
@@ -162,7 +166,6 @@
 
 												</div>
 												<div class="modal-footer" style="display: block;">
-													<button type="button" class="btn btn-primary">승인거부</button>
 													<button type="button" class="btn btn-primary">승인처리</button>
 												</div>
 											</div>
@@ -281,11 +284,14 @@
 						     </tr>
 						  </tbody>
 						</table>
-					</div>
+					</div> <!-- 승인 대기  end -->
 					
 					<!-- 승인 완료 -->
 					<div class="pass_box">
-						<div class="pass_box_title">승인 완료</div>
+						<div class="pass_box_title">
+							승인 완료
+							<span class="pass_count"> 2개</span>
+						</div>
 						<table class="table table-hover">
 						  <thead class="table_title">
 						    <tr>
@@ -296,7 +302,7 @@
 						      <th scope="col">1차 카테고리</th>
 						      <th scope="col">2차 카테고리</th>
 						      <th scope="col">승인일자</th>
-						      <th scope="col">승인상태</th>
+						      <th scope="col">상태</th>
 						      <th scope="col"></th>
 						    </tr>
 						  </thead>
@@ -325,13 +331,14 @@
 						    </tr>
 						   </tbody>
 						</table>
-					</div>
+					</div> <!-- 승인 완료  end -->
 				</div>
+				
 			</div>
-	
 		</div>
 		
 	<jsp:include page="../include/adminFooter.jsp"></jsp:include>
 	</div>
+	
 </body>
 </html>
