@@ -1,0 +1,210 @@
+@charset "UTF-8";
+
+.member_page {
+	margin-top: 10px;
+	padding: 0px;
+	overflow: hidden;
+	width: 100%;
+	margin-left: 0px;
+}
+
+.member_header {
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.member_title {
+	font-weight: bold;
+}
+
+.member_cate {
+	margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.cate_item {
+	text-decoration: none;
+	color: black;
+	margin-right: 20px;
+}
+
+.cate_item.active {
+	color: rgb(51, 151, 255);
+	font-weight: bold;
+}
+
+.search_select {
+	width: 134px;
+}
+
+.search_select:focus {
+	box-shadow: none;
+}
+
+.search_section {
+	display: flex;
+}
+
+.search_form {
+	display: flex;
+}
+
+.search_input {
+	display: block;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	-webkit-appearance: none;
+	margin-left: 10px;
+	border-radius: 5px;
+}
+
+.search_input:focus {
+	outline: none;
+}
+
+/* .member_body {
+	background-color: white;
+} */
+.search_cate {
+	display: flex;
+	justify-content: space-around;
+	border-bottom: 1px solid rgb(230, 230, 230);
+	text-align: center;
+	font-weight: bold;
+	padding: 10px 0px;
+	background-color: white;
+}
+
+.member_body div div:first-child {
+	width: 8%;
+}
+
+.member_body div div:nth-child(2) {
+	width: 16%;
+}
+
+.member_body div div:nth-child(3) {
+	width: 24%;
+}
+
+.member_body div div:nth-child(4) {
+	width: 16%;
+}
+
+.member_body div div:nth-child(5) {
+	width: 16%;
+}
+
+.member_body div div:nth-child(6) {
+	width: 8%;
+}
+
+.member_body div div:nth-child(7) {
+	width: 8%;
+}
+
+.search_item {
+	display: flex;
+	justify-content: space-around;
+	border-bottom: 1px solid rgb(230, 230, 230);
+	text-align: center;
+	align-items: center;
+	padding: 10px 0px;
+	background-color: white;
+}
+
+.profile_img {
+	display: initial;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+.profile_section {
+	position: relative;
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+.nick {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.badge_host {
+	margin: 0px 10px;
+	width: 46px;
+	height: 20px;
+	line-height: 20px;
+	border-radius: 5px;
+	padding: 0px 6px;
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	background-color: rgb(51, 151, 255);
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+}
+
+.badge_member {
+	margin: 0px 10px;
+	width: 40px;
+	height: 20px;
+	line-height: 20px;
+	border-radius: 5px;
+	padding: 0px 6px;
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	background-color: rgb(70, 200, 180);
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+}
+
+.badge_default {
+	margin: 0px 10px;
+	width: 40px;
+	height: 20px;
+	line-height: 20px;
+	border-radius: 5px;
+	padding: 0px 6px;
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	background-color: #a1a1a1; -webkit-box-flex : 0;
+	flex: 0 0 auto;
+	-webkit-box-flex: 0;
+}
+
+.delete_btn {
+	margin-top: 20px;
+}
+
+@media ( max-width : 970px) {
+	.member_cate {
+		display: block;
+	}
+	.search_section {
+		margin-top: 10px
+	}
+}

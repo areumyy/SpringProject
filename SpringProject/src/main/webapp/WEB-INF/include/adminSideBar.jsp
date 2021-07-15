@@ -76,7 +76,7 @@
 					</div>
 					
 					<div id="menuFrame3"class="menubutton">
-						<button type="button" id="3" class="ul">
+						<button type="button" id="3" class="ul" onclick="location.href='admin_notice.do'">
 							<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
 							공지사항 관리
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
@@ -84,7 +84,7 @@
 					</div>
 					
 					<div id="menuFrame4" class="menubutton">
-						<button type="button" id="4" class="ul">
+						<button type="button" id="4" class="ul" onclick="location.href='admin_member_list.do'">
 							<span class="glyphicon glyphicon-question-sign"  aria-hidden="true"></span>
 							회원 조회
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>

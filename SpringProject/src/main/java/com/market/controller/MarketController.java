@@ -55,12 +55,12 @@ public class MarketController {
 	public String optionSel() {
 		return "option_select";
 	}
-	
+
 	@RequestMapping("admin_frip_pass.do")
 	public String fripPass() {
 		return "admin_frip_pass";
 	}
-	
+
 	@RequestMapping("admin_cal_pass.do")
 	public String calPass() {
 		return "admin_cal_pass";
@@ -125,24 +125,34 @@ public class MarketController {
 	public String myPage() {
 		return "mypage";
 	}
-	
+
 	@RequestMapping("mypage_edit.do")
 	public String myPageEdit() {
 		return "mypage_edit";
 	}
-	
+
 	@RequestMapping("mypage_coupon.do")
 	public String myPageCoupon() {
 		return "mypage_coupon";
 	}
-	
+
 	@RequestMapping("mypage_purchases.do")
 	public String myPagePurchases() {
 		return "mypage_purchases";
 	}
-	
+
 	@RequestMapping("mypage_energy.do")
 	public String myPageEnergy() {
 		return "mypage_energy";
+	}
+
+	@RequestMapping("admin_notice.do")
+	public String adminNotice() {
+		return "admin_notice";
+	}
+
+	@RequestMapping("admin_member_list.do")
+	public String adminMember() {
+		return "admin_member_list";
 	}
 }
