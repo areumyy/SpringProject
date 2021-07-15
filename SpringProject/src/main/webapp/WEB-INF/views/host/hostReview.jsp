@@ -40,7 +40,7 @@
 					</div>
 					<div class="info_frame">
 						<div class="review_header">
-							<div>평균 평점</div>
+							<div>평균 평점</div> 
 							<div><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%23E6E6E6' fill-rule='evenodd' d='M8.032 12.715l-4.72 2.482.9-5.257L.394 6.217l5.279-.767L8.032.667l2.361 4.783 5.279.767-3.82 3.723.902 5.257z'/%3E %3C/svg%3E"></div>
 							<div>4.96 (총 2개)</div>
 						</div>
