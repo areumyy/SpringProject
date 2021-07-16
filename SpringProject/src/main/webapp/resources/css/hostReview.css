@@ -87,8 +87,8 @@
 
 .user_img {
     margin-right: 14px;
-    width: 56px;
-    height: 56px;
+    width: 30px;
+    height: 30px;
     border-radius: 24px;
     overflow: hidden;
 }
@@ -108,6 +108,11 @@
 }
 
 .review_regdate {
+	font-size: 13px;
+    color: #9b9b9b;
+}
+
+.frip_option_name {
 	font-size: 13px;
     color: #9b9b9b;
 }
@@ -150,17 +155,108 @@
     vertical-align: bottom;
 }
 
-.review_image_box {
-	
+.review_footer_box {
+	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    position: relative;
 }
 
 .review_image {
-	width: 120px;
+	width: 100px;
     border-radius: 10px;
 }
 
+.reply_btn_box {
+	position: relative;
+    width: 100px;
+}
+
+.reply_btn {
+    position: absolute;
+    bottom: 0px;
+    height: 30px;
+    line-height: 0px;
+    font-size: 15px;
+}
 
 
+/* 호스트 답변 */
+.host_reply_box {
+	width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #eee;
+}
+
+.host_info {
+	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.host_img_box {
+	flex: 0 0 auto;
+}
+
+.host_img {
+    margin-right: 14px;
+    width: 30px;
+    height: 30px;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.host_detail {
+	-webkit-box-flex: 1;
+    flex: 1 1 auto;
+}
+
+.host_name {
+	font-size: 15px;
+    font-weight: bold;
+}
+
+.reply_regdate {
+	font-size: 13px;
+    color: #9b9b9b;
+}
+
+.reply_cont {
+	margin-bottom: 20px;
+    white-space: pre-wrap; 	/* 공백 줄바꿈 적용 */
+    font-size: 13px;
+    line-height: 22px;
+}
+
+.booking_info {
+	font-size: 12px;
+    color: #9b9b9b;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+
+.reply_cont {
+    margin: 10px 0;
+    white-space: pre-wrap;
+    font-size: 13px;
+    line-height: 22px;
+}
+
+.reply_modal {
+	padding: 15px;
+}
+
+.reply_textarea {
+	text-align: center;
+}
+
+textarea{
+	width: 100%;
+}
 
 /* 반응형 */
 @media (max-width: 768px){
@@ -194,4 +290,9 @@
 	    flex-flow: column nowrap;
 	    align-content: flex-start;
 	}
+}
+
+@media (max-width: 550px){
+	
+	
 }
