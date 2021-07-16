@@ -31,10 +31,12 @@
 				<div class="Main">
 					<div class="Main_title_box">
 						<h1 class="Main_title">후기관리</h1>
-						<select name="frip_list">
-							<option value="">전체</option>
-							<option>프립명</option>
-						</select>
+						<div>
+							<select class="form-select form-select-lg mb-3 cal_select">
+								<option value="">전체</option>
+								<option value="">프립명</option>
+							</select>
+						</div>
 					</div>
 					
 					<div class="info_frame">
@@ -79,8 +81,41 @@
 							      				<span>2021년 7월 12일 16:05 작성</span>
 							      			</div>
 							      		</div>
-							      		<div class="review_image_box">
+							      		<div class="review_footer_box">
 							      			<img alt="review_image" src="<%=request.getContextPath() %>/resources/image/like/review_image.jpg" class="review_image">
+							      			<div class="reply_btn_box">
+							      				<!-- 답변하기 모달창 -->
+							      				<!-- Button trigger modal -->
+												<button type="button" class="btn btn-outline-secondary reply_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">답변하기</button>
+												<!-- Modal -->
+												<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<div class="modal-dialog modal-dialog-centered">
+														<div class="modal-content">
+															<div>
+																<div class="modal-header">
+																	답변하기
+																	<button type="button" class="btn-close"
+																		data-bs-dismiss="modal" aria-label="Close"></button>
+																</div>
+																<div class="modal-body">
+				
+																	<!-- 답변내용 -->
+																	<div>
+																		<div class="reply_modal">답변내용 작성</div>
+																		<div class="reply_textarea">
+																			<textarea rows="7" cols="50"></textarea>
+																		</div>
+																	</div>
+				
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-outline-secondary">작성하기</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+							      			</div>
 							      		</div>
 							        </div>
 							        <!-- 호스트답변 -->
@@ -134,8 +169,11 @@
 							      				<span>2021년 7월 12일 16:05 작성</span>
 							      			</div>
 							      		</div>
-							      		<div class="review_image_box">
+							      		<div class="review_footer_box">
 							      			<img alt="review_image" src="<%=request.getContextPath() %>/resources/image/like/review_image.jpg" class="review_image">
+							      			<div class="reply_btn_box">
+							      				<button type="button" class="btn btn-outline-secondary reply_btn">답변하기</button>
+							      			</div>
 							      		</div>
 							        </div>
 							      </div>
@@ -174,8 +212,11 @@
 							      				<span>2021년 7월 12일 16:05 작성</span>
 							      			</div>
 							      		</div>
-							      		<div class="review_image_box">
+							      		<div class="review_footer_box">
 							      			<img alt="review_image" src="<%=request.getContextPath() %>/resources/image/like/review_image.jpg" class="review_image">
+							      			<div class="reply_btn_box">
+							      				<button type="button" class="btn btn-outline-secondary reply_btn">답변하기</button>
+							      			</div>
 							      		</div>
 							        </div>
 							      </div>

@@ -155,8 +155,12 @@
     vertical-align: bottom;
 }
 
-.review_image_box {
-	
+.review_footer_box {
+	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    position: relative;
 }
 
 .review_image {
@@ -164,6 +168,18 @@
     border-radius: 10px;
 }
 
+.reply_btn_box {
+	position: relative;
+    width: 100px;
+}
+
+.reply_btn {
+    position: absolute;
+    bottom: 0px;
+    height: 30px;
+    line-height: 0px;
+    font-size: 15px;
+}
 
 
 /* 호스트 답변 */
@@ -230,7 +246,17 @@
     line-height: 22px;
 }
 
+.reply_modal {
+	padding: 15px;
+}
 
+.reply_textarea {
+	text-align: center;
+}
+
+textarea{
+	width: 100%;
+}
 
 /* 반응형 */
 @media (max-width: 768px){
@@ -264,4 +290,9 @@
 	    flex-flow: column nowrap;
 	    align-content: flex-start;
 	}
+}
+
+@media (max-width: 550px){
+	
+	
 }

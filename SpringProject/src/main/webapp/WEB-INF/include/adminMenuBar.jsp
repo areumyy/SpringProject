@@ -14,12 +14,12 @@
 </head>
 <body>
 	<header class="hostMenuBar">
-			<a class="homeButton" href="<%=request.getContextPath()%>/hostMain.do">
+			<a class="homeButton" href="<%=request.getContextPath()%>/admin_frip_pass.do">
 				<img src="<%=request.getContextPath()%>/resources/logo/logo.png"
 				width="80px" height="30px" alt="?"> 관리자 페이지
 			</a>
 			<div class="userInfo">
-				<a class="userName" href="<%=request.getContextPath()%>/hostInfo.do">
+				<a class="userName" href="<%=request.getContextPath()%>/admin_frip_pass.do">
 					<!-- 유저 프로필사진 + 닉네임 -->
 				</a>
 			</div>
