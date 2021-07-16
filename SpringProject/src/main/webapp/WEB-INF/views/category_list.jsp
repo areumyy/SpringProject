@@ -31,10 +31,10 @@
 					<div>
 						<!-- 소분류 -->
 						<div class="Small_Category">
-							<a href="" style="font-weight: bold; color: rgb(51, 151, 255);">전체</a>
-							<a href="">요리</a>
-							<a href="">음료</a>
-							<a href="">베이킹</a>
+							<a href="#" style="font-weight: bold; color: rgb(51, 151, 255);">전체</a>
+							<a href="#">요리</a>
+							<a href="#">음료</a>
+							<a href="#">베이킹</a>
 						</div>
 					</div>
 					
@@ -78,7 +78,7 @@
 											<span class="Category_Title_Count">181</span>
 										</div>
 										<div class="Category_List_All">
-											<a class="Category_List_All1" href="">전체 보기</a>
+											<a class="Category_List_All1" href="#">전체 보기</a>
 										</div>
 									</div>
 									
@@ -86,7 +86,7 @@
 										<section class="Category_List">
 											<div class="Category_List1">
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -123,8 +123,8 @@
 																<span class="Frip_Price1">23,000원</span>
 																<span class="Frip_Price2">39,000</span>
 															</div>
-															<div class="Frip_Rating">
-																<div class="Frip_Rating1">
+															<div class="Frip_Grade">
+																<div class="Frip_Grade1">
 																	<img
 																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
 																		alt="별점 icon"><span>5.00</span>
@@ -137,7 +137,7 @@
 													</a>
 												</div>
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -173,7 +173,7 @@
 																<span class="Frip_Price1">40,000원</span>
 																<span class="Frip_Price2"></span>
 															</div>
-															<div class="Frip_Rating">
+															<div class="Frip_Grade">
 																<img
 																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 30 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='30' height='16' fill='%233397FF' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.25 10.688H9.887L7.87 7.147v3.54H6.5V5h1.371l2.012 3.54V5h1.367v5.688zm4.895-2.41h-2.157v1.355h2.547v1.055h-3.918V5h3.926v1.059h-2.555v1.199h2.157v1.02zM22 8.565L22.652 5h1.36l-1.207 5.688h-1.422l-.762-3.243-.746 3.242h-1.418L17.247 5h1.362l.653 3.566L20.043 5h1.164L22 8.566z'/%3E %3C/g%3E %3C/svg%3E"
 																	class="Frip_New">
@@ -182,7 +182,7 @@
 													</a>
 												</div>
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -218,8 +218,8 @@
 																<span class="Frip_Price1">40,000원</span>
 																<span class="Frip_Price2"></span>
 															</div>
-															<div class="Frip_Rating">
-																<div class="Frip_Rating1">
+															<div class="Frip_Grade">
+																<div class="Frip_Grade1">
 																	<img
 																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
 																		alt="별점 icon"><span>4.80</span>
@@ -229,7 +229,7 @@
 													</a>
 												</div>
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -265,8 +265,8 @@
 																<span class="Frip_Price1">55,000원</span>
 																<span class="Frip_Price2"></span>
 															</div>
-															<div class="Frip_Rating">
-																<div class="Frip_Rating1">
+															<div class="Frip_Grade">
+																<div class="Frip_Grade1">
 																	<img
 																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
 																		alt="별점 icon"><span>5.00</span>
@@ -289,14 +289,14 @@
 											<span class="Category_Title_Count">11</span>
 										</div>
 										<div class="Category_List_All">
-											<a class="Category_List_All1" href="">전체 보기</a>
+											<a class="Category_List_All1" href="#">전체 보기</a>
 										</div>
 									</div>
 									<div class="Category_Main2" style="opacity: 1; display: block;">
 										<section class="Category_List">
 											<div class="Category_List1">
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -333,8 +333,8 @@
 																<span class="Frip_Price1">43,000원</span>
 																<span class="Frip_Price2"></span>
 															</div>
-															<div class="Frip_Rating">
-																<div class="Frip_Rating1">
+															<div class="Frip_Grade">
+																<div class="Frip_Grade1">
 																	<img
 																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
 																		alt="별점 icon"><span>4.90</span>
@@ -343,7 +343,7 @@
 														</div></a>
 												</div>
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -379,8 +379,8 @@
 																<span class="Frip_Price1">55,000원</span>
 																<span class="Frip_Price2"></span>
 															</div>
-															<div class="Frip_Rating">
-																<div class="Frip_Rating1">
+															<div class="Frip_Grade">
+																<div class="Frip_Grade1">
 																	<img
 																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
 																		alt="별점 icon"><span>5.00</span>
@@ -390,7 +390,7 @@
 													</a>
 												</div>
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -426,8 +426,8 @@
 																<span class="Frip_Price1">35,000원</span>
 																<span class="Frip_Price2">49,000</span>
 															</div>
-															<div class="Frip_Rating">
-																<div class="Frip_Rating1">
+															<div class="Frip_Grade">
+																<div class="Frip_Grade1">
 																	<img
 																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
 																		alt="별점 icon"><span>4.91</span>
@@ -437,7 +437,7 @@
 													</a>
 												</div>
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -473,8 +473,8 @@
 																<span class="Frip_Price1">30,000원</span>
 																<span class="Frip_Price2"></span>
 															</div>
-															<div class="Frip_Rating">
-																<div class="Frip_Rating1">
+															<div class="Frip_Grade">
+																<div class="Frip_Grade1">
 																	<img
 																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
 																		alt="별점 icon"><span>4.89</span>
@@ -496,14 +496,14 @@
 											<span class="Category_Title_Count">6</span>
 										</div>
 										<div class="Category_List_All">
-											<a class="Category_List_All1" href="">전체 보기</a>
+											<a class="Category_List_All1" href="#">전체 보기</a>
 										</div>
 									</div>
 									<div class="Category_Main2" style="opacity: 1; display: block;">
 										<section class="Category_List">
 											<div class="Category_List1">
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -539,7 +539,7 @@
 																<span class="Frip_Price1">40,000원</span>
 																<span class="Frip_Price2"></span>
 															</div>
-															<div class="Frip_Rating">
+															<div class="Frip_Grade">
 																<img
 																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 30 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='30' height='16' fill='%233397FF' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.25 10.688H9.887L7.87 7.147v3.54H6.5V5h1.371l2.012 3.54V5h1.367v5.688zm4.895-2.41h-2.157v1.355h2.547v1.055h-3.918V5h3.926v1.059h-2.555v1.199h2.157v1.02zM22 8.565L22.652 5h1.36l-1.207 5.688h-1.422l-.762-3.243-.746 3.242h-1.418L17.247 5h1.362l.653 3.566L20.043 5h1.164L22 8.566z'/%3E %3C/g%3E %3C/svg%3E"
 																	class="Frip_New">
@@ -548,7 +548,7 @@
 													</a>
 												</div>
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -584,7 +584,7 @@
 																<span class="Frip_Price1">199,000원</span>
 																<span class="Frip_Price2">250,000</span>
 															</div>
-															<div class="Frip_Rating">
+															<div class="Frip_Grade">
 																<img
 																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 30 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='30' height='16' fill='%233397FF' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.25 10.688H9.887L7.87 7.147v3.54H6.5V5h1.371l2.012 3.54V5h1.367v5.688zm4.895-2.41h-2.157v1.355h2.547v1.055h-3.918V5h3.926v1.059h-2.555v1.199h2.157v1.02zM22 8.565L22.652 5h1.36l-1.207 5.688h-1.422l-.762-3.243-.746 3.242h-1.418L17.247 5h1.362l.653 3.566L20.043 5h1.164L22 8.566z'/%3E %3C/g%3E %3C/svg%3E"
 																	class="Frip_New">
@@ -596,7 +596,7 @@
 													</a>
 												</div>
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -632,7 +632,7 @@
 																<span class="Frip_Price1">45,000원</span>
 																<span class="Frip_Price2"></span>
 															</div>
-															<div class="Frip_Rating">
+															<div class="Frip_Grade">
 																<img
 																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 30 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='30' height='16' fill='%233397FF' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.25 10.688H9.887L7.87 7.147v3.54H6.5V5h1.371l2.012 3.54V5h1.367v5.688zm4.895-2.41h-2.157v1.355h2.547v1.055h-3.918V5h3.926v1.059h-2.555v1.199h2.157v1.02zM22 8.565L22.652 5h1.36l-1.207 5.688h-1.422l-.762-3.243-.746 3.242h-1.418L17.247 5h1.362l.653 3.566L20.043 5h1.164L22 8.566z'/%3E %3C/g%3E %3C/svg%3E"
 																	class="Frip_New">
@@ -641,7 +641,7 @@
 													</a>
 												</div>
 												<div class="Category_List2">
-													<a class="Category_List3" href="">
+													<a class="Category_List3" href="#">
 														<div class="Category_List4">
 															<div class="Category_List5">
 																<div class="Category_List6">
@@ -676,7 +676,7 @@
 																<span class="Frip_Price1">45,000원</span>
 																<span class="Frip_Price2"></span>
 															</div>
-															<div class="Frip_Rating">
+															<div class="Frip_Grade">
 																<img
 																	src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='16' viewBox='0 0 30 16'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Crect width='30' height='16' fill='%233397FF' rx='5'/%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M11.25 10.688H9.887L7.87 7.147v3.54H6.5V5h1.371l2.012 3.54V5h1.367v5.688zm4.895-2.41h-2.157v1.355h2.547v1.055h-3.918V5h3.926v1.059h-2.555v1.199h2.157v1.02zM22 8.565L22.652 5h1.36l-1.207 5.688h-1.422l-.762-3.243-.746 3.242h-1.418L17.247 5h1.362l.653 3.566L20.043 5h1.164L22 8.566z'/%3E %3C/g%3E %3C/svg%3E"
 																	class="Frip_New">
@@ -689,7 +689,7 @@
 									</div>
 								</div>
 								<div class="Category_List_All2" font-size="13px">
-									<a class="Category_List_All3" href="">181개의 쿠킹 전체보기</a>
+									<a class="Category_List_All3" href="#">181개의 쿠킹 전체보기</a>
 								</div>
 							</div>
 						</div>

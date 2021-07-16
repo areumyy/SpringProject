@@ -393,12 +393,12 @@ div {
 	text-decoration: line-through;
 }
 
-.Frip_Rating {
+.Frip_Grade {
 	margin-top: 14px;
 	display: flex;
 }
 
-.Frip_Rating1 {
+.Frip_Grade1 {
 	font-size: 11px;
 	display: flex;
 	-webkit-box-align: center;
@@ -406,7 +406,7 @@ div {
 	color: rgb(187, 187, 187);
 }
 
-.Frip_Rating1>img {
+.Frip_Grade1>img {
 	margin-right: 2px;
 }
 
