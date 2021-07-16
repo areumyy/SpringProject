@@ -31,10 +31,10 @@
 		<div class="Frame"> 
 			<div class="Frame_Frame">
 				<jsp:include page="../hostInclude/hostSideBar.jsp"></jsp:include>
-	
+				<!-- 데이터가져와서 바로 입력되어있게 설정해야함 -->
 				<div class="Main">
-					<h1 class="Main_title">프립 만들기</h1>
-					<form method="post" action="<%=request.getContextPath()%>/insertFrip.do"
+					<h1 class="Main_title">프립 수정</h1>
+					<form method="post" action="<%=request.getContextPath()%>/UpdateFrip.do"
 						 onsubmit="return checkIt();">
 						<!-- 카테고리 선택 -->
 						<div class="Main_line" id="first">

@@ -67,7 +67,8 @@
 												<span class="class_price_before">50,000</span>
 											</div>
 											<div class="class_Button_div1">
-												<a href="#">수정</a>
+											<!-- 프립 번호 같이 보내줘야함! -->
+												<a href="<%=request.getContextPath()%>/hostUpdateFrip.do">수정</a>
 											</div>
 										</div>
 									</div>

@@ -154,7 +154,7 @@ public class MarketController {
 	public String hostQna() {
 		return "host/hostQna_list";
 	}
-	
+
 	@RequestMapping("hostReview.do")
 	public String hostReview() {
 		return "host/hostReview";
@@ -193,5 +193,25 @@ public class MarketController {
 	@RequestMapping("admin_member_list.do")
 	public String adminMember() {
 		return "admin_member_list";
+	}
+
+	@RequestMapping("hostSideBar.do")
+	public String hostSideBar() {
+		return "hostInclude/hostSideBar";
+	}
+
+	@RequestMapping("hostFooter.do")
+	public String hostFooter() {
+		return "hostInclude/hostFooter";
+	}
+
+	@RequestMapping("hostAsk_answer.do")
+	public String hostAsk_answer() {
+		return "host/hostAsk_answer";
+	}
+
+	@RequestMapping("hostUpdateFrip.do")
+	public String hostUpdateFrip() {
+		return "host/hostUpdateFrip";
 	}
 }

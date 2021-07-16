@@ -29,6 +29,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-content: flex-start;
+    height:95vh;
 }
 
 .Main_title {
@@ -49,7 +50,7 @@
     display: flex;
     flex-flow: column nowrap;
     height: 100%;
-    margin-top:30px;
+    margin-top:20px;
 }
 .list_inner {
 	margin-right: 14px;
