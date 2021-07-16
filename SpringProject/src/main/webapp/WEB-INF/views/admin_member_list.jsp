@@ -17,7 +17,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <!-- CSS 파일 -->
-<link href="<%=request.getContextPath()%>/resources/css/admin.css" rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/resources/css/hostExam.css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/resources/css/admin_member_list.css" rel="stylesheet" />
 </head>
 <body>

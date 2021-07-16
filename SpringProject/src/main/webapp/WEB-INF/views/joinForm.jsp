@@ -20,7 +20,6 @@
 <!-- CSS 파일 -->
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/login.css" rel="stylesheet"/>
-
 </head>
 <body>
 
@@ -38,10 +37,12 @@
 							<ul class="joinForm">
 								<li><input type="text" name="mem_email" class="joinForm_txt" placeholder="아이디(이메일)" required></li>
 								<li>
-									<input type="password" name="mem_pwd" class="joinForm_txt" placeholder="비밀번호" required>
+									<input type="password" id="pwd" name="mem_pwd" class="joinForm_txt" placeholder="비밀번호" required>
 									<span class="notice">대/소문자, 숫자, 특수문자 중 2가지 이상의 조합으로 10자 이상</span>
 								</li>
-								<li><input type="password" name="mem_pwd_check" class="joinForm_txt" placeholder="비밀번호 확인" required></li>
+								<li>
+									<input type="password" name="mem_pwd_check" class="joinForm_txt" placeholder="비밀번호 확인" required>
+								</li>
 								<li><input type="text" name="mem_name" class="joinForm_txt" placeholder="이름" required></li>
 								<li><input type="text" name="mem_nick" class="joinForm_txt" placeholder="닉네임" required></li>
 								<li><input type="text" name="mem_phone" class="joinForm_txt" placeholder="핸드폰 번호" required></li>

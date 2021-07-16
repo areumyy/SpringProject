@@ -3,7 +3,9 @@ package com.market.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,11 @@ public class MarketController {
 	@Autowired
 	private MemberDAO memberDao;
 
+	@RequestMapping("main.do")
+	public String main() {
+		return "home";
+	}
+
 	@RequestMapping("join.do")
 	public String join() {
 		return "joinForm";
@@ -32,16 +39,20 @@ public class MarketController {
 		PrintWriter out = response.getWriter();
 
 		int emailCheck = this.memberDao.checkEmail(dto.getMem_email());
-		if (emailCheck > 1) {
+		if (emailCheck > 0) { // 입력한 아이디가 이미 있을때
 			out.println("<script>");
 			out.println("alert('중복된 아이디(이메일)입니다.')");
 			out.println("history.back()");
 			out.println("</script>");
-		} else {
-			out.println("<script>");
-			out.println("alert('아이디 사용 가능')");
-			out.println("history.back()");
-			out.println("</script>");
+		} else { // 입력한 아이디가 없을때
+			if(dto.getMem_pwd().equals(mem_pwd_check)) { // 비밀번호 확인 성공
+				
+			} else { // 비밀번호 확인 실패
+				out.println("<script>");
+				out.println("alert('비밀번호를 다시 확인해주세요.')");
+				out.println("history.back()");
+				out.println("</script>");
+			}
 		}
 	}
 
@@ -53,6 +64,51 @@ public class MarketController {
 	@RequestMapping("login.do")
 	public String login() {
 		return "loginForm";
+	}
+
+	@RequestMapping("login_ok.do")
+	public void loginOk(@RequestParam("mem_email") String mem_email, @RequestParam("mem_pwd") String mem_pwd,
+			HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+
+		int result = this.memberDao.loginCheck(mem_email, mem_pwd);
+
+		if (result == 1) { // 로그인 성공
+			HttpSession session = request.getSession();
+
+			MemberDTO dto = this.memberDao.getMember(mem_email);
+
+			session.setAttribute("loginDto", dto);
+			if (dto.getMem_num() == 9999) {
+				session.setAttribute("loginType", "admin");
+			} else {
+				session.setAttribute("loginType", "member");
+			}
+
+			out.println("<script>");
+			out.println("location.href='main.do'");
+			out.println("</script>");
+		} else if (result == 2) { // 비밀번호 틀림
+			out.println("<script>");
+			out.println("alert('비밀번호가 틀립니다. 다시 확인해 주세요.')");
+			out.println("history.back()");
+			out.println("</script>");
+		} else if (result == -1) { // 존재하지 않는 아이디
+			out.println("<script>");
+			out.println("alert('존재하지 않는 아이디입니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+	}
+
+	@RequestMapping("logout.do")
+	public String logOut(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+
+		return "home";
 	}
 
 	@RequestMapping("qna_list.do")

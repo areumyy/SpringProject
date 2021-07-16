@@ -8,4 +8,12 @@
 	<select id="check_email" parameterType="String" resultType="int">
 		select count(*) from frip_member where mem_email = #{mem_email}
 	</select>
+	
+	<select id="pwd_find" parameterType="String" resultType="String">
+		select mem_pwd from frip_member where mem_email = #{mem_email}
+	</select>
+	
+	<select id="get_login_member" parameterType="String" resultType="com.market.model.MemberDTO">
+		select * from frip_member where mem_email = #{mem_email}
+	</select>
 </mapper>
