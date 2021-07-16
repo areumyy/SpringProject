@@ -35,4 +35,9 @@ public class MarketController {
 	public String cateList() {
 		return "category_list";
 	}
+	
+	@RequestMapping("frip_content.do")
+	public String fripContent() {
+		return "frip_content";
+	}
 }
