@@ -50,6 +50,14 @@
 						      <td>1/1</td>
 						      <td><a href="#">출석 취소하기</a></td>
 						    </tr>
+						    <tr>
+						      <th scope="row">홍길동</th>
+						      <td>남</td>
+						      <td>010-2312-3123</td>
+						      <td>1인</td>
+						      <td>0/1</td>
+						      <td><a href="#">출석</a></td>
+						    </tr>
 						  </tbody>
 						</table>
 					</div>

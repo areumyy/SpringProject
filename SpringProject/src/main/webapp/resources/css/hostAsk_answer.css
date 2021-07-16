@@ -31,30 +31,55 @@
     align-content: flex-start;
 }
 
-
-.cont_frame {
+.answer_frame {
 	width:100%;
+	display:flex;
+	margin-top:20px;
 	background-color:white;
-	min-height:500px;
-	border-radius:1px;
-	margin-top:100px;
-	padding-top:5px;
-	padding-left:10px;
+	height:100%;
+	padding: 20px 20px;
+	flex-direction: column;
 }
 
-/* hostAttendance_member */
-.frip_title{
+.answer_frame_ask{
 	width:100%;
-	background-color:white;
-	min-height:50px;
-	border-radius:4px;
-	margin-top:100px;
+
 }
 
-.cont_frame table tr{
+.askCont {
+	width:100%;
+	margin-top:20px;
+	padding: 10px;
+	
+}
+.answer_frame_answer{
+	margin-top:20px;
+	width:100%;
+
+}
+
+.writeButton{
+	float:right;
+}
+
+.answer_frame textarea {
+	margin-top:20px;
+	width:100%;
+	resize:none;
+}
+
+.writerInfo {
+	background-color:rgb(244, 244, 244);
+	height:40px;
+	padding-top:7px;
+	border-top:1px solid black;
+	border-bottom:1px solid black;
+}
+
+.writerInfoCont {
 	margin-left:10px;
-} 
-
+	margin-right:30px;
+}
 
 @media (max-width: 768px){
 	.MainFrame{

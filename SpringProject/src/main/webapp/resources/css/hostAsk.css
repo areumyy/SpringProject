@@ -42,6 +42,16 @@
     line-height: 24px;
     font-size: 24px;
 }
+
+.searchAsk {
+	width:100%;
+	height:20px;
+}
+
+.searchAsk button {
+	border:0px solid black;
+	background-color:rgb(242 242 242);
+}
 .info_frame{
 	-webkit-box-flex: 1;
     flex: 1 1 auto;
@@ -252,6 +262,27 @@
 	border-color:white;
 }
 
+.askTitle{
+	height:20px;
+	width:80%;
+}
+
+.option_item_cont{
+	margin-top:20px;
+	text-align:left;
+}
+
+.table td, th{
+	vertical-align:middle;
+	text-align:center;
+}
+
+.option_arcodion{
+	margin-left:120px;
+}
+.option_item_cont {
+	margin-left:20px;
+}
 
 @media (max-width: 768px){
 	.MainFrame{
