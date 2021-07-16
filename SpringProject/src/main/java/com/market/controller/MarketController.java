@@ -45,8 +45,8 @@ public class MarketController {
 			out.println("history.back()");
 			out.println("</script>");
 		} else { // 입력한 아이디가 없을때
-			if(dto.getMem_pwd().equals(mem_pwd_check)) { // 비밀번호 확인 성공
-				
+			if (dto.getMem_pwd().equals(mem_pwd_check)) { // 비밀번호 확인 성공
+
 			} else { // 비밀번호 확인 실패
 				out.println("<script>");
 				out.println("alert('비밀번호를 다시 확인해주세요.')");
@@ -269,5 +269,10 @@ public class MarketController {
 	@RequestMapping("hostUpdateFrip.do")
 	public String hostUpdateFrip() {
 		return "host/hostUpdateFrip";
+	}
+
+	@RequestMapping("frip_content.do")
+	public String fripContent() {
+		return "frip_content";
 	}
 }
