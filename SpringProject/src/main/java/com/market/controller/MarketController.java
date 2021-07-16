@@ -2,6 +2,7 @@ package com.market.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,10 +11,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.market.model.CategoryDAO;
+import com.market.model.CategoryDTO;
 import com.market.model.MemberDAO;
 import com.market.model.MemberDTO;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 public class MarketController {
@@ -32,8 +40,7 @@ public class MarketController {
 	}
 
 	@RequestMapping("join_ok.do")
-	public void joinOk(MemberDTO dto, HttpServletResponse response, @RequestParam("mem_pwd_check") String mem_pwd_check)
-			throws IOException {
+	public void joinOk(MemberDTO dto, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
 		PrintWriter out = response.getWriter();
@@ -45,12 +52,11 @@ public class MarketController {
 			out.println("history.back()");
 			out.println("</script>");
 		} else { // 입력한 아이디가 없을때
-			if (dto.getMem_pwd().equals(mem_pwd_check)) { // 비밀번호 확인 성공
-
-			} else { // 비밀번호 확인 실패
+			int insertCheck = this.memberDao.insertMember(dto);
+			if (insertCheck > 0) {
 				out.println("<script>");
-				out.println("alert('비밀번호를 다시 확인해주세요.')");
-				out.println("history.back()");
+				out.println("alert('회원가입이 완료되었습니다.')");
+				out.println("location.href='login.do'");
 				out.println("</script>");
 			}
 		}
@@ -59,6 +65,29 @@ public class MarketController {
 	@RequestMapping("pwd_search.do")
 	public String pwdSearch() {
 		return "pwdSearch";
+	}
+
+	@RequestMapping(value = "/pwd_search_ok.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void cate_two(HttpServletResponse response, @RequestParam("mem_email") String mem_email,
+			@RequestParam("mem_name") String mem_name) throws IOException {
+		String pwd = "일치하는 계정이 없습니다.";
+		int state = 0;
+		int checkEmail = this.memberDao.checkEmail(mem_email);
+
+		if (checkEmail > 0) { // 아이디가 존재할때
+			MemberDTO dto = this.memberDao.getMember(mem_email);
+			if (dto.getMem_name().equals(mem_name)) { // 이름이 일치할때
+				pwd = dto.getMem_pwd();
+				state = 1;
+			}
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("find_pwd", pwd);
+		obj.put("state", state);
+
+		response.getWriter().print(obj);
+
 	}
 
 	@RequestMapping("login.do")

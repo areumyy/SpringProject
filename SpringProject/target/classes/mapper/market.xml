@@ -16,4 +16,12 @@
 	<select id="get_login_member" parameterType="String" resultType="com.market.model.MemberDTO">
 		select * from frip_member where mem_email = #{mem_email}
 	</select>
+	
+	<insert id="insert_member" parameterType="com.market.model.MemberDTO">
+		<selectKey resultType="int" keyProperty="mem_num" order="BEFORE">
+			select count(*) from frip_member
+		</selectKey>
+		
+		insert into frip_member values(#{mem_num},#{mem_name},#{mem_email},#{mem_pwd},#{mem_nick},#{mem_phone},default,sysdate,default)
+	</insert>
 </mapper>

@@ -38,4 +38,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberDTO getMember(String mem_email) {
 		return this.sqlSession.selectOne("get_login_member", mem_email);
 	}
+
+	@Override
+	public int insertMember(MemberDTO dto) {
+		return this.sqlSession.insert("insert_member", dto);
+	}
 }

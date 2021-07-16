@@ -20,7 +20,34 @@
 <!-- CSS 파일 -->
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/login.css" rel="stylesheet"/>
+<script type="text/javascript">
+function findPwd() {
+    var mem_email = $("#mem_email").val();
+    var mem_name = $("#mem_name").val();
+	console.log(mem_email);
+	console.log(mem_name);
+        $.ajax({
+            type : "post",
+            url : '/controller/pwd_search_ok.do', 
+            data : {"mem_email": mem_email, "mem_name": mem_name},
+            dataType: 'json',
+            error : function(error) {
+                console.log("error");
+            },
+            success : function(data) {
+                var find_pwd = data.find_pwd;
+                var state = data.state;
+                
+                if(state == 1) {
+                	document.getElementById('find_pwd_section').innerText = "비밀번호는 '" + find_pwd + "'입니다.";
+                } else {
+                	document.getElementById('find_pwd_section').innerText = find_pwd;
+                }
+            }
+        }); 
 
+}
+</script>
 </head>
 <body>
  
@@ -34,16 +61,18 @@
 							<h3 class="login_join_title">비밀번호 찾기</h3>
 						</div>
 						
-						<form method="post" action="<%=request.getContextPath() %>/pwd_search_ok.do">
+						<%-- <form method="post" action="<%=request.getContextPath() %>/pwd_search_ok.do"> --%>
+						<div>
 							<ul class="pwdSearchForm">
 								<li>
-									<input type="text" name="memId" class="pwdSearchForm_txt" placeholder="아이디(이메일)" required>
-									<span class="notice">재설정하려는 비밀번호의 아이디(이메일)를 입력해주세요.</span>
+									<input type="text" id="mem_email" name="mem_email" class="pwdSearchForm_txt" placeholder="아이디(이메일)" required>
+									<span class="notice">비밀번호를 찾고자 하는 아이디(이메일)를 입력해주세요.</span>
 								</li>
-								<li><input type="text" name="memName" class="pwdSearchForm_txt" placeholder="이름" required></li>
+								<li><input type="text" id="mem_name" name="mem_name" class="pwdSearchForm_txt" placeholder="이름" required></li>
 							</ul>
-							<input type="submit" value="비밀번호 찾기" class="submit_btn">		
-						</form>
+							<input type="button" value="비밀번호 찾기" class="submit_btn" onclick="findPwd();">
+							<div id="find_pwd_section" class="find_pwd"></div>
+						</div>
 					</div>
 				</div>
 			</div>
