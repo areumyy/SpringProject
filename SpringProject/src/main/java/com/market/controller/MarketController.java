@@ -1,24 +1,51 @@
 package com.market.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonObject;
+import com.market.model.CategoryDAO;
+import com.market.model.CategoryDTO;
+import com.market.model.ClassDTO;
 import com.market.model.MemberDAO;
 import com.market.model.MemberDTO;
+import com.market.model.NoticeDAO;
+import com.market.model.NoticeDTO;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 public class MarketController {
 
 	@Autowired
 	private MemberDAO memberDao;
-
+	@Autowired
+	private NoticeDAO noticeDao;
+	@Autowired
+	private CategoryDAO categoryDao;
+	
 	@RequestMapping("join.do")
 	public String join() {
 		return "joinForm";
@@ -111,15 +138,75 @@ public class MarketController {
 	}
 
 	@RequestMapping("hostMain.do")
-	public String hostMain() {
+	public String hostMain(Model model) {
+		
+		List<NoticeDTO> NList = this.noticeDao.getNoticeList();
+
+		model.addAttribute("NList", NList);
+
 		return "host/hostMain";
 	}
 
 	@RequestMapping("hostMakeFrip.do")
-	public String hostMakeFrip() {
+	public String hostMakeFrip(Model model) {
+		
+		List<CategoryDTO> cateList = this.categoryDao.getCate_oneList();
+		
+		model.addAttribute("cateList",cateList);
+		
 		return "host/hostMakeFrip";
 	}
+	
+	@RequestMapping(value="/cate_two.do" ,method=RequestMethod.POST)
+	@ResponseBody
+	public void cate_two(HttpServletResponse response,@RequestParam("cate_one") String cate_one) throws IOException {
+	
+		List<CategoryDTO> cate_twoList = this.categoryDao.getCate_two(cate_one);
+		
+		JSONObject obj = new JSONObject();
+		
+		JSONArray ja = JSONArray.fromObject(cate_twoList);
 
+		obj.put("clist", ja);
+		
+		response.getWriter().print(obj);
+
+	}
+	
+	@RequestMapping(value="/uploadSummernoteImageFile.do",method=RequestMethod.POST, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String profileUpload(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request ) throws Exception {
+		JsonObject jsonObject = new JsonObject();
+		
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String fileRoot = contextRoot+"resources/fileupload/";
+		
+		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+		
+		File targetFile = new File(fileRoot + savedFileName);	
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			jsonObject.addProperty("url", targetFile+""); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("responseCode", "success");
+			System.out.println(targetFile);
+				
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		String a = jsonObject.toString();
+		return a;
+	}
+	
+	@RequestMapping("insertFrip.do")
+	public String insertFrip(ClassDTO dto) {
+		return "host/insertFrip";
+	}
+	
 	@RequestMapping("hostMyFrip.do")
 	public String hostMyFrip() {
 		return "host/hostMyFrip";

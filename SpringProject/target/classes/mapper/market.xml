@@ -8,4 +8,16 @@
 	<select id="check_email" parameterType="String" resultType="int">
 		select count(*) from frip_member where mem_email = #{mem_email}
 	</select>
+	
+	<select id="NoticeList" resultType="com.market.model.NoticeDTO">
+		select * from frip_notice where notice_flag = 1 order by notice_num desc
+	</select>
+	
+	<select id="cate_list" resultType="com.market.model.CategoryDTO">
+		select distinct cate_one from frip_category
+	</select>
+	
+	<select id="cate_two_list" parameterType="String" resultType="com.market.model.CategoryDTO">
+		select cate_two from frip_category where cate_one = #{cate_one}
+	</select>
 </mapper>

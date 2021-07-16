@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,10 +20,13 @@
 <script src="./resources/js/hostMakeFrip.js"></script>
 <!-- 카카오 지도 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- 네이버 textarea API -->
-<script	src="./resources/smartEditor/js/HuskyEZCreator.js" 
-	charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<!-- 썸머노트 -->
+ <script src="./resources/summernote/summernote-lite.js"></script>
+<script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="./resources/summernote/summernote-lite.css">
+<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script> -->
 </head>
 <body>
 	<div class="mainFrame">
@@ -35,7 +39,7 @@
 				<div class="Main">
 					<h1 class="Main_title">프립 만들기</h1>
 					<form method="post" action="<%=request.getContextPath()%>/insertFrip.do"
-						 onsubmit="return checkIt();">
+						 onsubmit="return checkIt();" enctype="multipart/form-data">
 						<!-- 카테고리 선택 -->
 						<div class="Main_line" id="first">
 							<div class="Main_line_1">
@@ -43,17 +47,19 @@
 									카테고리를 선택해 주세요.
 								</div>
 								<div class="Category">
-									<h4>1차 카테고리</h4>
-									<select class="selectBox" name="class_category1">
-										<option value="">::: 선택 :::</option>
-										<option value="액티비티">액티비티</option>
-									</select>
-									<br><br>
-									<h4>2차 카테고리</h4>
-									<select class="selectBox" name="class_category2">
-										<option value="">::: 선택 :::</option>
-										<option value="액티비티">액티비티</option>
-									</select>
+									<c:set var="cList" value="${cateList }"/>
+										<h4>1차 카테고리</h4>
+											<select class="selectBox" name="class_category1" onclick="change_cate_two()">
+												<option value="">::: 선택 :::</option>
+												<c:forEach items="${cList }" var="dto">
+													<option value="${dto.getCate_one() }" >${dto.getCate_one() }</option>
+												</c:forEach>
+											</select>
+										<br><br>
+										<h4>2차 카테고리</h4>
+										<select class="selectBox" name="class_category2">
+											<option value="">::: 선택 :::</option>
+										</select>
 								</div>
 							</div>
 							
@@ -376,13 +382,13 @@
 						</div><!-- 준비물 end -->
 						
 						<!-- 프립을 소개해 주세요 -->
-						<div class="Main_line_hidden" id="last">
+						<div class="Main_line" id="last">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 								 	프립을 소개해주세요!
 								</div>
 								<div class="timeTableCont">
-									<textarea name="naverEditor" id="naverEditor"></textarea>
+									<textarea id="summernote" name="editordata"></textarea>
 								</div>
 							</div>
 							<div class="Main_line_2">
@@ -417,8 +423,7 @@
 								<div class="final_confirm">
 									<div class="final_confirm_frame">
 										<div class="confirm_img">
-											<img src="<%=request.getContextPath() %>/resources/logo/logo.png" 
-												name="confirm_img" alt="이미지 없음" width="100%">
+											<img src="" name="confirm_img" alt="이미지 없음" width="100%">
 										</div>
 										<div class="final_frip_info">
 											<section class="info_section">

@@ -1,3 +1,60 @@
+//시작함수
+$(document).ready(function() {
+	//썸머노트
+	$('#summernote').summernote({
+		  height: 300,                 // 에디터 높이
+		  minHeight: 500,             // 최소 높이
+		  maxHeight: null,             // 최대 높이
+		  lang: "ko-KR",					// 한글 설정
+		  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
+		  toolbar: [
+			    // [groupName, [list of button]]
+			    ['fontname', ['fontname']],
+			    ['fontsize', ['fontsize']],
+			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+			    ['color', ['forecolor','color']],
+			    ['table', ['table']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    ['height', ['height']],
+			    ['insert',['picture','link','video']],
+			    ['view', ['fullscreen', 'help']]
+			  ],
+			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+			//toolbar end
+			
+			//이미지 관련 메서드
+			callbacks: {
+				onImageUpload: function(files, editor, welEditable) {
+		            for (var i = files.length - 1; i >= 0; i--) {
+		            	sendFile(files[i], this);
+		            }
+		        }
+			}
+          
+	});//썸머노트 end
+});
+
+//파일 업로드
+function sendFile(file, el) {
+	var form_data = new FormData();
+  	form_data.append('file', file);
+  	$.ajax({
+    	data: form_data,
+    	type: "POST",
+    	url: '/controller/uploadSummernoteImageFile.do',
+    	cache: false,
+    	contentType: false,
+    	enctype: 'multipart/form-data',
+    	processData: false,
+    	success: function(img_name) {
+      		$(el).summernote('editor.insertImage', img_name.url);
+      		console.log(img_name);
+      		console.log(img_name.url);
+    	}
+  	});
+}
+
 //이전 버튼
 function prevSelect() {
  		if($(".Main_line").attr("id") == "first"){
@@ -42,6 +99,33 @@ function nextSelect() {
 		nextNode.attr("class", "Main_line");
 
 	}
+}
+
+function change_cate_two() {
+	var val = $(".selectBox").val();
+
+	if(val.length != 0) {
+		$.ajax({
+		    type : "post",
+		    url : '/controller/cate_two.do', 
+		    data : {"cate_one":val},
+		    dataType: 'json',
+		    error : function(error) {
+		    	console.log("error");
+		    },
+		    success : function(data) {
+		    	var clist = data.clist;
+				var select = $("[name=class_category2]");
+				select.empty();
+				select.append("<option value=''>::: 선택 :::</option>");
+				
+				for(var i=0; i<clist.length; i++) {
+					select.append("<option value='"+clist[i].cate_two+"'>"+clist[i].cate_two+"</option>")
+				}
+		    }
+		}); 
+	}
+	
 }
 
 //옵션추가하기 버튼 눌렀을 때 함수
@@ -190,33 +274,6 @@ function findAddr2() {
     }).open();
 }
 
-//네이버 에디터
-$(document).ready(function() {
-	var oEditors=[];
-	nhn.husky.EZCreator.createInIFrame({
-		oAppRef: oEditors,
-		elPlaceHolder:"naverEditor",
-		sSkinURI:"./resources/smartEditor/SmartEditor2Skin.html",
-		fCreator: "createSEditor2",
-		htParams : 	{ 
-			bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
-			bUseVerticalResizer : false, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
-			bUseModeChanger : false, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
-			//aAdditionalFontList : aAdditionalFontSet, // 추가 글꼴 목록 
-			/*fOnBeforeUnload : function() { 
-				alert("완료!"); 
-				} */
-			}, //boolean 
-			
-			fOnAppLoad : function() { 
-				// Editor 에 값 셋팅 
-				oEditors.getById["naverEditor"].exec("PASTE_HTML", [""]); 
-			}, 
-				
-	});
-});
-
-
 //유효성 검사 및 제출 확인 (유효성 추가해야됨)
 function checkIt() {
 
@@ -227,3 +284,4 @@ function checkIt() {
 		return false;
 	}
 }
+
