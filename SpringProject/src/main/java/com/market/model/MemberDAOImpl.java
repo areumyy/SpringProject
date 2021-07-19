@@ -16,6 +16,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public int checkNick(String mem_nick) {
+		return this.sqlSession.selectOne("check_nick", mem_nick);
+	}
+
+	@Override
 	public int loginCheck(String mem_email, String mem_pwd) {
 		int result = 0;
 		int check = this.sqlSession.selectOne("check_email", mem_email);
@@ -43,4 +48,5 @@ public class MemberDAOImpl implements MemberDAO {
 	public int insertMember(MemberDTO dto) {
 		return this.sqlSession.insert("insert_member", dto);
 	}
+
 }

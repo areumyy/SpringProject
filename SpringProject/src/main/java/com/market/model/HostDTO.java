@@ -7,5 +7,5 @@ public class HostDTO {
 
 	private int host_num;
 	private int host_memNum;
-	private int host_cont;
+	private String host_cont;
 }

@@ -39,26 +39,79 @@ public class MarketController {
 		return "joinForm";
 	}
 
+	@RequestMapping(value = "/emailCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public void emailCheck(HttpServletResponse response, @RequestParam("mem_email") String mem_email) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		String res = null;
+		int state = 0;
+		
+		int result = this.memberDao.checkEmail(mem_email);
+		if(result > 0) {
+			res = "사용 불가능합니다.";
+			state = 2;
+		} else {
+			res = "사용 가능합니다.";
+			state = 1;
+		}
+		
+		JSONObject obj = new JSONObject();
+		obj.put("res", res);
+		obj.put("state", state);
+
+		response.getWriter().print(obj);
+
+	}
+	
+	@RequestMapping(value = "/nickCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public void nickCheck(HttpServletResponse response, @RequestParam("mem_nick") String mem_nick) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		String res = null;
+		int state = 0;
+		
+		int result = this.memberDao.checkNick(mem_nick);
+		if(result > 0) {
+			res = "사용 불가능합니다.";
+			state = 2;
+		} else {
+			res = "사용 가능합니다.";
+			state = 1;
+		}
+		
+		JSONObject obj = new JSONObject();
+		obj.put("res", res);
+		obj.put("state", state);
+
+		response.getWriter().print(obj);
+	}
+	
 	@RequestMapping("join_ok.do")
 	public void joinOk(MemberDTO dto, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
 		PrintWriter out = response.getWriter();
 
-		int emailCheck = this.memberDao.checkEmail(dto.getMem_email());
-		if (emailCheck > 0) { // 입력한 아이디가 이미 있을때
+		/*
+		 * int emailCheck = this.memberDao.checkEmail(dto.getMem_email()); if
+		 * (emailCheck > 0) { // 입력한 아이디가 이미 있을때 out.println("<script>");
+		 * out.println("alert('중복된 아이디(이메일)입니다.')"); out.println("history.back()");
+		 * out.println("</script>"); } else { // 입력한 아이디가 없을때 int insertCheck =
+		 * this.memberDao.insertMember(dto); if (insertCheck > 0) {
+		 * out.println("<script>"); out.println("alert('회원가입이 완료되었습니다.')");
+		 * out.println("location.href='login.do'"); out.println("</script>"); } }
+		 */
+		int insertCheck = this.memberDao.insertMember(dto);
+		if (insertCheck > 0) {
 			out.println("<script>");
-			out.println("alert('중복된 아이디(이메일)입니다.')");
+			out.println("alert('회원가입이 완료되었습니다.')");
+			out.println("location.href='login.do'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('회원가입 실패.')");
 			out.println("history.back()");
 			out.println("</script>");
-		} else { // 입력한 아이디가 없을때
-			int insertCheck = this.memberDao.insertMember(dto);
-			if (insertCheck > 0) {
-				out.println("<script>");
-				out.println("alert('회원가입이 완료되었습니다.')");
-				out.println("location.href='login.do'");
-				out.println("</script>");
-			}
 		}
 	}
 
@@ -69,7 +122,7 @@ public class MarketController {
 
 	@RequestMapping(value = "/pwd_search_ok.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void cate_two(HttpServletResponse response, @RequestParam("mem_email") String mem_email,
+	public void pwdSearch(HttpServletResponse response, @RequestParam("mem_email") String mem_email,
 			@RequestParam("mem_name") String mem_name) throws IOException {
 		String pwd = "일치하는 계정이 없습니다.";
 		int state = 0;
@@ -108,7 +161,7 @@ public class MarketController {
 			HttpSession session = request.getSession();
 
 			MemberDTO dto = this.memberDao.getMember(mem_email);
-
+			System.out.println("로그인한 계정 >>> " + dto.getMem_num());
 			session.setAttribute("loginDto", dto);
 			if (dto.getMem_num() == 9999) {
 				session.setAttribute("loginType", "admin");
@@ -135,6 +188,7 @@ public class MarketController {
 	@RequestMapping("logout.do")
 	public String logOut(HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		System.out.println("로그아웃한 계정 >>>" + session.getAttribute("loginDto"));
 		session.invalidate();
 
 		return "home";
