@@ -17,7 +17,7 @@ public class ClassDTO {
 	private String class_image;
 	private int class_count;
 	private String class_startArea;
-	private String class_endtArea;
+	private String class_endArea;
 	private String class_cont;
 	private String class_plan;
 	private String class_include;

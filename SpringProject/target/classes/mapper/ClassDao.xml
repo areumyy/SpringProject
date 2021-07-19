@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.model.ClassDAO">
+	<select id="countClass" resultType="int">
+		select count(*)+1 from frip_class 
+	</select>
+	
+	<insert id="insertClass" parameterType="com.market.model.ClassDTO">
+		
+		insert into frip_class values(#{class_num},1,#{class_category1}
+				,#{class_category2}, #{class_hash}, #{class_title}, #{class_image}, #{class_count},
+				#{class_startArea}, #{class_endArea}, #{class_cont}, #{class_plan}, #{class_include},
+				#{class_exclude}, #{class_supply}, #{class_notice}, default, sysdate, default, default)
+	</insert>
+</mapper>

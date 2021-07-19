@@ -50,57 +50,58 @@ function uploadSummernoteImageFile(file, el) {
 		success : function(data) {
 			//$(el).summernote('editor.insertImage', "/controller/resources/summernote/FileUpload/7a83eda6-5036-4ce9-acf4-ed2ae82db0ee.png");
 			console.log(data.url);
-			setTimeout(function() { $(el).summernote('editor.insertImage', data.url) }, 3100);
+			setTimeout(function() { $(el).summernote('editor.insertImage', data.url) }, 4000);
 		}
 	});
 }
 
 //이전 버튼
 function prevSelect() {
- 		if($(".Main_line").attr("id") == "first"){
- 			return;
- 		}else if($(".nextButton").length == 0) {
- 			$(".submitButton").remove();
- 			$("form").append("<input type='button' value='다음' class='btn btn-primary nextButton' onclick='nextSelect()'>");
- 			
- 			var nextNode = $(".Main_line").prev();
-			$(".Main_line").attr("class", "Main_line_hidden");
-			nextNode.attr("class", "Main_line");
- 		}else {
-	 		var nextNode = $(".Main_line").prev();
-			$(".Main_line").attr("class", "Main_line_hidden");
-			nextNode.attr("class", "Main_line");
- 		}
- 	}
+	if($("[value=1]").attr("id").substring(8) != 1) {
+		var num = $("[value=1]").prev().prev().attr("id").substring(8);
+		$("#btnradio"+num).trigger("click");
+	} 
+ }
 //다음 버튼
 function nextSelect() {
-	if($(".Main_line").attr("id") == "last"){
+	var num = $("[value=1]").next().next().attr("id").substring(8);
+	$("#btnradio"+num).trigger("click");
+}
+// 보이는 화면을 바꾸는 메서드 
+function change_div(i){
+	
+	$(".Main_line").attr("class", "Main_line_hidden");
+	$("#main_"+i).attr("class", "Main_line");
+	
+	var fripInfo = $("[name=class_title]").val();
+	var include = $("[name=class_include]").val();
+	var exclude  = $("[name=class_exclude]").val();
+	var plan = $("[name=class_plan]").val();
+	var end_area = $("[name=endArea]").val();
+	var endArea_detail = $("[name=endArea_detail]").val();
+	var fripcont = $("#summernote").val();
+	
+	$("#fripInfo").text()
+	$("#fripTitle").text(fripInfo);
+	$("#include").text(include);
+	$("#exclude").text(exclude);
+	$("#plan").text(plan);
+	$("#location").text(end_area +""+endArea_detail);
+	
+	//클래스 바꿔주기
+	$("[value=1]").val(0);
+	$("#btnradio"+i).val(1);
+	
+	if(i == 11 && $(".submitButton").length == 0) {
 		$(".nextButton").remove();
-		var nextNode = $(".Main_line").next();
-		$(".Main_line").attr("class", "Main_line_hidden");
-		nextNode.attr("class", "Main_line");
 		$("form").append("<input type='submit' class='btn btn-primary submitButton' value='제출'>");
-		console.log($("[name=class_title]").val());
-		var fripInfo = $("[name=class_title]").val();
-		var include = $("[name=class_include]").val();
-		var exclude  = $("[name=class_exclude]").val();
-		var plan = $("[name=class_plan]").val();
-		var end_area = $("[name=endArea]").val();
-		var endArea_detail = $("[name=endArea_detail]").val();
-		
-		$("#fripTitle").text(fripInfo);
-		$("#include").text(include);
-		$("#exclude").text(exclude);
-		$("#plan").text(plan);
-		$("#location").text(end_area +""+endArea_detail);
-	}else {
-		var nextNode = $(".Main_line").next();
-		$(".Main_line").attr("class", "Main_line_hidden");
-		nextNode.attr("class", "Main_line");
-
+	}else if($(".submitButton").length != 0) {
+		$(".submitButton").remove();
+		$("form").append("<input type='button' value='다음' class='btn btn-primary nextButton' onclick='nextSelect()'>");
 	}
 }
 
+// 카테고리 1에따라 2를 바꾸는 메서드
 function change_cate_two() {
 	var val = $(".selectBox").val();
 
@@ -221,8 +222,7 @@ function findAddr() {
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById("address").value = addr;
-            // 커서를 상세주소 필드로 이동한다.
-            $("[name=endArea_detail]").focus();
+
         }
     }).open();
 }

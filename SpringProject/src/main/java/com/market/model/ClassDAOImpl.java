@@ -11,9 +11,12 @@ public class ClassDAOImpl implements ClassDAO {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public int insertClass(ClassDTO dto) {
-		
+	public int insertClass(ClassDTO dto) {	
 		return this.sqlSession.insert("insertClass", dto);
-		
+	}
+
+	@Override
+	public int countClass() {
+		return this.sqlSession.selectOne("countClass");
 	}
 }

@@ -1,6 +1,7 @@
 package com.market.controller;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -52,7 +53,7 @@ public class MarketController {
 	private ClassDAO classDao;
 	@Autowired
 	private OptionDAO optionDao;
-	
+
 	@RequestMapping("join.do")
 	public String join() {
 		return "joinForm";
@@ -146,7 +147,7 @@ public class MarketController {
 
 	@RequestMapping("hostMain.do")
 	public String hostMain(Model model) {
-		
+
 		List<NoticeDTO> NList = this.noticeDao.getNoticeList();
 
 		model.addAttribute("NList", NList);
@@ -156,82 +157,101 @@ public class MarketController {
 
 	@RequestMapping("hostMakeFrip.do")
 	public String hostMakeFrip(Model model) {
-		
+
 		List<CategoryDTO> cateList = this.categoryDao.getCate_oneList();
-		
-		model.addAttribute("cateList",cateList);
-		
+
+		model.addAttribute("cateList", cateList);
+
 		return "host/hostMakeFrip";
 	}
-	
-	@RequestMapping(value="/cate_two.do" ,method=RequestMethod.POST)
+
+	@RequestMapping(value = "/cate_two.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void cate_two(HttpServletResponse response,@RequestParam("cate_one") String cate_one) throws IOException {
-	
+	public void cate_two(HttpServletResponse response, @RequestParam("cate_one") String cate_one) throws IOException {
+
 		List<CategoryDTO> cate_twoList = this.categoryDao.getCate_two(cate_one);
-		
+
 		JSONObject obj = new JSONObject();
-		
+
 		JSONArray ja = JSONArray.fromObject(cate_twoList);
 
 		obj.put("clist", ja);
-		
+
 		response.getWriter().print(obj);
 
 	}
-	
-	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
+
+	@RequestMapping(value = "/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
 	@ResponseBody
-	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile,
+			HttpServletRequest request) {
 		JsonObject jsonObject = new JsonObject();
-	
+
 		String fileRoot = "C:\\Users\\kmsol\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\summernote\\FileUpload\\";
-		
-		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-		
-		File targetFile = new File(fileRoot + savedFileName);	
+
+		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
+		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
+
+		File targetFile = new File(fileRoot + savedFileName);
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-			jsonObject.addProperty("url", "/controller/resources/summernote/FileUpload/"+savedFileName); 
+			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
+			jsonObject.addProperty("url", "/controller/resources/summernote/FileUpload/" + savedFileName);
 			jsonObject.addProperty("responseCode", "success");
-				
+
 		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			FileUtils.deleteQuietly(targetFile); // 저장된 파일 삭제
 			jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
 		}
 		String a = jsonObject.toString();
 		return a;
 	}
+
+	  @RequestMapping("insertFrip.do") 
+	  public String insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
+			  HttpServletRequest request) throws Exception { // 파일 업로드 처리 
+	  dto.setClass_image(upload.fileUpload(mRequest));
+	  System.out.println(dto);
+	  
+	  //주소입력 기본주소 + 상세주소
+	  dto.setClass_endArea(request.getParameter("class_endArea") 
+			  				+""+request.getParameter("endArea_detail"));
+	  if(request.getParameter("startArea") == null) {
+		  dto.setClass_startArea("null");
+	  }
+	  //전체 클래스의 수 + 1구하기
+	  int count = this.classDao.countClass();
+	  dto.setClass_num(count);
+	  odto.setOption_classNum(count);
+	  
+	  int result = this.classDao.insertClass(dto); 
+	  
+	  System.out.println(result);
+	 
+	  //옵션
+	  int result2 =0;
+	  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
+	  if(odto.getOption_endDate() == null) { //  끝나는 날이 없으면 공백값
+		  odto.setOption_endDate("null");
+	  }
+	  
+	  for(int i=1; i<=Qtt; i++) {
+		  odto.setOption_name(request.getParameter("option_name"+i));
+		  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
+		  System.out.println(odto);
+		  System.out.println(odto.getOption_name());
+		  System.out.println(odto.getOption_price()); 
+		  result2 = this.optionDao.insertOption(odto); 
 	
-	@RequestMapping("insertFrip.do")
-	public String insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
-				@RequestParam("optionQtt")int Qtt,HttpServletRequest request) throws Exception {
-		// 파일 업로드 처리
-		dto.setClass_image(upload.fileUpload(mRequest)); 
-		
-		int result = this.classDao.insertClass(dto);
-		System.out.println("cont "+ dto.getClass_cont());
-		for(int i=1; i<=Qtt; i++) {
-			odto.setOption_name(request.getParameter("option_name"+i));
-			odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i)));
-			System.out.println(odto.getOption_name());
-			System.out.println(odto.getOption_price());
-			int result2 = this.optionDao.insertOption(odto);
-			if(result2==1) {
-				continue;
-			}else {
-				System.out.println("오류");
-				break;
-			}
-		}
-		
-	return "host/insertFrip";
-	}
-	
+	  }
+
+	 return "redirect:hostMain.do"; 
+	 
+	 }
+	 
+
 	@RequestMapping("hostMyFrip.do")
 	public String hostMyFrip() {
 		return "host/hostMyFrip";
