@@ -61,29 +61,6 @@ button, input {
 	outline: none;
 }
 
-.qna_category {
-	border-bottom: 1px solid black;
-	padding: 20px 0px;
-	white-space: nowrap;
-	overflow: auto;
-}
-
-.qna_category>span {
-	margin-right: 20px;
-}
-
-.qna_category_item {
-	color: black;
-	cursor: pointer;
-	font-size: 14px;
-}
-
-.qna_category_item_select {
-	color: rgb(51, 151, 255);
-	cursor: pointer;
-	font-size: 14px;
-}
-
 .qna_list {
 	margin: 0px;
 	padding: 0px;
@@ -131,92 +108,24 @@ button, input {
 	margin-bottom: 20px;
 }
 
-.pagination_prev_group {
-	display: flex;
-	margin-right: 10px;
-}
-
-.pagination_prev_item {
-	width: 40px;
-	height: 40px;
-	line-height: normal;
-	padding: 0px;
-	background-color: white;
-	text-align: center;
-	cursor: not-allowed;
-	border-radius: 50%;
-	font-size: 18px;
-	display: flex;
-	-webkit-box-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	align-items: center;
-	outline: none;
-}
-
-.pagination_prev_item_img {
-	transform: rotate(180deg);
-}
-
-.pagination_btn {
-	width: 40px;
-	height: 40px;
-	line-height: normal;
-	padding: 0px;
-	background-color: white;
-	text-align: center;
-	cursor: pointer;
-	border-radius: 50%;
+.page_link {
 	color: black;
-	font-size: 18px;
-	font-weight: normal;
-	display: flex;
-	-webkit-box-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	align-items: center;
-	outline: none;
+	padding: .375rem .75rem;
+	border-radius: 50%;
+	margin-right: 5px;
 }
 
-.pagination_btn_select {
-	width: 40px;
-	height: 40px;
-	line-height: normal;
-	padding: 0px;
-	background-color: white;
-	text-align: center;
-	cursor: pointer;
-	border-radius: 50%;
+.page_link:hover {
+	background-color: #dedede;
+	color: black;
+}
+
+.active {
 	color: rgb(51, 151, 255);
-	font-size: 18px;
-	font-weight: bold;
-	display: flex;
-	-webkit-box-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	align-items: center;
-	outline: none;
 }
 
-.pagination_next_group {
-	display: flex;
-	margin-left: 10px;
-}
-
-.pagination_next_item {
-	width: 40px;
-	height: 40px;
-	line-height: normal;
-	padding: 0px;
-	background-color: white;
-	text-align: center;
-	cursor: pointer;
-	border-radius: 50%;
-	font-size: 18px;
-	display: flex;
-	-webkit-box-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	align-items: center;
-	outline: none;
+@media ( min-width : 768px) {
+	.main {
+		justify-content: space-between;
+	}
 }

@@ -10,17 +10,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.market.model.CategoryDAO;
-import com.market.model.CategoryDTO;
 import com.market.model.MemberDAO;
 import com.market.model.MemberDTO;
+import com.market.model.PageDTO;
+import com.market.model.QnaDAO;
+import com.market.model.QnaDTO;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -28,6 +29,8 @@ public class MarketController {
 
 	@Autowired
 	private MemberDAO memberDao;
+	@Autowired
+	private QnaDAO qnaDao;
 
 	@RequestMapping("main.do")
 	public String main() {
@@ -60,7 +63,6 @@ public class MarketController {
 		obj.put("state", state);
 
 		response.getWriter().print(obj);
-
 	}
 	
 	@RequestMapping(value = "/nickCheck", method = RequestMethod.POST)
@@ -92,15 +94,6 @@ public class MarketController {
 
 		PrintWriter out = response.getWriter();
 
-		/*
-		 * int emailCheck = this.memberDao.checkEmail(dto.getMem_email()); if
-		 * (emailCheck > 0) { // 입력한 아이디가 이미 있을때 out.println("<script>");
-		 * out.println("alert('중복된 아이디(이메일)입니다.')"); out.println("history.back()");
-		 * out.println("</script>"); } else { // 입력한 아이디가 없을때 int insertCheck =
-		 * this.memberDao.insertMember(dto); if (insertCheck > 0) {
-		 * out.println("<script>"); out.println("alert('회원가입이 완료되었습니다.')");
-		 * out.println("location.href='login.do'"); out.println("</script>"); } }
-		 */
 		int insertCheck = this.memberDao.insertMember(dto);
 		if (insertCheck > 0) {
 			out.println("<script>");
@@ -195,7 +188,28 @@ public class MarketController {
 	}
 
 	@RequestMapping("qna_list.do")
-	public String qnaList() {
+	public String qnaList(HttpServletRequest request, Model model) {
+		int totalRecord = 0;
+		int rowsize = 5;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.qnaDao.getListCount(0);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord);
+
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<QnaDTO> pageList = this.qnaDao.getQnaList(dto);
+
+		model.addAttribute("list", pageList);
+		model.addAttribute("Paging", dto);
+
 		return "qna_list";
 	}
 
