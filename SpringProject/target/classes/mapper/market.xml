@@ -20,4 +20,28 @@
 	<select id="cate_two_list" parameterType="String" resultType="com.market.model.CategoryDTO">
 		select cate_two from frip_category where cate_one = #{cate_one}
 	</select>
+	
+	<insert id="insertClass" parameterType="com.market.model.ClassDTO">
+		<selectKey resultType="int" keyProperty="class_num" order="BEFORE">
+			select count(*) + 1 from frip_class
+		</selectKey>
+		
+		insert into frip_class values(#{class_num},#{class_memnum},#{class_category1}
+				,#{class_category2}, #{class_hash}, #{class_title}, #{class_image}, #{class_count},
+				#{class_startarea}, #{class_endarea}, #{class_cont}, #{class_plan}, #{class_include},
+				#{class_exclude}, #{class_supply}, #{class_notice}, default, #{class_regdate}, 
+				default, default)
+	</insert>
+	<insert id="insertOption" parameterType="com.market.model.OptionDTO">
+		<selectKey resultType="int" keyProperty="class_num" order="BEFORE">
+			select count(*) from frip_class
+		</selectKey>
+		
+		<selectKey resultType="int" keyProperty="option_num" order="BEFORE">
+			select count(*) + 1 from frip_option
+		</selectKey>
+		
+		insert into frip_option values(#{option_num}, #{class_num}, #{option_name},#{option_price},
+			#{option_price}, #{option_startDate}, #{option_endDate})
+	</insert>
 </mapper>

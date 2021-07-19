@@ -9,4 +9,11 @@ public class ClassDAOImpl implements ClassDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+	@Override
+	public int insertClass(ClassDTO dto) {
+		
+		return this.sqlSession.insert("insertClass", dto);
+		
+	}
 }

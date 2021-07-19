@@ -24,14 +24,15 @@ $(document).ready(function() {
 			//toolbar end
 			
 			//이미지 관련 메서드
-			callbacks : { 
-            	onImageUpload : function(files, editor, welEditable) {
-            // 파일 업로드(다중업로드를 위해 반복문 사용)
-            for (var i = files.length - 1; i >= 0; i--) {
-            uploadSummernoteImageFile(files[i],this);
-            		}
-            	}
-            }
+			 callbacks : { 
+	            	onImageUpload : function(files, editor, welEditable) {
+	            // 파일 업로드(다중업로드를 위해 반복문 사용)
+	            for (var i = files.length - 1; i >= 0; i--) {
+	            uploadSummernoteImageFile(files[i],
+	            this);
+	            		}
+	            	}
+	            }
           
 	});//썸머노트 end
 });
@@ -47,28 +48,11 @@ function uploadSummernoteImageFile(file, el) {
 		enctype : 'multipart/form-data',
 		processData : false,
 		success : function(data) {
-			$(el).summernote('editor.insertImage', data.url);
+			//$(el).summernote('editor.insertImage', "/controller/resources/summernote/FileUpload/7a83eda6-5036-4ce9-acf4-ed2ae82db0ee.png");
+			console.log(data.url);
+			setTimeout(function() { $(el).summernote('editor.insertImage', data.url) }, 3100);
 		}
 	});
-}
-//파일 업로드
-function sendFile(file, el) {
-	var form_data = new FormData();
-  	form_data.append('file', file);
-  	$.ajax({
-    	data: form_data,
-    	type: "POST",
-    	url: '/controller/uploadSummernoteImageFile.do',
-    	cache: false,
-    	contentType: false,
-    	enctype: 'multipart/form-data',
-    	processData: false,
-    	success: function(img_name) {
-      		$(el).summernote('editor.insertImage', img_name.url);
-      		console.log(img_name);
-      		console.log(img_name.url);
-    	}
-  	});
 }
 
 //이전 버튼
@@ -238,7 +222,7 @@ function findAddr() {
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById("address").value = addr;
             // 커서를 상세주소 필드로 이동한다.
-            document.getElementById("detailAddress").focus();
+            $("[name=endArea_detail]").focus();
         }
     }).open();
 }

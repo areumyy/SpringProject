@@ -115,7 +115,7 @@
 										<h4>대표 이미지</h4>
 										<img src="" id="poster" alt="미리보기" width="200" height="200">
 										<input type="file" id="upload" class="form-control" 
-												name="class_image" accept="image/*">
+												name="class_image2" accept="image/*">
 									</div>
 								</div>
 							</div>
@@ -192,7 +192,7 @@
 									<br><br><br><br>
 									<!-- 옵션 수를 보내주는 히든값 
 											받을 때 option,price뒤에 숫자 붙여서 이 값만큼 for문 돌려주면 됨 옵션 추가, 삭제 반영함-->
-									<input type="hidden" class="optionQtt" value="1">
+									<input type="hidden" class="optionQtt" name="optionQtt" value="1">
 									<div class="schedule_option">
 										<div class="little_title">구매옵션</div>
 										<div class="optionTextDiv">
@@ -382,7 +382,7 @@
 						</div><!-- 준비물 end -->
 						
 						<!-- 프립을 소개해 주세요 -->
-						<div class="Main_line" id="last">
+						<div class="Main_line_hidden" id="last">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 								 	프립을 소개해주세요!

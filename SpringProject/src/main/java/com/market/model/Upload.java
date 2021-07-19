@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,12 +48,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Service    // 해당 Upload 라는 클래스는 비지니스 로직을 수행하는 클래스
 public class Upload {
 
-	public boolean fileUpload(MultipartHttpServletRequest mRequest) {
-		
-		boolean isUpload = false;
-		
+	public String fileUpload(MultipartHttpServletRequest mRequest) {
+		String result = "";
 		String uploadPath = 
-				"C:\\Users\\kmsol\\git\\SpringProject1\\SpringProject\\src\\main\\webapp\\resources\\upload";
+				"C:\\Users\\kmsol\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\upload\\";
 		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
@@ -60,7 +59,7 @@ public class Upload {
 		int day = cal.get(Calendar.DATE);
 		
 		Iterator<String> iterator = mRequest.getFileNames();
-		
+
 		while(iterator.hasNext()) {
 			String uploadFileName = iterator.next();
 			
@@ -81,12 +80,12 @@ public class Upload {
 			}
 			
 			// 실제적으로 파일을 만들어 보자.
-			String saveFileName = originalFileName;
+			String saveFileName = UUID.randomUUID()+originalFileName;
+			result = year + "-" + month + "-" + day + "/"+saveFileName;
 			
 			if(saveFileName != null && !saveFileName.equals("")) {
 				saveFileName = 
 						System.currentTimeMillis() + "_" + saveFileName;
-				
 				
 				try {
 					// ........\\resources\\upload\\2021-07-06\\실제파일
@@ -94,8 +93,7 @@ public class Upload {
 					
 					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드.
 					mFile.transferTo(origin);
-					
-					isUpload = true;
+
 				} catch (IllegalStateException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -106,6 +104,6 @@ public class Upload {
 			}
 		}  // while 문 end
 		
-		return isUpload;
+		return result;
 	}
 }

@@ -1,7 +1,6 @@
 package com.market.controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -9,29 +8,31 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.JsonObject;
 import com.market.model.CategoryDAO;
 import com.market.model.CategoryDTO;
+import com.market.model.ClassDAO;
 import com.market.model.ClassDTO;
 import com.market.model.MemberDAO;
 import com.market.model.MemberDTO;
 import com.market.model.NoticeDAO;
 import com.market.model.NoticeDTO;
+import com.market.model.OptionDAO;
+import com.market.model.OptionDTO;
+import com.market.model.Upload;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -45,6 +46,12 @@ public class MarketController {
 	private NoticeDAO noticeDao;
 	@Autowired
 	private CategoryDAO categoryDao;
+	@Autowired
+	private Upload upload;
+	@Autowired
+	private ClassDAO classDao;
+	@Autowired
+	private OptionDAO optionDao;
 	
 	@RequestMapping("join.do")
 	public String join() {
@@ -177,24 +184,18 @@ public class MarketController {
 	@ResponseBody
 	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
 		JsonObject jsonObject = new JsonObject();
-		
-        /*
-		 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
-		 */
-		
-		// 내부경로로 저장
-		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot+"resources/fileupload/";
+	
+		String fileRoot = "C:\\Users\\kmsol\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\summernote\\FileUpload\\";
 		
 		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
 		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-		System.out.println(fileRoot);
+		
 		File targetFile = new File(fileRoot + savedFileName);	
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-			jsonObject.addProperty("url", "/summernote/resources/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("url", "/controller/resources/summernote/FileUpload/"+savedFileName); 
 			jsonObject.addProperty("responseCode", "success");
 				
 		} catch (IOException e) {
@@ -207,8 +208,28 @@ public class MarketController {
 	}
 	
 	@RequestMapping("insertFrip.do")
-	public String insertFrip(ClassDTO dto) {
-		return "host/insertFrip";
+	public String insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
+				@RequestParam("optionQtt")int Qtt,HttpServletRequest request) throws Exception {
+		// 파일 업로드 처리
+		dto.setClass_image(upload.fileUpload(mRequest)); 
+		
+		int result = this.classDao.insertClass(dto);
+		System.out.println("cont "+ dto.getClass_cont());
+		for(int i=1; i<=Qtt; i++) {
+			odto.setOption_name(request.getParameter("option_name"+i));
+			odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i)));
+			System.out.println(odto.getOption_name());
+			System.out.println(odto.getOption_price());
+			int result2 = this.optionDao.insertOption(odto);
+			if(result2==1) {
+				continue;
+			}else {
+				System.out.println("오류");
+				break;
+			}
+		}
+		
+	return "host/insertFrip";
 	}
 	
 	@RequestMapping("hostMyFrip.do")
