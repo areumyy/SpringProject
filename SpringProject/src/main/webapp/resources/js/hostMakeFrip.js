@@ -24,17 +24,33 @@ $(document).ready(function() {
 			//toolbar end
 			
 			//이미지 관련 메서드
-			callbacks: {
-				onImageUpload: function(files, editor, welEditable) {
-		            for (var i = files.length - 1; i >= 0; i--) {
-		            	sendFile(files[i], this);
-		            }
-		        }
-			}
+			callbacks : { 
+            	onImageUpload : function(files, editor, welEditable) {
+            // 파일 업로드(다중업로드를 위해 반복문 사용)
+            for (var i = files.length - 1; i >= 0; i--) {
+            uploadSummernoteImageFile(files[i],this);
+            		}
+            	}
+            }
           
 	});//썸머노트 end
 });
 
+function uploadSummernoteImageFile(file, el) {
+	data = new FormData();
+	data.append("file", file);
+	$.ajax({
+		data : data,
+		type : "POST",
+		url : "uploadSummernoteImageFile",
+		contentType : false,
+		enctype : 'multipart/form-data',
+		processData : false,
+		success : function(data) {
+			$(el).summernote('editor.insertImage', data.url);
+		}
+	});
+}
 //파일 업로드
 function sendFile(file, el) {
 	var form_data = new FormData();
