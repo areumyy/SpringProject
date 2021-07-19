@@ -49,7 +49,7 @@
 						<ul class="pagination">
 							<c:if test="${Paging.getPage() > Paging.getBlock() }">
 								<li class="page-item">
-									<a class="page-link" href="qna_list.do?page=1" style="color: black;">
+									<a class="page_link" href="qna_list.do?page=1">
 										<span aria-hidden="true">&laquo;</span>
 									</a>
 								</li>
