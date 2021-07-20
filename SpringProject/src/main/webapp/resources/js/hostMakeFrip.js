@@ -48,8 +48,6 @@ function uploadSummernoteImageFile(file, el) {
 		enctype : 'multipart/form-data',
 		processData : false,
 		success : function(data) {
-			//$(el).summernote('editor.insertImage', "/controller/resources/summernote/FileUpload/7a83eda6-5036-4ce9-acf4-ed2ae82db0ee.png");
-			console.log(data.url);
 			setTimeout(function() { $(el).summernote('editor.insertImage', data.url) }, 4000);
 		}
 	});
@@ -72,22 +70,34 @@ function change_div(i){
 	
 	$(".Main_line").attr("class", "Main_line_hidden");
 	$("#main_"+i).attr("class", "Main_line");
-
+	
+	//입력한 정보 가져오기
 	var fripInfo = $("[name=class_title]").val();
 	var include = $("[name=class_include]").val();
 	var exclude  = $("[name=class_exclude]").val();
 	var plan = $("[name=class_plan]").val();
-	var end_area = $("[name=endArea]").val();
+	var end_area = $("[name=class_endArea]").val();
 	var endArea_detail = $("[name=endArea_detail]").val();
 	var fripcont = $("#summernote").val();
+	// 정보칸 비워주기
+	$("#fripInfo").empty();
+	$("#fripTitle").empty();
+	$("#include").empty();
+	$("#exclude").empty();
+	$("#plan").empty();
+	$("#location").empty();
+	// 입력한 정보 최종 확인 칸에 넣어주기
+	$("#fripInfo").append(fripcont);
+	$("#fripTitle").append("<p style='white-space: pre-line;'>"+fripInfo+"</p>");
+	$("#include").append("<p style='white-space: pre-line;'>"+include+"</p>");
+	$("#exclude").append("<p style='white-space: pre-line;'>"+exclude+"</p>");
+	$("#plan").append("<p style='white-space: pre-line;'>"+plan+"</p>");
+	$("#location").append("<p style='white-space: pre-line;'>"+end_area+" "+endArea_detail+"</p>");
+
 	
-	
-	$("#fripInfo").text(fripcont);
-	$("#fripTitle").text(fripInfo);
-	$("#include").text(include);
-	$("#exclude").text(exclude);
-	$("#plan").text(plan);
-	$("#location").text(end_area +""+endArea_detail);
+	//최종 확인에서 이미지 크기 수정해주기
+	$(".confirm_img").find("img").css("width", "100%");
+	$("#fripInfo").find("img").css("width", "100%");
 	
 	//클래스 바꿔주기
 	$("[value=1]").val(0);
@@ -278,8 +288,8 @@ function findAddr2() {
 
 //유효성 검사 및 제출 확인 (유효성 추가해야됨)
 function checkIt() {
-return true;
-	/*if(confirm('제출하시겠습니까?')){
+
+	if(confirm('제출하시겠습니까?')){
 		
 		if($(".selectBox").eq(0).val().length == 0 
 				&& $(".selectBox").eq(1).val().length == 0) { // 카테고리
@@ -347,6 +357,6 @@ return true;
 		console.log($(".optionText").eq(0).val().length == 0 
 				|| $(".optionText").eq(1).val().length == 0);
 		return false;
-	}*/
+	}
 }
 

@@ -15,4 +15,8 @@
 				#{class_startArea}, #{class_endArea}, #{class_cont}, #{class_plan}, #{class_include},
 				#{class_exclude}, #{class_supply}, #{class_notice}, default, sysdate, default, default)
 	</insert>
+	
+	<select id="getList_MemNum" parameterType="int" resultType="com.market.model.ClassDTO">
+		select * from frip_class where class_memnum = #{mem_num}
+	</select>
 </mapper>

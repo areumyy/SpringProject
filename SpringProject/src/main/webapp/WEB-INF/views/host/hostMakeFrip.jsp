@@ -24,9 +24,7 @@
  <script src="./resources/summernote/summernote-lite.js"></script>
 <script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="./resources/summernote/summernote-lite.css">
-<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script> -->
+
 </head>
 <body>
 	<div class="mainFrame">
@@ -38,30 +36,31 @@
 	
 				<div class="Main">
 					<h1 class="Main_title">프립 만들기</h1>
-					<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="1" autocomplete="off" checked onclick="change_div(1)">
-					  <label class="btn btn-outline-primary" for="btnradio1">카테고리</label>	
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="" autocomplete="off" onclick="change_div(2)">
-					  <label class="btn btn-outline-primary" for="btnradio2">프립명</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" value="" autocomplete="off" onclick="change_div(3)">
-					  <label class="btn btn-outline-primary" for="btnradio3">이미지</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" value="" autocomplete="off" onclick="change_div(4)">
-					  <label class="btn btn-outline-primary" for="btnradio4" >진행일</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio5" value="" autocomplete="off" onclick="change_div(5)">
-					  <label class="btn btn-outline-primary" for="btnradio5">인원 및 옵션</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio6" value="" autocomplete="off" onclick="change_div(6)">
-					  <label class="btn btn-outline-primary" for="btnradio6">진행지</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio7" value="" autocomplete="off" onclick="change_div(7)">
-					  <label class="btn btn-outline-primary" for="btnradio7">상세 일정</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio8" value="" autocomplete="off" onclick="change_div(8)">
-					  <label class="btn btn-outline-primary" for="btnradio8">포함사항</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio9" value="" autocomplete="off" onclick="change_div(9)">
-					  <label class="btn btn-outline-primary" for="btnradio9">준비물</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio10" value="" autocomplete="off" onclick="change_div(10)">
-					  <label class="btn btn-outline-primary" for="btnradio10">프립소개</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio11" value="" autocomplete="off" onclick="change_div(11)">
-					  <label class="btn btn-outline-primary" for="btnradio11">최종 확인</label>
-					</div>
+					
+						<div class="btn-group buttonGroup" role="group" aria-label="Basic radio toggle button group">
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="1" autocomplete="off" checked onclick="change_div(1)">
+						  <label class="btn btn-outline-primary" for="btnradio1">카테고리</label>	
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="" autocomplete="off" onclick="change_div(2)">
+						  <label class="btn btn-outline-primary" for="btnradio2">프립명</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" value="" autocomplete="off" onclick="change_div(3)">
+						  <label class="btn btn-outline-primary" for="btnradio3">이미지</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" value="" autocomplete="off" onclick="change_div(4)">
+						  <label class="btn btn-outline-primary" for="btnradio4" >진행일</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio5" value="" autocomplete="off" onclick="change_div(5)">
+						  <label class="btn btn-outline-primary" for="btnradio5">인원 및 옵션</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio6" value="" autocomplete="off" onclick="change_div(6)">
+						  <label class="btn btn-outline-primary" for="btnradio6">진행지</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio7" value="" autocomplete="off" onclick="change_div(7)">
+						  <label class="btn btn-outline-primary" for="btnradio7">상세 일정</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio8" value="" autocomplete="off" onclick="change_div(8)">
+						  <label class="btn btn-outline-primary" for="btnradio8">포함사항</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio9" value="" autocomplete="off" onclick="change_div(9)">
+						  <label class="btn btn-outline-primary" for="btnradio9">준비물</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio10" value="" autocomplete="off" onclick="change_div(10)">
+						  <label class="btn btn-outline-primary" for="btnradio10">프립소개</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio11" value="" autocomplete="off" onclick="change_div(11)">
+						  <label class="btn btn-outline-primary" for="btnradio11">최종 확인</label>
+						</div>
 					
 					<form method="post" action="<%=request.getContextPath()%>/insertFrip.do"
 						 onsubmit="return checkIt();" enctype="multipart/form-data">

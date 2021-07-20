@@ -17,6 +17,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath()%>/resources/css/hostMyFrip.css"
 	rel="stylesheet" />
+<script src="./resources/js/hostMyFrip.js"></script>
 </head>
 <body>
 	<div class="mainFrame">
@@ -42,6 +43,7 @@
 							  <label class="btn btn-outline-primary menuButton" for="btnradio3">종료</label>
 							</div>
 							
+							
 							<div class="class_group">
 								<c:forEach begin="1" end="4" var="i">
 									<div class="class_item">
@@ -56,7 +58,7 @@
 												</div>
 												<div class="class_item_image">
 													<img class="class_img"
-														src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1623911236019_872487">
+														src="">
 												</div>
 											</div>
 											<div class="class_item_hash">추가수량 확보 | 나만의 감성 만들기</div>

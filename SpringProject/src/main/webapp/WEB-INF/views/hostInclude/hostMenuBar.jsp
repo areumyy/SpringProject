@@ -19,8 +19,8 @@
 			<div class="userInfo">
 				<a class="userName" href="<%=request.getContextPath()%>/hostInfo.do">
 					<%-- <img src="프로필사진"
-							width="30px" height="30px">
-					${loginDto.getMem_Nick } --%>
+							width="30px" height="30px">--%>
+					${loginDto.getMem_nick() }
 				</a>
 			</div>
 		</header>

@@ -364,8 +364,7 @@ public class MarketController {
 	  public void insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
 			  HttpServletRequest request, HttpServletResponse response) throws Exception { // 파일 업로드 처리 
 		  response.setContentType("text/html; charset=UTF-8");
-		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
-		  System.out.println(Qtt);
+		 
 		  dto.setClass_image(upload.fileUpload(mRequest));
 		  System.out.println(dto);
 		  
@@ -389,7 +388,9 @@ public class MarketController {
 			  odto.setOption_endDate("null");
 		  }
 		  
-		  
+		  //옵션 개수
+		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
+		 
 		  for(int i=1; i<=Qtt; i++) {
 			  odto.setOption_name(request.getParameter("option_name"+i));
 			  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
@@ -415,7 +416,14 @@ public class MarketController {
 	 
 
 	@RequestMapping("hostMyFrip.do")
-	public String hostMyFrip() {
+	public String hostMyFrip(HttpServletRequest request, Model model ) {
+		HttpSession session = request.getSession();
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto");
+		int mem_num = loginDto.getMem_num();
+		List<ClassDTO> dto = this.classDao.getList_MemNum(mem_num);
+		
+		model.addAttribute("List",dto);
+		
 		return "host/hostMyFrip";
 	}
 

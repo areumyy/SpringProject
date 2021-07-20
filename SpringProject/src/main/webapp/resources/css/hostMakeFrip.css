@@ -336,6 +336,11 @@ textarea {
     line-height: 22px;
     font-size: 12px;
 }
+
+#fripInfo img{
+	width:300px;
+	height:100%;
+}
 .info_title {
 	margin-bottom: 15px;
     line-height: 14px;
@@ -405,5 +410,10 @@ textarea {
 	    visibility: hidden;
 	    padding: 0px;
 	    max-height: 0px;
+    }
+    
+    .buttonGroup{
+    	display:flex;
+    	flex-flow: row wrap;
     }
 }
