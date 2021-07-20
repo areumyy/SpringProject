@@ -12,7 +12,7 @@ public class PageDTO {
 	private int totalRecord; // DB 상의 테이블의 전체 레코드 수
 	private int startNo; // 해당 페이지 시작 번호
 	private int endNo; // 해당 페이지 끝 번호
-	private int block = 5; // 아래에 보여질 페이지 최대 수 - 예) [1][2][3] / [4][5][6]
+	private int block; // 아래에 보여질 페이지 최대 수 - 예) [1][2][3] / [4][5][6]
 	private int startBlock; // 해당 페이지에서 시작 블럭
 	private int endBlock; // 해당 페이지에서 끝 블럭
 	private int allPage; // 전체 페이지 수
@@ -25,11 +25,12 @@ public class PageDTO {
 
 	}
 
-	public PageDTO(int page, int rowsize, int totalRecord) { // 인자 생성자
+	public PageDTO(int page, int rowsize, int totalRecord, int block) { // 인자 생성자
 		this.page = page;
 		this.rowsize = rowsize;
 		this.totalRecord = totalRecord;
-
+		this.block = block;
+		
 		// 해당 페이지 시작 번호
 		this.startNo = (this.page * this.rowsize) - (this.rowsize - 1);
 
@@ -51,8 +52,8 @@ public class PageDTO {
 		}
 	}
 
-	public PageDTO(int page, int rowsize, int totalRecord, String field, String keyword) {
-		this(page, rowsize, totalRecord);
+	public PageDTO(int page, int rowsize, int totalRecord, int block, String field, String keyword) {
+		this(page, rowsize, totalRecord, block);
 		this.field = field;
 		this.keyword = keyword;
 	}
