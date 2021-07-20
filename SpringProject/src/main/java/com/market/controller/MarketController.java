@@ -4,6 +4,7 @@ import java.io.File;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import java.io.IOException;
@@ -366,11 +367,7 @@ public class MarketController {
 		  response.setContentType("text/html; charset=UTF-8");
 		 
 		  dto.setClass_image(upload.fileUpload(mRequest));
-		  System.out.println(dto);
-		  
-		  //주소입력 기본주소 + 상세주소
-		  dto.setClass_endArea(request.getParameter("class_endArea") 
-				  				+""+request.getParameter("endArea_detail"));
+
 		  if(request.getParameter("startArea") == null) {
 			  dto.setClass_startArea("null");
 		  }
@@ -390,14 +387,14 @@ public class MarketController {
 		  
 		  //옵션 개수
 		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
-		 
+
 		  for(int i=1; i<=Qtt; i++) {
 			  odto.setOption_name(request.getParameter("option_name"+i));
 			  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
 	
 			  result2 = this.optionDao.insertOption(odto); 
-
 		  }
+		 
 		 PrintWriter out = response.getWriter();
 		 if(result == 1 && result2 == 1) {
 			out.println("<script>");
@@ -414,15 +411,40 @@ public class MarketController {
 	 
 	 }
 	 
+	@RequestMapping(value = "/hostClassList.do", method = RequestMethod.POST)
+	@ResponseBody 
+	public void hostClassList(HttpServletRequest request, HttpServletResponse response) throws IOException {  
+		HttpSession session = request.getSession();
+		
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
+		
+		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
+		int class_pass = Integer.parseInt(request.getParameter("class_pass")); // 승인 상태 번호
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("mem_num", mem_num);
+		List<ClassDTO> list = null;
+		if(class_pass == 2) {
+			class_pass = 1;
+			map.put("class_pass", class_pass);
+			list = this.classDao.getList_endClass(map);
+		}else {
+			map.put("class_pass", class_pass);
+			list = this.classDao.getList_MemNum(map);
+		}
+		System.out.println(list);
+		JSONObject obj = new JSONObject();
 
+		JSONArray ja = JSONArray.fromObject(list);
+
+		obj.put("clist", ja);
+
+		response.getWriter().print(obj);
+	}
+	
 	@RequestMapping("hostMyFrip.do")
 	public String hostMyFrip(HttpServletRequest request, Model model ) {
-		HttpSession session = request.getSession();
-		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto");
-		int mem_num = loginDto.getMem_num();
-		List<ClassDTO> dto = this.classDao.getList_MemNum(mem_num);
-		
-		model.addAttribute("List",dto);
 		
 		return "host/hostMyFrip";
 	}
@@ -513,7 +535,14 @@ public class MarketController {
 	}
 
 	@RequestMapping("hostUpdateFrip.do")
-	public String hostUpdateFrip() {
+	public String hostUpdateFrip(@RequestParam("class_num")int num, Model model) {
+		List<ClassDTO> classList = this.classDao.getList_classNum(num);
+		
+		List<CategoryDTO> cateList = this.categoryDao.getCate_oneList();
+
+		model.addAttribute("cateList", cateList);
+		model.addAttribute("classList", classList);
+		
 		return "host/hostUpdateFrip";
 	}
 

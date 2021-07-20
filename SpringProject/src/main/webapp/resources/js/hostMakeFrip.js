@@ -76,7 +76,7 @@ function change_div(i){
 	var include = $("[name=class_include]").val();
 	var exclude  = $("[name=class_exclude]").val();
 	var plan = $("[name=class_plan]").val();
-	var end_area = $("[name=class_endArea]").val();
+	var end_area = $("[name=class_endArea2]").val();
 	var endArea_detail = $("[name=endArea_detail]").val();
 	var fripcont = $("#summernote").val();
 	// 정보칸 비워주기
@@ -93,7 +93,7 @@ function change_div(i){
 	$("#exclude").append("<p style='white-space: pre-line;'>"+exclude+"</p>");
 	$("#plan").append("<p style='white-space: pre-line;'>"+plan+"</p>");
 	$("#location").append("<p style='white-space: pre-line;'>"+end_area+" "+endArea_detail+"</p>");
-
+	$("[name=class_endArea]").val(end_area +" "+endArea_detail);
 	
 	//최종 확인에서 이미지 크기 수정해주기
 	$(".confirm_img").find("img").css("width", "100%");
@@ -288,7 +288,6 @@ function findAddr2() {
 
 //유효성 검사 및 제출 확인 (유효성 추가해야됨)
 function checkIt() {
-
 	if(confirm('제출하시겠습니까?')){
 		
 		if($(".selectBox").eq(0).val().length == 0 

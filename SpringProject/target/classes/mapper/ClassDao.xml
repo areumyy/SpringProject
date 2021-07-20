@@ -16,7 +16,23 @@
 				#{class_exclude}, #{class_supply}, #{class_notice}, default, sysdate, default, default)
 	</insert>
 	
-	<select id="getList_MemNum" parameterType="int" resultType="com.market.model.ClassDTO">
-		select * from frip_class where class_memnum = #{mem_num}
+	<select id="getList_MemNum" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select distinct f.* from frip_class f, frip_option o
+			where f.class_memnum = #{mem_num}
+			and f.class_pass = #{class_pass} 
+			and f.class_delcheck = 'no'
+			and f.class_num = o.option_classnum
+			and o.option_startdate > sysdate 
+		]]>
+	</select>
+	
+	<select id="getList_endClass" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		select * from frip_class where class_memnum = #{mem_num}  
+			and class_pass = #{class_pass} and class_delcheck = 'no' and class_cal = '2'
+	</select>
+	
+	<select id="getList_classNum" parameterType="int" resultType="com.market.model.ClassDTO">
+		select * from frip_class where class_num = #{class_num}
 	</select>
 </mapper>

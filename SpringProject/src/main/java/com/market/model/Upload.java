@@ -80,13 +80,13 @@ public class Upload {
 			}
 			
 			// 실제적으로 파일을 만들어 보자.
-			String saveFileName = UUID.randomUUID()+originalFileName;
-			result = year + "-" + month + "-" + day + "/"+saveFileName;
+			String saveFileName = originalFileName;
 			
 			if(saveFileName != null && !saveFileName.equals("")) {
 				saveFileName = 
 						System.currentTimeMillis() + "_" + saveFileName;
 				
+				result = year + "-" + month + "-" + day + "/"+saveFileName;
 				try {
 					// ........\\resources\\upload\\2021-07-06\\실제파일
 					File origin = new File(homedir+"/"+saveFileName);

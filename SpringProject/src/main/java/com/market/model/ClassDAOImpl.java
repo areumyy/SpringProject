@@ -1,5 +1,6 @@
 package com.market.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -23,8 +24,18 @@ public class ClassDAOImpl implements ClassDAO {
 	}
 
 	@Override
-	public List<ClassDTO> getList_MemNum(int mem_num) {
+	public List<ClassDTO> getList_MemNum(HashMap<String, Integer> map) {
+		return this.sqlSession.selectList("getList_MemNum", map);
+	}
+
+	@Override
+	public List<ClassDTO> getList_endClass(HashMap<String, Integer> map) {
+		return this.sqlSession.selectList("getList_endClass", map);
+	}
+
+	@Override
+	public List<ClassDTO> getList_classNum(int class_num) {
 		
-		return this.sqlSession.selectList("getList_MemNum", mem_num);
+		return this.sqlSession.selectList("getList_classNum", class_num);
 	}
 }
