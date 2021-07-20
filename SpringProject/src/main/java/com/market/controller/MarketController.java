@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.market.model.MemberDAO;
 import com.market.model.MemberDTO;
+import com.market.model.NoticeDAO;
+import com.market.model.NoticeDTO;
 import com.market.model.PageDTO;
 import com.market.model.QnaDAO;
 import com.market.model.QnaDTO;
@@ -31,6 +33,8 @@ public class MarketController {
 	private MemberDAO memberDao;
 	@Autowired
 	private QnaDAO qnaDao;
+	@Autowired
+	private NoticeDAO NoticeDao;
 
 	@RequestMapping("main.do")
 	public String main() {
@@ -44,50 +48,51 @@ public class MarketController {
 
 	@RequestMapping(value = "/emailCheck", method = RequestMethod.POST)
 	@ResponseBody
-	public void emailCheck(HttpServletResponse response, @RequestParam("mem_email") String mem_email) throws IOException {
+	public void emailCheck(HttpServletResponse response, @RequestParam("mem_email") String mem_email)
+			throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		String res = null;
 		int state = 0;
-		
+
 		int result = this.memberDao.checkEmail(mem_email);
-		if(result > 0) {
+		if (result > 0) {
 			res = "사용 불가능합니다.";
 			state = 2;
 		} else {
 			res = "사용 가능합니다.";
 			state = 1;
 		}
-		
+
 		JSONObject obj = new JSONObject();
 		obj.put("res", res);
 		obj.put("state", state);
 
 		response.getWriter().print(obj);
 	}
-	
+
 	@RequestMapping(value = "/nickCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public void nickCheck(HttpServletResponse response, @RequestParam("mem_nick") String mem_nick) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		String res = null;
 		int state = 0;
-		
+
 		int result = this.memberDao.checkNick(mem_nick);
-		if(result > 0) {
+		if (result > 0) {
 			res = "사용 불가능합니다.";
 			state = 2;
 		} else {
 			res = "사용 가능합니다.";
 			state = 1;
 		}
-		
+
 		JSONObject obj = new JSONObject();
 		obj.put("res", res);
 		obj.put("state", state);
 
 		response.getWriter().print(obj);
 	}
-	
+
 	@RequestMapping("join_ok.do")
 	public void joinOk(MemberDTO dto, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
@@ -213,8 +218,55 @@ public class MarketController {
 		return "qna_list";
 	}
 
+	@RequestMapping("qna_search.do")
+	public String qnaSearchList(@RequestParam("keyword") String keyword, HttpServletRequest request, Model model) {
+		int totalRecord = 0;
+		int rowsize = 5;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.qnaDao.getSearchListCount(keyword, 0);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3, "0", keyword);
+
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<QnaDTO> pageList = this.qnaDao.getQnaSearchList(dto);
+
+		model.addAttribute("list", pageList);
+		model.addAttribute("Paging", dto);
+
+		return "qna_list";
+	}
+
 	@RequestMapping("notice_list.do")
-	public String noticeList() {
+	public String noticeList(HttpServletRequest request, Model model) {
+		int totalRecord = 0;
+		int rowsize = 8;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.NoticeDao.getListCount(0);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<NoticeDTO> pageList = this.NoticeDao.getNoticeList(dto);
+
+		model.addAttribute("list", pageList);
+		model.addAttribute("Paging", dto);
+
 		return "notice_list";
 	}
 

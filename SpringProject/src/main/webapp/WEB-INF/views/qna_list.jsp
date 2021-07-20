@@ -27,9 +27,9 @@
 
 				<div class="qna_list_page">
 					<h1 class="qna_list_title">자주 묻는 질문</h1>
-					<form class="qna_search_form">
+					<form class="qna_search_form" method="post" action="<%=request.getContextPath()%>/qna_search.do">
 						<img src="<%=request.getContextPath() %>/resources/image/menu/search.svg" class="qna_search_img">
-						<input type="text" placeholder="키워드를 입력하세요" value="">
+						<input type="text" placeholder="키워드를 입력하세요" value="" name="keyword" autocomplete="off">
 					</form>
 					<div class="accordion" id="accordionExample">
 					<ul class="qna_list">
