@@ -72,7 +72,7 @@ function change_div(i){
 	
 	$(".Main_line").attr("class", "Main_line_hidden");
 	$("#main_"+i).attr("class", "Main_line");
-	
+
 	var fripInfo = $("[name=class_title]").val();
 	var include = $("[name=class_include]").val();
 	var exclude  = $("[name=class_exclude]").val();
@@ -81,7 +81,8 @@ function change_div(i){
 	var endArea_detail = $("[name=endArea_detail]").val();
 	var fripcont = $("#summernote").val();
 	
-	$("#fripInfo").text()
+	
+	$("#fripInfo").text(fripcont);
 	$("#fripTitle").text(fripInfo);
 	$("#include").text(include);
 	$("#exclude").text(exclude);
@@ -131,7 +132,8 @@ function change_cate_two() {
 
 //옵션추가하기 버튼 눌렀을 때 함수
 function addOption() {
-	var Qtt = parseInt($(".optionQtt").val())+1;
+	var Qtt = ($(".optionText").length/2)+1;
+	console.log(Qtt);
 	$(".optionTextDiv").append
 		("<div class='"+Qtt+"'><input type='text' class='optionText' value='참가비 (1인)' " +
 				"name='option_name"+Qtt+"'> <div class='deleteButton' " +
@@ -276,10 +278,10 @@ function findAddr2() {
 
 //유효성 검사 및 제출 확인 (유효성 추가해야됨)
 function checkIt() {
-
-	if(confirm('제출하시겠습니까?')){
+return true;
+	/*if(confirm('제출하시겠습니까?')){
 		
-		if($(".selectBox").eq(0).length == 0 
+		if($(".selectBox").eq(0).val().length == 0 
 				&& $(".selectBox").eq(1).val().length == 0) { // 카테고리
 			alert("카테고리를 확인해 주세요!");
 			$("#btnradio1").trigger("click");
@@ -300,30 +302,51 @@ function checkIt() {
 			alert("시작일을 확인해 주세요!");
 			$("#btnradio4").trigger("click");
 			return false;
-		}else if($(".optionNumber").val().length == 0) { // 인원 및 옵션
+		}else if($(".optionNumber").val().length == 0) { // 인원 및 (옵션)
 			alert("인원수를 입력해주세요!");
 			$("#btnradio5").trigger("click");
 			return false;
-		}else if($(".optionNumber").val()<= 0) { // 인원 및 옵션
+		}else if($(".optionNumber").val() <= 0) { // 인원 및 (옵션)
 			alert("최소 인원수는 1명입니다!");
 			$("#btnradio5").trigger("click");
 			return false;
-		}else if($(".optionNumber").val()<= 0) { // 인원 및 옵션
-			alert("최소 인원수는 1명입니다!");
-			$("#btnradio5").trigger("click");
+		}else if($("#address").val().length == 0 
+					|| $(".detailAddress").val().length == 0) {
+			alert("프립 진행지를 확인해주세요");
+			$("#btnradio6").trigger("click");
 			return false;
+		}else if($("[name=class_plan]").val().length == 0) {
+			alert("상세 일정을 확인해 주세요");
+			$("#btnradio7").trigger("click");
+			return false;
+		}else if($("[name=class_include]").val().length==0) {
+			alert("포함사항을 확인해 주세요");
+			$("#btnradio8").trigger("click");
+			return false;
+		}else if($("[name=class_exclude]").val().length==0) {
+			alert("불포함사항을 확인해 주세요");
+			$("#btnradio8").trigger("click");
+			return false;
+		}else if($("#summernote").val().length==0) {
+			alert("프립 소개를 확인해 주세요");
+			$("#btnradio10").trigger("click");
+			return false;
+		}else if(true) { // (인원) 및 옵션
+			var index = $(".optionText").length/2;
+			
+			for(var i=0; i<index; i++) {
+				if($(".optionText").eq((2*i)).val().length == 0
+						|| $(".optionText").eq((2*i)+1).val().length == 0){
+					alert("모든 옵션의 이름과 가격을 확인해주세요!");
+					$("#btnradio5").trigger("click");
+					return false;
+				}
+			}
 		}
-		
-		
-		else{
-			return true;
-		}
-		
-		
-	}
-	else {
-		console.log($(".optionQtt").val());
+	}else {
+		console.log($(".optionText").eq(0).val().length == 0 
+				|| $(".optionText").eq(1).val().length == 0);
 		return false;
-	}
+	}*/
 }
 

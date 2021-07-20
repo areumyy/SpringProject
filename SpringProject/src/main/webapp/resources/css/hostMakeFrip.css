@@ -346,7 +346,9 @@ textarea {
 .notice p{
 	color:red;
 }
-
+.optionQtt {
+	visibility:hidden;
+}
 #naverEditor{
 	height:50%;
 }

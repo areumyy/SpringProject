@@ -363,7 +363,9 @@ public class MarketController {
 	  @RequestMapping("insertFrip.do") 
 	  public void insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
 			  HttpServletRequest request, HttpServletResponse response) throws Exception { // 파일 업로드 처리 
-		 
+		  response.setContentType("text/html; charset=UTF-8");
+		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
+		  System.out.println(Qtt);
 		  dto.setClass_image(upload.fileUpload(mRequest));
 		  System.out.println(dto);
 		  
@@ -381,18 +383,19 @@ public class MarketController {
 		  int result = this.classDao.insertClass(dto); 
 		 
 		  //옵션
-		  int result2 =0;
-		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
+		  int result2 = 0;
+		  
 		  if(odto.getOption_endDate() == null) { //  끝나는 날이 없으면 공백값
 			  odto.setOption_endDate("null");
 		  }
+		  
 		  
 		  for(int i=1; i<=Qtt; i++) {
 			  odto.setOption_name(request.getParameter("option_name"+i));
 			  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
 	
 			  result2 = this.optionDao.insertOption(odto); 
-		
+
 		  }
 		 PrintWriter out = response.getWriter();
 		 if(result == 1 && result2 == 1) {
@@ -419,7 +422,7 @@ public class MarketController {
 	@RequestMapping("hostAttendance.do")
 	public String hostAttendance() {
 		return "host/hostAttendance";
-	}
+	} 
 
 	@RequestMapping("hostAttendance_member.do")
 	public String hostAttendance_member() {

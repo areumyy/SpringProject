@@ -212,7 +212,7 @@
 									<div>
 										<div class="little_title">일정별 인원</div>
 										<div class="people">
-											<input type="number" class="optionNumber" value="10" name="class_count">
+											<input type="number" class="optionNumber" name="class_count">
 										</div>
 									</div>
 									<br><br><br><br>
