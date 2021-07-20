@@ -278,9 +278,51 @@ function findAddr2() {
 function checkIt() {
 
 	if(confirm('제출하시겠습니까?')){
-		return true;
-	}else {
-		alert("실패");
+		
+		if($(".selectBox").eq(0).length == 0 
+				&& $(".selectBox").eq(1).val().length == 0) { // 카테고리
+			alert("카테고리를 확인해 주세요!");
+			$("#btnradio1").trigger("click");
+			return false;
+		}else if($("[name=class_hash]").val().length==0) { // 프립명
+			alert("캐치프레이즈를 확인해 주세요!");
+			$("#btnradio2").trigger("click");
+			return false;			
+		}else if($("[name=class_title]").val().length==0) { // 프립명
+			alert("프립명을 확인해 주세요!");
+			$("#btnradio2").trigger("click");
+			return false;			
+		}else if($("#upload").val().length==0) { // 이미지
+			alert("대표이미지를 업로드해 주세요!");
+			$("#btnradio3").trigger("click");
+			return false;			
+		}else if($("[name=option_startDate]").val().length == 0) { // 진행일
+			alert("시작일을 확인해 주세요!");
+			$("#btnradio4").trigger("click");
+			return false;
+		}else if($(".optionNumber").val().length == 0) { // 인원 및 옵션
+			alert("인원수를 입력해주세요!");
+			$("#btnradio5").trigger("click");
+			return false;
+		}else if($(".optionNumber").val()<= 0) { // 인원 및 옵션
+			alert("최소 인원수는 1명입니다!");
+			$("#btnradio5").trigger("click");
+			return false;
+		}else if($(".optionNumber").val()<= 0) { // 인원 및 옵션
+			alert("최소 인원수는 1명입니다!");
+			$("#btnradio5").trigger("click");
+			return false;
+		}
+		
+		
+		else{
+			return true;
+		}
+		
+		
+	}
+	else {
+		console.log($(".optionQtt").val());
 		return false;
 	}
 }

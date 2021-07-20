@@ -72,8 +72,8 @@
 												<div class="notice_regdate">${dto.getNotice_regdate().substring(0,16) }</div>
 											</div>
 											<div class="notice_list_item_ans accordion-collapse collapse" id="collapse${index.count }" data-bs-parent="#accordionExample" style="">
-												<p style="white-space: pre-line;"
-													>${dto.getNotice_cont() }
+												<p style="white-space: pre-line;">
+													${dto.getNotice_cont() }
 												</p>
 											</div>
 										</li>

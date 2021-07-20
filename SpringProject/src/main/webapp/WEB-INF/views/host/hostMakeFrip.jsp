@@ -75,8 +75,8 @@
 									<c:set var="cList" value="${cateList }"/>
 										<h4>1차 카테고리</h4>
 											<select class="selectBox" name="class_category1" 
-												onclick="change_cate_two()" required>
-												<option value="" selected="disabled">::: 선택 :::</option>
+												onclick="change_cate_two()">
+												<option value="" >::: 선택 :::</option>
 												<c:forEach items="${cList }" var="dto">
 													<option value="${dto.getCate_one() }" >${dto.getCate_one() }</option>
 												</c:forEach>
@@ -212,7 +212,7 @@
 									<div>
 										<div class="little_title">일정별 인원</div>
 										<div class="people">
-											<input type="number" class="optionNumber" value="10" min="1" max="50" name="class_count">
+											<input type="number" class="optionNumber" value="10" name="class_count">
 										</div>
 									</div>
 									<br><br><br><br>

@@ -3,6 +3,10 @@ package com.market.controller;
 import java.io.File;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
@@ -10,6 +14,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +41,10 @@ import com.market.model.OptionDTO;
 import com.market.model.Upload;
 
 import net.sf.json.JSONArray;
+import com.market.model.PageDTO;
+import com.market.model.QnaDAO;
+import com.market.model.QnaDTO;
+
 import net.sf.json.JSONObject;
 
 @Controller
@@ -53,28 +62,80 @@ public class MarketController {
 	private ClassDAO classDao;
 	@Autowired
 	private OptionDAO optionDao;
+	@Autowired
+	private QnaDAO qnaDao;
+
+	@RequestMapping("main.do")
+	public String main() {
+		return "home";
+	}
 
 	@RequestMapping("join.do")
 	public String join() {
 		return "joinForm";
 	}
 
+	@RequestMapping(value = "/emailCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public void emailCheck(HttpServletResponse response, @RequestParam("mem_email") String mem_email) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		String res = null;
+		int state = 0;
+		
+		int result = this.memberDao.checkEmail(mem_email);
+		if(result > 0) {
+			res = "사용 불가능합니다.";
+			state = 2;
+		} else {
+			res = "사용 가능합니다.";
+			state = 1;
+		}
+		
+		JSONObject obj = new JSONObject();
+		obj.put("res", res);
+		obj.put("state", state);
+
+		response.getWriter().print(obj);
+	}
+	
+	@RequestMapping(value = "/nickCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public void nickCheck(HttpServletResponse response, @RequestParam("mem_nick") String mem_nick) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		String res = null;
+		int state = 0;
+		
+		int result = this.memberDao.checkNick(mem_nick);
+		if(result > 0) {
+			res = "사용 불가능합니다.";
+			state = 2;
+		} else {
+			res = "사용 가능합니다.";
+			state = 1;
+		}
+		
+		JSONObject obj = new JSONObject();
+		obj.put("res", res);
+		obj.put("state", state);
+
+		response.getWriter().print(obj);
+	}
+	
 	@RequestMapping("join_ok.do")
-	public void joinOk(MemberDTO dto, HttpServletResponse response, @RequestParam("mem_pwd_check") String mem_pwd_check)
-			throws IOException {
+	public void joinOk(MemberDTO dto, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
 		PrintWriter out = response.getWriter();
 
-		int emailCheck = this.memberDao.checkEmail(dto.getMem_email());
-		if (emailCheck > 1) {
+		int insertCheck = this.memberDao.insertMember(dto);
+		if (insertCheck > 0) {
 			out.println("<script>");
-			out.println("alert('중복된 아이디(이메일)입니다.')");
-			out.println("history.back()");
+			out.println("alert('회원가입이 완료되었습니다.')");
+			out.println("location.href='login.do'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
-			out.println("alert('아이디 사용 가능')");
+			out.println("alert('회원가입 실패.')");
 			out.println("history.back()");
 			out.println("</script>");
 		}
@@ -85,13 +146,103 @@ public class MarketController {
 		return "pwdSearch";
 	}
 
+	@RequestMapping(value = "/pwd_search_ok.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void pwdSearch(HttpServletResponse response, @RequestParam("mem_email") String mem_email,
+			@RequestParam("mem_name") String mem_name) throws IOException {
+		String pwd = "일치하는 계정이 없습니다.";
+		int state = 0;
+		int checkEmail = this.memberDao.checkEmail(mem_email);
+
+		if (checkEmail > 0) { // 아이디가 존재할때
+			MemberDTO dto = this.memberDao.getMember(mem_email);
+			if (dto.getMem_name().equals(mem_name)) { // 이름이 일치할때
+				pwd = dto.getMem_pwd();
+				state = 1;
+			}
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("find_pwd", pwd);
+		obj.put("state", state);
+
+		response.getWriter().print(obj);
+
+	}
+
 	@RequestMapping("login.do")
 	public String login() {
 		return "loginForm";
 	}
 
+	@RequestMapping("login_ok.do")
+	public void loginOk(@RequestParam("mem_email") String mem_email, @RequestParam("mem_pwd") String mem_pwd,
+			HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+
+		int result = this.memberDao.loginCheck(mem_email, mem_pwd);
+
+		if (result == 1) { // 로그인 성공
+			HttpSession session = request.getSession();
+
+			MemberDTO dto = this.memberDao.getMember(mem_email);
+			System.out.println("로그인한 계정 >>> " + dto.getMem_num());
+			session.setAttribute("loginDto", dto);
+			if (dto.getMem_num() == 9999) {
+				session.setAttribute("loginType", "admin");
+			} else {
+				session.setAttribute("loginType", "member");
+			}
+
+			out.println("<script>");
+			out.println("location.href='main.do'");
+			out.println("</script>");
+		} else if (result == 2) { // 비밀번호 틀림
+			out.println("<script>");
+			out.println("alert('비밀번호가 틀립니다. 다시 확인해 주세요.')");
+			out.println("history.back()");
+			out.println("</script>");
+		} else if (result == -1) { // 존재하지 않는 아이디
+			out.println("<script>");
+			out.println("alert('존재하지 않는 아이디입니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+	}
+
+	@RequestMapping("logout.do")
+	public String logOut(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		System.out.println("로그아웃한 계정 >>>" + session.getAttribute("loginDto"));
+		session.invalidate();
+
+		return "home";
+	}
+
 	@RequestMapping("qna_list.do")
-	public String qnaList() {
+	public String qnaList(HttpServletRequest request, Model model) {
+		int totalRecord = 0;
+		int rowsize = 5;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.qnaDao.getListCount(0);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord);
+
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<QnaDTO> pageList = this.qnaDao.getQnaList(dto);
+
+		model.addAttribute("list", pageList);
+		model.addAttribute("Paging", dto);
+
 		return "qna_list";
 	}
 
@@ -210,44 +361,52 @@ public class MarketController {
 	}
 
 	  @RequestMapping("insertFrip.do") 
-	  public String insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
-			  HttpServletRequest request) throws Exception { // 파일 업로드 처리 
-	  dto.setClass_image(upload.fileUpload(mRequest));
-	  System.out.println(dto);
-	  
-	  //주소입력 기본주소 + 상세주소
-	  dto.setClass_endArea(request.getParameter("class_endArea") 
-			  				+""+request.getParameter("endArea_detail"));
-	  if(request.getParameter("startArea") == null) {
-		  dto.setClass_startArea("null");
-	  }
-	  //전체 클래스의 수 + 1구하기
-	  int count = this.classDao.countClass();
-	  dto.setClass_num(count);
-	  odto.setOption_classNum(count);
-	  
-	  int result = this.classDao.insertClass(dto); 
-	  
-	  System.out.println(result);
-	 
-	  //옵션
-	  int result2 =0;
-	  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
-	  if(odto.getOption_endDate() == null) { //  끝나는 날이 없으면 공백값
-		  odto.setOption_endDate("null");
-	  }
-	  
-	  for(int i=1; i<=Qtt; i++) {
-		  odto.setOption_name(request.getParameter("option_name"+i));
-		  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
-		  System.out.println(odto);
-		  System.out.println(odto.getOption_name());
-		  System.out.println(odto.getOption_price()); 
-		  result2 = this.optionDao.insertOption(odto); 
+	  public void insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
+			  HttpServletRequest request, HttpServletResponse response) throws Exception { // 파일 업로드 처리 
+		 
+		  dto.setClass_image(upload.fileUpload(mRequest));
+		  System.out.println(dto);
+		  
+		  //주소입력 기본주소 + 상세주소
+		  dto.setClass_endArea(request.getParameter("class_endArea") 
+				  				+""+request.getParameter("endArea_detail"));
+		  if(request.getParameter("startArea") == null) {
+			  dto.setClass_startArea("null");
+		  }
+		  //전체 클래스의 수 + 1구하기
+		  int count = this.classDao.countClass();
+		  dto.setClass_num(count);
+		  odto.setOption_classNum(count);
+		  
+		  int result = this.classDao.insertClass(dto); 
+		 
+		  //옵션
+		  int result2 =0;
+		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
+		  if(odto.getOption_endDate() == null) { //  끝나는 날이 없으면 공백값
+			  odto.setOption_endDate("null");
+		  }
+		  
+		  for(int i=1; i<=Qtt; i++) {
+			  odto.setOption_name(request.getParameter("option_name"+i));
+			  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
 	
-	  }
-
-	 return "redirect:hostMain.do"; 
+			  result2 = this.optionDao.insertOption(odto); 
+		
+		  }
+		 PrintWriter out = response.getWriter();
+		 if(result == 1 && result2 == 1) {
+			out.println("<script>");
+			out.println("alert('등록 성공!')");
+			out.println("location.href='hostMain.do'");
+			out.println("</script>");
+		 }else {
+			out.println("<script>");
+			out.println("alert('등록 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+		 }
+	 
 	 
 	 }
 	 
@@ -345,5 +504,10 @@ public class MarketController {
 	@RequestMapping("hostUpdateFrip.do")
 	public String hostUpdateFrip() {
 		return "host/hostUpdateFrip";
+	}
+
+	@RequestMapping("frip_content.do")
+	public String fripContent() {
+		return "frip_content";
 	}
 }

@@ -114,6 +114,7 @@
     font-size: 14px;
     border-radius: 4px;
     cursor: pointer;
+    border: 0px solid black;
 }
 
 .superHost {
@@ -182,6 +183,10 @@
 
 .notice_list_item {
 	display:flex;
+}
+
+.notice_list_item:hover {
+	cursor:pointer;
 }
 .notice_list {
 	padding-left: 0px;
@@ -273,6 +278,11 @@
     color: rgb(155, 155, 155);
     word-break: keep-all;
     text-align: center;
+}
+
+.notice_list_item_ans {
+	margin-top : 10px;
+	margin-left : 10px;
 }
 
 @media (max-width: 1200px) {

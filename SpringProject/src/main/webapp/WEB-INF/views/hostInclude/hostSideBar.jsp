@@ -158,7 +158,7 @@
 				<ul class="menuList2">
 					<li class="menutext"><a href="<%=request.getContextPath() %>/hostAttendance.do">출석부</a></li>
 					<li class="menutext"><a href="<%=request.getContextPath() %>/hostAsk.do">문의하기</a></li>
-					<li class="menutext"><a href="<%=request.getContextPath() %>/hostReviewManagement.do">후기 관리</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostReview.do">후기 관리</a></li>
 				</ul>
 			</div>
 			
