@@ -34,8 +34,8 @@ public class MarketController {
 	@Autowired
 	private QnaDAO qnaDao;
 	@Autowired
-	private NoticeDAO NoticeDao;
-
+	private NoticeDAO noticeDao;
+	
 	@RequestMapping("main.do")
 	public String main() {
 		return "home";
@@ -257,12 +257,12 @@ public class MarketController {
 		}
 
 		// DB 상의 전체 게시물의 수를 확인하는 작업.
-		totalRecord = this.NoticeDao.getListCount(0);
+		totalRecord = this.noticeDao.getListCount(0);
 
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
 		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
-		List<NoticeDTO> pageList = this.NoticeDao.getNoticeList(dto);
+		List<NoticeDTO> pageList = this.noticeDao.getNoticeList(dto);
 
 		model.addAttribute("list", pageList);
 		model.addAttribute("Paging", dto);
