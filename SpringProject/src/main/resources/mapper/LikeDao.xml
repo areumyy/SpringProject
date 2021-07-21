@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.model.LikeDAO">
+	
+	<!-- 찜 클래스 목록 (장소/해시태그/제목/이미지) -->
+	<select id="likeClass" parameterType="int" resultType="com.market.model.ClassDTO">
+		<!-- select *
+		from frip_class f join frip_option o
+		on f.class_num = o.option_classnum
+		where class_num in(select like_target from frip_like where like_writer = #{mem_num} and like_flag = 1) -->
+	
+		select * from frip_class 
+		where class_num in(select like_target from frip_like where like_writer = #{mem_num} and like_flag = 1)
+	</select>
+	
+	<!-- 찜 클래스 별 옵션 상세정보 (가격) -->
+	<select id="option_cont" parameterType="int" resultType="com.market.model.OptionDTO">
+		<!--   select option_price
+		from frip_class f join frip_option o
+		on f.class_num = o.option_classnum
+		where class_num in(select like_target from frip_like where like_writer = #{mem_num} and like_flag = 1) -->
+		
+		select * from frip_option 
+		where option_classNum in(select class_num from frip_class 
+		where class_num in(select like_target from frip_like 
+		where like_writer = #{mem_num} and like_flag = 1))  
+	</select>
+	
+	<!-- 찜 클래스 별 별점 -->
+	<select id="class_score"  parameterType="int" resultType="Integer">
+		select avg(review_score) from frip_review
+		where review_classnum in(select like_target from frip_like
+		where like_writer = #{mem_num} and like_flag = 1) group by review_classnum
+	</select>
+	
+	<!-- 찜 호스트 목록  -->
+	<select id="likeHost" parameterType="int"  resultType="com.market.model.HostDTO">
+		select * from frip_host 
+		where host_num in(select like_target from frip_like where like_writer = #{mem_num} and like_flag = 2)
+	</select>
+	
+	<!-- 찜 호스트 별 상세정보 (이름/프로필) -->
+	<select id="likeHostInfo"  parameterType="int"  resultType="com.market.model.MemberDTO">
+		select * from frip_member 
+		where mem_num in(select host_memnum from frip_host 
+		where host_num in(select like_target from frip_like 
+		where like_writer = #{mem_num} and like_flag = 2))
+	</select>
+	
+	<!-- 찜 호스트가 운영하는 클래스 개수 -->
+	<select id="like_classCount" parameterType="int" resultType="Integer">
+		select count(*), class_memnum from frip_class 
+		where class_memnum in(select host_memnum from frip_host 
+		where host_num in(select like_target from frip_like 
+		where like_writer = #{mem_num} and like_flag = 2)) group by class_memnum
+	</select>
+	
+	<!-- 찜 호스트 후기 개수 -->
+	<select id="like_reviewCount" parameterType="int" resultType="Integer">
+		select count(*), review_classnum from frip_review
+		where review_classnum in(select class_num from frip_class 
+		where class_num in(select like_target from frip_like 
+		where like_writer = #{mem_num} and like_flag = 2)) group by review_classnum
+		
+		<!-- select count(*) from frip_review
+		where review_classnum in(select class_num from frip_class 
+		where class_memnum = #{host_memNum}) -->
+	</select>
+	
+	<!-- 찜 호스트 찜 개수 -->
+	<select id="like_likeCount" parameterType="int" resultType="Integer">
+		select count(*), like_target from frip_like 
+		where like_writer = #{mem_num} and like_flag = 2 group by like_target
+	</select>
+	
+	<!-- 호스트 상세정보 (이름/프로필) -->
+	<select id="hosfInfo" parameterType="int" resultType="com.market.model.MemberDTO">
+		select * from frip_member where mem_num = #{host_memNum} 
+	</select>
+	
+	<!-- 호스트 소개(소개내용) -->
+	<select id="hostContent" parameterType="int" resultType="com.market.model.HostDTO">
+		select * from frip_host where host_memnum = #{host_memNum}
+	</select>
+	
+	<!-- 호스트가 운영하는 클래스 개수  -->
+	<select id="classCount" parameterType="int" resultType="int">
+		select count(*) from frip_class where class_memnum = #{host_memNum}
+	</select>
+	
+	<!-- 호스트 후기 개수 -->	
+	<select id="reviewCount" parameterType="int" resultType="int">
+		select count(*) from frip_review
+		where review_classnum in(select class_num from frip_class 
+		where class_memnum = #{host_memNum})
+	</select>
+	
+	<!-- 호스트 찜 개수 -->
+	<select id="likeCount" parameterType="int" resultType="int">
+		select count(*) from frip_like where like_target = #{host_memNum} and like_flag = 2
+	</select>
+	
+	<!-- 호스트가 운영하는 클래스 목록  -->
+	<select id="hostClass" parameterType="int" resultType="com.market.model.ClassDTO">
+		select * from frip_class where class_memnum = #{host_memNum}
+	</select>
+	
+	<!-- 호스트가 운영하는 클래스 옵션 상세정보 (가격) -->
+	<select id="hostClassOption" parameterType="int" resultType="com.market.model.OptionDTO">
+		select * from frip_option 
+		where option_classnum in(select class_num from frip_class where class_memnum = #{host_memNum})
+	</select>
+	
+	<!-- 호스트가 운영하는 클래스 모든 리뷰1 (회원이름/회원프로필/리뷰내용/리뷰작성일) -->
+	<select id="classReview1"  parameterType="int" resultType="com.market.model.ReviewDTO">
+		select r.review_num , r.review_regdate, r.review_cont, m.mem_name, m.mem_profileimg
+		from frip_member m join frip_review r 
+		on m.mem_num = r.review_writer
+		where review_classnum in(select class_num from frip_class
+		where class_memnum = #{host_memNum}) order by review_num
+	</select>
+	
+	<!-- 호스트가 운영하는 클래스 모든 리뷰2 (회원이름/회원프로필/리뷰내용/리뷰작성일) -->
+	<select id="classReview2"  parameterType="int" resultType="com.market.model.ReviewDTO">
+		select r.review_num, c.class_title
+		from frip_class c join frip_review r 
+		on c.class_num = r.review_classnum
+		where review_classnum in(select class_num from frip_class
+		where class_memnum = #{host_memNum}) order by review_num
+	</select>
+	
+	<!-- 호스트가 운영하는 클래스 모든 리뷰3 (옵션명/시작날짜/끝날짜) -->
+	<select id="classReview3"  parameterType="int" resultType="com.market.model.ReviewDTO">
+		select r.review_num, o.option_name, o.option_startdate, o.option_enddate
+		from frip_option o join frip_review r 
+		on o.option_classnum = r.review_classnum
+		where review_classnum in(select class_num from frip_class
+		where class_memnum = #{host_memNum}) order by review_num
+	</select>
+	
+	
+</mapper>

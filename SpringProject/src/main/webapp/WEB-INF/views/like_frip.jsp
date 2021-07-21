@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,127 +40,42 @@
 						</div>
 					</div>
 					<div class="likePage_list">
-						<div class="list_inner">
-							<a href="">
-								<div class="class_info">
-									<div class="place_like">
-										<span class="class_place">부산수영구</span>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"></button>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button>
-									</div>
-									<img alt="class_img" src="<%=request.getContextPath() %>/resources/image/like/class_img.jpg" class="class_img">
-								</div>
-								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
-								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
-								<div class="class_price">30,000원</div>
-								<div class="class_score">
-									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
-									<span>4.92</span>
-								</div>
-							</a>
-						</div>
+						<!-- key값 받기 -->
+						<c:set var="classList" value="${likeClassList }" />		<!-- 클래스 찜 리스트 -->
+						<c:set var="optionCont" value="${optionCont }" />		<!-- 찜 클래스 옵션 상세정보 (옵션가격 적용) -->
+						<c:set var="classScore" value="${classScore }" />		<!-- 찜 클래스 별 별점 -->
 						
-						<div class="list_inner">
-							<a href="">
-								<div class="class_info">
-									<div class="place_like">
-										<span class="class_place">부산수영구</span>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"></button>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button>
-									</div>
-									<img alt="class_img" src="<%=request.getContextPath() %>/resources/image/like/class_img.jpg" class="class_img">
+						<c:if test="${!empty classList }">
+							<c:forEach items="${classList }" var="dto" varStatus="status">
+								<div class="list_inner">
+									<a href="#">
+										<div class="class_info">
+											<div class="place_like">
+												<span class="class_place">${dto.getClass_endArea() }</span>
+												<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"></button>
+												<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button>
+											</div>
+											<!-- 사진 수정필요 -->
+											<img alt="class_img" src="<%=request.getContextPath() %>/resources/image/like/class_img.jpg" class="class_img">
+										</div>
+										<div class="class_hash">${dto.getClass_hash() }</div>
+										<div class="class_title">${dto.getClass_title() }</div>
+										<div class="class_price"> <fmt:formatNumber value="${optionCont[status.index].getOption_price() }" />원 </div>
+										<div class="class_score">
+											<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
+											<span>${classScore[status.index] }</span>
+										</div>
+									</a>
 								</div>
-								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
-								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
-								<div class="class_price">30,000원</div>
-								<div class="class_score">
-									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
-									<span>4.92</span>
-								</div>
-							</a>
-						</div>
+							</c:forEach>
+						</c:if>
 						
-						<div class="list_inner">
-							<a href="">
-								<div class="class_info">
-									<div class="place_like">
-										<span class="class_place">부산수영구</span>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"></button>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button>
-									</div>
-									<img alt="class_img" src="<%=request.getContextPath() %>/resources/image/like/class_img.jpg" class="class_img">
-								</div>
-								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
-								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
-								<div class="class_price">30,000원</div>
-								<div class="class_score">
-									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
-									<span>4.92</span>
-								</div>
-							</a>
-						</div>
-						
-						<div class="list_inner">
-							<a href="">
-								<div class="class_info">
-									<div class="place_like">
-										<span class="class_place">부산수영구</span>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"></button>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button>
-									</div>
-									<img alt="class_img" src="<%=request.getContextPath() %>/resources/image/like/class_img.jpg" class="class_img">
-								</div>
-								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
-								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
-								<div class="class_price">30,000원</div>
-								<div class="class_score">
-									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
-									<span>4.92</span>
-								</div>
-							</a>
-						</div>
-						
-						<div class="list_inner">
-							<a href="">
-								<div class="class_info">
-									<div class="place_like">
-										<span class="class_place">부산수영구</span>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"></button>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button>
-									</div>
-									<img alt="class_img" src="<%=request.getContextPath() %>/resources/image/like/class_img.jpg" class="class_img">
-								</div>
-								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
-								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
-								<div class="class_price">30,000원</div>
-								<div class="class_score">
-									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
-									<span>4.92</span>
-								</div>
-							</a>
-						</div>
-						
-						<div class="list_inner">
-							<a href="">
-								<div class="class_info">
-									<div class="place_like">
-										<span class="class_place">부산수영구</span>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"></button>
-										<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button>
-									</div>
-									<img alt="class_img" src="<%=request.getContextPath() %>/resources/image/like/class_img.jpg" class="class_img">
-								</div>
-								<div class="class_hash">#부산패들보드#부산바다#부산놀거리</div>
-								<div class="class_title">[▼1만원할인/부산] 선선한 아침 광안리에서 즐기는 썬라이즈</div>
-								<div class="class_price">30,000원</div>
-								<div class="class_score">
-									<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
-									<span>4.92</span>
-								</div>
-							</a>
-						</div>
+						<c:if test="${empty classList }">
+							<h1>저장된 프립이 없습니다.</h1>
+						</c:if>
 					</div>
 						
+					<!-- 페이징 처리 -->
 					<nav aria-label="Page navigation example" class="like_page_footer">
 						<ul class="pagination">
 							<li class="page-item"><a class="page-link" href="#"
@@ -177,7 +94,6 @@
 			<jsp:include page="../include/footer.jsp" />
 		</div>
 	</div>
-
 
 </body>
 </html>

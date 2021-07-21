@@ -143,6 +143,7 @@
 							</div>
 						</div>
 					</div>
+
 					<c:if test="${loginDto != null }">
 						<div class="menu2-1-2">
 							<a class="menu_link" href="<%=request.getContextPath() %>/like_frip.do">
@@ -153,6 +154,7 @@
 									<p class="menu_font">저장</p>
 								</div>
 							</a>
+
 							<a class="menu_link" href="<%=request.getContextPath() %>/mypage.do">
 								<div class="menu_div">
 									<div class="menu_btn_div">
