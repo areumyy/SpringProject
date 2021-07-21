@@ -9,4 +9,9 @@ public class OptionDAOImpl implements OptionDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+	@Override
+	public int insertOption(OptionDTO dto) {
+		return this.sqlSession.insert("insertOption", dto);
+	}
 }

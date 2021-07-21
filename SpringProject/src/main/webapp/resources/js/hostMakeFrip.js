@@ -1,52 +1,149 @@
+//시작함수
+$(document).ready(function() {
+	//썸머노트
+	$('#summernote').summernote({
+		  height: 300,                 // 에디터 높이
+		  minHeight: 500,             // 최소 높이
+		  maxHeight: null,             // 최대 높이
+		  lang: "ko-KR",					// 한글 설정
+		  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
+		  toolbar: [
+			    // [groupName, [list of button]]
+			    ['fontname', ['fontname']],
+			    ['fontsize', ['fontsize']],
+			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+			    ['color', ['forecolor','color']],
+			    ['table', ['table']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    ['height', ['height']],
+			    ['insert',['picture','link','video']],
+			    ['view', ['fullscreen', 'help']]
+			  ],
+			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+			//toolbar end
+			
+			//이미지 관련 메서드
+			 callbacks : { 
+	            	onImageUpload : function(files, editor, welEditable) {
+	            // 파일 업로드(다중업로드를 위해 반복문 사용)
+	            for (var i = files.length - 1; i >= 0; i--) {
+	            uploadSummernoteImageFile(files[i],
+	            this);
+	            		}
+	            	}
+	            }
+          
+	});//썸머노트 end
+});
+
+function uploadSummernoteImageFile(file, el) {
+	data = new FormData();
+	data.append("file", file);
+	$.ajax({
+		data : data,
+		type : "POST",
+		url : "uploadSummernoteImageFile",
+		contentType : false,
+		enctype : 'multipart/form-data',
+		processData : false,
+		success : function(data) {
+			setTimeout(function() { $(el).summernote('editor.insertImage', data.url) }, 4000);
+		}
+	});
+}
+
 //이전 버튼
 function prevSelect() {
- 		if($(".Main_line").attr("id") == "first"){
- 			return;
- 		}else if($(".nextButton").length == 0) {
- 			$(".submitButton").remove();
- 			$("form").append("<input type='button' value='다음' class='btn btn-primary nextButton' onclick='nextSelect()'>");
- 			
- 			var nextNode = $(".Main_line").prev();
-			$(".Main_line").attr("class", "Main_line_hidden");
-			nextNode.attr("class", "Main_line");
- 		}else {
-	 		var nextNode = $(".Main_line").prev();
-			$(".Main_line").attr("class", "Main_line_hidden");
-			nextNode.attr("class", "Main_line");
- 		}
- 	}
+	if($("[value=1]").attr("id").substring(8) != 1) {
+		var num = $("[value=1]").prev().prev().attr("id").substring(8);
+		$("#btnradio"+num).trigger("click");
+	} 
+ }
 //다음 버튼
 function nextSelect() {
-	if($(".Main_line").attr("id") == "last"){
+	var num = $("[value=1]").next().next().attr("id").substring(8);
+	$("#btnradio"+num).trigger("click");
+}
+// 보이는 화면을 바꾸는 메서드 
+function change_div(i){
+	
+	$(".Main_line").attr("class", "Main_line_hidden");
+	$("#main_"+i).attr("class", "Main_line");
+	
+	//입력한 정보 가져오기
+	var fripInfo = $("[name=class_title]").val();
+	var include = $("[name=class_include]").val();
+	var exclude  = $("[name=class_exclude]").val();
+	var plan = $("[name=class_plan]").val();
+	var end_area = $("[name=class_endArea2]").val();
+	var endArea_detail = $("[name=endArea_detail]").val();
+	var fripcont = $("#summernote").val();
+	// 정보칸 비워주기
+	$("#fripInfo").empty();
+	$("#fripTitle").empty();
+	$("#include").empty();
+	$("#exclude").empty();
+	$("#plan").empty();
+	$("#location").empty();
+	// 입력한 정보 최종 확인 칸에 넣어주기
+	$("#fripInfo").append(fripcont);
+	$("#fripTitle").append("<p style='white-space: pre-line;'>"+fripInfo+"</p>");
+	$("#include").append("<p style='white-space: pre-line;'>"+include+"</p>");
+	$("#exclude").append("<p style='white-space: pre-line;'>"+exclude+"</p>");
+	$("#plan").append("<p style='white-space: pre-line;'>"+plan+"</p>");
+	$("#location").append("<p style='white-space: pre-line;'>"+end_area+" "+endArea_detail+"</p>");
+	$("[name=class_endArea]").val(end_area +" "+endArea_detail);
+	
+	//최종 확인에서 이미지 크기 수정해주기
+	$(".confirm_img").find("img").css("width", "100%");
+	$("#fripInfo").find("img").css("width", "100%");
+	
+	//클래스 바꿔주기
+	$("[value=1]").val(0);
+	$("#btnradio"+i).val(1);
+	
+	if(i == 11 && $(".submitButton").length == 0) {
 		$(".nextButton").remove();
-		var nextNode = $(".Main_line").next();
-		$(".Main_line").attr("class", "Main_line_hidden");
-		nextNode.attr("class", "Main_line");
 		$("form").append("<input type='submit' class='btn btn-primary submitButton' value='제출'>");
-		console.log($("[name=class_title]").val());
-		var fripInfo = $("[name=class_title]").val();
-		var include = $("[name=class_include]").val();
-		var exclude  = $("[name=class_exclude]").val();
-		var plan = $("[name=class_plan]").val();
-		var end_area = $("[name=endArea]").val();
-		var endArea_detail = $("[name=endArea_detail]").val();
-		
-		$("#fripTitle").text(fripInfo);
-		$("#include").text(include);
-		$("#exclude").text(exclude);
-		$("#plan").text(plan);
-		$("#location").text(end_area +""+endArea_detail);
-	}else {
-		var nextNode = $(".Main_line").next();
-		$(".Main_line").attr("class", "Main_line_hidden");
-		nextNode.attr("class", "Main_line");
-
+	}else if($(".submitButton").length != 0) {
+		$(".submitButton").remove();
+		$("form").append("<input type='button' value='다음' class='btn btn-primary nextButton' onclick='nextSelect()'>");
 	}
+}
+
+// 카테고리 1에따라 2를 바꾸는 메서드
+function change_cate_two() {
+	var val = $(".selectBox").val();
+
+	if(val.length != 0) {
+		$.ajax({
+		    type : "post",
+		    url : '/controller/cate_two.do', 
+		    data : {"cate_one":val},
+		    dataType: 'json',
+		    error : function(error) {
+		    	console.log("error");
+		    },
+		    success : function(data) {
+		    	var clist = data.clist;
+				var select = $("[name=class_category2]");
+				select.empty();
+				select.append("<option value=''>::: 선택 :::</option>");
+				
+				for(var i=0; i<clist.length; i++) {
+					select.append("<option value='"+clist[i].cate_two+"'>"+clist[i].cate_two+"</option>")
+				}
+		    }
+		}); 
+	}
+	
 }
 
 //옵션추가하기 버튼 눌렀을 때 함수
 function addOption() {
-	var Qtt = parseInt($(".optionQtt").val())+1;
+	var Qtt = ($(".optionText").length/2)+1;
+	console.log(Qtt);
 	$(".optionTextDiv").append
 		("<div class='"+Qtt+"'><input type='text' class='optionText' value='참가비 (1인)' " +
 				"name='option_name"+Qtt+"'> <div class='deleteButton' " +
@@ -137,8 +234,7 @@ function findAddr() {
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById("address").value = addr;
-            // 커서를 상세주소 필드로 이동한다.
-            document.getElementById("detailAddress").focus();
+
         }
     }).open();
 }
@@ -190,40 +286,76 @@ function findAddr2() {
     }).open();
 }
 
-//네이버 에디터
-$(document).ready(function() {
-	var oEditors=[];
-	nhn.husky.EZCreator.createInIFrame({
-		oAppRef: oEditors,
-		elPlaceHolder:"naverEditor",
-		sSkinURI:"./resources/smartEditor/SmartEditor2Skin.html",
-		fCreator: "createSEditor2",
-		htParams : 	{ 
-			bUseToolbar : true, // 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
-			bUseVerticalResizer : false, // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
-			bUseModeChanger : false, // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
-			//aAdditionalFontList : aAdditionalFontSet, // 추가 글꼴 목록 
-			/*fOnBeforeUnload : function() { 
-				alert("완료!"); 
-				} */
-			}, //boolean 
-			
-			fOnAppLoad : function() { 
-				// Editor 에 값 셋팅 
-				oEditors.getById["naverEditor"].exec("PASTE_HTML", [""]); 
-			}, 
-				
-	});
-});
-
-
 //유효성 검사 및 제출 확인 (유효성 추가해야됨)
 function checkIt() {
-
 	if(confirm('제출하시겠습니까?')){
-		return true;
+		
+		if($(".selectBox").eq(0).val().length == 0 
+				&& $(".selectBox").eq(1).val().length == 0) { // 카테고리
+			alert("카테고리를 확인해 주세요!");
+			$("#btnradio1").trigger("click");
+			return false;
+		}else if($("[name=class_hash]").val().length==0) { // 프립명
+			alert("캐치프레이즈를 확인해 주세요!");
+			$("#btnradio2").trigger("click");
+			return false;			
+		}else if($("[name=class_title]").val().length==0) { // 프립명
+			alert("프립명을 확인해 주세요!");
+			$("#btnradio2").trigger("click");
+			return false;			
+		}else if($("#upload").val().length==0) { // 이미지
+			alert("대표이미지를 업로드해 주세요!");
+			$("#btnradio3").trigger("click");
+			return false;			
+		}else if($("[name=option_startDate]").val().length == 0) { // 진행일
+			alert("시작일을 확인해 주세요!");
+			$("#btnradio4").trigger("click");
+			return false;
+		}else if($(".optionNumber").val().length == 0) { // 인원 및 (옵션)
+			alert("인원수를 입력해주세요!");
+			$("#btnradio5").trigger("click");
+			return false;
+		}else if($(".optionNumber").val() <= 0) { // 인원 및 (옵션)
+			alert("최소 인원수는 1명입니다!");
+			$("#btnradio5").trigger("click");
+			return false;
+		}else if($("#address").val().length == 0 
+					|| $(".detailAddress").val().length == 0) {
+			alert("프립 진행지를 확인해주세요");
+			$("#btnradio6").trigger("click");
+			return false;
+		}else if($("[name=class_plan]").val().length == 0) {
+			alert("상세 일정을 확인해 주세요");
+			$("#btnradio7").trigger("click");
+			return false;
+		}else if($("[name=class_include]").val().length==0) {
+			alert("포함사항을 확인해 주세요");
+			$("#btnradio8").trigger("click");
+			return false;
+		}else if($("[name=class_exclude]").val().length==0) {
+			alert("불포함사항을 확인해 주세요");
+			$("#btnradio8").trigger("click");
+			return false;
+		}else if($("#summernote").val().length==0) {
+			alert("프립 소개를 확인해 주세요");
+			$("#btnradio10").trigger("click");
+			return false;
+		}else if(true) { // (인원) 및 옵션
+			var index = $(".optionText").length/2;
+			
+			for(var i=0; i<index; i++) {
+				if($(".optionText").eq((2*i)).val().length == 0
+						|| $(".optionText").eq((2*i)+1).val().length == 0){
+					alert("모든 옵션의 이름과 가격을 확인해주세요!");
+					$("#btnradio5").trigger("click");
+					return false;
+				}
+			}
+		}
 	}else {
-		alert("실패");
+		console.log($(".optionText").eq(0).val().length == 0 
+				|| $(".optionText").eq(1).val().length == 0);
 		return false;
 	}
 }
+

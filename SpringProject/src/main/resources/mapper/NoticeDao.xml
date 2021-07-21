@@ -16,4 +16,8 @@
 		]]> 
 	</select>
 	
+	<select id="NoticeList" resultType="com.market.model.NoticeDTO">
+		select * from frip_notice where notice_flag = 1 order by notice_num desc
+	</select>
+	
 </mapper>

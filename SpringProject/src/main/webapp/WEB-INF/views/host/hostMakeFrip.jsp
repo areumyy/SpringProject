@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,10 +20,11 @@
 <script src="./resources/js/hostMakeFrip.js"></script>
 <!-- 카카오 지도 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- 네이버 textarea API -->
-<script	src="./resources/smartEditor/js/HuskyEZCreator.js" 
-	charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<!-- 썸머노트 -->
+ <script src="./resources/summernote/summernote-lite.js"></script>
+<script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="./resources/summernote/summernote-lite.css">
+
 </head>
 <body>
 	<div class="mainFrame">
@@ -34,26 +36,55 @@
 	
 				<div class="Main">
 					<h1 class="Main_title">프립 만들기</h1>
+					
+						<div class="btn-group buttonGroup" role="group" aria-label="Basic radio toggle button group">
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="1" autocomplete="off" checked onclick="change_div(1)">
+						  <label class="btn btn-outline-primary" for="btnradio1">카테고리</label>	
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="" autocomplete="off" onclick="change_div(2)">
+						  <label class="btn btn-outline-primary" for="btnradio2">프립명</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" value="" autocomplete="off" onclick="change_div(3)">
+						  <label class="btn btn-outline-primary" for="btnradio3">이미지</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" value="" autocomplete="off" onclick="change_div(4)">
+						  <label class="btn btn-outline-primary" for="btnradio4" >진행일</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio5" value="" autocomplete="off" onclick="change_div(5)">
+						  <label class="btn btn-outline-primary" for="btnradio5">인원 및 옵션</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio6" value="" autocomplete="off" onclick="change_div(6)">
+						  <label class="btn btn-outline-primary" for="btnradio6">진행지</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio7" value="" autocomplete="off" onclick="change_div(7)">
+						  <label class="btn btn-outline-primary" for="btnradio7">상세 일정</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio8" value="" autocomplete="off" onclick="change_div(8)">
+						  <label class="btn btn-outline-primary" for="btnradio8">포함사항</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio9" value="" autocomplete="off" onclick="change_div(9)">
+						  <label class="btn btn-outline-primary" for="btnradio9">준비물</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio10" value="" autocomplete="off" onclick="change_div(10)">
+						  <label class="btn btn-outline-primary" for="btnradio10">프립소개</label>
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio11" value="" autocomplete="off" onclick="change_div(11)">
+						  <label class="btn btn-outline-primary" for="btnradio11">최종 확인</label>
+						</div>
+					
 					<form method="post" action="<%=request.getContextPath()%>/insertFrip.do"
-						 onsubmit="return checkIt();">
+						 onsubmit="return checkIt();" enctype="multipart/form-data">
 						<!-- 카테고리 선택 -->
-						<div class="Main_line" id="first">
+						<div class="Main_line" id="main_1">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									카테고리를 선택해 주세요.
 								</div>
 								<div class="Category">
-									<h4>1차 카테고리</h4>
-									<select class="selectBox" name="class_category1">
-										<option value="">::: 선택 :::</option>
-										<option value="액티비티">액티비티</option>
-									</select>
-									<br><br>
-									<h4>2차 카테고리</h4>
-									<select class="selectBox" name="class_category2">
-										<option value="">::: 선택 :::</option>
-										<option value="액티비티">액티비티</option>
-									</select>
+									<c:set var="cList" value="${cateList }"/>
+										<h4>1차 카테고리</h4>
+											<select class="selectBox" name="class_category1" 
+												onclick="change_cate_two()">
+												<option value="" >::: 선택 :::</option>
+												<c:forEach items="${cList }" var="dto">
+													<option value="${dto.getCate_one() }" >${dto.getCate_one() }</option>
+												</c:forEach>
+											</select>
+										<br><br>
+										<h4>2차 카테고리</h4>
+										<select class="selectBox" name="class_category2">
+											<option value="">::: 선택 :::</option>
+										</select>
 								</div>
 							</div>
 							
@@ -74,7 +105,7 @@
 						</div>
 						
 						<!-- 프립명 -->
-						<div class="Main_line_hidden">
+						<div class="Main_line_hidden" id="main_2">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									프립을 한 문장으로 <br> 표현해 주세요.
@@ -99,7 +130,7 @@
 						</div>
 						
 						<!-- 이미지 업로드 -->
-						<div class="Main_line_hidden">
+						<div class="Main_line_hidden" id="main_3">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									사진을 업로드해주세요.
@@ -109,7 +140,7 @@
 										<h4>대표 이미지</h4>
 										<img src="" id="poster" alt="미리보기" width="200" height="200">
 										<input type="file" id="upload" class="form-control" 
-												name="class_image" accept="image/*">
+												name="class_image2" accept="image/*">
 									</div>
 								</div>
 							</div>
@@ -127,7 +158,7 @@
 						</div>
 						
 						<!-- 진행일 -->
-						<div class="Main_line_hidden">
+						<div class="Main_line_hidden" id="main_4">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									진행일 설정
@@ -171,7 +202,7 @@
 						</div><!-- 진행일 end -->
 						
 						<!-- 인원 설정 -->
-						<div class="Main_line_hidden">
+						<div class="Main_line_hidden" id="main_5">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									인원 및 구매 옵션 설정
@@ -180,13 +211,13 @@
 									<div>
 										<div class="little_title">일정별 인원</div>
 										<div class="people">
-											<input type="number" class="optionNumber" value="10" min="1" max="50" name="class_count">
+											<input type="number" class="optionNumber" name="class_count">
 										</div>
 									</div>
 									<br><br><br><br>
 									<!-- 옵션 수를 보내주는 히든값 
 											받을 때 option,price뒤에 숫자 붙여서 이 값만큼 for문 돌려주면 됨 옵션 추가, 삭제 반영함-->
-									<input type="hidden" class="optionQtt" value="1">
+									<input type="hidden" class="optionQtt" name="optionQtt" value="1">
 									<div class="schedule_option">
 										<div class="little_title">구매옵션</div>
 										<div class="optionTextDiv">
@@ -230,7 +261,7 @@
 						</div><!-- 인원설정 end -->
 						
 						<!-- 진행지 -->
-						<div class="Main_line_hidden">
+						<div class="Main_line_hidden" id="main_6">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									어디에서 하나요?
@@ -250,12 +281,13 @@
 								
 								<div class="choiseLocation">
 									<input type="text" id="address" class="address" 
-											name="endArea" placeholder="기본주소" disabled>
+											name="class_endArea2" placeholder="기본주소" disabled>
 									<input type="button" class="findAddress"
 											value="주소 찾기" onclick="findAddr()" >	
 									<input type="text" class="detailAddress" 
 											name="endArea_detail" placeholder="상세주소">
 								</div>
+								<input type="hidden" name="class_endArea" value="">
 								<div class="little_title">집결지<small>선택사항</small></div>
 								<div class="choiseLocation">
 									<input type="text" id="address2" class="address" 
@@ -278,7 +310,7 @@
 						</div><!-- 진행지 end -->
 						
 						<!-- 상세 일정 -->
-						<div class="Main_line_hidden">
+						<div class="Main_line_hidden" id="main_7">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									자세한 일정을 알려주세요
@@ -307,7 +339,7 @@
 						</div><!-- 상세 일정 end-->
 						
 						<!-- 포함 사항 -->
-						<div class="Main_line_hidden">
+						<div class="Main_line_hidden" id="main_8">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									무엇을 제공하나요?
@@ -341,7 +373,7 @@
 						</div><!-- 포함 사항 end -->
 						
 						<!-- 준비물 -->
-						<div class="Main_line_hidden">
+						<div class="Main_line_hidden" id="main_9">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 									준비물 및 유의사항 <small>선택사항</small>
@@ -376,13 +408,13 @@
 						</div><!-- 준비물 end -->
 						
 						<!-- 프립을 소개해 주세요 -->
-						<div class="Main_line_hidden" id="last">
+						<div class="Main_line_hidden" id="main_10">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 								 	프립을 소개해주세요!
 								</div>
 								<div class="timeTableCont">
-									<textarea name="naverEditor" id="naverEditor"></textarea>
+									<textarea id="summernote" name="class_cont"></textarea>
 								</div>
 							</div>
 							<div class="Main_line_2">
@@ -409,7 +441,7 @@
 						</div><!-- 프립 소개 end -->
 						
 						<!-- 프립을 소개해 주세요 -->
-						<div class="Main_line_hidden" id="final">
+						<div class="Main_line_hidden" id="main_11">
 							<div class="Main_line_1">
 								<div class="Main_line_title">
 								 	최종확인
@@ -417,8 +449,7 @@
 								<div class="final_confirm">
 									<div class="final_confirm_frame">
 										<div class="confirm_img">
-											<img src="<%=request.getContextPath() %>/resources/logo/logo.png" 
-												name="confirm_img" alt="이미지 없음" width="100%">
+											<img src="" name="confirm_img" alt="이미지 없음" width="100%">
 										</div>
 										<div class="final_frip_info">
 											<section class="info_section">

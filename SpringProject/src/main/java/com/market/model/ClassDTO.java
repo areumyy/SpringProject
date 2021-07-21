@@ -1,5 +1,7 @@
 package com.market.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -11,10 +13,11 @@ public class ClassDTO {
 	private String class_category2;
 	private String class_hash;
 	private String class_title;
+	private MultipartFile class_image2;
 	private String class_image;
 	private int class_count;
 	private String class_startArea;
-	private String class_endtArea;
+	private String class_endArea;
 	private String class_cont;
 	private String class_plan;
 	private String class_include;

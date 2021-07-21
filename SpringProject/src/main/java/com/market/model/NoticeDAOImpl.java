@@ -21,4 +21,9 @@ public class NoticeDAOImpl implements NoticeDAO {
 	public List<NoticeDTO> getNoticeList(PageDTO dto) {
 		return this.sqlSession.selectList("notice_list", dto);
 	}
+
+	@Override
+	public List<NoticeDTO> getHostNoticeList() {
+		return this.sqlSession.selectList("NoticeList");
+	}
 }
