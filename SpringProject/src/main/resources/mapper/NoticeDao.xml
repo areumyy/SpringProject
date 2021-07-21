@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.model.NoticeDAO">
+	
+	<select id="notice_list_count" parameterType="int" resultType="int">
+		select count(*) from frip_notice where notice_flag = #{notice_flag}
+	</select>
+	
+	<select id="notice_list" parameterType="com.market.model.PageDTO" resultType="com.market.model.NoticeDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by notice_num desc) rnum from frip_notice b) 
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]> 
+	</select>
+	
+</mapper>

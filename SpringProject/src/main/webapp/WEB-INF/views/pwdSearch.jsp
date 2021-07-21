@@ -24,8 +24,7 @@
 function findPwd() {
     var mem_email = $("#mem_email").val();
     var mem_name = $("#mem_name").val();
-	console.log(mem_email);
-	console.log(mem_name);
+    
         $.ajax({
             type : "post",
             url : '/controller/pwd_search_ok.do', 

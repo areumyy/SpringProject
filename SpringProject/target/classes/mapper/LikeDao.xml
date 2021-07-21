@@ -65,9 +65,9 @@
 		where class_num in(select like_target from frip_like 
 		where like_writer = #{mem_num} and like_flag = 2)) group by review_classnum
 		
-		select count(*) from frip_review
+		<!-- select count(*) from frip_review
 		where review_classnum in(select class_num from frip_class 
-		where class_memnum = #{host_memNum})
+		where class_memnum = #{host_memNum}) -->
 	</select>
 	
 	<!-- 찜 호스트 찜 개수 -->
