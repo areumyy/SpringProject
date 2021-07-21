@@ -2,6 +2,7 @@ package com.market.controller;
 
 import java.io.File;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.google.gson.JsonObject;
 import com.market.model.CategoryDAO;
@@ -339,7 +343,7 @@ public class MarketController {
 			HttpServletRequest request) {
 		JsonObject jsonObject = new JsonObject();
 
-		String fileRoot = "C:\\Users\\kmsol\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\summernote\\FileUpload\\";
+		String fileRoot = "C:\\Users\\kmsol\\Desktop\\NCS\\workspace\\";
 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
@@ -349,7 +353,7 @@ public class MarketController {
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
-			jsonObject.addProperty("url", "/controller/resources/summernote/FileUpload/" + savedFileName);
+			jsonObject.addProperty("url", "/summernoteImage/" + savedFileName);
 			jsonObject.addProperty("responseCode", "success");
 
 		} catch (IOException e) {
@@ -361,6 +365,7 @@ public class MarketController {
 		return a;
 	}
 
+	
 	  @RequestMapping("insertFrip.do") 
 	  public void insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
 			  HttpServletRequest request, HttpServletResponse response) throws Exception { // 파일 업로드 처리 
@@ -370,6 +375,9 @@ public class MarketController {
 
 		  if(request.getParameter("startArea") == null) {
 			  dto.setClass_startArea("null");
+		  }
+		  if(dto.getClass_endDate() == null) { //  끝나는 날이 없으면 공백값
+			  dto.setClass_endDate("null");
 		  }
 		  //전체 클래스의 수 + 1구하기
 		  int count = this.classDao.countClass();
@@ -381,9 +389,6 @@ public class MarketController {
 		  //옵션
 		  int result2 = 0;
 		  
-		  if(odto.getOption_endDate() == null) { //  끝나는 날이 없으면 공백값
-			  odto.setOption_endDate("null");
-		  }
 		  
 		  //옵션 개수
 		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));

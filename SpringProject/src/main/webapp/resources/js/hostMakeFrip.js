@@ -48,7 +48,8 @@ function uploadSummernoteImageFile(file, el) {
 		enctype : 'multipart/form-data',
 		processData : false,
 		success : function(data) {
-			setTimeout(function() { $(el).summernote('editor.insertImage', data.url) }, 4000);
+			//setTimeout(function() { $(el).summernote('editor.insertImage', data.url) }, 4000);
+			$(el).summernote('editor.insertImage', data.url);
 		}
 	});
 }
