@@ -285,17 +285,17 @@
 									<input type="button" class="findAddress"
 											value="주소 찾기" onclick="findAddr()" >	
 									<input type="text" class="detailAddress" 
-											name="endArea_detail" placeholder="상세주소">
+											name="class_endAreaDetail" placeholder="상세주소">
 								</div>
 								<input type="hidden" name="class_endArea" value="">
 								<div class="little_title">집결지<small>선택사항</small></div>
 								<div class="choiseLocation">
 									<input type="text" id="address2" class="address" 
-											name="startArea" placeholder="기본주소" disabled>
+											name="class_startArea" placeholder="기본주소" disabled>
 									<input type="button" class="findAddress"
 											value="주소 찾기" onclick="findAddr2()" >	
 									<input type="text" class="detailAddress" 
-											name="startArea_detail" placeholder="상세주소">
+											name="class_startAreaDetail" placeholder="상세주소">
 								</div>
 							</div>
 							<div class="Main_line_2">

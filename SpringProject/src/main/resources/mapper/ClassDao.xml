@@ -10,9 +10,10 @@
 	
 	<insert id="insertClass" parameterType="com.market.model.ClassDTO">
 		
-		insert into frip_class values(#{class_num},1,#{class_category1}
+		insert into frip_class values(#{class_num},#{class_memNum},#{class_category1}
 				,#{class_category2}, #{class_hash}, #{class_title}, #{class_image},#{class_startDate},#{class_endDate},
-				 #{class_count}, #{class_startArea}, #{class_endArea}, #{class_cont}, #{class_plan}, #{class_include},
+				 #{class_count}, #{class_startArea},#{class_startAreaDetail}, #{class_endArea},#{class_endAreaDetail}, 
+				 #{class_cont}, #{class_plan}, #{class_include},
 				#{class_exclude}, #{class_supply}, #{class_notice}, default, sysdate, default, default)
 	</insert>
 	
@@ -34,4 +35,17 @@
 	<select id="getList_classNum" parameterType="int" resultType="com.market.model.ClassDTO">
 		select * from frip_class where class_num = #{class_num}
 	</select>
+	
+	<update id="updateClass" parameterType="com.market.model.ClassDTO" >
+		update frip_class set 
+		class_category1=#{class_category1}
+		,class_category2=#{class_category2},class_hash = #{class_hash}, class_title=#{class_title}, 
+		class_image=#{class_image},class_startDate=#{class_startDate},class_endDate=#{class_endDate},
+		class_count=#{class_count},class_startArea=#{class_startArea},
+		class_startAreaDetail=#{class_startAreaDetail}, class_endArea=#{class_endArea},
+		class_endAreaDetail=#{class_endAreaDetail}, class_cont=#{class_cont},
+		class_plan= #{class_plan}, class_include=#{class_include},
+		class_exclude=#{class_exclude},class_supply=#{class_supply},class_notice= #{class_notice}
+		where class_num = #{class_num}
+	</update>
 </mapper>

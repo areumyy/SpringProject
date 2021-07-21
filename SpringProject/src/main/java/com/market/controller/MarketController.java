@@ -334,7 +334,21 @@ public class MarketController {
 		obj.put("clist", ja);
 
 		response.getWriter().print(obj);
+		
+	}
+	
+	@RequestMapping(value = "/summerCont.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void summerCont(HttpServletResponse response, @RequestParam("class_num") int class_num) throws IOException {
 
+		ClassDTO dto = this.classDao.getList_classNum(class_num);
+
+		JSONObject obj = new JSONObject();
+
+		obj.put("dto", dto);
+
+		response.getWriter().print(obj);
+		 
 	}
 
 	@RequestMapping(value = "/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
@@ -343,7 +357,7 @@ public class MarketController {
 			HttpServletRequest request) {
 		JsonObject jsonObject = new JsonObject();
 
-		String fileRoot = "C:\\Users\\kmsol\\Desktop\\NCS\\workspace\\";
+		String fileRoot = "C:\\Users\\kmsol\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\summerUpload\\";
 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
@@ -370,15 +384,23 @@ public class MarketController {
 	  public void insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
 			  HttpServletRequest request, HttpServletResponse response) throws Exception { // 파일 업로드 처리 
 		  response.setContentType("text/html; charset=UTF-8");
-		 
-		  dto.setClass_image(upload.fileUpload(mRequest));
+		  HttpSession session = request.getSession();
+		  MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
+			
+		  int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
+		  
+		  dto.setClass_memNum(mem_num); // 회원 번호 넣어주기
+		  dto.setClass_image(upload.fileUpload(mRequest)); // 파일 이름으로 변환
 
+		
 		  if(request.getParameter("startArea") == null) {
-			  dto.setClass_startArea("null");
+			  dto.setClass_startArea("null"); 
+			  dto.setClass_startAreaDetail("null"); 
+		  } 
+		  if(dto.getClass_endDate() == null) { // 끝나는날이 없으면 공백값 
+			  dto.setClass_endDate("null"); 
 		  }
-		  if(dto.getClass_endDate() == null) { //  끝나는 날이 없으면 공백값
-			  dto.setClass_endDate("null");
-		  }
+		 
 		  //전체 클래스의 수 + 1구하기
 		  int count = this.classDao.countClass();
 		  dto.setClass_num(count);
@@ -388,14 +410,13 @@ public class MarketController {
 		 
 		  //옵션
 		  int result2 = 0;
-		  
-		  
 		  //옵션 개수
 		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
-
+		  System.out.println(Qtt);
 		  for(int i=1; i<=Qtt; i++) {
 			  odto.setOption_name(request.getParameter("option_name"+i));
 			  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
+			  System.out.println(odto);
 	
 			  result2 = this.optionDao.insertOption(odto); 
 		  }
@@ -438,7 +459,6 @@ public class MarketController {
 			map.put("class_pass", class_pass);
 			list = this.classDao.getList_MemNum(map);
 		}
-		System.out.println(list);
 		JSONObject obj = new JSONObject();
 
 		JSONArray ja = JSONArray.fromObject(list);
@@ -541,16 +561,99 @@ public class MarketController {
 
 	@RequestMapping("hostUpdateFrip.do")
 	public String hostUpdateFrip(@RequestParam("class_num")int num, Model model) {
-		List<ClassDTO> classList = this.classDao.getList_classNum(num);
-		
+		ClassDTO classList = this.classDao.getList_classNum(num);
+		List<CategoryDTO> cate_twoList = this.categoryDao.getCate_two(classList.getClass_category1());
 		List<CategoryDTO> cateList = this.categoryDao.getCate_oneList();
-
+		List<OptionDTO> optionList = this.optionDao.getOptionList(num);
+		int optionCount = this.optionDao.getOptionCount(num);
+		
+		model.addAttribute("cate2List", cate_twoList);
 		model.addAttribute("cateList", cateList);
 		model.addAttribute("classList", classList);
-		 
+		model.addAttribute("optionList", optionList);
+		model.addAttribute("optionCount", optionCount);
 		return "host/hostUpdateFrip";
 	}
 
+	@RequestMapping("hostUpdateFripOk.do")
+	public void hostUpdateFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
+			  HttpServletRequest request, HttpServletResponse response) throws IOException {
+		 response.setContentType("text/html; charset=UTF-8");
+		  HttpSession session = request.getSession();
+		  MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
+		
+		  int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
+		  
+		  dto.setClass_memNum(mem_num); // 회원 번호 넣어주기
+
+		  //원래 클래스의 정보
+		  ClassDTO classList = this.classDao.getList_classNum(dto.getClass_num());
+		  
+		  //사진을 수정했는지 여부 확인
+		  if(dto.getClass_image2().getSize() == 0 ) {
+			  dto.setClass_image(classList.getClass_image());
+		  }else {
+			  dto.setClass_image(upload.fileUpload(mRequest)); // 파일 이름으로 변환		  
+		  }
+		  
+		  if(request.getParameter("startArea") == null) {
+			  dto.setClass_startArea("null"); 
+			  dto.setClass_startAreaDetail("null"); 
+		  } 
+		  if(dto.getClass_endDate() == null) { // 끝나는날이 없으면 공백값 
+			  dto.setClass_endDate("null"); 
+		  }
+		 
+		  odto.setOption_classNum(dto.getClass_num());
+		  System.out.println(dto);
+		  int result = this.classDao.UpdateClass(dto); 
+		  System.out.println("여기1");
+		  //옵션 삭제후 재생성
+		  int maxNum = this.optionDao.getmaxoptionNum(dto.getClass_num());
+		  int optionCount = this.optionDao.getcountoption(dto.getClass_num());
+		  HashMap<String, Integer> map = new HashMap<String, Integer>();
+		  map.put("maxNum", maxNum);
+		  map.put("optionCount", optionCount);
+		  System.out.println("여기2");
+		  //옵션 삭제
+		  this.optionDao.deleteOption(dto.getClass_num());
+		  System.out.println("여기3");
+		  //옵션 번호가 방금 지운 번호보다 높은 번호를 방금 지운 숫자만큼 삭제
+		  this.optionDao.optionNumdown(map);
+		  System.out.println(odto);
+		  System.out.println("여기4");
+		  //옵션 
+		  int result2 = 0;
+		  //옵션 개수
+		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
+		  System.out.println(Qtt);
+		  for(int i=1; i<=Qtt; i++) {
+			  System.out.println(request.getParameter("option_name"+i));
+			  System.out.println(Integer.parseInt(request.getParameter("option_price"+i)));
+			  odto.setOption_name(request.getParameter("option_name"+i));
+			  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
+			  System.out.println(odto.getOption_name());
+			  System.out.println(odto.getOption_price());
+			  result2 = this.optionDao.insertOption(odto); 
+		  } 
+		 
+		 PrintWriter out = response.getWriter();
+		System.out.println(result);
+		System.out.println(result2);
+		  if(result == 1 && result2 == 1) { 
+			  out.println("<script>");
+			  out.println("alert('수정 성공!')"); 
+			  out.println("location.href='hostMyFrip.do'");
+			  out.println("</script>"); 
+		  }else { 
+			  out.println("<script>");
+			  out.println("alert('수정 실패!')"); 
+			  out.println("history.back()");
+			  out.println("</script>"); 
+		  }
+
+	}
+	
 	@RequestMapping("frip_content.do")
 	public String fripContent() {
 		return "frip_content";
