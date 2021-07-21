@@ -15,6 +15,8 @@ public class ClassDTO {
 	private String class_title;
 	private MultipartFile class_image2;
 	private String class_image;
+	private String class_startDate;
+	private String class_endDate;
 	private int class_count;
 	private String class_startArea;
 	private String class_endArea;

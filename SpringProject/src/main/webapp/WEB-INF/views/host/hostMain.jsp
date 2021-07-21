@@ -32,7 +32,7 @@
 								<div class="hostInfo_name">
 									<h2>안녕하세요!
 										<br>
-										123<!-- 닉네임 -->
+										${loginDto.getMem_nick() }
 										호스트님
 									</h2>
 									<div class="hostInfo_hostGrade">

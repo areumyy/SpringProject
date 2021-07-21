@@ -478,7 +478,7 @@ public class MarketController {
 			HttpServletRequest request) {
 		JsonObject jsonObject = new JsonObject();
 
-		String fileRoot = "C:\\Users\\kmsol\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\summernote\\FileUpload\\";
+		String fileRoot = "C:\\Users\\SOS\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\upload\\";
 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
@@ -488,7 +488,7 @@ public class MarketController {
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
-			jsonObject.addProperty("url", "/controller/resources/summernote/FileUpload/" + savedFileName);
+			jsonObject.addProperty("url", "/summernoteImage/" + savedFileName);
 			jsonObject.addProperty("responseCode", "success");
 
 		} catch (IOException e) {
@@ -500,32 +500,32 @@ public class MarketController {
 		return a;
 	}
 
-	@RequestMapping("insertFrip.do")
-	public void insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
-			HttpServletRequest request, HttpServletResponse response) throws Exception { // 파일 업로드 처리
-		response.setContentType("text/html; charset=UTF-8");
+	  @RequestMapping("insertFrip.do") 
+	  public void insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
+			  HttpServletRequest request, HttpServletResponse response) throws Exception { // 파일 업로드 처리 
+		  response.setContentType("text/html; charset=UTF-8");
+		 
+		  dto.setClass_image(upload.fileUpload(mRequest));
 
-		dto.setClass_image(upload.fileUpload(mRequest));
-
-		if (request.getParameter("startArea") == null) {
-			dto.setClass_startArea("null");
-		}
-		// 전체 클래스의 수 + 1구하기
-		int count = this.classDao.countClass();
-		dto.setClass_num(count);
-		odto.setOption_classNum(count);
-
-		int result = this.classDao.insertClass(dto);
-
-		// 옵션
-		int result2 = 0;
-
-		if (odto.getOption_endDate() == null) { // 끝나는 날이 없으면 공백값
-			odto.setOption_endDate("null");
-		}
-
-		// 옵션 개수
-		int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
+		  if(request.getParameter("startArea") == null) {
+			  dto.setClass_startArea("null");
+		  }
+		  if(dto.getClass_endDate() == null) { //  끝나는 날이 없으면 공백값
+			  dto.setClass_endDate("null");
+		  }
+		  //전체 클래스의 수 + 1구하기
+		  int count = this.classDao.countClass();
+		  dto.setClass_num(count);
+		  odto.setOption_classNum(count);
+		  
+		  int result = this.classDao.insertClass(dto); 
+		 
+		  //옵션
+		  int result2 = 0;
+		  
+		  
+		  //옵션 개수
+		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
 
 		for (int i = 1; i <= Qtt; i++) {
 			odto.setOption_name(request.getParameter("option_name" + i));

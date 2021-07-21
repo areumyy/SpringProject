@@ -11,6 +11,6 @@
 		</selectKey>
 		
 		insert into frip_option values(#{option_num}, #{option_classNum}, #{option_name},#{option_price},
-			#{option_price}, #{option_startDate}, #{option_endDate})
+			#{option_price})
 	</insert>
 </mapper>

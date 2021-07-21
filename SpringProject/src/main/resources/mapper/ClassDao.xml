@@ -11,19 +11,18 @@
 	<insert id="insertClass" parameterType="com.market.model.ClassDTO">
 		
 		insert into frip_class values(#{class_num},1,#{class_category1}
-				,#{class_category2}, #{class_hash}, #{class_title}, #{class_image}, #{class_count},
-				#{class_startArea}, #{class_endArea}, #{class_cont}, #{class_plan}, #{class_include},
+				,#{class_category2}, #{class_hash}, #{class_title}, #{class_image},#{class_startDate},#{class_endDate},
+				 #{class_count}, #{class_startArea}, #{class_endArea}, #{class_cont}, #{class_plan}, #{class_include},
 				#{class_exclude}, #{class_supply}, #{class_notice}, default, sysdate, default, default)
 	</insert>
 	
 	<select id="getList_MemNum" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
 		<![CDATA[
-			select distinct f.* from frip_class f, frip_option o
-			where f.class_memnum = #{mem_num}
-			and f.class_pass = #{class_pass} 
-			and f.class_delcheck = 'no'
-			and f.class_num = o.option_classnum
-			and o.option_startdate > sysdate 
+			select distinct * from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass} 
+			and class_delcheck = 'no'
+            and class_startdate > sysdate
 		]]>
 	</select>
 	

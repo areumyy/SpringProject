@@ -166,12 +166,12 @@
 								<div class="schedule">
 									<div>
 										<div class="little_title">시작일</div>
-										<input type="date" name="option_startDate">
+										<input type="date" name="class_startDate">
 									</div>
 									<br><br><br><br>
 									<div>
 										<div class="little_title">종료일<small>(선택사항)</small></div>
-										<input type="date" name="option_endDate">
+										<input type="date" name="class_endDate">
 									</div>
 								</div>
 							</div>

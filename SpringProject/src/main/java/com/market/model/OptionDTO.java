@@ -10,6 +10,4 @@ public class OptionDTO {
 	private String option_name;
 	private int option_price;
 	private int option_editPrice;
-	private String option_startDate;
-	private String option_endDate;
 }
