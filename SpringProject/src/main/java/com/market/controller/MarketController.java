@@ -542,7 +542,7 @@ public class MarketController {
 
 		model.addAttribute("cateList", cateList);
 		model.addAttribute("classList", classList);
-		
+		 
 		return "host/hostUpdateFrip";
 	}
 
