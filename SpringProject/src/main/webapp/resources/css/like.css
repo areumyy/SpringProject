@@ -211,6 +211,9 @@
 	width: 20px;
 }
 
+.divide_span {
+	padding: 0 5px;
+}
 
 /* 호스트 상세 페이지 */
 .host_box {
@@ -300,8 +303,6 @@ input[type="radio"]:checked + label::after {
 input[id="tab01"]:checked ~ .cont01 {
 	display: flex;
     flex-flow: row wrap;    
-    -webkit-box-pack: justify;
-    justify-content: space-between;
     right: 0px;
 }
 

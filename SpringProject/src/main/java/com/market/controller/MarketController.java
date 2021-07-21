@@ -3,6 +3,7 @@ package com.market.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,15 +11,26 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.market.model.CategoryDAO;
 import com.market.model.CategoryDTO;
+import com.market.model.ClassDAO;
+import com.market.model.ClassDTO;
+import com.market.model.HostDAO;
+import com.market.model.HostDTO;
+import com.market.model.LikeDAO;
+import com.market.model.LikeDTO;
 import com.market.model.MemberDAO;
 import com.market.model.MemberDTO;
+import com.market.model.OptionDAO;
+import com.market.model.OptionDTO;
+import com.market.model.ReviewDTO;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -28,6 +40,9 @@ public class MarketController {
 
 	@Autowired
 	private MemberDAO memberDao;
+	
+	@Autowired
+	private LikeDAO likeDao;
 
 	@RequestMapping("main.do")
 	public String main() {
@@ -151,17 +166,109 @@ public class MarketController {
 	}
 
 	@RequestMapping("like_frip.do")
-	public String likeFrip() {
+	public String likeFrip(HttpServletRequest request, Model model) {
+		
+		// 세션값 가져오기
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO)session.getAttribute("loginDto");
+		
+		System.out.println("로그인 세션 mem_num 값 확인 >>> " + dto.getMem_num());
+		
+		// 찜 클래스 목록 가져오는 메서드
+		List<ClassDTO> likeClass = this.likeDao.getLikeClassList(dto.getMem_num());
+		
+		// 찜 클래스 별 옵션 상세정보  가져오는 메서드
+		List<OptionDTO> optionCont = this.likeDao.getOption(dto.getMem_num());
+		
+		// 찜 클래스 별 별점
+		List<Integer> classScore = this.likeDao.class_score(dto.getMem_num());
+		
+		model.addAttribute("likeClassList", likeClass);
+		model.addAttribute("optionCont", optionCont);
+		model.addAttribute("classScore", classScore);
+		
 		return "like_frip";
 	}
 
 	@RequestMapping("like_host.do")
-	public String likeHost() {
+	public String likeHost(HttpServletRequest request, Model model) {
+		
+		// 세션값 가져오기
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO)session.getAttribute("loginDto");
+		
+		// 찜 호스트 목록 가져오는 메서드
+		List<HostDTO> likeHost = this.likeDao.getLikeHostList(dto.getMem_num());
+		
+		// 찜 호스트 별 상세정보 가져오는 메서드
+		List<MemberDTO> hostInfo = this.likeDao.getHostInfo(dto.getMem_num());
+		
+		// 찜 호스트가 운영하는 클래스 개수 가져오는 메서드
+		List<Integer> classCount = this.likeDao.host_classCount(dto.getMem_num());
+		
+		// 찜 호스트 후기 개수 가져오는 메서드
+		List<Integer> reviewCount = this.likeDao.host_reivewCount(dto.getMem_num());
+		
+		// 찜 호스트 찜 개수 가져오는 메서드
+		List<Integer> likeCount = this.likeDao.host_reivewCount(dto.getMem_num());
+		
+		model.addAttribute("likeHostList", likeHost);
+		model.addAttribute("hostInfo", hostInfo);
+		model.addAttribute("classCount", classCount);
+		model.addAttribute("reviewCount", reviewCount);
+		model.addAttribute("likeCount", likeCount);
+		
 		return "like_host";
 	}
 
 	@RequestMapping("host_info.do")
-	public String hostInfo() {
+	public String hostInfo(@RequestParam("hostMemNum") int host_memNum, HttpServletRequest request, Model model) {
+		
+		// 세션값 가져오기
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO)session.getAttribute("loginDto");
+		
+		// 호스트 상세정보 가져오는 메서드
+		MemberDTO hostInfo = this.likeDao.hostInfo(host_memNum);
+		
+		// 호스트 소개 가져오는 메서드
+		HostDTO hostCont = this.likeDao.hostCont(host_memNum);
+		
+		// 호스트가 운영하는 클래스 개수 가져오는 메서드
+		int classCount = this.likeDao.class_count(host_memNum);
+		
+		// 호스트 후기 개수 가져오는 메서드
+		int reviewCount = this.likeDao.review_count(host_memNum);
+		
+		// 호스트 찜 개수 가져오는 메서드
+		int likeCount = this.likeDao.like_count(host_memNum);
+		
+		// 호스트가 운영하는 클래스 목록 가져오는 메서드
+		List<ClassDTO> hostClass = this.likeDao.host_classList(host_memNum);
+		
+		// 호스트가 운영하는 클래스 옵션 상세정보 가져오는 메서드
+		List<OptionDTO> hostClassOption = this.likeDao.host_classOption(host_memNum);
+
+		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
+		List<ReviewDTO> classReview1 = this.likeDao.class_review1(host_memNum);
+		
+		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명)
+		List<ReviewDTO> classReview2 = this.likeDao.class_review2(host_memNum);
+		
+		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명/시작날짜/끝날짜)
+		List<ReviewDTO> classReview3 = this.likeDao.class_review3(host_memNum);
+		
+		model.addAttribute("hostCont", hostCont);
+		model.addAttribute("hostInfo", hostInfo);
+		model.addAttribute("classCount", classCount);
+		model.addAttribute("reviewCount", reviewCount);
+		model.addAttribute("likeCount", likeCount);
+		model.addAttribute("hostClass", hostClass);
+		model.addAttribute("hostClassOption", hostClassOption);
+		model.addAttribute("classReview1", classReview1);
+		model.addAttribute("classReview2", classReview2);
+		model.addAttribute("classReview3", classReview3);
+		
 		return "host_info";
 	}
 
