@@ -48,4 +48,23 @@
 		class_exclude=#{class_exclude},class_supply=#{class_supply},class_notice= #{class_notice}
 		where class_num = #{class_num}
 	</update>
+	
+	<select id="countClass_memnum" parameterType="int" resultType="int" >
+		select count(*) from frip_class where class_memnum = #{mem_num}
+	</select>
+	
+	<select id="getList" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+		select * from (select b.*, row_number() over(order by class_num) rnum from frip_class b where class_memnum = #{mem_num}) 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	
+	<update id="entercheck" parameterType="int">
+		update frip_booking set booking_entercheck = 'yes' where booking_num = #{booking_num}
+	</update>
+	
+	<update id="entercancel" parameterType="int">
+		update frip_booking set booking_entercheck = 'no' where booking_num = #{booking_num}
+	</update>
 </mapper>

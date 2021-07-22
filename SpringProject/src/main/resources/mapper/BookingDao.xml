@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.model.BookingDAO">
+	<select id="getBookingCount" parameterType="int" resultType="int">
+		select count(*) from frip_booking where booking_classNum = #{class_num}
+	</select>
+
+	<select id="getBookingList" parameterType="java.util.Map" resultType="com.market.model.BookingDTO">
+		<![CDATA[
+		select * from 
+		(select b.*, m.mem_name,m.mem_phone,o.option_name,row_number() 
+		over(order by b.booking_num) rnum 
+		from frip_booking b, frip_member m, frip_option o
+		where  b.booking_writer = m.mem_num
+		and o.option_num = b.booking_option 
+		and b.booking_classnum = #{class_num}) 
+		where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+</mapper>
+

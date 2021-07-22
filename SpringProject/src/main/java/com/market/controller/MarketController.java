@@ -1,16 +1,10 @@
 package com.market.controller;
 
 import java.io.File;
-
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,27 +22,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.google.gson.JsonObject;
+import com.market.model.BookingDAO;
+import com.market.model.BookingDTO;
 import com.market.model.CategoryDAO;
 import com.market.model.CategoryDTO;
 import com.market.model.ClassDAO;
 import com.market.model.ClassDTO;
+import com.market.model.Class_qnaDAO;
+import com.market.model.Class_qnaDTO;
 import com.market.model.MemberDAO;
 import com.market.model.MemberDTO;
 import com.market.model.NoticeDAO;
 import com.market.model.NoticeDTO;
 import com.market.model.OptionDAO;
 import com.market.model.OptionDTO;
-import com.market.model.Upload;
-
-import net.sf.json.JSONArray;
 import com.market.model.PageDTO;
 import com.market.model.QnaDAO;
 import com.market.model.QnaDTO;
+import com.market.model.Upload;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -69,7 +63,11 @@ public class MarketController {
 	private OptionDAO optionDao;
 	@Autowired
 	private QnaDAO qnaDao;
-
+	@Autowired
+	private BookingDAO bookingDao;
+	@Autowired
+	private Class_qnaDAO class_qnaDao;
+	
 	@RequestMapping("main.do")
 	public String main() {
 		return "home";
@@ -475,18 +473,141 @@ public class MarketController {
 	}
 
 	@RequestMapping("hostAttendance.do")
-	public String hostAttendance() {
+	public String hostAttendance(HttpServletRequest request, Model model) {	
+		HttpSession session = request.getSession();
+		
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
+		
+		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
+		
+		int totalRecord = 0;
+		int rowsize = 10;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.classDao.countClass(mem_num);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord);
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("dto", dto);
+		map.put("mem_num", mem_num);
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<ClassDTO> classList = this.classDao.getList(map);
+		
+		model.addAttribute("cList", classList);
+		model.addAttribute("Paging", dto);
 		return "host/hostAttendance";
 	} 
 
 	@RequestMapping("hostAttendance_member.do")
-	public String hostAttendance_member() {
+	public String hostAttendance_member(HttpServletRequest request, Model model) {
+		
+		int class_num = Integer.parseInt(request.getParameter("class_num"));
+		
+		int totalRecord = 0;
+		int rowsize = 10;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.bookingDao.getCount(class_num);
+		
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord);
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("dto", dto);
+		map.put("class_num", class_num);
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<BookingDTO> BookingList = this.bookingDao.getList(map);
+		
+		// 클래스 정보
+		ClassDTO cdto = this.classDao.getList_classNum(class_num);
+		
+		model.addAttribute("cList", cdto);
+		model.addAttribute("bList", BookingList);
+		model.addAttribute("Paging", dto);
+		
 		return "host/hostAttendance_member";
 	}
 
 	@RequestMapping("hostAsk.do")
-	public String hostAsk() {
+	public String hostAsk(HttpServletRequest request,Model model) {
+
+		int mem_num = getMem_num(request);
+			
+		int totalRecord = 0;
+		int rowsize = 10;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.class_qnaDao.getCount(mem_num);
+		
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord);
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("dto", dto);
+		map.put("mem_num", mem_num);
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<Class_qnaDTO> qnaList = this.class_qnaDao.getQnaList(map);
+		
+		model.addAttribute("qList", qnaList);
+		model.addAttribute("Paging", dto);
+		
 		return "host/hostAsk";
+	}
+	
+	@RequestMapping("hostAskComplete.do")
+	public String hostAskComplete(HttpServletRequest request, Model model) {
+		
+		int mem_num = getMem_num(request);
+		
+		int totalRecord = 0;
+		int rowsize = 10;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.class_qnaDao.getCount(mem_num);
+		
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord);
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("dto", dto);
+		map.put("mem_num", mem_num);
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<Class_qnaDTO> qnaList = this.class_qnaDao.getQnaCompleteList(map);
+		
+		model.addAttribute("qList", qnaList);
+		model.addAttribute("Paging", dto);
+		
+		return "host/hostAskComplete";
 	}
 
 	@RequestMapping("hostCalculateReq.do")
@@ -555,10 +676,75 @@ public class MarketController {
 	}
 
 	@RequestMapping("hostAsk_answer.do")
-	public String hostAsk_answer() {
+	public String hostAsk_answer(HttpServletRequest request, Model model) {
+		
+		int qna_num = Integer.parseInt(request.getParameter("qna_num"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		
+		// qna_num으로 상세내역 구하기
+		Class_qnaDTO dto =  this.class_qnaDao.getContent(qna_num);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		
 		return "host/hostAsk_answer";
 	}
-
+	
+	@RequestMapping("hostAnswerWRiteOk.do")
+	public String hostAnswerWRiteOk(HttpServletRequest request, Model model) {
+		
+		String ans_cont = request.getParameter("ans_cont");
+		int page = Integer.parseInt(request.getParameter("page"));
+		int qna_num = Integer.parseInt(request.getParameter("qna_num"));
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("ans_cont", ans_cont);
+		map.put("qna_num", qna_num);
+		// 상세 내역 넣어주기
+		int dto =  this.class_qnaDao.insertAnswer(map);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		
+		return "redirect:hostAsk.do?page="+page;
+	}
+	@RequestMapping("hostAskAnswerUpdate.do")
+	public String hostAskAnswerUpdate(HttpServletRequest request, Model model) {
+		
+		int qna_num = Integer.parseInt(request.getParameter("qna_num"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		
+		// qna_num으로 상세내역 구하기
+		Class_qnaDTO dto =  this.class_qnaDao.getContent(qna_num);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		
+		return "host/hostAsk_answerUpdate";
+	}
+	
+	@RequestMapping("hostAnswerUpdateOk.do")
+	public String hostAnswerUpdateOk(HttpServletRequest request, Model model) {
+		
+		String ans_cont = request.getParameter("ans_cont");
+		int page = Integer.parseInt(request.getParameter("page"));
+		int qna_num = Integer.parseInt(request.getParameter("qna_num"));
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("ans_cont", ans_cont);
+		map.put("qna_num", qna_num);
+		// 상세 내역 넣어주기
+		int dto =  this.class_qnaDao.insertAnswer(map);
+		 
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		
+		return "redirect:hostAskComplete.do?page="+page;
+	}
+		
+		
 	@RequestMapping("hostUpdateFrip.do")
 	public String hostUpdateFrip(@RequestParam("class_num")int num, Model model) {
 		ClassDTO classList = this.classDao.getList_classNum(num);
@@ -607,21 +793,21 @@ public class MarketController {
 		  odto.setOption_classNum(dto.getClass_num());
 		  System.out.println(dto);
 		  int result = this.classDao.UpdateClass(dto); 
-		  System.out.println("여기1");
+		
 		  //옵션 삭제후 재생성
 		  int maxNum = this.optionDao.getmaxoptionNum(dto.getClass_num());
 		  int optionCount = this.optionDao.getcountoption(dto.getClass_num());
 		  HashMap<String, Integer> map = new HashMap<String, Integer>();
 		  map.put("maxNum", maxNum);
 		  map.put("optionCount", optionCount);
-		  System.out.println("여기2");
+		  
 		  //옵션 삭제
 		  this.optionDao.deleteOption(dto.getClass_num());
-		  System.out.println("여기3");
+		 
 		  //옵션 번호가 방금 지운 번호보다 높은 번호를 방금 지운 숫자만큼 삭제
 		  this.optionDao.optionNumdown(map);
 		  System.out.println(odto);
-		  System.out.println("여기4");
+		  
 		  //옵션 
 		  int result2 = 0;
 		  //옵션 개수
@@ -657,5 +843,36 @@ public class MarketController {
 	@RequestMapping("frip_content.do")
 	public String fripContent() {
 		return "frip_content";
+	}
+	
+	@RequestMapping("entercheck.do")
+	public String entercheck(HttpServletRequest request) {
+		int booking_num = Integer.parseInt(request.getParameter("booking_num"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		int class_num = Integer.parseInt(request.getParameter("class_num"));
+		
+		this.bookingDao.entercheck(booking_num);
+		
+		return "redirect:hostAttendance_member.do?class_num="+class_num+"&page="+page;
+	}
+	
+	@RequestMapping("entercancel.do")
+	public String entercancel(HttpServletRequest request) {
+		int booking_num = Integer.parseInt(request.getParameter("booking_num"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		int class_num = Integer.parseInt(request.getParameter("class_num"));
+		this.bookingDao.entercancel(booking_num);
+		
+		return "redirect:hostAttendance_member.do?class_num="+class_num+"&page="+page;
+	}
+	
+	public int getMem_num(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
+		
+		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
+		
+		return mem_num;
 	}
 }

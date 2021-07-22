@@ -11,7 +11,7 @@
 	
 	<select id="qna_list" parameterType="com.market.model.PageDTO" resultType="com.market.model.QnaDTO">
 		<![CDATA[
-			select * from (select b.*, row_number() over(order by qna_num) rnum from frip_qna b) 
+			select * from (select b.*, row_number() over(order by class_num) rnum from frip_class b) 
 			where rnum >= #{startNo} and rnum <= #{endNo}
 		]]> 
 	</select>

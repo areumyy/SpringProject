@@ -43,4 +43,14 @@ public class ClassDAOImpl implements ClassDAO {
 	public int UpdateClass(ClassDTO dto) {
 		return this.sqlSession.update("updateClass", dto);
 	}
+
+	@Override
+	public int countClass(int mem_num) {
+		return this.sqlSession.selectOne("countClass_memnum", mem_num);
+	}
+
+	@Override
+	public List<ClassDTO> getList(HashMap<String, Object> map) {
+		return this.sqlSession.selectList("getList", map);
+	}
 }
