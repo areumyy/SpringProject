@@ -240,6 +240,56 @@
 	margin-top: 12px;
 }
 
-.mypage_footer_txt_bottom{
+.mypage_footer_txt_bottom {
 	margin-bottom: 12px;
+}
+
+.color_gray {
+	line-height: 10px;
+	font-size: 10px;
+	color: rgb(155, 155, 155);
+}
+
+.mypage_reviewWrite_button {
+	border-radius: 5px;
+	text-align: center;
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	width: 80px;
+	height: 38px;
+	background-color: white;
+	line-height: 13px;
+	padding: 13px;
+	border: 1px solid rgb(51, 151, 255);
+	color: rgb(51, 151, 255);
+	font-size: 12px;
+	min-width: 80px;
+}
+
+.mypage_reviewWrite_button:hover {
+	color: rgb(51, 151, 255);
+}
+
+.mypage_productDetail_wrapper {
+	padding: 0px 20px 20px;
+}
+
+.mypage__productDetail_button {
+	border-radius: 5px;
+	text-align: center;
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	width: 100%;
+	height: 50px;
+	background-color: transparent;
+	line-height: 13px;
+	padding: 13px;
+	border: 1px solid rgb(238, 238, 238);
+	font-size: 13px;
 }

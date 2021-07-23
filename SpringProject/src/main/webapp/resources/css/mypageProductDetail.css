@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.mypage_productDetail_header_wrapper {
+	line-height: 20px;
+	padding: 30px 20px 0px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.mypage_productDetail_wrapper {
+	display: flex;
+	margin-top: 10px;
+	flex-direction: column;
+}
+
+.bottom_gray {
+	border-bottom: 10px solid rgb(238, 238, 238);
+}
+
+.mypage_footer_txt_bottom {
+	margin-bottom: 12px;
+}
+
+.color_gray {
+	line-height: 10px;
+	font-size: 10px;
+	color: rgb(155, 155, 155);
+}
+
+.productDetail_memInfo {
+	font-size: 10px;
+	line-height: 17px;
+	color: rgb(155, 155, 155);
+	margin-top: 20px;
+}
+
+.notFlex_wrapper {
+	width: 100%;
+	margin-bottom: 60px;
+}
+
+.detail_info {
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	font-size: 13px; 
+	padding : 16px 20px;
+}
+
+.infoTitle {
+	color: rgb(155, 155, 155);
+}

@@ -13,8 +13,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
-<link href="<%=request.getContextPath() %>/resources/css/mypage_common.css" rel="stylesheet"/>
-<link href="<%=request.getContextPath() %>/resources/css/mypage_coupon.css" rel="stylesheet"/>
+<link href="<%=request.getContextPath() %>/resources/css/mypageCommon.css" rel="stylesheet"/>
+<link href="<%=request.getContextPath() %>/resources/css/mypageCoupon.css" rel="stylesheet"/>
 </head>
 <body>
 	<div id="app">

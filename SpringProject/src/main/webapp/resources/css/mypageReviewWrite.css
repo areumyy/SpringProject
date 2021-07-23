@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+.mypage_reviewWrite_header_wrapper {
+	width: 100%;
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	height: 50px;
+	position: relative;
+	border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.mypage_reviewWrite_cont {
+	padding: 24px 20px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+.img_style {
+	display: initial;
+	width: 100%;
+	height: 100%;
+}
+
+.reviewWrite_img {
+	width: 60px;
+	height: 60px;
+}
+
+.reviewWrite_question {
+	font-size: 20px;
+	line-height: 10px;
+	letter-spacing: -0.5px;
+	font-weight: bold;
+	color: rgb(51, 61, 75);
+	margin: 16px 28px;
+}
+
+.dataReview {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+.reviewWrite_comment {
+	font-size: 12px;
+	line-height: 18px;
+	letter-spacing: -0.3px;
+	color: rgb(153, 153, 153);
+	margin-top: 5px;
+}
+
+.textarea_style {
+	font-size: 14px;
+	line-height: 22px;
+	letter-spacing: -0.35px;
+	width: 100%;
+	min-height: 150px;
+	padding: 15px;
+	resize: none;
+	background-color: rgb(237, 239, 242);
+	border-radius: 5px;
+	color: rgb(78, 89, 104);
+	border-style: none;
+}
+
+.textarea_style::placeholder {
+	color: #CBD2DA;
+}
+
+.textarea_style:focus {
+	outline: none;
+}
+
+.textarea_count {
+	margin-top: 2px;
+	font-size: 12px;
+	letter-spacing: -0.3px;
+	line-height: 18px;
+	color: rgb(153, 153, 153);
+}
+
+.imgUpload {
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	width: 100%;
+	height: 56px;
+	border: 1px solid rgb(208, 216, 226);
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.imgUpload>input {
+	display: none;
+}
+
+.imgUpload>span {
+	font-size: 17px;
+	color: rgb(78, 89, 104);
+}
+
+.mypage_reviewWrite_footer {
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 50px 0px 65px;
+}
+
+.reviewWrite_button {
+	width: 290px;
+	height: 50px;
+	line-height: normal;
+	padding: 0px 13px;
+	background-color: rgb(51, 151, 255);
+	text-align: center;
+	cursor: pointer;
+	border-radius: 5px;
+	border: 0px;
+	color: white;
+	font-size: 14px;
+}

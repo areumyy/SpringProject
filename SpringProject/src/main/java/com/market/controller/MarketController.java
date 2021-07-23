@@ -145,4 +145,21 @@ public class MarketController {
 	public String myPageEnergy() {
 		return "mypage_energy";
 	}
+	
+	@RequestMapping("mypage_review.do")
+	public String myPageReview() {
+		return "mypage_review";
+	}
+	
+	@RequestMapping("mypage_productDetail.do")
+	public String myPageProductDetail() {
+		return "mypage_productDetail";
+	}
+	
+	@RequestMapping("mypage_reviewWrite.do")
+	public String myPageReviewWrite() {
+		return "mypage_reviewWrite";
+	}
+	
+	
 }

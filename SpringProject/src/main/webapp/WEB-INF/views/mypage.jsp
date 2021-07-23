@@ -13,7 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
-<link href="<%=request.getContextPath() %>/resources/css/mypage_common.css" rel="stylesheet"/>
+<link href="<%=request.getContextPath() %>/resources/css/mypageCommon.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/mypage.css" rel="stylesheet"/>
 </head>
 <body>
@@ -29,7 +29,7 @@
 						<div class="customer_info_wrapper"><!-- 개인 정보 -->
 							<div class="customer_info">
 								<div class="customer_name">
-									<div class="customer_name_txt" href="">이름</div>
+									<div class="customer_name_txt" href="">sol97</div>
 									<a href="<%=request.getContextPath() %>/mypage_edit.do">
 										<img alt="더보기" class="customer_more"
 										src="<%=request.getContextPath() %>/resources/image/mypage/more.svg">
@@ -70,11 +70,13 @@
 									</a>
 								</div>
 								<div class="customer_info_box">
-									<a href="" class="customer_txt_style">
+									<a href="<%=request.getContextPath()%>/mypage_review.do"
+										class="customer_txt_style">
+
 										<div class="customer_box_txt">
-											후기<img class="box_arrow" src="<%=request.getContextPath() %>/resources/image/mypage/arrow.svg">
-										</div>
-										0
+											후기<img class="box_arrow"
+												src="<%=request.getContextPath()%>/resources/image/mypage/arrow.svg">
+										</div> 0
 									</a>
 								</div>
 							</div>

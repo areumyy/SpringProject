@@ -13,7 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
-<link href="<%=request.getContextPath() %>/resources/css/mypage_common.css" rel="stylesheet"/>
+<link href="<%=request.getContextPath() %>/resources/css/mypageCommon.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/mypage.css" rel="stylesheet"/>
 </head>
 <body>
@@ -54,11 +54,11 @@
 						<div class="customer_membershipCard"><!-- 개인 카드 -->
 							<div class="customer_box_wrapper">
 								<div class="customer_info_box">
-									<a href="" class="customer_txt_style">
+									<a href="<%=request.getContextPath()%>/mypage_energy.do" class="customer_txt_style">
 										<div class="customer_box_txt">
-											에너지<img class="box_arrow" src="<%=request.getContextPath() %>/resources/image/mypage/arrow.svg">
-										</div>
-										0
+											에너지<img class="box_arrow"
+												src="<%=request.getContextPath()%>/resources/image/mypage/arrow.svg">
+										</div> 0
 									</a>
 								</div>
 								<div class="customer_info_box">
@@ -70,7 +70,7 @@
 									</a>
 								</div>
 								<div class="customer_info_box">
-									<a href="" class="customer_txt_style">
+									<a href="<%=request.getContextPath() %>/mypage_review.do" class="customer_txt_style">
 										<div class="customer_box_txt">
 											후기<img class="box_arrow" src="<%=request.getContextPath() %>/resources/image/mypage/arrow.svg">
 										</div>
@@ -124,9 +124,17 @@
 										</div>
 										<div class="pgCard_footer_wrapper">
 											<div class="pgCard_footer_info">
-											<span class="mypage_footer_txt_bottom">1인 이용권 ★오전 클래스(10:30) 특별 할인★</span>
-											<span>사용가능1</span>
+												<span class="mypage_footer_txt_bottom">1인 이용권 ★오전 클래스(10:30) 특별 할인★</span>
+												<span class="color_gray">사용가능1</span>
 											</div>
+											<a href="<%=request.getContextPath()%>/mypage_reviewWrite.do"
+												class="mypage_reviewWrite_button"> 후기 작성
+											</a>
+										</div>
+										<div class="mypage_productDetail_wrapper">
+											<a href="<%=request.getContextPath()%>/mypage_productDetail.do"
+												class="mypage__productDetail_button"> 상세 정보 
+											</a>
 										</div>
 									</div>
 									
