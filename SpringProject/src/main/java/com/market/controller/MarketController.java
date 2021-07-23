@@ -767,7 +767,7 @@ public class MarketController {
 		 response.setContentType("text/html; charset=UTF-8");
 		  HttpSession session = request.getSession();
 		  MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
-		
+		 
 		  int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
 		  
 		  dto.setClass_memNum(mem_num); // 회원 번호 넣어주기
@@ -794,38 +794,33 @@ public class MarketController {
 		  System.out.println(dto);
 		  int result = this.classDao.UpdateClass(dto); 
 		
-		  //옵션 삭제후 재생성
-		  int maxNum = this.optionDao.getmaxoptionNum(dto.getClass_num());
+		  //원래 옵션 개수
 		  int optionCount = this.optionDao.getcountoption(dto.getClass_num());
-		  HashMap<String, Integer> map = new HashMap<String, Integer>();
-		  map.put("maxNum", maxNum);
-		  map.put("optionCount", optionCount);
-		  
-		  //옵션 삭제
-		  this.optionDao.deleteOption(dto.getClass_num());
-		 
-		  //옵션 번호가 방금 지운 번호보다 높은 번호를 방금 지운 숫자만큼 삭제
-		  this.optionDao.optionNumdown(map);
-		  System.out.println(odto);
 		  
 		  //옵션 
 		  int result2 = 0;
 		  //옵션 개수
 		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
-		  System.out.println(Qtt);
-		  for(int i=1; i<=Qtt; i++) {
-			  System.out.println(request.getParameter("option_name"+i));
-			  System.out.println(Integer.parseInt(request.getParameter("option_price"+i)));
-			  odto.setOption_name(request.getParameter("option_name"+i));
-			  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
-			  System.out.println(odto.getOption_name());
-			  System.out.println(odto.getOption_price());
-			  result2 = this.optionDao.insertOption(odto); 
-		  } 
+		  
+		  for(int i=1; i<=optionCount; i++) {
+			  odto.setOption_num(Integer.parseInt(request.getParameter("option_num"+i)));
+			  odto.setOption_editPrice(Integer.parseInt(request.getParameter("option_price"+i))); 
+
+			  result2 = this.optionDao.updateOption(odto); 
+		  }
+		  
+		  //옵션을 추가했을 때 발생
+		  if(Qtt > optionCount) {
+			  for(int i=(optionCount+1); i<=Qtt; i++) {
+				  odto.setOption_name(request.getParameter("option_name"+i));
+				  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
+
+				  result2 = this.optionDao.insertOption(odto); 
+			  }
+		  }
 		 
 		 PrintWriter out = response.getWriter();
-		System.out.println(result);
-		System.out.println(result2);
+
 		  if(result == 1 && result2 == 1) { 
 			  out.println("<script>");
 			  out.println("alert('수정 성공!')"); 

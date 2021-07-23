@@ -35,7 +35,7 @@
 				<jsp:include page="../hostInclude/hostSideBar.jsp"></jsp:include>
 	
 				<div class="Main">
-					<h1 class="Main_title">프립 만들기</h1>
+					<h1 class="Main_title">프립 수정</h1>
 					
 						<div class="btn-group buttonGroup" role="group" aria-label="Basic radio toggle button group">
 						  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="a1" autocomplete="off" checked onclick="change_div(1)">
@@ -238,14 +238,10 @@
 										<div class="little_title">구매옵션</div>
 										<div class="optionTextDiv">
 											<c:forEach items="${optionList }" var="dto" varStatus="index">
+												<input type="hidden" value="${dto.getOption_num() }" name="option_num${index.count }">
 												<div class="${index.count }">
-													<input type="text" class="optionText" value="${dto.getOption_name() }" name="option_name${index.count }"> 
-													<c:if test="${index.count == 1 }">
+													<input type="text" class="optionText" value="${dto.getOption_name() }" name="option_name${index.count }" readonly> 
 														<span>기본</span>
-													</c:if>
-													<c:if test="${index.count != 1 }">
-														<div class="deleteButton" name="${index.count }" onclick="deleteOption(this)">삭제</div>
-													</c:if>
 													<br>
 													<input type="text" class="optionText" value="${dto.getOption_price() }" name="option_price${index.count }" placeholder="가격">
 													<span>원</span>

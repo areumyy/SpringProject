@@ -101,6 +101,7 @@
 							</table>
 						</div>
 						
+					</div>
 						<!-- 페이징 처리 부분 -->
 						<nav aria-label="Page navigation example" class="qna_list_footer">
 							<ul class="pagination">
@@ -128,7 +129,6 @@
 								</c:if>
 							</ul>
 						</nav>
-					</div>
 				</div>
 			</div>
 		</div>

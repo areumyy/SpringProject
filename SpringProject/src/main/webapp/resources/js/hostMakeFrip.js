@@ -33,9 +33,7 @@ $(document).ready(function() {
 	            		}
 	            	}
 	            }
-          
 	});//썸머노트 end
-	summernoteCont();
 });
 //써머노트에 이미지 업로드하는 메서드
 function uploadSummernoteImageFile(file, el) {
