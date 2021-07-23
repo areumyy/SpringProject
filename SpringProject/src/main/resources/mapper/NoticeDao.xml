@@ -9,7 +9,29 @@
 		select count(*) from frip_notice where notice_flag = #{notice_flag}
 	</select>
 	
-	<select id="notice_list" parameterType="com.market.model.PageDTO" resultType="com.market.model.NoticeDTO">
+	<select id="notice_list_all_count" resultType="int">
+		select count(*) from frip_notice
+	</select>
+	
+	<select id="notice_list_member" parameterType="com.market.model.PageDTO" resultType="com.market.model.NoticeDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by notice_num desc) rnum from frip_notice b where notice_flag = 0) 
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]> 
+	</select>
+	
+	<select id="notice_list_host" parameterType="com.market.model.PageDTO" resultType="com.market.model.NoticeDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by notice_num desc) rnum from frip_notice b where notice_flag = 1) 
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]> 
+	</select>
+	
+	<select id="host_main_notice" resultType="com.market.model.NoticeDTO">
+		select * from frip_notice order by notice_num desc
+	</select>
+	
+	<select id="notice_list_all" parameterType="com.market.model.PageDTO" resultType="com.market.model.NoticeDTO">
 		<![CDATA[
 			select * from (select b.*, row_number() over(order by notice_num desc) rnum from frip_notice b) 
 			where rnum >= #{startNo} and rnum <= #{endNo}
@@ -20,4 +42,30 @@
 		select * from frip_notice where notice_flag = 1 order by notice_num desc
 	</select>
 	
+	<insert id="notice_insert" parameterType="com.market.model.NoticeDTO">
+		<selectKey resultType="int" keyProperty="notice_num" order="BEFORE" >
+			select count(*) + 1 from frip_notice
+		</selectKey>
+		
+		insert into frip_notice values(#{notice_num},#{notice_title},#{notice_cont},sysdate,#{notice_flag})
+	</insert>
+	
+	<delete id="notice_delete" parameterType="int">
+		delete from frip_notice where notice_num = #{notice_num}
+	</delete>
+	
+	<update id="notice_num_update" parameterType="int">
+		<![CDATA[
+			update frip_notice set notice_num = notice_num - 1 where notice_num > #{notice_num}
+		]]>
+	</update>
+	
+	<select id="notice_cont" parameterType="int" resultType="com.market.model.NoticeDTO">
+		select * from frip_notice where notice_num = #{notice_num}
+	</select>
+	
+	<update id="notice_edit" parameterType="com.market.model.NoticeDTO">
+		update frip_notice set notice_title = #{notice_title}, notice_flag = #{notice_flag}, notice_cont = #{notice_cont}
+		where notice_num = #{notice_num} 
+	</update>
 </mapper>

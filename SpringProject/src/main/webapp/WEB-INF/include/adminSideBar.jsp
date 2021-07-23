@@ -76,7 +76,7 @@
 					</div>
 					
 					<div id="menuFrame3"class="menubutton">
-						<button type="button" id="3" class="ul" onclick="location.href='admin_notice.do'">
+						<button type="button" id="3" class="ul" onclick="location.href='admin_notice.do?sort=total'">
 							<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
 							공지사항 관리
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>

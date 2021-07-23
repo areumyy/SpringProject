@@ -239,7 +239,7 @@ public class MarketController {
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
 		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
-		List<QnaDTO> pageList = this.qnaDao.getQnaList(dto);
+		List<QnaDTO> pageList = this.qnaDao.getQnaListMember(dto);
 
 		model.addAttribute("list", pageList);
 		model.addAttribute("Paging", dto);
@@ -291,7 +291,7 @@ public class MarketController {
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
 		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
-		List<NoticeDTO> pageList = this.noticeDao.getNoticeList(dto);
+		List<NoticeDTO> pageList = this.noticeDao.getMemberNoticeList(dto);
 
 		model.addAttribute("list", pageList);
 		model.addAttribute("Paging", dto);
@@ -500,32 +500,31 @@ public class MarketController {
 		return a;
 	}
 
-	  @RequestMapping("insertFrip.do") 
-	  public void insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
-			  HttpServletRequest request, HttpServletResponse response) throws Exception { // 파일 업로드 처리 
-		  response.setContentType("text/html; charset=UTF-8");
-		 
-		  dto.setClass_image(upload.fileUpload(mRequest));
+	@RequestMapping("insertFrip.do")
+	public void insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
+			HttpServletRequest request, HttpServletResponse response) throws Exception { // 파일 업로드 처리
+		response.setContentType("text/html; charset=UTF-8");
 
-		  if(request.getParameter("startArea") == null) {
-			  dto.setClass_startArea("null");
-		  }
-		  if(dto.getClass_endDate() == null) { //  끝나는 날이 없으면 공백값
-			  dto.setClass_endDate("null");
-		  }
-		  //전체 클래스의 수 + 1구하기
-		  int count = this.classDao.countClass();
-		  dto.setClass_num(count);
-		  odto.setOption_classNum(count);
-		  
-		  int result = this.classDao.insertClass(dto); 
-		 
-		  //옵션
-		  int result2 = 0;
-		  
-		  
-		  //옵션 개수
-		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
+		dto.setClass_image(upload.fileUpload(mRequest));
+
+		if (request.getParameter("startArea") == null) {
+			dto.setClass_startArea("null");
+		}
+		if (dto.getClass_endDate() == null) { // 끝나는 날이 없으면 공백값
+			dto.setClass_endDate("null");
+		}
+		// 전체 클래스의 수 + 1구하기
+		int count = this.classDao.countClass();
+		dto.setClass_num(count);
+		odto.setOption_classNum(count);
+
+		int result = this.classDao.insertClass(dto);
+
+		// 옵션
+		int result2 = 0;
+
+		// 옵션 개수
+		int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
 
 		for (int i = 1; i <= Qtt; i++) {
 			odto.setOption_name(request.getParameter("option_name" + i));
@@ -608,12 +607,54 @@ public class MarketController {
 	}
 
 	@RequestMapping("hostNotice_list.do")
-	public String hostNotice() {
+	public String hostNotice(Model model, HttpServletRequest request) {
+		int totalRecord = 0;
+		int rowsize = 5;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.noticeDao.getListCount(1);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<NoticeDTO> pageList = this.noticeDao.getHostNoticeList(dto);
+
+		model.addAttribute("list", pageList);
+		model.addAttribute("Paging", dto);
+		
 		return "host/hostNotice_list";
 	}
 
 	@RequestMapping("hostQna_list.do")
-	public String hostQna() {
+	public String hostQna(Model model, HttpServletRequest request) {
+		int totalRecord = 0;
+		int rowsize = 5;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.qnaDao.getListCount(1);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<QnaDTO> pageList = this.qnaDao.getQnaListHost(dto);
+
+		model.addAttribute("list", pageList);
+		model.addAttribute("Paging", dto);
+		
 		return "host/hostQna_list";
 	}
 
@@ -648,8 +689,132 @@ public class MarketController {
 	}
 
 	@RequestMapping("admin_notice.do")
-	public String adminNotice() {
+	public String adminNotice(HttpServletRequest request, Model model, @RequestParam("sort") String sort) {
+		int totalRecord = 0;
+		int rowsize = 5;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		PageDTO dto = null;
+		List<NoticeDTO> pageList = null;
+
+		if (sort.equals("total")) {
+			totalRecord = this.noticeDao.getListAllCount();
+
+			dto = new PageDTO(page, rowsize, totalRecord, 3);
+
+			pageList = this.noticeDao.getNoticeAllList(dto);
+		} else if (sort.equals("host")) {
+			totalRecord = this.noticeDao.getListCount(1);
+
+			dto = new PageDTO(page, rowsize, totalRecord, 3);
+
+			pageList = this.noticeDao.getHostNoticeList(dto);
+		} else if (sort.equals("member")) {
+			totalRecord = this.noticeDao.getListCount(0);
+
+			dto = new PageDTO(page, rowsize, totalRecord, 3);
+
+			pageList = this.noticeDao.getMemberNoticeList(dto);
+		}
+		model.addAttribute("list", pageList);
+		model.addAttribute("Paging", dto);
+		model.addAttribute("sort", sort);
+
 		return "admin_notice";
+	}
+
+	@RequestMapping("admin_notice_insert.do")
+	public String adminNoticeInsert() {
+		return "admin_notice_insertForm";
+	}
+
+	@RequestMapping("admin_notice_insert_ok.do")
+	public void adminNoticeInsertOk(NoticeDTO dto, HttpServletResponse response)
+			throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+
+		int result = this.noticeDao.insertNotice(dto);
+
+		if (result > 0) {
+			out.println("<script>");
+			out.println("location.href='admin_notice.do?sort=total'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('등록 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+	}
+
+	@RequestMapping("notice_del.do")
+	public void adminNoticeDel(@RequestParam("notice_num") int notice_num, HttpServletResponse response,
+			@RequestParam("sort") String sort) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+
+		int result = this.noticeDao.deleteNotice(notice_num);
+
+		if (result > 0) {
+			this.noticeDao.updateNoticeNum(notice_num);
+			out.println("<script>");
+			out.println("location.href='admin_notice.do?sort=" + sort + "'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('삭제 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+	}
+
+	@RequestMapping("notice_edit.do")
+	public String adminNoticeEdti(@RequestParam("notice_num") int notice_num, Model model, @RequestParam("sort") String sort, @RequestParam("page") int page) {
+		NoticeDTO dto = this.noticeDao.getNoticeCont(notice_num);
+
+		model.addAttribute("dto", dto);
+		model.addAttribute("sort", sort);
+		model.addAttribute("page", page);
+		
+		return "admin_notice_edit";
+	}
+
+	@RequestMapping("admin_notice_edit_ok.do")
+	public void adminNoticeEdidOk(NoticeDTO dto, HttpServletResponse response, @RequestParam("page") int page)
+			throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+
+		int result = this.noticeDao.editNotice(dto);
+		
+		if (result > 0) {
+			
+			String sort = null;
+			if(dto.getNotice_flag() == 0) {
+				sort = "member";
+			} else if (dto.getNotice_flag() == 1) {
+				sort = "host";
+			}
+			out.println("<script>");
+			out.println("location.href='admin_notice.do?sort=" + sort + "&page=" + page +"'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('수정 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+
 	}
 
 	@RequestMapping("admin_member_list.do")

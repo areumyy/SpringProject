@@ -9,7 +9,7 @@
 		select count(*) from frip_qna where qna_flag = #{qna_flag}
 	</select>
 	
-	<select id="qna_list" parameterType="com.market.model.PageDTO" resultType="com.market.model.QnaDTO">
+	<select id="qna_list_member" parameterType="com.market.model.PageDTO" resultType="com.market.model.QnaDTO">
 		<![CDATA[
 			select * from (select b.*, row_number() over(order by qna_num) rnum from frip_qna b where qna_flag = 0) 
 			where rnum >= #{startNo} and rnum <= #{endNo}
@@ -25,5 +25,12 @@
 			select * from (select b.*, row_number() over(order by qna_num) rnum from frip_qna b where qna_flag = 0 and qna_title like '%' || #{keyword} || '%') 
 			where rnum >= #{startNo} and rnum <= #{endNo}
 		]]>
+	</select>
+	
+	<select id="qna_list_host" parameterType="com.market.model.PageDTO" resultType="com.market.model.QnaDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by qna_num) rnum from frip_qna b where qna_flag =1) 
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]> 
 	</select>
 </mapper>

@@ -16,27 +16,27 @@
 	<header class="header">
 		<section class="menu1">
 			<div class="menu1-1">
-				<c:if test="${loginType == null }">
 					<div class="host_btn">
 						<a>
-							<div class="host_btn_1">로그인이 필요합니다.</div>
+							<c:if test="${loginType == null }">
+								<div class="host_btn_1" id="guest">로그인이 필요합니다.</div>
+							</c:if>
+							<c:if test="${loginType == 'member' }">
+								<div class="host_btn" id="member_btn">
+									<a href="<%=request.getContextPath() %>/hostMain.do?loginDto=${loginDto}">
+										<div class="host_btn_1">호스트 센터</div>
+									</a>
+								</div>
+							</c:if>
+							<c:if test="${loginType == 'admin' }">
+								<div class="host_btn" id="host_btn">
+									<a href="<%=request.getContextPath() %>/admin_frip_pass.do">
+										<div class="host_btn_1">관리자 센터</div>
+									</a>
+								</div>
+							</c:if>
 						</a>
 					</div>
-				</c:if>
-				<c:if test="${loginType == 'member' }">
-					<div class="host_btn">
-						<a href="<%=request.getContextPath() %>/hostMain.do?loginDto=${loginDto}" target="_blank">
-							<div class="host_btn_1">호스트 센터</div>
-						</a>
-					</div>
-				</c:if>
-				<c:if test="${loginType == 'admin' }">
-					<div class="host_btn">
-						<a href="#" target="_blank">
-							<div class="host_btn_1">관리자 센터</div>
-						</a>
-					</div>
-				</c:if>
 				<div class="info_btn">
 					<!-- 로그인 전 -->
 					<c:if test="${loginDto == null }">

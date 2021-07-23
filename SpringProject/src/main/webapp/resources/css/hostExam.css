@@ -31,6 +31,33 @@
     align-content: flex-start;
 }
 
+.list_footer {
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	width: 100%;
+	padding: 30px 0px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.page_link {
+	color: black;
+	padding: .375rem .75rem;
+	border-radius: 50%;
+	margin-right: 5px;
+	text-decoration: none;
+}
+
+.page_link:hover {
+	background-color: #dedede;
+}
+
+.paging_active {
+	color: rgb(51, 151, 255);
+}
 @media (max-width: 768px){
 	.MainFrame{
 	    display: flex;
