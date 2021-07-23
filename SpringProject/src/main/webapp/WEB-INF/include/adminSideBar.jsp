@@ -84,7 +84,7 @@
 					</div>
 					
 					<div id="menuFrame4" class="menubutton">
-						<button type="button" id="4" class="ul" onclick="location.href='admin_member_list.do'">
+						<button type="button" id="4" class="ul" onclick="location.href='admin_member_list.do?sort=total'">
 							<span class="glyphicon glyphicon-question-sign"  aria-hidden="true"></span>
 							회원 조회
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>

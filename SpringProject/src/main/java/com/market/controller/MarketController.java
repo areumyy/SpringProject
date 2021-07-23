@@ -628,7 +628,7 @@ public class MarketController {
 
 		model.addAttribute("list", pageList);
 		model.addAttribute("Paging", dto);
-		
+
 		return "host/hostNotice_list";
 	}
 
@@ -654,7 +654,7 @@ public class MarketController {
 
 		model.addAttribute("list", pageList);
 		model.addAttribute("Paging", dto);
-		
+
 		return "host/hostQna_list";
 	}
 
@@ -735,8 +735,7 @@ public class MarketController {
 	}
 
 	@RequestMapping("admin_notice_insert_ok.do")
-	public void adminNoticeInsertOk(NoticeDTO dto, HttpServletResponse response)
-			throws IOException {
+	public void adminNoticeInsertOk(NoticeDTO dto, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 
 		PrintWriter out = response.getWriter();
@@ -778,13 +777,14 @@ public class MarketController {
 	}
 
 	@RequestMapping("notice_edit.do")
-	public String adminNoticeEdti(@RequestParam("notice_num") int notice_num, Model model, @RequestParam("sort") String sort, @RequestParam("page") int page) {
+	public String adminNoticeEdti(@RequestParam("notice_num") int notice_num, Model model,
+			@RequestParam("sort") String sort, @RequestParam("page") int page) {
 		NoticeDTO dto = this.noticeDao.getNoticeCont(notice_num);
 
 		model.addAttribute("dto", dto);
 		model.addAttribute("sort", sort);
 		model.addAttribute("page", page);
-		
+
 		return "admin_notice_edit";
 	}
 
@@ -796,17 +796,17 @@ public class MarketController {
 		PrintWriter out = response.getWriter();
 
 		int result = this.noticeDao.editNotice(dto);
-		
+
 		if (result > 0) {
-			
+
 			String sort = null;
-			if(dto.getNotice_flag() == 0) {
+			if (dto.getNotice_flag() == 0) {
 				sort = "member";
 			} else if (dto.getNotice_flag() == 1) {
 				sort = "host";
 			}
 			out.println("<script>");
-			out.println("location.href='admin_notice.do?sort=" + sort + "&page=" + page +"'");
+			out.println("location.href='admin_notice.do?sort=" + sort + "&page=" + page + "'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
@@ -818,7 +818,89 @@ public class MarketController {
 	}
 
 	@RequestMapping("admin_member_list.do")
-	public String adminMember() {
+	public String adminMember(Model model, HttpServletRequest request, @RequestParam("sort") String sort) {
+		int totalRecord = 0;
+		int rowsize = 5;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		PageDTO dto = null;
+		List<MemberDTO> memberList = null;
+
+		if (sort.equals("total")) {
+			totalRecord = this.memberDao.getAllCount();
+			dto = new PageDTO(page, rowsize, totalRecord, 3);
+			memberList = this.memberDao.getAllList(dto);
+			List<MemberDTO> hostlist = this.memberDao.getMemberList(dto);
+			model.addAttribute("hostlist", hostlist);
+
+		} else if (sort.equals("host")) {
+			totalRecord = this.memberDao.getHostCount();
+			dto = new PageDTO(page, rowsize, totalRecord, 3);
+			memberList = this.memberDao.getHostList(dto);
+
+		} else if (sort.equals("member")) {
+			totalRecord = this.memberDao.getAllCount() - this.memberDao.getHostCount();
+			dto = new PageDTO(page, rowsize, totalRecord, 3);
+			memberList = this.memberDao.getMemberList(dto);
+
+		} else if (sort.equals("out")) {
+			totalRecord = this.memberDao.getOutCount();
+			dto = new PageDTO(page, rowsize, totalRecord, 3);
+			memberList = this.memberDao.getOutList(dto);
+		}
+
+		model.addAttribute("list", memberList);
+		model.addAttribute("Paging", dto);
+		model.addAttribute("sort", sort);
+
+		return "admin_member_list";
+	}
+
+	@RequestMapping("admin_member_del.do")
+	public void adminMemDel(Model model, HttpServletResponse response, @RequestParam("sort") String sort,
+			@RequestParam("page") String page, @RequestParam("check") int[] mem_num) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+
+		this.memberDao.updateMemberDel(mem_num);
+
+		out.println("<script>");
+		out.println("location.href='admin_member_list.do?sort=" + sort + "&page=" + page + "'");
+		out.println("</script>");
+	}
+
+	@RequestMapping("admin_member_search.do")
+	public String adminMemSearch(Model model, HttpServletRequest request, @RequestParam("sort") String sort,
+			@RequestParam("field") String field, @RequestParam("keyword") String keyword) {
+		int totalRecord = 0;
+		int rowsize = 5;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.memberDao.getSearchCount(field, keyword);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3, field, keyword);
+
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<MemberDTO> pageList = this.memberDao.getSearchMember(dto);
+
+		model.addAttribute("list", pageList);
+		model.addAttribute("Paging", dto);
+		model.addAttribute("sort", "total");
+
 		return "admin_member_list";
 	}
 

@@ -29,4 +29,86 @@
 		insert into frip_member values(#{mem_num},#{mem_name},#{mem_email},#{mem_pwd},#{mem_nick},#{mem_phone},default,sysdate,default,null)
 	</insert>
 
+	<select id="count_all" resultType="int">
+		select count(*) from frip_member where mem_status != 0
+	</select>
+	
+	<select id="list_all" parameterType="com.market.model.PageDTO" resultType="com.market.model.MemberDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by mem_num desc) rnum from frip_member b where mem_status != 0) 
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]> 
+	</select>
+	
+	<select id="count_host" resultType="int">
+		select count(*) from frip_member where mem_status = 2
+	</select>
+	
+	<select id="list_host" parameterType="com.market.model.PageDTO" resultType="com.market.model.MemberDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by mem_num desc) rnum from frip_member b where mem_status = 2) 
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]>
+	</select>
+	
+	<select id="list_member" parameterType="com.market.model.PageDTO" resultType="com.market.model.MemberDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by mem_num desc) rnum from frip_member b where mem_status = 1) 
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]>
+	</select>
+	
+	<select id="count_out" resultType="int">
+		select count(*) from frip_member where mem_status = 3
+	</select>
+	
+	<select id="list_out" parameterType="com.market.model.PageDTO" resultType="com.market.model.MemberDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by mem_num desc) rnum from frip_member b where mem_status = 3) 
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]>
+	</select>
+	
+	<update id="update_del" parameterType="int">
+		update frip_member set mem_status = 3 where mem_num = #{target}
+	</update>
+	
+	<select id="count_total" parameterType="String" resultType="int">
+		select count(*) from frip_member where mem_name like '%' || #{keyword} || '%' or mem_nick like '%' || #{keyword} || '%' or mem_phone like '%' || #{keyword} || '%'
+	</select>
+	<select id="count_name" parameterType="String" resultType="int">
+		select count(*) from frip_member where mem_name like '%' || #{keyword} || '%'
+	</select>
+	<select id="count_nick" parameterType="String" resultType="int">
+		select count(*) from frip_member where mem_nick like '%' || #{keyword} || '%'
+	</select>
+	<select id="count_phone" parameterType="String" resultType="int">
+		select count(*) from frip_member where mem_phone like '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="list_total" parameterType="com.market.model.PageDTO" resultType="com.market.model.MemberDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by mem_num desc) rnum from frip_member b where mem_name like '%' || #{keyword} || '%' or mem_nick like '%' || #{keyword} || '%' or mem_phone like '%' || #{keyword} || '%') 
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]>
+	</select> 
+	<select id="list_name" parameterType="com.market.model.PageDTO" resultType="com.market.model.MemberDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by mem_num desc) rnum from frip_member b where mem_name like '%' || #{keyword} || '%')
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]>
+	</select> 
+	<select id="list_nick" parameterType="com.market.model.PageDTO" resultType="com.market.model.MemberDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by mem_num desc) rnum from frip_member b where mem_nick like '%' || #{keyword} || '%')
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]>
+	</select> 
+	<select id="list_phone" parameterType="com.market.model.PageDTO" resultType="com.market.model.MemberDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by mem_num desc) rnum from frip_member b where mem_phone like '%' || #{keyword} || '%')
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]>
+	</select> 
+	
 </mapper>

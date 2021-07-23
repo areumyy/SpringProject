@@ -1,5 +1,7 @@
 package com.market.model;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,4 +51,56 @@ public class MemberDAOImpl implements MemberDAO {
 		return this.sqlSession.insert("insert_member", dto);
 	}
 
+	@Override
+	public int getAllCount() {
+		return this.sqlSession.selectOne("count_all");
+	}
+
+	@Override
+	public List<MemberDTO> getAllList(PageDTO dto) {
+		return this.sqlSession.selectList("list_all", dto);
+	}
+
+	@Override
+	public int getHostCount() {
+		return this.sqlSession.selectOne("count_host");
+	}
+
+	@Override
+	public List<MemberDTO> getHostList(PageDTO dto) {
+		return this.sqlSession.selectList("list_host", dto);
+	}
+
+	@Override
+	public List<MemberDTO> getMemberList(PageDTO dto) {
+		return this.sqlSession.selectList("list_member", dto);
+	}
+
+	@Override
+	public int getOutCount() {
+		return this.sqlSession.selectOne("count_out");
+	}
+
+	@Override
+	public List<MemberDTO> getOutList(PageDTO dto) {
+		return this.sqlSession.selectList("list_out", dto);
+	}
+
+	@Override
+	public void updateMemberDel(int[] mem_num) {
+		for (int i = 0; i < mem_num.length; i++) {
+			int target = mem_num[i];
+			this.sqlSession.update("update_del", target);
+		}
+	}
+
+	@Override
+	public int getSearchCount(String field, String keyword) {
+		return this.sqlSession.selectOne("count_" + field, keyword);
+	}
+
+	@Override
+	public List<MemberDTO> getSearchMember(PageDTO dto) {
+		return this.sqlSession.selectList("list_" + dto.getField(), dto);
+	}
 }
