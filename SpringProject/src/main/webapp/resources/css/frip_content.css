@@ -249,18 +249,18 @@ button {
 .Content_Img1 {
     min-height: 1px;
 }
-
+/* 
 .image-slide img {
     display: block;
 }
-
+ */
 .Content_Img2 {
     display: none !important;
 }
 
 .Content_Img3 {
     display: initial;
-    border-radius: 0px;
+    border-radius: 5px;
     width: 100%;
     height: 100%;
 }
@@ -946,23 +946,25 @@ div[Attributes Style] {
 .Content_Recommend1 {
     max-width: 1200px;
     border: 0px;
-    padding: 0 30px;
 }
 
 .Content_Recommend1 > header {
-    padding: 0px 20px;
 }
 
 .Content_Recommend2 {
     display: flex;
-    overflow: auto;
+	min-height: 1px;
+	justify-content: space-between !important;
 }
 
 .Content_Recommend2 > div {
-    -webkit-box-flex: 1;
-    flex: 1 0 auto;
-    max-width: 184px;
-    margin-right: 8px;
+    margin-right: 15px;
+	margin-bottom: 30px;
+	width: calc(20% - 12px) !important;
+}
+
+..Content_Recommend2>:nth-child(5n) {
+	margin-right: 0px;
 }
 
 .Content_Recommend3 {

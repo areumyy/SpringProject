@@ -2,6 +2,7 @@ package com.market.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,9 +10,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.market.model.ClassDAO;
+import com.market.model.ClassDTO;
 import com.market.model.MemberDAO;
 import com.market.model.MemberDTO;
 
@@ -20,6 +24,9 @@ public class MarketController {
 
 	@Autowired
 	private MemberDAO memberDao;
+	
+	@Autowired
+	private ClassDAO classDao;
 
 	@RequestMapping("main.do")
 	public String main() {
@@ -136,10 +143,10 @@ public class MarketController {
 		return "host_info";
 	}
 
-	@RequestMapping("category_list.do")
-	public String cateList() {
-		return "category_list";
-	}
+	/*
+	 * @RequestMapping("category_list.do") public String cateList() { return
+	 * "category_list"; }
+	 */
 
 	@RequestMapping("option_select.do")
 	public String optionSel() {
@@ -275,4 +282,82 @@ public class MarketController {
 	public String fripContent() {
 		return "frip_content";
 	}
+	
+	// 선택 카테고리 전체 리스트 
+	@RequestMapping("cooking_alllist.do")
+	public String cooking_alllist(@RequestParam("num") int category_num, Model model) {
+		
+		model.addAttribute("category_num", category_num);
+		
+		// 카테고리의 전체 프립 수
+		int totalallcount = this.classDao.getAllListCount(category_num);
+		// 카테고리의 금주의 프립 수
+		int weekallcount = this.classDao.getWeekAllListCount(category_num);
+		// 카테고리의 신규 프립 수
+		int newallcount = this.classDao.getNewAllListCount(category_num);
+		
+		model.addAttribute("TotalAllCount", totalallcount);
+		model.addAttribute("WeekAllCount", weekallcount);
+		model.addAttribute("NewAllCount", newallcount);
+		
+		// 카테고리 이름
+		ClassDTO categoryname = this.classDao.getCategoryName(category_num);
+		// 하위카테고리 이름 리스트 가져오기
+		List<ClassDTO> categorynameList = this.classDao.getCategoryNameList(category_num);
+		
+		model.addAttribute("CategoryName", categoryname);
+		model.addAttribute("CategoryNameList", categorynameList);
+		
+		// 인기 프립 리스트 가져오기
+		List<ClassDTO> bestclassallList = this.classDao.getBestClassAllList(category_num);
+		// 금주의 프립 리스트 가져오기
+		List<ClassDTO> weekclassallList = this.classDao.getWeekClassAllList(category_num);
+		// 신규 프립 리스트 가져오기
+		List<ClassDTO> newclassallList = this.classDao.getNewClassAllList(category_num);
+		
+		model.addAttribute("BestAllList", bestclassallList);
+		model.addAttribute("WeekAllList", weekclassallList);
+		model.addAttribute("NewAllList", newclassallList);
+		
+		return "category_all_list";
+	}
+	
+	
+	// 선택 카테고리 리스트 
+	@RequestMapping("cooking_list.do")
+	public String cooking_list(@RequestParam("num") int category_num, Model model) {
+		
+		// 카테고리의 전체 프립 수
+		int totalcount = this.classDao.getListCount(category_num);
+		// 카테고리의 금주의 프립 수
+		int weekcount = this.classDao.getWeekListCount(category_num);
+		// 카테고리의 신규 프립 수
+		int newcount = this.classDao.getNewListCount(category_num);
+		
+		model.addAttribute("TotalCount", totalcount);
+		model.addAttribute("WeekCount", weekcount);
+		model.addAttribute("NewCount", newcount);
+		
+		// 카테고리 이름
+		ClassDTO categoryname = this.classDao.getCategoryName(category_num);
+		// 하위카테고리 이름 리스트 가져오기
+		List<ClassDTO> categorynameList = this.classDao.getCategoryNameList(category_num);
+		
+		model.addAttribute("CategoryName", categoryname);
+		model.addAttribute("CategoryNameList", categorynameList);
+		
+		// 인기 프립 리스트 가져오기
+		List<ClassDTO> bestclassList = this.classDao.getBestClassList(category_num);
+		// 금주의 프립 리스트 가져오기
+		List<ClassDTO> weekclassList = this.classDao.getWeekClassList(category_num);
+		// 신규 프립 리스트 가져오기
+		List<ClassDTO> newclassList = this.classDao.getNewClassList(category_num);
+		
+		model.addAttribute("BestList", bestclassList);
+		model.addAttribute("WeekList", weekclassList);
+		model.addAttribute("NewList", newclassList);
+		
+		return "category_list";
+	}
+	
 }

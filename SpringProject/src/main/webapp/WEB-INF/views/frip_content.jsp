@@ -1304,7 +1304,6 @@
 					</div>
 					
 					
-					
 					<section class="Content_Intro2 Content_Recommend1">
 						<header class="Content_Intro3">
 							<h4 class="Content_Intro4">이런 프립은 어때요?</h4>
@@ -1325,6 +1324,7 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="생활소믈리에 기초 와인 강의 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/WINE_MAIN_01_1504598552674">
 															</div>
 														</div>
@@ -1366,6 +1366,7 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="Tea+Cocktail 차 마시며 배우는 테마가 있는 칵테일 만들기 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/1586175181732_bf1jwj">
 															</div>
 														</div>
@@ -1408,6 +1409,7 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="신사 / 가로수길 칵테일 클래스 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/product_banner_1560603284574_547509">
 															</div>
 														</div>
@@ -1450,6 +1452,50 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="술술 놀면서 수제 맥주 만들기 썸네일" width="192"
+																	class="Content_Img3"
+																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="Content_Recommend_State1">
+												<div class="Content_Recommend_State2">판매중</div>
+											</div>
+										</div>
+										<div class="Frip_Title1">19세이상｜맥주를 즐기는 방법</div>
+										<div class="Frip_Title2">술술 놀면서 수제 맥주 만들기</div>
+										<div class="Frip_Price1">
+											<span class="Frip_Price2">40,000원</span>
+											<span class="Frip_Price3"></span>
+										</div>
+										<div class="Frip_Grade1">
+											<div class="Frip_Grade2">
+												<img
+													src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
+													alt="별점 icon">
+												<span>4.80</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="Content_Recommend3">
+								<a class="Content_Recommend4" href="#">
+									<div class="Content_Recommend5">
+										<div class="Content_Recommend6">
+											<div class="Content_Recommend_Place1">
+												<span class="Content_Recommend_Place2"><span>송파/강동구</span></span>
+											</div>
+											<div class="Content_Img1">
+												<img class="Content_Img2" width="192"
+													src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
+												<div class="Content_Main2" style="opacity: 1; display: block;">
+													<div style="display: block;">
+														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																<img alt="술술 놀면서 수제 맥주 만들기 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
 															</div>
 														</div>
@@ -1486,8 +1532,6 @@
 			<jsp:include page="../include/footer.jsp" />
 		</div>
 	</div>
-<!-- 
-	document.querySelector("#app > div > div.Content_Main1 > div > div > div.Content_Main4 > div.Content_Intro1 > div:nth-child(8) > div > div.Content_Main7 > div")
- -->
+
 </body>
 </html>
