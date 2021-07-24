@@ -74,7 +74,7 @@
 	</update>
 	
 	<select id="count_total" parameterType="String" resultType="int">
-		select count(*) from frip_member where mem_name like '%' || #{keyword} || '%' or mem_nick like '%' || #{keyword} || '%' or mem_phone like '%' || #{keyword} || '%'
+		select count(*) from frip_member where mem_name like '%' || #{keyword} || '%' or mem_nick like '%' || #{keyword} || '%' or mem_phone like '%' || #{keyword} || '%' or mem_email like '%' || #{keyword} || '%'
 	</select>
 	<select id="count_name" parameterType="String" resultType="int">
 		select count(*) from frip_member where mem_name like '%' || #{keyword} || '%'
@@ -85,10 +85,13 @@
 	<select id="count_phone" parameterType="String" resultType="int">
 		select count(*) from frip_member where mem_phone like '%' || #{keyword} || '%'
 	</select>
+	<select id="count_email" parameterType="String" resultType="int">
+		select count(*) from frip_member where mem_email like '%' || #{keyword} || '%'
+	</select>
 	
 	<select id="list_total" parameterType="com.market.model.PageDTO" resultType="com.market.model.MemberDTO">
 		<![CDATA[
-			select * from (select b.*, row_number() over(order by mem_num desc) rnum from frip_member b where mem_name like '%' || #{keyword} || '%' or mem_nick like '%' || #{keyword} || '%' or mem_phone like '%' || #{keyword} || '%') 
+			select * from (select b.*, row_number() over(order by mem_num desc) rnum from frip_member b where mem_name like '%' || #{keyword} || '%' or mem_nick like '%' || #{keyword} || '%' or mem_phone like '%' || #{keyword} || '%' or mem_email like '%' || #{keyword} || '%') 
 			where rnum >= #{startNo} and rnum <= #{endNo}
 		]]>
 	</select> 
@@ -110,5 +113,10 @@
 			where rnum >= #{startNo} and rnum <= #{endNo}
 		]]>
 	</select> 
-	
+	<select id="list_email" parameterType="com.market.model.PageDTO" resultType="com.market.model.MemberDTO">
+		<![CDATA[
+			select * from (select b.*, row_number() over(order by mem_num desc) rnum from frip_member b where mem_email like '%' || #{keyword} || '%')
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]>
+	</select> 
 </mapper>
