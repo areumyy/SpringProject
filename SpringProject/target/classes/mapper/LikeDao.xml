@@ -14,6 +14,13 @@
 	
 		select * from frip_class 
 		where class_num in(select like_target from frip_like where like_writer = #{mem_num} and like_flag = 1)
+		
+		
+		<!-- <![CDATA[
+			select * from (select b.*, row_number() over(order by class_num) rnum from frip_class b 
+			where class_num in(select like_target from frip_like where like_writer = #{class_memNum} and like_flag = 1)) 
+			where rnum >= #{startNo} and rnum <= #{endNo}
+		]]>  -->
 	</select>
 	
 	<!-- 찜 클래스 별 옵션 상세정보 (가격) -->
@@ -30,10 +37,19 @@
 	</select>
 	
 	<!-- 찜 클래스 별 별점 -->
-	<select id="class_score"  parameterType="int" resultType="Integer">
-		select avg(review_score) from frip_review
-		where review_classnum in(select like_target from frip_like
-		where like_writer = #{mem_num} and like_flag = 1) group by review_classnum
+	<select id="class_score"  parameterType="int" resultType="Integer">	        
+		select NVL(review_score, 0)
+		from frip_class
+		left outer join (select review_classNum, avg(review_score) review_score from frip_review group by review_classNum)
+		on class_num = review_classNum
+		where class_num in(select like_target from frip_like
+		where like_writer = #{mem_num} and like_flag = 1) order by class_num
+	</select>
+	
+	<!-- 찜 클래스 개수 -->
+	<select id="classList_count" parameterType="int" resultType="int">
+		select count(*) from frip_class 
+		where class_num in(select like_target from frip_like where like_writer = #{mem_num} and like_flag = 1)
 	</select>
 	
 	<!-- 찜 호스트 목록  -->
@@ -114,9 +130,18 @@
 		where option_classnum in(select class_num from frip_class where class_memnum = #{host_memNum})
 	</select>
 	
+	<!-- 호스트가 운영하는 클래스 별 별점 -->
+	<select id="hostClassScore"  parameterType="int" resultType="Integer">	        
+		select NVL(review_score, 0)
+		from frip_class
+		left outer join (select review_classNum, avg(review_score) review_score from frip_review group by review_classNum)
+		on class_num = review_classNum
+		where class_num in(select class_num from frip_class where class_memnum = #{host_memNum}) order by class_num
+	</select>
+	
 	<!-- 호스트가 운영하는 클래스 모든 리뷰1 (회원이름/회원프로필/리뷰내용/리뷰작성일) -->
 	<select id="classReview1"  parameterType="int" resultType="com.market.model.ReviewDTO">
-		select r.review_num , r.review_regdate, r.review_cont, m.mem_name, m.mem_profileimg
+		select r.review_num , r.review_regdate, r.review_cont, r.review_score, r.review_like, m.mem_name, m.mem_profileimg
 		from frip_member m join frip_review r 
 		on m.mem_num = r.review_writer
 		where review_classnum in(select class_num from frip_class
@@ -140,6 +165,52 @@
 		where review_classnum in(select class_num from frip_class
 		where class_memnum = #{host_memNum}) order by review_num
 	</select>
+
+	<!-- 좋아요 상태 -->
+	<select id="review_status" parameterType="java.util.Map" resultType="int">
+		select count(*) from frip_like where like_writer = #{like_writer} and like_target = #{like_target} and like_flag = 3
+	</select>
+	
+	<!-- 좋아요 누른 리뷰 리스트 -->
+	<select id="review_like_list" parameterType="java.util.Map"  resultType="Integer">
+		<!-- select * from frip_like where like_writer = #{mem_num} and like_flag = 3 order by like_target -->
+		select NVL(like_target, 0) from frip_review
+		left outer join (select like_target from frip_like where like_writer = #{mem_num} and like_flag = 3 order by like_target)
+		on review_num  = like_target
+		where review_classnum in(select class_num from frip_class where class_memnum = #{host_memNum}) order by review_num
+	</select>
+
+	<!-- 리뷰 좋아요 -->
+	<update id="review_like_plus" parameterType="int">
+		update frip_review set review_like = review_like + 1 where review_num = #{review_no}
+	</update>
+	
+	<!-- 리뷰 싫어요 -->
+	<update id="review_like_minus" parameterType="int">
+		update frip_review set review_like = review_like - 1 where review_num = #{review_no}
+	</update>
+	
+	<!-- 좋아요 DB 삭제 -->
+	<delete id="review_del" parameterType="java.util.Map">
+		delete from frip_like where like_writer = #{like_writer} and like_target = #{like_target} and like_flag = 3
+	</delete>
+	
+	<!-- 좋아요 DB 추가 -->
+	<insert id="review_add" parameterType="java.util.Map">
+		insert into frip_like values(#{like_writer}, #{like_target}, 3)
+	</insert>
+	
+	<!-- 리뷰 좋아요 개수 -->
+	<select id="review_like_count" parameterType="int" resultType="int">
+		select review_like from frip_review where review_num = #{review_no}
+	</select>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 </mapper>

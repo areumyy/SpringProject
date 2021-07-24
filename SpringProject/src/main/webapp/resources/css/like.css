@@ -365,7 +365,8 @@ input[id="tab02"]:checked ~ .review_search_option {
 }
 
 .review_score {
-	
+	font-size: 13px;
+    color: #9b9b9b;
 }
 
 .review_regdate {
@@ -407,7 +408,12 @@ input[id="tab02"]:checked ~ .review_search_option {
     color: #555;
 }
 
-.review_like_count {
+.review_like_on {
+	color: rgb(51, 151, 255);
+    vertical-align: bottom;
+}
+
+.review_like_off {
     vertical-align: bottom;
 }
 

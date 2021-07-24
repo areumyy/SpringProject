@@ -9,10 +9,11 @@ public class ReviewDTO {
 	private int review_writer;
 	private int review_classNum;
 	private int review_like;
-	private int review_score; 			// 평점: 1,2,3,4,5
+	private float review_score; 			// 평점: 1,2,3,4,5
 	private String review_cont;
 	private String review_regdate;
 	private String review_image;
+	private String review_reply;		
 	private String mem_name;			// 추가 (회원명)
 	private String mem_profileImg;		// 추가 (회원 프로필)
 	private String class_title;			// 추가 (클래스명)

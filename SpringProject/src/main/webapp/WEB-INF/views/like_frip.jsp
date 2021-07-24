@@ -53,7 +53,7 @@
 											<div class="place_like">
 												<span class="class_place">${dto.getClass_endArea() }</span>
 												<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"></button>
-												<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button>
+												<%-- <button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button> --%>
 											</div>
 											<!-- 사진 수정필요 -->
 											<img alt="class_img" src="<%=request.getContextPath() %>/resources/image/like/class_img.jpg" class="class_img">
@@ -61,13 +61,14 @@
 										<div class="class_hash">${dto.getClass_hash() }</div>
 										<div class="class_title">${dto.getClass_title() }</div>
 										<div class="class_price"> <fmt:formatNumber value="${optionCont[status.index].getOption_price() }" />원 </div>
-										<div class="class_score">
+										<div class="class_score">	
 											<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
-											<span>${classScore[status.index] }</span>
+											<span> <fmt:formatNumber value="${classScore[status.index] }" pattern="0.0"/> </span>
 										</div>
 									</a>
 								</div>
 							</c:forEach>
+							
 						</c:if>
 						
 						<c:if test="${empty classList }">

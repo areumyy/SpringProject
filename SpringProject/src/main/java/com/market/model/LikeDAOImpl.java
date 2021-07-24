@@ -1,6 +1,8 @@
 package com.market.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,13 @@ public class LikeDAOImpl implements LikeDAO {
 		
 		return this.sqlSession.selectList("class_score", mem_num);
 	}
+	
+	// 찜 클래스 개수
+	/*
+	 * @Override public int classList_count(int mem_num) {
+	 * 
+	 * return this.sqlSession.selectOne("classList_count", mem_num); }
+	 */
 
 	// 찜 호스트 목록 
 	@Override
@@ -116,6 +125,13 @@ public class LikeDAOImpl implements LikeDAO {
 		
 		return this.sqlSession.selectList("hostClassOption", host_memNum);
 	}
+	
+	// 호스트가 운영하는 클래스 별 별점
+	@Override
+	public List<Integer> host_class_score(int host_memNum) {
+		
+		return this.sqlSession.selectList("hostClassScore", host_memNum);
+	}
 
 	// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
 	@Override
@@ -137,6 +153,68 @@ public class LikeDAOImpl implements LikeDAO {
 		
 		return this.sqlSession.selectList("classReview3", host_memNum);
 	}
+	
+	// 좋아요 상태
+	@Override
+	public int review_status(HashMap<String, Integer> map) {
+		
+		return this.sqlSession.selectOne("review_status", map);
+	}
+	
+	// 좋아요 누른 리뷰 리스트
+	@Override
+	public List<Integer> review_like_list(HashMap<String, Integer> map) {
+		
+		return this.sqlSession.selectList("review_like_list", map);
+	}
+
+	// 리뷰 좋아요
+	@Override
+	public int review_like_plus(int review_no) {
+		
+		return this.sqlSession.update("review_like_plus", review_no);
+	}
+	
+	// 리뷰 싫어요
+	@Override
+	public int review_like_minus(int review_no) {
+		
+		return this.sqlSession.update("review_like_minus", review_no);
+	}
+
+	// 좋아요 DB 삭제
+	@Override
+	public int review_like_del(HashMap<String, Integer> map) {
+		
+		return this.sqlSession.delete("review_del", map);
+	}
+
+	// 좋아요 DB 추가
+	@Override
+	public int review_like_add(HashMap<String, Integer> map) {
+		
+		return this.sqlSession.insert("review_add", map);
+	}
+
+	// 리뷰 좋아요 개수
+	@Override
+	public int review_like_count(int review_no) {
+		
+		return this.sqlSession.selectOne("review_like_count", review_no);
+	}
+	
+
+	
+
+	
+
+
+
+	
+	
+	
+
+	
 
 	
 
