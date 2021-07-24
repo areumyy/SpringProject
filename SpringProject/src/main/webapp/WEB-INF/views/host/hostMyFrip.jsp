@@ -17,6 +17,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath()%>/resources/css/hostMyFrip.css"
 	rel="stylesheet" />
+<script src="./resources/js/hostMyFrip.js"></script>
 </head>
 <body>
 	<div class="mainFrame">
@@ -32,15 +33,16 @@
 					<div class="info_frame">
 						<div class="state">
 							<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-							  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+							  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked onclick="getClassList(1,'판매중')">
 							  <label class="btn btn-outline-primary" for="btnradio1">판매중</label>
 							
-							  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+							  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="getClassList(0,'대기중')">
 							  <label class="btn btn-outline-primary" for="btnradio2">대기중</label>
 							
-							  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+							  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="getClassList(2,'종료')">
 							  <label class="btn btn-outline-primary menuButton" for="btnradio3">종료</label>
 							</div>
+							
 							
 							<div class="class_group">
 								<c:forEach begin="1" end="4" var="i">
@@ -49,14 +51,11 @@
 											<div class="class_item_thumbnail">
 												<div class="class_item_top">
 													<span class="class_area">서울</span>
-													<!-- 스크랩 누른상태 -->
-													<i class="fas fa-bookmark fa-2x push" data-placement="left"></i>
-													<!-- 스크랩 안누른 상태 -->
-													<i class="far fa-bookmark fa-2x nopush" data-placement="left"></i>
+					
 												</div>
 												<div class="class_item_image">
 													<img class="class_img"
-														src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,w_310/product_banner_1623911236019_872487">
+														src="<%=request.getContextPath() %>/resources/upload/2021-7-20/1626768737637_test.png" height="150px">
 												</div>
 											</div>
 											<div class="class_item_hash">추가수량 확보 | 나만의 감성 만들기</div>

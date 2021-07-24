@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.model.OptionDAO">
+	<insert id="insertOption" parameterType="com.market.model.OptionDTO">
+		
+		<selectKey resultType="int" keyProperty="option_num" order="BEFORE">
+			select count(*) + 1 from frip_option
+		</selectKey>
+		
+		insert into frip_option values(#{option_num}, #{option_classNum}, #{option_name},#{option_price},
+			#{option_price})
+	</insert>
+</mapper>

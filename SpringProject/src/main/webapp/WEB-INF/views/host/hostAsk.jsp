@@ -67,7 +67,7 @@
 							      <td>클래스 명</td>
 							      <td>
 								      <div class="option_arcodion">
-										<button class=" accordion-button collapsed arcodion_selector askTitle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+										<button class="accordion-button collapsed arcodion_selector askTitle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 											<div class="arcodion_div">
 												<div class="arcodion_title">언제 진행하나요?</div>
 											</div>

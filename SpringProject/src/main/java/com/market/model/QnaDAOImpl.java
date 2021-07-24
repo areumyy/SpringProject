@@ -18,8 +18,8 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaDTO> getQnaList(PageDTO dto) {
-		return this.sqlSession.selectList("qna_list", dto);
+	public List<QnaDTO> getQnaListMember(PageDTO dto) {
+		return this.sqlSession.selectList("qna_list_member", dto);
 	}
 
 	@Override
@@ -35,6 +35,11 @@ public class QnaDAOImpl implements QnaDAO {
 	@Override
 	public List<QnaDTO> getQnaSearchList(PageDTO dto) {
 		return this.sqlSession.selectList("qna_search_list_member", dto);
+	}
+
+	@Override
+	public List<QnaDTO> getQnaListHost(PageDTO dto) {
+		return this.sqlSession.selectList("qna_list_host", dto);
 	}
 
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.model.ClassDAO">
+	<select id="countClass" resultType="int">
+		select count(*)+1 from frip_class 
+	</select>
+	
+	<insert id="insertClass" parameterType="com.market.model.ClassDTO">
+		
+		insert into frip_class values(#{class_num},1,#{class_category1}
+				,#{class_category2}, #{class_hash}, #{class_title}, #{class_image},#{class_startDate},#{class_endDate},
+				 #{class_count}, #{class_startArea}, #{class_endArea}, #{class_cont}, #{class_plan}, #{class_include},
+				#{class_exclude}, #{class_supply}, #{class_notice}, default, sysdate, default, default)
+	</insert>
+	
+	<select id="getList_MemNum" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select distinct * from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass} 
+			and class_delcheck = 'no'
+            and class_startdate > sysdate
+		]]>
+	</select>
+	
+	<select id="getList_endClass" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		select * from frip_class where class_memnum = #{mem_num}  
+			and class_pass = #{class_pass} and class_delcheck = 'no' and class_cal = '2'
+	</select>
+	
+	<select id="getList_classNum" parameterType="int" resultType="com.market.model.ClassDTO">
+		select * from frip_class where class_num = #{class_num}
+	</select>
+</mapper>

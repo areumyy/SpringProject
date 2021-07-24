@@ -115,3 +115,8 @@
 	-webkit-box-flex: 0;
 	flex: 0 0 auto;
 }
+
+.notice_btn_div {
+	margin: 20px 0px 10px;
+	text-align: right;
+}

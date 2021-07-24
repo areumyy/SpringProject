@@ -1,5 +1,6 @@
 $('#upload').change(function(){
     setImageFromFile(this, '#poster');
+    setImageFromFile(this, '[name=confirm_img]');
 });
 
 function setImageFromFile(input, expression) {

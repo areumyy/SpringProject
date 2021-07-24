@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.model.CategoryDAO">
+	
+	<select id="cate_list" resultType="com.market.model.CategoryDTO">
+		select distinct cate_one from frip_category
+	</select>
+	
+	<select id="cate_two_list" parameterType="String" resultType="com.market.model.CategoryDTO">
+		select cate_two from frip_category where cate_one = #{cate_one}
+	</select>
+	
+</mapper>

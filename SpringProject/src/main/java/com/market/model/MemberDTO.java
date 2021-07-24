@@ -13,5 +13,6 @@ public class MemberDTO {
 	private String mem_phone;
 	private int mem_point;
 	private String mem_regdate;
-	private String mem_delCheck;
+	private String mem_status;
+	private String mem_profileimg;
 }
