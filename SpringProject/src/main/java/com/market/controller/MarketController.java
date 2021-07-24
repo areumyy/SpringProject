@@ -28,6 +28,7 @@ import com.market.model.CategoryDAO;
 import com.market.model.CategoryDTO;
 import com.market.model.ClassDAO;
 import com.market.model.ClassDTO;
+import com.market.model.HostDAO;
 import com.market.model.HostDTO;
 import com.market.model.LikeDAO;
 import com.market.model.MemberDAO;
@@ -64,6 +65,8 @@ public class MarketController {
 	private OptionDAO optionDao;
 	@Autowired
 	private QnaDAO qnaDao;
+	@Autowired
+	private HostDAO hostDao;
 
 	@RequestMapping("main.do")
 	public String main() {
@@ -437,13 +440,45 @@ public class MarketController {
 	}
 
 	@RequestMapping("hostMain.do")
-	public String hostMain(Model model) {
+	public String hostMain(Model model, @RequestParam("loginNum") int loginNum) {
+		String page = null;
+		MemberDTO dto = this.memberDao.getMember(loginNum);
 
-		List<NoticeDTO> NList = this.noticeDao.getHostNoticeList();
+		if (dto.getMem_status() == 2) { // 호스트인 사람이 호스트페이지 접근했을때
+			List<NoticeDTO> NList = this.noticeDao.getHostNoticeList();
 
-		model.addAttribute("NList", NList);
+			model.addAttribute("NList", NList);
+			page = "host/hostMain";
+			System.out.println(dto.getMem_status());
+		} else { // 호스트 아닌 사람이 호스트 페이지 접근했을때
+			page = "host/hostInsert";
+			System.out.println(dto.getMem_status());
+		}
 
-		return "host/hostMain";
+		return page;
+	}
+
+	@RequestMapping("host_insert.do")
+	public void hostInsertOk(HostDTO dto, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+		
+		int res = this.hostDao.insertHost(dto);
+
+		if (res > 0) {
+			this.memberDao.changeHost(dto.getHost_memNum());
+			
+			out.println("<script>");
+			out.println("location.href='hostMain.do?loginNum=" + dto.getHost_memNum() + "'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('호스트 등록 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+
 	}
 
 	@RequestMapping("hostMakeFrip.do")
@@ -502,7 +537,7 @@ public class MarketController {
 
 	@RequestMapping("insertFrip.do")
 	public void insertFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
-			HttpServletRequest request, HttpServletResponse response) throws Exception { // 파일 업로드 처리
+			HttpServletRequest request, HttpServletResponse response, @RequestParam("login_num") String login_num) throws Exception { // 파일 업로드 처리
 		response.setContentType("text/html; charset=UTF-8");
 
 		dto.setClass_image(upload.fileUpload(mRequest));
@@ -537,7 +572,7 @@ public class MarketController {
 		if (result == 1 && result2 == 1) {
 			out.println("<script>");
 			out.println("alert('등록 성공!')");
-			out.println("location.href='hostMain.do'");
+			out.println("location.href='hostMain.do?loginNum=" + login_num + "'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");

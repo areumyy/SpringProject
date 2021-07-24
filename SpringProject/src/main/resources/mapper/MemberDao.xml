@@ -21,6 +21,10 @@
 		select * from frip_member where mem_email = #{mem_email}
 	</select>
 	
+	<select id="get_login_member_num" parameterType="int" resultType="com.market.model.MemberDTO">
+		select * from frip_member where mem_num = #{mem_num}
+	</select>
+	
 	<insert id="insert_member" parameterType="com.market.model.MemberDTO">
 		<selectKey resultType="int" keyProperty="mem_num" order="BEFORE">
 			select count(*) from frip_member
@@ -119,4 +123,8 @@
 			where rnum >= #{startNo} and rnum <= #{endNo}
 		]]>
 	</select> 
+	
+	<update id="change_host" parameterType="int">
+		update frip_member set mem_status = 2 where mem_num = #{mem_num}
+	</update>
 </mapper>

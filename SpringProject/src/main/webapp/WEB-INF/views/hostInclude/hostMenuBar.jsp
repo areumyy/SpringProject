@@ -12,7 +12,7 @@
 </head>
 <body>
 	<header class="hostMenuBar">
-			<a class="homeButton" href="<%=request.getContextPath()%>/hostMain.do">
+			<a class="homeButton" href="<%=request.getContextPath()%>/hostMain.do?loginNum=${loginDto.getMem_num()}">
 				<img src="<%=request.getContextPath()%>/resources/logo/logo.png"
 				width="80px" height="30px" alt="?"> 호스트 관리 페이지
 			</a>

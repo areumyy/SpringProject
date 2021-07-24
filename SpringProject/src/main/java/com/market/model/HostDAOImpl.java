@@ -9,4 +9,9 @@ public class HostDAOImpl implements HostDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+	@Override
+	public int insertHost(HostDTO dto) {
+		return this.sqlSession.insert("insert_host", dto);
+	}
 }

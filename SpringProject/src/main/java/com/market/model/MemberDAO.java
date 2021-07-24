@@ -11,7 +11,9 @@ public interface MemberDAO {
 	public int loginCheck(String mem_email, String mem_pwd);
 
 	public MemberDTO getMember(String mem_email);
-
+	
+	public MemberDTO getMember(int mem_num);
+	
 	public int insertMember(MemberDTO dto);
 
 	public int getAllCount();
@@ -33,4 +35,6 @@ public interface MemberDAO {
 	public int getSearchCount(String field, String keyword);
 
 	public List<MemberDTO> getSearchMember(PageDTO dto);
+	
+	public void changeHost(int mem_num);
 }

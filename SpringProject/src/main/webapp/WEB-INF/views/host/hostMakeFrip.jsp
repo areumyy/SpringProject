@@ -64,6 +64,7 @@
 					
 					<form method="post" action="<%=request.getContextPath()%>/insertFrip.do"
 						 onsubmit="return checkIt();" enctype="multipart/form-data">
+						 <input type="hidden" name="login_num" value="${loginDto.getMem_num() }">
 						<!-- 카테고리 선택 -->
 						<div class="Main_line" id="main_1">
 							<div class="Main_line_1">
