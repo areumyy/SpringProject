@@ -32,4 +32,9 @@ public class BookingDAOImpl implements BookingDAO {
 	public int entercancel(int booking_num) {
 		return this.sqlSession.update("entercancel", booking_num);
 	}
+
+	@Override
+	public int getCountEnter(int class_num) {
+		return this.sqlSession.selectOne("count_class_enter", class_num);
+	}
 }

@@ -30,7 +30,7 @@
 			select count(*) from frip_member
 		</selectKey>
 		
-		insert into frip_member values(#{mem_num},#{mem_name},#{mem_email},#{mem_pwd},#{mem_nick},#{mem_phone},default,sysdate,default,null)
+		insert into frip_member values(#{mem_num},#{mem_name},#{mem_email},#{mem_pwd},#{mem_nick},#{mem_phone},default,default,sysdate,1)
 	</insert>
 
 	<select id="count_all" resultType="int">

@@ -20,5 +20,9 @@
 		where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
 		]]>
 	</select>
+	
+	<select id="count_class_enter" parameterType="int" resultType="int">
+		select count(*) from frip_booking where booking_classNum = #{class_num} and booking_enterCheck = 'yes'
+	</select>
 </mapper>
 

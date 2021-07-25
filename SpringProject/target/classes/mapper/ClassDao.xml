@@ -29,7 +29,7 @@
 	
 	<select id="getList_endClass" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
 		select * from frip_class where class_memnum = #{mem_num}  
-			and class_pass = #{class_pass} and class_delcheck = 'no' and class_cal = '2'
+			and class_pass = #{class_pass} and class_delcheck = 'no'
 	</select>
 	
 	<select id="getList_classNum" parameterType="int" resultType="com.market.model.ClassDTO">
@@ -67,4 +67,9 @@
 	<update id="entercancel" parameterType="int">
 		update frip_booking set booking_entercheck = 'no' where booking_num = #{booking_num}
 	</update>
+	
+	<select id="count_endClass" parameterType="int" resultType="int">
+		select count(*) from frip_class where class_memnum = #{mem_num}  
+			and class_pass = 1 and class_delcheck = 'no'
+	</select>
 </mapper>

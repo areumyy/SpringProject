@@ -53,4 +53,9 @@ public class ClassDAOImpl implements ClassDAO {
 	public List<ClassDTO> getList(HashMap<String, Object> map) {
 		return this.sqlSession.selectList("getList", map);
 	}
+
+	@Override
+	public int getCount_endClass(int mem_num) {
+		return this.sqlSession.selectOne("count_endClass", mem_num);
+	}
 }

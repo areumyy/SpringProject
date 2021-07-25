@@ -13,4 +13,6 @@ public interface ClassDAO {
 	public ClassDTO getList_classNum(int class_num);
 	public int countClass(int mem_num);
 	public List<ClassDTO> getList(HashMap<String, Object> map);
+	
+	public int getCount_endClass(int mem_num);
 } 

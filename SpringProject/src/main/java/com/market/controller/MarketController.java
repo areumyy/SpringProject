@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -535,7 +536,7 @@ public class MarketController {
 			HttpServletRequest request) {
 		JsonObject jsonObject = new JsonObject();
 
-		String fileRoot = "C:\\Users\\SOS\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\summerUpload\\";
+		String fileRoot = "C:\\Users\\sd020\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\summerUpload\\";
 
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
@@ -788,7 +789,47 @@ public class MarketController {
 	}
 
 	@RequestMapping("hostCalculateReq.do")
-	public String hostCalReq() {
+	public String hostCalReq(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
+
+		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
+
+		int totalRecord = 0;
+		int rowsize = 5;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.classDao.getCount_endClass(mem_num);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+
+		map.put("mem_num", mem_num);
+		map.put("class_pass", 1);
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		List<ClassDTO> classList = this.classDao.getList_endClass(map);
+		List<Integer> classBuy = new ArrayList<Integer>();
+		List<Integer> classEnter = new ArrayList<Integer>();
+		
+		for(int i =0; i<classList.size(); i++) {
+			classBuy.add(this.bookingDao.getCount(classList.get(i).getClass_num()));
+			classEnter.add(this.bookingDao.getCountEnter(classList.get(i).getClass_num()));
+		}
+		
+		model.addAttribute("list", classList);
+		model.addAttribute("buyList", classBuy);
+		model.addAttribute("enterList", classEnter);
+		model.addAttribute("Paging", dto);
+		
 		return "host/hostCalculateReq";
 	}
 
