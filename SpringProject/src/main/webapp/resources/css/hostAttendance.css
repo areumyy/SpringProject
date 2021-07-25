@@ -35,11 +35,42 @@
 .cont_frame {
 	width:100%;
 	background-color:white;
-	min-height:500px;
+	min-height:600px;
 	border-radius:1px;
-	margin-top:100px;
+	margin-top:50px;
 	padding-top:5px;
 	padding-left:10px;
+}
+.table td , th{
+	text-align:center;
+}
+
+.qna_list_footer {
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	width: 100%;
+	padding: 30px 0px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.page_link {
+	color: black;
+	padding: .375rem .75rem;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+
+.page_link:hover {
+	background-color: #dedede;
+	color: black;
+}
+
+.active {
+	color: rgb(51, 151, 255);
 }
 
 /* hostAttendance_member */
@@ -56,7 +87,7 @@
 } 
 
 
-@media (max-width: 854px){
+@media (max-width: 768px){
 	.MainFrame{
 	    display: flex;
 	    flex-flow: column nowrap;

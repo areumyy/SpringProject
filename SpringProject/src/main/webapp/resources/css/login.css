@@ -118,7 +118,11 @@
     margin-bottom: 10px;
 }
 
-
+.email_check_area {
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 10px;
+}
 /* 비밀번호 찾기 */
 .pwdSearchForm {
 	list-style: none;
@@ -146,7 +150,9 @@
 	outline: none;
 }
 
-
+.find_pwd {
+	margin-top: 50px;
+}
 /* 반응형 */ 
 @media ( min-width : 768px) {
 	.frip_logo {

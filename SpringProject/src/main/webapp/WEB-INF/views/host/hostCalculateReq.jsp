@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,107 +52,31 @@
 									<div>실 정산 금액</div>
 									<div>상태</div>
 								</div>
-								<div class="cal_item">
-									<div>2020-09-01 00:00</div>
-									<div class="item_title"><p>[30일 챌린지]하루에 한권씩aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p></div>
-									<div>60</div>
-									<div>10</div>
-									<div>50</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div>
-										<button class="btn btn-primary">정산 요청</button>
-									</div>
-								</div>
-								<div class="cal_item">
-									<div>2020-09-01 00:00</div>
-									<div class="item_title"><p>[30일 챌린지]하루에 한권씩a</p></div>
-									<div>60</div>
-									<div>10</div>
-									<div>50</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div><button class="btn btn-success" disabled>정산 완료</button></div>
-								</div>
-								<div class="cal_item">
-									<div>2020-09-01 00:00</div>
-									<div class="item_title"><p>[30일 챌린지]하루에 한권씩a</p></div>
-									<div>60</div>
-									<div>10</div>
-									<div>50</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div><button class="btn btn-secondary" disabled>정산 요청 완료</button></div>
-								</div>
-								<div class="cal_item">
-									<div>2020-09-01 00:00</div>
-									<div class="item_title"><p>[30일 챌린지]하루에 한권씩a</p></div>
-									<div>60</div>
-									<div>10</div>
-									<div>50</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div><button class="btn btn-primary">정산 요청</button></div>
-								</div>
-								<div class="cal_item">
-									<div>2020-09-01 00:00</div>
-									<div class="item_title"><p>[30일 챌린지]하루에 한권씩a</p></div>
-									<div>60</div>
-									<div>10</div>
-									<div>50</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div><button class="btn btn-primary">정산 요청</button></div>
-								</div>
-								<div class="cal_item">
-									<div>2020-09-01 00:00</div>
-									<div class="item_title"><p>[30일 챌린지]하루에 한권씩a</p></div>
-									<div>60</div>
-									<div>10</div>
-									<div>50</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div><button class="btn btn-primary">정산 요청</button></div>
-								</div>
-								<div class="cal_item">
-									<div>2020-09-01 00:00</div>
-									<div class="item_title"><p>[30일 챌린지]하루에 한권씩a</p></div>
-									<div>60</div>
-									<div>10</div>
-									<div>50</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div><button class="btn btn-primary">정산 요청</button></div>
-								</div>
-								<div class="cal_item">
-									<div>2020-09-01 00:00</div>
-									<div class="item_title"><p>[30일 챌린지]하루에 한권씩a</p></div>
-									<div>60</div>
-									<div>10</div>
-									<div>50</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div><button class="btn btn-primary">정산 요청</button></div>
-								</div>
-								<div class="cal_item">
-									<div>2020-09-01 00:00</div>
-									<div class="item_title"><p>[30일 챌린지]하루에 한권씩a</p></div>
-									<div>60</div>
-									<div>10</div>
-									<div>50</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div>100,000</div>
-									<div><button class="btn btn-primary">정산 요청</button></div>
-								</div>
+								<c:if test="${!empty list }">
+									<c:forEach items="${list }" var="dto" varStatus="status">
+										<div class="cal_item">
+											<div>${dto.getClass_startDate() }</div>
+											<div class="item_title"><p>${dto.getClass_title() }</p></div>
+											<div>${buyList[status.index] }</div>
+											<div>${enterList[status.index] }</div>
+											<div>${buyList[status.index] - enterList[status.index] }</div>
+											<div>100,000</div>
+											<div>100,000</div>
+											<div>100,000</div>
+											<div>
+												<c:if test="${dto.getClass_cal() == 0 }">
+													<button class="btn btn-primary">정산 요청</button>
+												</c:if>
+												<c:if test="${dto.getClass_cal() == 1 }">
+													<div><button class="btn btn-secondary" disabled>정산 요청 완료</button></div>
+												</c:if>
+												<c:if test="${dto.getClass_cal() == 2 }">
+													<div><button class="btn btn-success" disabled>정산 완료</button></div>
+												</c:if>
+											</div>
+										</div>
+									</c:forEach>
+								</c:if>
 							</div>
 						</div>
 				</div>

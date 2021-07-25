@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,86 +34,54 @@
 							<h2 class="qna_title">자주 묻는 질문</h2>
 						</div>
 						<div class="qna_body">
-							
 							<div class="accordion" id="accordionExample">
 								<ul class="qna_list">
-									<li>
-										<div class="qna_list_item" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true">프립(Frip)이란?</div>
-										<div class="qna_list_item_ans accordion-collapse collapse" id="collapse1" data-bs-parent="#accordionExample">
-											<p>프립은 호스트가 진행합니다.</p>
-											<p>
-												<br>
-											</p>
-											<p>프립 호스트는 프립을 통해 다양한 액티비티 프로그램을 진행하는 진행자입니다.</p>
-											<p>
-												<br>
-											</p>
-											<p>프립 호스트는 본인만이 가지고 있는 컨텐츠가 있다면 누구나 신청이 가능합니다.</p>
-										</div>
-									</li>
-									<li>
-										<div class="qna_list_item" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true">진행 예정인 프립 보는 방법</div>
-										<div class="qna_list_item_ans accordion-collapse collapse" id="collapse2" data-bs-parent="#accordionExample">
-											<p>프립은 호스트가 진행합니다.</p>
-											<p>
-												<br>
-											</p>
-											<p>프립 호스트는 프립을 통해 다양한 액티비티 프로그램을 진행하는 진행자입니다.</p>
-											<p>
-												<br>
-											</p>
-											<p>프립 호스트는 본인만이 가지고 있는 컨텐츠가 있다면 누구나 신청이 가능합니다.</p>
-										</div>
-									</li>
-									<li>
-										<div class="qna_list_item" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="true">프립에 회원가입 하는 방법</div>
-										<div class="qna_list_item_ans accordion-collapse collapse" id="collapse3" data-bs-parent="#accordionExample">
-											<p>프립은 호스트가 진행합니다.</p>
-											<p>
-												<br>
-											</p>
-											<p>프립 호스트는 프립을 통해 다양한 액티비티 프로그램을 진행하는 진행자입니다.</p>
-											<p>
-												<br>
-											</p>
-											<p>프립 호스트는 본인만이 가지고 있는 컨텐츠가 있다면 누구나 신청이 가능합니다.</p>
-										</div>	
-									</li>
-									<li>
-										<div class="qna_list_item" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="true">프립 신청 방법</div>
-										<div class="qna_list_item_ans accordion-collapse collapse" id="collapse4" data-bs-parent="#accordionExample">
-											<p>프립은 호스트가 진행합니다.</p>
-											<p>
-												<br>
-											</p>
-											<p>프립 호스트는 프립을 통해 다양한 액티비티 프로그램을 진행하는 진행자입니다.</p>
-											<p>
-												<br>
-											</p>
-											<p>프립 호스트는 본인만이 가지고 있는 컨텐츠가 있다면 누구나 신청이 가능합니다.</p>
-										</div>
-									</li>
-									<li>
-										<div class="qna_list_item" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="true">프립은 누가 진행하나요?</div>
-										<div class="qna_list_item_ans accordion-collapse collapse" id="collapse5" data-bs-parent="#accordionExample">
-											<p>프립은 호스트가 진행합니다.</p>
-											<p>
-												<br>
-											</p>
-											<p>프립 호스트는 프립을 통해 다양한 액티비티 프로그램을 진행하는 진행자입니다.</p>
-											<p>
-												<br>
-											</p>
-											<p>프립 호스트는 본인만이 가지고 있는 컨텐츠가 있다면 누구나 신청이 가능합니다.</p>
-										</div>
-									</li>
+									<c:if test="${!empty list }">
+										<c:forEach items="${list }" var="dto">
+											<li>
+												<div class="qna_list_item" data-bs-toggle="collapse" data-bs-target="#collapse${dto.getQna_num() }" aria-expanded="true">${dto.getQna_title() }</div>
+												<div class="qna_list_item_ans accordion-collapse collapse" id="collapse${dto.getQna_num() }" data-bs-parent="#accordionExample">
+													${dto.getQna_cont() }
+												</div>
+											</li>
+										</c:forEach>
+									</c:if>
 								</ul>
-								</div>
-							
+							</div>
 						</div>
+						<nav aria-label="Page navigation example" class="list_footer">
+						<ul class="pagination">
+							<c:if test="${Paging.getPage() > Paging.getBlock() }">
+								<li class="page-item">
+									<a class="page_link" href="hostQna_list.do?page=1">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+									<a class="page_link" href="hostQna_list.do?page=${Paging.getPage() - 1 }">	
+										<span aria-hidden="true">&lt;</span>
+									</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${Paging.getStartBlock() }" end="${Paging.getEndBlock() }" var="i">
+								<c:if test="${i == Paging.getPage() }">
+									<li class="page-item"><a class="page_link paging_active">${i }</a></li>
+								</c:if>
+								<c:if test="${i != Paging.getPage() }">
+									<li class="page-item"><a class="page_link" href="hostQna_list.do?page=${i }">${i }</a></li>
+								</c:if>
+							</c:forEach>
+							<c:if test="${Paging.getEndBlock() < Paging.getAllPage() }">
+								<li class="page-item">
+									<a class="page_link" href="hostQna_list.do?page=${Paging.getPage() + 1 }">	
+										<span aria-hidden="true">&gt;</span>
+									</a>
+									<a class="page_link" href="hostQna_list.do?page=${Paging.getAllPage() }">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</c:if>
+						</ul>
+					</nav>
 					</div>
-
-
 				</div>
 			</div>
 	

@@ -246,6 +246,8 @@ a {
 
 .category_list>li>a {
 	color: #838383;
+	margin-bottom: 15px;
+	margin-right: 7px;
 }
 
 .category_list>li>a:hover {

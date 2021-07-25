@@ -38,8 +38,8 @@
 						
 						<form method="post" action="<%=request.getContextPath() %>/login_ok.do">
 							<ul class="loginForm">
-								<li><input type="text" name="memEmail" class="loginForm_txt" placeholder="아이디(이메일)" required></li>
-								<li><input type="password" name="memPwd" class="loginForm_txt" placeholder="비밀번호" required></li>
+								<li><input type="text" name="mem_email" class="loginForm_txt" placeholder="아이디(이메일)" required></li>
+								<li><input type="password" name="mem_pwd" class="loginForm_txt" placeholder="비밀번호" required></li>
 							</ul>
 							<a href="<%=request.getContextPath() %>/pwd_search.do" class="pwd_search">비밀번호 찾기</a><br>
 							<input type="submit" value="로그인" class="submit_btn">	

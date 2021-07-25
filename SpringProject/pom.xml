@@ -167,6 +167,20 @@
 		    <version>2.4</version>
 		</dependency>
 		
+		<!-- ajax사용할 수 있는 라이브러리 -->
+		<dependency>
+		    <groupId>net.sf.json-lib</groupId>
+		    <artifactId>json-lib-ext-spring</artifactId>
+		    <version>1.0.2</version>
+		</dependency>
+		
+		<!-- gson라이브러리 썸머노트로 파일업로드할때 사용함 -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.6</version>
+		</dependency>
+
 	</dependencies>
     <build>
         <plugins>

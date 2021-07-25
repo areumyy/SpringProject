@@ -76,7 +76,7 @@
 					</div>
 					
 					<div id="menuFrame3"class="menubutton">
-						<button type="button" id="3" class="ul">
+						<button type="button" id="3" class="ul" onclick="location.href='admin_notice.do?sort=total'">
 							<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
 							공지사항 관리
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
@@ -84,7 +84,7 @@
 					</div>
 					
 					<div id="menuFrame4" class="menubutton">
-						<button type="button" id="4" class="ul">
+						<button type="button" id="4" class="ul" onclick="location.href='admin_member_list.do?sort=total'">
 							<span class="glyphicon glyphicon-question-sign"  aria-hidden="true"></span>
 							회원 조회
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
@@ -103,10 +103,9 @@
 	<div class="mobile">
 		<header class="hostMenuBar">
 			<button onclick="showMenu()">
-				<span class="glyphicon glyphicon-list"  aria-hidden="true"></span>
+				<i class="fa fa-align-justify" aria-hidden="true" style="color:white;"></i>
 			</button>
-			
-			<a class="mobileLogo" href="<%=request.getContextPath()%>/hostMain.do">
+			<a class="mobileLogo" href="<%=request.getContextPath()%>/admin_frip_pass.do">
 				<img src="<%=request.getContextPath()%>/resources/logo/logo.png"
 				width="80px" height="30px" alt="?">
 			</a>
@@ -116,7 +115,7 @@
 		
 		<nav class="mobileNav">
 			<header class="menuBarHeader">
-				<a class="homeButton" href="<%=request.getContextPath()%>/hostMain.do">
+				<a class="homeButton" href="<%=request.getContextPath()%>/admin_frip_pass.do">
 					<img src="<%=request.getContextPath()%>/resources/logo/menulogo.PNG"
 					width="60px" height="30px" alt="?"> 관리자 페이지
 				</a>
@@ -127,8 +126,7 @@
 					<span class="glyphicon glyphicon-tent"  aria-hidden="true"></span>
 				</div>
 				<ul class="menuList">
-					<li class="menutext"><a href="<%=request.getContextPath() %>/hostMakeFrip.do">프립 만들기</a></li>
-					<li class="menutext"><a href="#">내 프립</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/admin_frip_pass.do">프립 승인</a></li>
 				</ul>
 			</div>
 			
@@ -137,10 +135,7 @@
 					<span class="glyphicon glyphicon-user"  aria-hidden="true"></span>
 				</div>
 				<ul class="menuList2">
-					<li class="menutext"><a href="#">출석부</a></li>
-					<li class="menutext"><a href="#">예약 관리</a></li>
-					<li class="menutext"><a href="#">후기 관리</a></li>
-					<li class="menutext"><a href="#">문의하기</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/admin_cal_pass.do">정산 승인</a></li>
 				</ul>
 			</div>
 			
@@ -149,8 +144,7 @@
 					<span class="glyphicon glyphicon-tent"  aria-hidden="true"></span>
 				</div>
 				<ul class="menuList">
-					<li class="menutext"><a href="#">정산 요청</a></li>
-					<li class="menutext"><a href="#">정산 완료</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/admin_notice.do">공지사항 관리</a></li>
 				</ul>
 			</div>
 			
@@ -159,8 +153,7 @@
 					<span class="glyphicon glyphicon-question-sign"  aria-hidden="true"></span>
 				</div>
 				<ul class="menuList">
-					<li class="menutext"><a href="#">공지사항</a></li>
-					<li class="menutext"><a href="#">자주 묻는 질문</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/admin_member_list.do">회원조회</a></li>
 				</ul>
 			</div>
 			<div class="menuName logout">

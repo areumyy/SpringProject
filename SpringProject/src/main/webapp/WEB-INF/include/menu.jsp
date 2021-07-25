@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,35 +10,75 @@
 <link href="<%=request.getContextPath()%>/resources/css/menu.css"
 	rel="stylesheet" />
 </head>
+<script type="text/javascript">
+$(function(){
+	$("#member_btn").css("display", "none");
+	$("#admin_btn").css("display", "none");
+	$("#guest").css("display", "none");
+	<%
+	String type = null;
+	if (session.getAttribute("loginType") != null) {
+		type = (String) session.getAttribute("loginType");
+	} 
+	
+	if(type != null){ 
+		if (type.equals("member")) {%>
+		$("#member_btn").css("display", "block");
+		$("#admin_btn").css("display", "none");
+		$("#guest").css("display", "none");
+		
+	<%} else if (type.equals("admin")) {%>
+		$("#admin_btn").css("display", "block");
+		$("#member_btn").css("display", "none");
+		$("#guest").css("display", "none");
+	<%} 
+	} else {%>
+		$("#guest").css("display","block");
+		$("#admin_btn").css("display", "none");
+		$("#member_btn").css("display", "none");
+	<%} %>
+})
+</script>
 <body>
 	
 	<!-- 화면 768px 이상일때 메뉴 -->
 	<header class="header">
 		<section class="menu1">
 			<div class="menu1-1">
-				<div class="host_btn">
-					<a href="#" target="_blank">
-						<div class="host_btn_1">호스트 센터</div>
-					</a>
-				</div>
+					<div class="host_btn">
+						<a>
+							<div class="host_btn_1" id="guest">로그인이 필요합니다.</div>
+							<div class="host_btn" id="member_btn">
+								<a href="<%=request.getContextPath() %>/hostMain.do?loginNum=${loginDto.getMem_num() }" target="_blank">
+									<div class="host_btn_1">호스트 센터</div>
+								</a>
+							</div>
+							<div class="host_btn" id="admin_btn">
+								<a href="<%=request.getContextPath() %>/admin_frip_pass.do" target="_blank">
+									<div class="host_btn_1">관리자 센터</div>
+								</a>
+							</div>
+						</a>
+					</div>
 				<div class="info_btn">
 					<!-- 로그인 전 -->
-					<a class="qna_link" href="<%=request.getContextPath() %>/join.do">
-						<div class="qna_div">회원가입</div>
-					</a>
-					<a class="qna_link" href="<%=request.getContextPath() %>/login.do">
-						<div class="qna_div">로그인</div>
-					</a>
-					
-					
+					<c:if test="${loginDto == null }">
+						<a class="qna_link" href="<%=request.getContextPath() %>/join.do">
+							<div class="qna_div">회원가입</div>
+						</a>
+						<a class="qna_link" href="<%=request.getContextPath() %>/login.do">
+							<div class="qna_div">로그인</div>
+						</a>
+					</c:if>
 					<!-- 로그인 후 -->
-					<!-- <a class="name_link" href="#">
-						<div class="name_div">
-							<span>이성욱</span>님
-						</div>
-					</a>
-					<button type="button" class="btn btn-secondary logout">로그아웃</button> -->
-					
+					<c:if test="${loginDto != null }">
+						<a class="name_link" href="#">
+							<div class="name_div">
+								<span>${loginDto.getMem_nick() }</span>님
+							</div>
+						</a>
+						<button type="button" class="btn btn-secondary logout" onclick="location.href='logout.do'">로그아웃</button>
+					</c:if>
 					
 					<a class="qna_link" href="<%=request.getContextPath() %>/qna_list.do">
 						<div class="qna_div">자주 묻는 질문</div>
@@ -65,7 +106,7 @@
 							    <li><a class="dropdown-item" href="#">아웃도어</a>
 							    	<ul>
 							    		<li><a href="<%=request.getContextPath() %>/category_list.do">서핑</a></li>
-							    		<li><a href="#">캠핑</a></li>
+							    		<li><a href="<%=request.getContextPath() %>/frip_content.do">캠핑</a></li>
 							    		<li><a href="#">등산/트래킹</a></li>
 							    		<li><a href="#">기타</a></li>
 							    	</ul>
@@ -119,30 +160,54 @@
 								<div>
 									<form class="search_form" method="post" action="<%=request.getContextPath() %>/search.do">
 										<img src="<%=request.getContextPath() %>/resources/image/menu/search.svg" class="search_img">
-										<input type="search" placeholder="검색어를 입력해주세요." class="search_input">
+										<input type="search" placeholder="검색어를 입력해주세요." class="search_input" autocomplete="off">
 									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="menu2-1-2">
-						<a class="menu_link" href="<%=request.getContextPath() %>/like_frip.do">
-							<div class="menu_div">
-								<div class="menu_btn_div">
-									<img src="<%=request.getContextPath() %>/resources/image/menu/save.svg" alt="저장-icon">
+
+					<c:if test="${loginDto != null }">
+						<div class="menu2-1-2">
+							<a class="menu_link" href="<%=request.getContextPath() %>/like_frip.do">
+								<div class="menu_div">
+									<div class="menu_btn_div">
+										<img src="<%=request.getContextPath() %>/resources/image/menu/save.svg" alt="저장-icon">
+									</div>
+									<p class="menu_font">저장</p>
 								</div>
-								<p class="menu_font">저장</p>
-							</div>
-						</a>
-						<a class="menu_link" href="<%=request.getContextPath() %>/mypage.do">
-							<div class="menu_div">
-								<div class="menu_btn_div">
-									<img src="<%=request.getContextPath() %>/resources/image/menu/mypage.svg" alt="마이-icon">
+							</a>
+
+							<a class="menu_link" href="<%=request.getContextPath() %>/mypage.do">
+								<div class="menu_div">
+									<div class="menu_btn_div">
+										<img src="<%=request.getContextPath() %>/resources/image/menu/mypage.svg" alt="마이-icon">
+									</div>
+									<p class="menu_font">마이</p>
 								</div>
-								<p class="menu_font">마이</p>
-							</div>
-						</a>
-					</div>
+							</a>
+						</div>
+					</c:if>
+					<c:if test="${loginDto == null }">
+						<div class="menu2-1-2">
+							<a class="menu_link" href="<%=request.getContextPath() %>/login.do">
+								<div class="menu_div">
+									<div class="menu_btn_div">
+										<img src="<%=request.getContextPath() %>/resources/image/menu/save.svg" alt="저장-icon">
+									</div>
+									<p class="menu_font">저장</p>
+								</div>
+							</a>
+							<a class="menu_link" href="<%=request.getContextPath() %>/login.do">
+								<div class="menu_div">
+									<div class="menu_btn_div">
+										<img src="<%=request.getContextPath() %>/resources/image/menu/mypage.svg" alt="마이-icon">
+									</div>
+									<p class="menu_font">마이</p>
+								</div>
+							</a>
+						</div>
+					</c:if>
 				</div>
 			</div>
 		</section>

@@ -12,13 +12,15 @@
 </head>
 <body>
 	<header class="hostMenuBar">
-			<a class="homeButton" href="<%=request.getContextPath()%>/hostMain.do">
+			<a class="homeButton" href="<%=request.getContextPath()%>/hostMain.do?loginNum=${loginDto.getMem_num()}">
 				<img src="<%=request.getContextPath()%>/resources/logo/logo.png"
 				width="80px" height="30px" alt="?"> 호스트 관리 페이지
 			</a>
 			<div class="userInfo">
 				<a class="userName" href="<%=request.getContextPath()%>/hostInfo.do">
-					<!-- 유저 프로필사진 + 닉네임 -->
+					<%-- <img src="프로필사진"
+							width="30px" height="30px">--%>
+					${loginDto.getMem_nick() }
 				</a>
 			</div>
 		</header>

@@ -6,9 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link
-	href="<%=request.getContextPath()%>/resources/css/hostSideBar.css"
-	rel="stylesheet" />
+<link href="<%=request.getContextPath()%>/resources/css/hostSideBar.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
 	// 시작시 불필요한 것들 hide
@@ -56,7 +54,6 @@
 <body>
 
 	<!-- 768px 이상 -->
-
 			<div class="hostSideBar">
 				<div class="btn-group-vertical" role="group" aria-label="...">
 					<div id="menuFrame1"class="menubutton">
@@ -87,7 +84,7 @@
 						<a type="button" href="<%=request.getContextPath() %>/hostAsk.do" class="li">
 							문의 하기
 						</a>
-						<a type="button" href="#" class="li">
+						<a type="button" href="<%=request.getContextPath() %>/hostReview.do" class="li">
 							 후기 관리
 						</a>
 					</div>
@@ -150,7 +147,7 @@
 				</div>
 				<ul class="menuList">
 					<li class="menutext"><a href="<%=request.getContextPath() %>/hostMakeFrip.do">프립 만들기</a></li>
-					<li class="menutext"><a href="#">내 프립</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostMyFrip.do">내 프립</a></li>
 				</ul>
 			</div>
 			
@@ -159,10 +156,9 @@
 					<span class="glyphicon glyphicon-user"  aria-hidden="true"></span>
 				</div>
 				<ul class="menuList2">
-					<li class="menutext"><a href="#">출석부</a></li>
-					<li class="menutext"><a href="#">예약 관리</a></li>
-					<li class="menutext"><a href="#">후기 관리</a></li>
-					<li class="menutext"><a href="#">문의하기</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostAttendance.do">출석부</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostAsk.do">문의하기</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostReview.do">후기 관리</a></li>
 				</ul>
 			</div>
 			

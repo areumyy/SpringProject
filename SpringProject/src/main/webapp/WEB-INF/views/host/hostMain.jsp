@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,7 @@
 								<div class="hostInfo_name">
 									<h2>안녕하세요!
 										<br>
-										123<!-- 닉네임 -->
+										${loginDto.getMem_nick() }
 										호스트님
 									</h2>
 									<div class="hostInfo_hostGrade">
@@ -55,40 +56,36 @@
 						<section class="Main_line1_section2">
 							<div class="notice">
 								<h2 class="notice_text">공지사항</h2>
-								<a href="#" class="notice_more"> <!-- 전체 공지로 이동 -->
+								<a href="<%=request.getContextPath() %>/hostNotice_list.do" class="notice_more"> <!-- 전체 공지로 이동 -->
 									더 보기
 								</a>
 							</div>
-							<div> <!-- 호스트 공지사항을 최신순으로 가져와서 보여주는 반복문 -->
-								<a href="#" class="notice_cont"> <!-- 공지로 이동하는 주소 추가 -->
-									<span class="notice_cont_title">공지제목</span>
-									<span class="notice_cont_date">2021-06-05</span>
-								</a>
+							<c:set var="Nlist" value="${NList }"/>
+							<div class="accordion" id="accordionExample">
+								<ul class="notice_list">
+									<c:if test="${!empty Nlist }">
+									<c:forEach var="dto" items="${Nlist }" begin="0" end="4" varStatus="index">
+										<li>
+											<span>공지</span>
+											<div class="notice_list_item">
+												<div class="notice_title collapsed" data-bs-toggle="collapse" data-bs-target="#collapse${index.count }" aria-expanded="false">${dto.getNotice_title() }</div>
+												<div class="notice_regdate">${dto.getNotice_regdate().substring(0,16) }</div>
+											</div>
+											<div class="notice_list_item_ans accordion-collapse collapse" id="collapse${index.count }" data-bs-parent="#accordionExample" style="">
+												<p style="white-space: pre-line;">
+													${dto.getNotice_cont() }
+												</p>
+											</div>
+										</li>
+									</c:forEach>
+									</c:if>
+									
+									<c:if test="${empty Nlist }">
+										공지사항이 없습니다.
+									</c:if>
+								</ul>
 							</div>
-							<div> <!-- 호스트 공지사항을 최신순으로 가져와서 보여주는 반복문 -->
-								<a href="#" class="notice_cont"> <!-- 공지로 이동하는 주소 추가 -->
-									<span class="notice_cont_title">공지제목</span>
-									<span class="notice_cont_date">2021-06-05</span>
-								</a>
-							</div>
-							<div> <!-- 호스트 공지사항을 최신순으로 가져와서 보여주는 반복문 -->
-								<a href="#" class="notice_cont"> <!-- 공지로 이동하는 주소 추가 -->
-									<span class="notice_cont_title">공지제목</span>
-									<span class="notice_cont_date">2021-06-05</span>
-								</a>
-							</div>
-							<div> <!-- 호스트 공지사항을 최신순으로 가져와서 보여주는 반복문 -->
-								<a href="#" class="notice_cont"> <!-- 공지로 이동하는 주소 추가 -->
-									<span class="notice_cont_title">공지제목</span>
-									<span class="notice_cont_date">2021-06-05</span>
-								</a>
-							</div>
-							<div> <!-- 호스트 공지사항을 최신순으로 가져와서 보여주는 반복문 -->
-								<a href="#" class="notice_cont"> <!-- 공지로 이동하는 주소 추가 -->
-									<span class="notice_cont_title">공지제목</span>
-									<span class="notice_cont_date">2021-06-05</span>
-								</a>
-							</div>
+							<!--  -->
 						</section>
 					</div>
 					<!-- 2번째 줄 -->
