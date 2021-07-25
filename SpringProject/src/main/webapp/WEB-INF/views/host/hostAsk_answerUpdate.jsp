@@ -41,14 +41,14 @@
 							</div>
 							<br><br>
 							<hr width="100%" >
-							<form action="<%=request.getContextPath() %>/hostAnswerWRiteOk.do" method="post">
+							<form action="<%=request.getContextPath() %>/hostAnswerUpdateOk.do" method="post">
 								<input type="hidden" value="${page }" name="page">
 								<input type="hidden" value="${dto.getClass_qna_num() }" name="qna_num">
 								<div class="answer_frame_answer">
 									<h5>답변하기</h5>
-									<textarea rows="7" cols="60" name="ans_cont"></textarea>
+									<textarea rows="7" cols="60" name="ans_cont" style='white-space: pre-line;'>${dto.getClass_ans_cont() }</textarea>
 									<br>
-									<input type="submit" class="btn btn-primary writeButton" value="작성하기">
+									<input type="submit" class="btn btn-primary writeButton" value="수정하기">
 								</div>
 							</form>
 						</div>

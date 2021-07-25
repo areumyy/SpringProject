@@ -34,8 +34,23 @@ public class ClassDAOImpl implements ClassDAO {
 	}
 
 	@Override
-	public List<ClassDTO> getList_classNum(int class_num) {
+	public ClassDTO getList_classNum(int class_num) {
 		
-		return this.sqlSession.selectList("getList_classNum", class_num);
+		return this.sqlSession.selectOne("getList_classNum", class_num);
+	}
+
+	@Override
+	public int UpdateClass(ClassDTO dto) {
+		return this.sqlSession.update("updateClass", dto);
+	}
+
+	@Override
+	public int countClass(int mem_num) {
+		return this.sqlSession.selectOne("countClass_memnum", mem_num);
+	}
+
+	@Override
+	public List<ClassDTO> getList(HashMap<String, Object> map) {
+		return this.sqlSession.selectList("getList", map);
 	}
 }

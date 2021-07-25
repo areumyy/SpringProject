@@ -13,4 +13,6 @@ public class Class_qnaDTO {
 	private String class_ans_cont;
 	private String class_ans_regdate;
 	private int class_qna_pri; // 0: 비공개, 1: 공개
+	private String mem_name;
+	private String class_title;
 }

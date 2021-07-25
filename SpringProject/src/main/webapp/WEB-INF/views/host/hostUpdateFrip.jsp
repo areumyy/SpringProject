@@ -17,7 +17,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath()%>/resources/css/hostMakeFrip.css"
 	rel="stylesheet" />
-<script src="./resources/js/hostMakeFrip.js"></script>
+<script src="./resources/js/hostUpdateFrip.js"></script>
 <!-- 카카오 지도 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 썸머노트 -->
@@ -38,7 +38,7 @@
 					<h1 class="Main_title">프립 만들기</h1>
 					
 						<div class="btn-group buttonGroup" role="group" aria-label="Basic radio toggle button group">
-						  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="1" autocomplete="off" checked onclick="change_div(1)">
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="a1" autocomplete="off" checked onclick="change_div(1)">
 						  <label class="btn btn-outline-primary" for="btnradio1">카테고리</label>	
 						  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="" autocomplete="off" onclick="change_div(2)">
 						  <label class="btn btn-outline-primary" for="btnradio2">프립명</label>
@@ -62,8 +62,12 @@
 						  <label class="btn btn-outline-primary" for="btnradio11">최종 확인</label>
 						</div>
 					
-					<form method="post" action="<%=request.getContextPath()%>/insertFrip.do"
+					<form method="post" action="<%=request.getContextPath()%>/hostUpdateFripOk.do"
 						 onsubmit="return checkIt();" enctype="multipart/form-data">
+					<c:set var="cdto" value="${classList }"/>
+					<c:set var="cList" value="${cateList }"/>
+					<c:set var="c2List" value="${cate2List }"/>
+					<input type="hidden" value="${cdto.getClass_num() }" name="class_num">
 						<!-- 카테고리 선택 -->
 						<div class="Main_line" id="main_1">
 							<div class="Main_line_1">
@@ -71,19 +75,31 @@
 									카테고리를 선택해 주세요.
 								</div>
 								<div class="Category">
-									<c:set var="cList" value="${cateList }"/>
 										<h4>1차 카테고리</h4>
 											<select class="selectBox" name="class_category1" 
 												onclick="change_cate_two()">
 												<option value="" >::: 선택 :::</option>
 												<c:forEach items="${cList }" var="dto">
-													<option value="${dto.getCate_one() }" >${dto.getCate_one() }</option>
+													<c:if test="${cdto.getClass_category1() == dto.getCate_one() }">
+														<option value="${dto.getCate_one() }" Selected>${dto.getCate_one() }</option>
+													</c:if>
+													<c:if test="${cdto.getClass_category1() != dto.getCate_one() }">
+														<option value="${dto.getCate_one() }">${dto.getCate_one() }</option>
+													</c:if>
 												</c:forEach>
 											</select>
 										<br><br>
 										<h4>2차 카테고리</h4>
 										<select class="selectBox" name="class_category2">
 											<option value="">::: 선택 :::</option>
+											<c:forEach items="${c2List }" var="dto">
+												<c:if test="${cdto.getClass_category2() == dto.getCate_two() }">
+													<option value="${dto.getCate_two() }" Selected>${dto.getCate_two() }</option>
+												</c:if>
+												<c:if test="${cdto.getClass_category2() != dto.getCate_two() }">
+													<option value="${dto.getCate_two() }">${dto.getCate_two() }</option>
+												</c:if>
+											</c:forEach>
 										</select>
 								</div>
 							</div>
@@ -112,11 +128,11 @@
 								</div>
 								<div class="hash">
 									<div class="little_title">캐치프레이즈</div>
-									<input type="text" class="text" name="class_hash">
+									<input type="text" class="text" name="class_hash" value="${cdto.getClass_hash() }">
 								</div>
 								<div class="frip_title">
 									<div class="little_title">프립명</div>
-									<input type="text" id="fripTitleText" class="text" name="class_title">
+									<input type="text" id="fripTitleText" class="text" name="class_title" value="${cdto.getClass_title() }">
 								</div>
 							</div>
 							
@@ -138,9 +154,9 @@
 								<div class="fileUpload">
 									<div>
 										<h4>대표 이미지</h4>
-										<img src="" id="poster" alt="미리보기" width="200" height="200">
+										<img src="/controller/resources/upload/${cdto.getClass_image() }" id="poster" alt="미리보기" width="200" height="200">
 										<input type="file" id="upload" class="form-control" 
-												name="class_image2" accept="image/*">
+												name="class_image2" accept="image/*" value="${cdto.getClass_image() }">
 									</div>
 								</div>
 							</div>
@@ -166,12 +182,12 @@
 								<div class="schedule">
 									<div>
 										<div class="little_title">시작일</div>
-										<input type="date" name="option_startDate">
+										<input type="date" name="class_startDate" value="${cdto.getClass_startDate().substring(0,10) }">
 									</div>
 									<br><br><br><br>
 									<div>
 										<div class="little_title">종료일<small>(선택사항)</small></div>
-										<input type="date" name="option_endDate">
+										<input type="date" name="class_endDate" value="${cdto.getClass_endDate().substring(0,10) }">
 									</div>
 								</div>
 							</div>
@@ -211,24 +227,31 @@
 									<div>
 										<div class="little_title">일정별 인원</div>
 										<div class="people">
-											<input type="number" class="optionNumber" name="class_count">
+											<input type="number" class="optionNumber" name="class_count" value="${cdto.getClass_count() }">
 										</div>
 									</div>
 									<br><br><br><br>
 									<!-- 옵션 수를 보내주는 히든값 
 											받을 때 option,price뒤에 숫자 붙여서 이 값만큼 for문 돌려주면 됨 옵션 추가, 삭제 반영함-->
-									<input type="hidden" class="optionQtt" name="optionQtt" value="1">
+									<input type="hidden" class="optionQtt" name="optionQtt" value="${optionCount }">
 									<div class="schedule_option">
 										<div class="little_title">구매옵션</div>
 										<div class="optionTextDiv">
-											<div class="1">
-												<input type="text" class="optionText" value="참가비 (1인)" name="option_name1"> 
-												<span>기본</span>
-												<br>
-												<input type="text" class="optionText" value="5000" name="option_price1" placeholder="가격">
-												<span>원</span>
-												<hr width="80%"> 
-											</div>
+											<c:forEach items="${optionList }" var="dto" varStatus="index">
+												<div class="${index.count }">
+													<input type="text" class="optionText" value="${dto.getOption_name() }" name="option_name${index.count }"> 
+													<c:if test="${index.count == 1 }">
+														<span>기본</span>
+													</c:if>
+													<c:if test="${index.count != 1 }">
+														<div class="deleteButton" name="${index.count }" onclick="deleteOption(this)">삭제</div>
+													</c:if>
+													<br>
+													<input type="text" class="optionText" value="${dto.getOption_price() }" name="option_price${index.count }" placeholder="가격">
+													<span>원</span>
+													<hr width="80%"> 
+												</div>
+											</c:forEach>
 										</div> 
 										<input type="button" value="옵션 추가하기" class="btn btn-info" onclick="addOption()">
 									</div>
@@ -278,24 +301,23 @@
 									  <label class="form-check-label" for="inlineRadio2">온라인</label>
 									</div>
 								</div>
-								
 								<div class="choiseLocation">
 									<input type="text" id="address" class="address" 
-											name="class_endArea2" placeholder="기본주소" disabled>
+											name="class_endArea2"  disabled value="${cdto.getClass_endArea() }">
 									<input type="button" class="findAddress"
 											value="주소 찾기" onclick="findAddr()" >	
 									<input type="text" class="detailAddress" 
-											name="endArea_detail" placeholder="상세주소">
+											name="class_endAreaDetail" placeholder="상세주소" value="${cdto.getClass_endAreaDetail() }">
 								</div>
 								<input type="hidden" name="class_endArea" value="">
 								<div class="little_title">집결지<small>선택사항</small></div>
-								<div class="choiseLocation">
+								<div class="choiseLocation">								
 									<input type="text" id="address2" class="address" 
-											name="startArea" placeholder="기본주소" disabled>
+											name="class_startArea" placeholder="기본주소" disabled>
 									<input type="button" class="findAddress"
 											value="주소 찾기" onclick="findAddr2()" >	
 									<input type="text" class="detailAddress" 
-											name="startArea_detail" placeholder="상세주소">
+											name="class_startAreaDetail" placeholder="상세주소" >
 								</div>
 							</div>
 							<div class="Main_line_2">
@@ -320,7 +342,7 @@
 								</div> 
 								<div class="timeTableCont">
 									<textarea rows="20" cols="60" 
-									placeholder="예시) 30분 집결 및 간단한 소개" name="class_plan"></textarea>
+									placeholder="예시) 30분 집결 및 간단한 소개" name="class_plan" style='white-space: pre-line;'>${cdto.getClass_plan() }</textarea>
 								</div>
 								
 							</div>
@@ -348,14 +370,14 @@
 									<div class="little_title">포함사항</div>
 								</div> 
 								<div class="timeTableCont">
-									<textarea rows="10" cols="60" placeholder="포함사항을 입력해주세요" name="class_include"></textarea>
+									<textarea rows="10" cols="60" placeholder="포함사항을 입력해주세요" name="class_include" style='white-space: pre-line;'>${cdto.getClass_include() }</textarea>
 								</div>
 								<br><br>
 								<div class="timeTable">
 									<div class="little_title">불포함사항</div>
 								</div> 
 								<div class="timeTableCont">
-									<textarea rows="10" cols="60" placeholder="불포함사항을 입력해주세요" name="class_exclude"></textarea>
+									<textarea rows="10" cols="60" placeholder="불포함사항을 입력해주세요" name="class_exclude" style='white-space: pre-line;'>${cdto.getClass_exclude() }</textarea>
 								</div>
 
 							</div>
@@ -382,14 +404,14 @@
 									<div class="little_title">준비물</div>
 								</div> 
 								<div class="timeTableCont">
-									<textarea rows="10" cols="60" name="class_supply" placeholder="준비물 가이드를 참고하여 작성해주세요."></textarea>
+									<textarea rows="10" cols="60" name="class_supply" placeholder="준비물 가이드를 참고하여 작성해주세요." style='white-space: pre-line;'>${cdto.getClass_supply() }</textarea>
 								</div>
 								<br><br>
 								<div class="timeTable">
 									<div class="little_title">유의사항</div>
 								</div> 
 								<div class="timeTableCont">
-									<textarea rows="10" cols="60" name="class_notice" placeholder="유의사항 및 신청시 유의사항을 가이드를 참고하여 작성해 주세요"></textarea>
+									<textarea rows="10" cols="60" name="class_notice" placeholder="유의사항 및 신청시 유의사항을 가이드를 참고하여 작성해 주세요" style='white-space: pre-line;'>${cdto.getClass_notice() }</textarea>
 								</div>
 
 							</div>
@@ -413,8 +435,9 @@
 								<div class="Main_line_title">
 								 	프립을 소개해주세요!
 								</div>
+								<input type="hidden" value="${cdato.getClass_cont() }" name="summernoteVal">
 								<div class="timeTableCont">
-									<textarea id="summernote" name="class_cont"></textarea>
+									<textarea id="summernote" name="class_cont" value="${cdato.getClass_cont() }">${cdato.getClass_cont() }</textarea>
 								</div>
 							</div>
 							<div class="Main_line_2">
@@ -449,7 +472,7 @@
 								<div class="final_confirm">
 									<div class="final_confirm_frame">
 										<div class="confirm_img">
-											<img src="" name="confirm_img" alt="이미지 없음" width="100%">
+											<img src="/controller/resources/upload/${cdto.getClass_image() }" name="confirm_img" alt="이미지 없음" width="100%">
 										</div>
 										<div class="final_frip_info">
 											<section class="info_section">
