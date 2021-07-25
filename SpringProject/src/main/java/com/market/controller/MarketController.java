@@ -302,6 +302,7 @@ public class MarketController {
 		return "notice_list";
 	}
 
+	// 저장페이지 - 프립 찜 매핑
 	@RequestMapping("like_frip.do")
 	public String likeFrip(HttpServletRequest request, Model model) {
 
@@ -310,25 +311,6 @@ public class MarketController {
 		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
 
 		System.out.println("로그인 세션 mem_num 값 확인 >>> " + dto.getMem_num());
-		
-		/*
-		 * // 페이징 처리 int totalRecord = 0; int rowsize = 5; int page = 0; // 현재 페이지 변수
-		 * 
-		 * if (request.getParameter("page") != null) { page =
-		 * Integer.parseInt(request.getParameter("page")); } else { page = 1; // 처음으로
-		 * "게시물 전체 목록" 태그를 클릭한 경우 }
-		 * 
-		 * // DB 상의 전체 게시물의 수를 확인하는 작업. totalRecord =
-		 * this.likeDao.classList_count(dto.getMem_num());
-		 * 
-		 * PageDTO dtoP = new PageDTO(page, rowsize, totalRecord, 3);
-		 * 
-		 * // 페이지에 해당하는 게시물을 가져오는 메서드 호출 // List<QnaDTO> pageList =
-		 * this.qnaDao.getQnaList(dto);
-		 * 
-		 * HashMap<String, Object> map = new HashMap<String, Object>() ;
-		 * map.put("class_memNum", dto.getMem_num()); map.put("pageDto", dtoP);
-		 */
 
 		// 찜 클래스 목록 가져오는 메서드
 		List<ClassDTO> likeClass = this.likeDao.getLikeClassList(dto.getMem_num());
@@ -347,6 +329,7 @@ public class MarketController {
 		return "like_frip";
 	}
 
+	// 저장페이지 - 호스트 찜 매핑
 	@RequestMapping("like_host.do")
 	public String likeHost(HttpServletRequest request, Model model) {
 
@@ -367,7 +350,7 @@ public class MarketController {
 		List<Integer> reviewCount = this.likeDao.host_reivewCount(dto.getMem_num());
 
 		// 찜 호스트 찜 개수 가져오는 메서드
-		List<Integer> likeCount = this.likeDao.host_reivewCount(dto.getMem_num());
+		List<Integer> likeCount = this.likeDao.host_likeCount(dto.getMem_num());
 
 		model.addAttribute("likeHostList", likeHost);
 		model.addAttribute("hostInfo", hostInfo);
@@ -378,6 +361,7 @@ public class MarketController {
 		return "like_host";
 	}
 
+	// 저장페이지 - 호스트 상세페이지 매핑
 	@RequestMapping("host_info.do")
 	public String hostInfo(@RequestParam("hostMemNum") int host_memNum, HttpServletRequest request, Model model) {
 
@@ -417,7 +401,6 @@ public class MarketController {
 
 		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명/시작날짜/끝날짜)
 		List<ReviewDTO> classReview3 = this.likeDao.class_review3(host_memNum);
-
 		
 		HashMap<String, Integer> map = new HashMap<String, Integer>() ;
 		map.put("mem_num", dto.getMem_num());			// 로그인한 멤버 번호
@@ -441,62 +424,8 @@ public class MarketController {
 
 		return "host_info";
 	}
-
-	/*
-	 * // 페이지 로딩시 댓글 좋아요 눌러놨던 게시물에 좋아요 표시
-	 * 
-	 * @RequestMapping(value = "/like_status_before.do", method =
-	 * RequestMethod.POST)
-	 * 
-	 * @ResponseBody public void likeStatus_before(HttpServletResponse
-	 * response, @RequestParam("reviewNum") int reviewNum, HttpServletRequest
-	 * request) throws IOException {
-	 * 
-	 * response.setContentType("text/html; charset=UTF-8");
-	 * 
-	 * // 세션값 가져오기 HttpSession session = request.getSession(); MemberDTO dto =
-	 * (MemberDTO) session.getAttribute("loginDto");
-	 * 
-	 * HashMap<String, Integer> map = new HashMap<String, Integer>() ;
-	 * map.put("like_writer", dto.getMem_num()); // 로그인한 멤버 번호
-	 * map.put("like_target", reviewNum); // 좋아요 누른 리뷰 번호
-	 * 
-	 * System.out.println("멤버 번호1 즉시실행 >>> " + dto.getMem_num());
-	 * System.out.println("리뷰 번호1 즉시실행>>> " + reviewNum);
-	 * 
-	 * // 해당 리뷰에 대한 좋아요 상태 체크하는 메서드 (0: 안 누른 상태 / 1: 누른 상태) int like_status =
-	 * this.likeDao.review_status(map); System.out.println("리뷰 좋아요 상태입니다 즉시실행 >>> "
-	 * + like_status);
-	 * 
-	 * int state = 0; int likeCount = 0;
-	 * 
-	 * if(like_status > 0) { // 좋아요 누른 상태
-	 * 
-	 * System.out.println("멤버 번호2 즉시실행 >>> " + dto.getMem_num());
-	 * System.out.println("리뷰 번호2 즉시실행  >>> " + reviewNum);
-	 * 
-	 * // 리뷰 좋아요 개수 가져오는 메서드 int like_count =
-	 * this.likeDao.review_like_count(reviewNum);
-	 * 
-	 * state = 2; likeCount = like_count;
-	 * 
-	 * } else if(like_status == 0) { // 좋아요 안 누른 상태
-	 * 
-	 * System.out.println("멤버 번호3 즉시실행 >>> " + dto.getMem_num());
-	 * System.out.println("리뷰 번호3 즉시실행 >>> " + reviewNum);
-	 * 
-	 * // 리뷰 좋아요 개수 가져오는 메서드 int like_count =
-	 * this.likeDao.review_like_count(reviewNum);
-	 * 
-	 * state = 1; likeCount = like_count; }
-	 * 
-	 * JSONObject obj = new JSONObject(); obj.put("state", state);
-	 * obj.put("likeCount", likeCount);
-	 * 
-	 * response.getWriter().print(obj); }
-	 */
 	
-	// 댓글 좋아요 매핑
+	// 저장페이지 - 리뷰 좋아요 매핑 
 	@RequestMapping(value = "/like_status.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void likeStatus(HttpServletResponse response, @RequestParam("reviewNum") int reviewNum, HttpServletRequest request) throws IOException {
@@ -567,6 +496,106 @@ public class MarketController {
 		response.getWriter().print(obj);
 	}
 	
+	// 저장페이지 - 호스트 리뷰 기준별 조회 매핑 (평점 높은순/평점 낮은순/최신순/추천순)
+	@RequestMapping("review_sort.do")
+	public String reviewSort(@RequestParam("sort") String sort, @RequestParam("hostMemNum") int host_memNum, HttpServletRequest request, Model model) {
+		
+		System.out.println("sort >>> " + sort);
+		System.out.println("host_memNum >>> " + host_memNum);
+		
+		// 세션값 가져오기
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+
+		// 호스트 상세정보 가져오는 메서드
+		MemberDTO hostInfo = this.likeDao.hostInfo(host_memNum);
+
+		// 호스트 소개 가져오는 메서드
+		HostDTO hostCont = this.likeDao.hostCont(host_memNum);
+
+		// 호스트가 운영하는 클래스 개수 가져오는 메서드
+		int classCount = this.likeDao.class_count(host_memNum);
+
+		// 호스트 후기 개수 가져오는 메서드
+		int reviewCount = this.likeDao.review_count(host_memNum);
+
+		// 호스트 찜 개수 가져오는 메서드
+		int likeCount = this.likeDao.like_count(host_memNum);
+
+		// 호스트가 운영하는 클래스 목록 가져오는 메서드
+		List<ClassDTO> hostClass = this.likeDao.host_classList(host_memNum);
+
+		// 호스트가 운영하는 클래스 옵션 상세정보 가져오는 메서드
+		List<OptionDTO> hostClassOption = this.likeDao.host_classOption(host_memNum);
+		
+		// 호스트가 운영하는 클래스 별 별점
+		List<Integer> hosfClassScore = this.likeDao.host_class_score(host_memNum);
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>() ;
+		map.put("mem_num", dto.getMem_num());			// 로그인한 멤버 번호
+		map.put("host_memNum", host_memNum);			// 호스트 멤버 번호
+
+		// 평점 높은순 
+		List<ReviewDTO> review_highScore1 = this.likeDao.review_highScore1(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
+		List<ReviewDTO> review_highScore2 = this.likeDao.review_highScore2(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2(클래스명) 
+		List<ReviewDTO> review_highScore3 = this.likeDao.review_highScore3(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 옵션명/시작날짜/끝날짜) 
+		List<Integer> highScore_like_list = this.likeDao.highScore_like_list(map);		 // 좋아요 누른 리뷰번호 리스트 가져오기
+		
+		// 평점 낮은순 
+		List<ReviewDTO> review_lowScore1 = this.likeDao.review_lowScore1(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
+		List<ReviewDTO> review_lowScore2 = this.likeDao.review_lowScore2(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2(클래스명) 
+		List<ReviewDTO> review_lowScore3 = this.likeDao.review_lowScore3(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 옵션명/시작날짜/끝날짜) 
+		List<Integer> lowScore_like_list = this.likeDao.lowScore_like_list(map);	   // 좋아요 누른 리뷰번호 리스트 가져오기
+		
+		// 최신순 
+		List<ReviewDTO> review_newScore1 = this.likeDao.review_newScore1(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
+		List<ReviewDTO> review_newScore2 = this.likeDao.review_newScore2(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2(클래스명) 
+		List<ReviewDTO> review_newScore3 = this.likeDao.review_newScore3(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 옵션명/시작날짜/끝날짜)
+		List<Integer> newScore_like_list = this.likeDao.newScore_like_list(map);	   // 좋아요 누른 리뷰번호 리스트 가져오기
+		
+		// 추천순 
+		List<ReviewDTO> review_likeScore1 = this.likeDao.review_likeScore1(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
+		List<ReviewDTO> review_likeScore2 = this.likeDao.review_likeScore2(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2(클래스명) 
+		List<ReviewDTO> review_likeScore3 = this.likeDao.review_likeScore3(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 옵션명/시작날짜/끝날짜) 
+		List<Integer> likeScore_like_list = this.likeDao.likeScore_like_list(map);		 // 좋아요 누른 리뷰번호 리스트 가져오기
+
+		model.addAttribute("hostCont", hostCont);
+		model.addAttribute("hostInfo", hostInfo);
+		model.addAttribute("classCount", classCount);
+		model.addAttribute("reviewCount", reviewCount);
+		model.addAttribute("likeCount", likeCount);
+		model.addAttribute("hostClass", hostClass);
+		model.addAttribute("hostClassOption", hostClassOption);
+		model.addAttribute("hosfClassScore", hosfClassScore);
+		model.addAttribute("sort", sort);
+		
+		if(sort.equals("score_high")) {		// 평점 높은순 
+			model.addAttribute("classReview1", review_highScore1);
+			model.addAttribute("classReview2", review_highScore2);
+			model.addAttribute("classReview3", review_highScore3);
+			model.addAttribute("like_list", highScore_like_list);
+			
+		} else if(sort.equals("score_low")) {	// 평점 낮은순
+			model.addAttribute("classReview1", review_lowScore1);
+			model.addAttribute("classReview2", review_lowScore2);
+			model.addAttribute("classReview3", review_lowScore3);
+			model.addAttribute("like_list", lowScore_like_list);
+			
+		} else if(sort.equals("score_new")) {	// 최신순
+			model.addAttribute("classReview1", review_newScore1);
+			model.addAttribute("classReview2", review_newScore2);
+			model.addAttribute("classReview3", review_newScore3);
+			model.addAttribute("like_list", newScore_like_list);
+			
+		} else if(sort.equals("score_like")) {	// 추천순
+			model.addAttribute("classReview1", review_likeScore1);
+			model.addAttribute("classReview2", review_likeScore2);
+			model.addAttribute("classReview3", review_likeScore3);
+			model.addAttribute("like_list", likeScore_like_list);
+		}			
+
+		return "host_info_reviewSort";
+	}
 	
 	
 

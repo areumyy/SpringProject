@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>호스트_상세</title>
+<title>호스트_상세_리뷰정렬</title>
 
 <!-- 반응형 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,7 +57,7 @@
 	        }
 	    });
 	});
-	
+		
 	// 리뷰 좋아요 버튼 클릭시 실행함수
 	function like_btn(reviewNum) {
 		
@@ -89,7 +89,7 @@
             }
         }); 
 	}
-
+	
 </script>
 
 </head>
@@ -205,7 +205,6 @@
 									</div>
 								</c:forEach>
 							</c:if>
-							
 							<c:if test="${empty hostClass }">
 								<h3>저장된 프립이 없습니다.</h3>
 							</c:if>
@@ -218,6 +217,7 @@
 					 		<c:set var="classReview2" value="${classReview2 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명) -->
 					 		<c:set var="classReview3" value="${classReview3 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명/시작날짜/끝날짜) -->
 					 		<c:set var="likeList" value="${like_list }" />			<!-- 좋아요 누른 리뷰번호 리스트 가져오기 -->
+					 		<c:set var="sort" value="${sort }" />	
 					 		
 					 		<c:if test="${!empty classReview1 }">
 					 			<c:forEach items="${classReview1 }" var="dto2" varStatus="status">
@@ -225,7 +225,7 @@
 							      		<div class="user_info">
 							      			<div class="user_img_box">
 							      				<!-- 사진 수정필요(유저 사진) -->
-							      				<img alt="${dto2.getMem_profileImg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto2.getMem_profileImg() }" class="user_img">
+						      					<img alt="${dto2.getMem_profileImg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto2.getMem_profileImg() }" class="user_img">
 							      			</div>
 							      			<div class="user_detail">
 							      				<div class="user_name">${dto2.getMem_name() }</div>
@@ -238,7 +238,7 @@
 							      		<div class="review_cont">${dto2.getReview_cont() }</div>
 							      		<div class="booking_info">
 							      			<div class="class_name">${classReview2[status.index].getClass_title() }</div>
-							      			<c:if test="${classReview3[status.index].getOption_endDate() eq null}">
+							     			<c:if test="${classReview3[status.index].getOption_endDate() eq null}">
 								      			<div class="class_startDate">
 								      				<span>${classReview3[status.index].getOption_startDate() } 참여</span>
 								      				<span> | ${classReview3[status.index].getOption_name() }</span>
@@ -267,7 +267,7 @@
 							      		</div>
 							      		<div class="review_image_box">
 							      			<!-- 사진 수정필요 (후기 사진)-->
-							      			<img alt="${dto2.getReview_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto2.getReview_image() }" class="review_image">
+						      				<img alt="${dto2.getReview_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto2.getReview_image() }" class="review_image">
 							      		</div>
 							      	</div>
 							      </c:forEach>

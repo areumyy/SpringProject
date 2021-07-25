@@ -34,13 +34,6 @@ public class LikeDAOImpl implements LikeDAO {
 		
 		return this.sqlSession.selectList("class_score", mem_num);
 	}
-	
-	// 찜 클래스 개수
-	/*
-	 * @Override public int classList_count(int mem_num) {
-	 * 
-	 * return this.sqlSession.selectOne("classList_count", mem_num); }
-	 */
 
 	// 찜 호스트 목록 
 	@Override
@@ -202,23 +195,106 @@ public class LikeDAOImpl implements LikeDAO {
 		
 		return this.sqlSession.selectOne("review_like_count", review_no);
 	}
-	
 
-	
+	// 리뷰 정렬기준 - 평점 높은순(score_high)
+	@Override
+	public List<ReviewDTO> review_highScore1(int host_memNum) {
+		
+		return this.sqlSession.selectList("review_highScore1", host_memNum);
+	}
 
+	@Override
+	public List<ReviewDTO> review_highScore2(int host_memNum) {
 	
+		return this.sqlSession.selectList("review_highScore2", host_memNum);
+	}
 
+	@Override
+	public List<ReviewDTO> review_highScore3(int host_memNum) {
+		
+		return this.sqlSession.selectList("review_highScore3", host_memNum);
+	}
+	
+	@Override
+	public List<Integer> highScore_like_list(HashMap<String, Integer> map) {
+		
+		return this.sqlSession.selectList("highScore_like_list", map);
+	}
 
+	// 리뷰 정렬기준 - 평점 낮은순(score_low)
+	@Override
+	public List<ReviewDTO> review_lowScore1(int host_memNum) {
+		
+		return this.sqlSession.selectList("review_lowScore1", host_memNum);
+	}
 
-	
-	
-	
+	@Override
+	public List<ReviewDTO> review_lowScore2(int host_memNum) {
+		
+		return this.sqlSession.selectList("review_lowScore2", host_memNum);
+	}
 
+	@Override
+	public List<ReviewDTO> review_lowScore3(int host_memNum) {
+		
+		return this.sqlSession.selectList("review_lowScore3", host_memNum);
+	}
 	
+	@Override
+	public List<Integer> lowScore_like_list(HashMap<String, Integer> map) {
+		
+		return this.sqlSession.selectList("lowScore_like_list", map);
+	}
 
-	
+	// 리뷰 정렬기준 - 최신순(score_new)
+	@Override
+	public List<ReviewDTO> review_newScore1(int host_memNum) {
+		
+		return this.sqlSession.selectList("review_newScore1", host_memNum);
+	}
 
+	@Override
+	public List<ReviewDTO> review_newScore2(int host_memNum) {
+		
+		return this.sqlSession.selectList("review_newScore2", host_memNum);
+	}
+
+	@Override
+	public List<ReviewDTO> review_newScore3(int host_memNum) {
+		
+		return this.sqlSession.selectList("review_newScore3", host_memNum);
+	}
 	
+	@Override
+	public List<Integer> newScore_like_list(HashMap<String, Integer> map) {
+		
+		return this.sqlSession.selectList("newScore_like_list", map);
+	}
+
+	// 리뷰 정렬기준 - 평점 추천순(score_like)
+	@Override
+	public List<ReviewDTO> review_likeScore1(int host_memNum) {
+		
+		return this.sqlSession.selectList("review_likeScore1", host_memNum);
+	}
+
+	@Override
+	public List<ReviewDTO> review_likeScore2(int host_memNum) {
+		
+		return this.sqlSession.selectList("review_likeScore2", host_memNum);
+	}
+
+	@Override
+	public List<ReviewDTO> review_likeScore3(int host_memNum) {
+		
+		return this.sqlSession.selectList("review_likeScore3", host_memNum);
+	}
 	
+	@Override
+	public List<Integer> likeScore_like_list(HashMap<String, Integer> map) {
+		
+		return this.sqlSession.selectList("likeScore_like_list", map);
+	}
+
 
 }

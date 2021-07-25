@@ -10,14 +10,10 @@
 <!-- 반응형 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 부트스트랩 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <!-- CSS 파일 -->
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/like.css" rel="stylesheet"/>
@@ -51,15 +47,15 @@
 								<div class="list_inner2">
 									<div class="inner_box">
 										<a href="<%=request.getContextPath() %>/host_info.do?hostMemNum=${dto.getHost_memNum() }" class="host_link">
-											<div class="host_img">
-												<!-- 사진 수정필요 -->
-												<img alt="host_img" src="<%=request.getContextPath() %>/resources/image/like/host_img.png">
+											<div>
+												<!-- 사진 수정필요(호스트 사진) -->
+												<img alt="${hostInfo[status.index].getMem_profileimg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo[status.index].getMem_profileimg() }" class="host_img">
 											</div>
 											<div class="host_info">
 												<div class="host_info_detail1">
 													<span class="host_name">${hostInfo[status.index].getMem_name() }</span>
 													<img alt="arrow_icon" src="<%=request.getContextPath() %>/resources/image/like/arrow_icon.svg" class="arrow_icon">
-													<img alt="superHost_badge" src="<%=request.getContextPath() %>/resources/image/like/superHost_badge.svg" class="superHost_badge">
+													<img alt="superHost_badge" src="<%=request.getContextPath() %>/resources/image/like/superHost_badge.svg">
 												</div>
 												<div class="host_info_detail2">
 													<span class="frip_count">프립 ${classCount[status.index] }</span>
@@ -77,26 +73,47 @@
 								</div>
 							</c:forEach>
 						</c:if>
-						
-						<c:if test="${empty hostList }">
-							<h1>저장된 호스트가 없습니다.</h1>
-						</c:if>
 					</div>
 					
+					<c:if test="${empty hostList }">
+							<div class="likePage_list_none">
+								<div>저장된 호스트가 없습니다.</div>
+							</div>
+					</c:if>
+					
 					<!-- 페이징 처리 -->
-					<nav aria-label="Page navigation example" class="like_page_footer">
+					<%-- <nav aria-label="Page navigation example" class="list_footer">
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Previous" style="color: black;"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<li class="page-item active"><a class="page-link" href="#" style="color: white;">1</a></li>
-							<li class="page-item"><a class="page-link" href="#" style="color: black;">2</a></li>
-							<li class="page-item"><a class="page-link" href="#" style="color: black;">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Next" style="color: black;"> <span aria-hidden="true">&raquo;</span>
-							</a></li>
+							<c:if test="${Paging.getPage() > Paging.getBlock() }">
+								<li class="page-item">
+									<a class="page_link" href="qna_list.do?page=1">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+									<a class="page_link" href="qna_list.do?page=${Paging.getPage() - 1 }">	
+										<span aria-hidden="true">&lt;</span>
+									</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${Paging.getStartBlock() }" end="${Paging.getEndBlock() }" var="i">
+								<c:if test="${i == Paging.getPage() }">
+									<li class="page-item"><a class="page_link paging_active">${i }</a></li>
+								</c:if>
+								<c:if test="${i != Paging.getPage() }">
+									<li class="page-item"><a class="page_link" href="qna_list.do?page=${i }">${i }</a></li>
+								</c:if>
+							</c:forEach>
+							<c:if test="${Paging.getEndBlock() < Paging.getAllPage() }">
+								<li class="page-item">
+									<a class="page_link" href="qna_list.do?page=${Paging.getPage() + 1 }">	
+										<span aria-hidden="true">&gt;</span>
+									</a>
+									<a class="page_link" href="qna_list.do?page=${Paging.getAllPage() }">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</c:if>
 						</ul>
-					</nav>
+					</nav> --%>
 				</div>	
 			</div>
 			<jsp:include page="../include/footer.jsp" />
