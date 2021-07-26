@@ -18,7 +18,7 @@
 			select count(*)
 			from frip_class c 
 			left outer join frip_option o on c.class_num = o.option_classNum
-			left outer join (select booking_classnum, count(*) count
+			join (select booking_classnum, count(*) count
 			                 from frip_booking
 			                 where booking_regdate
 			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
@@ -73,7 +73,7 @@
 			select c.class_num, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 
 			left outer join frip_option o on c.class_num = o.option_classNum
-			left outer join (select booking_classnum, count(*) count
+			join (select booking_classnum, count(*) count
 			                 from frip_booking
 			                 where booking_regdate
 			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
@@ -136,6 +136,20 @@
 		]]>
 	</select>
 	
+	<!-- 프립 전체 리스트 가져오기 -->
+	<select id="alllist1" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select c.class_num, c.class_hash, c.class_title, c.class_category1, c.class_category2, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			from frip_class c 
+			left outer join frip_option o on c.class_num = o.option_classNum
+			left outer join (select review_classNum, avg(review_score) review_score
+			                 from frip_review
+			                 group by review_classNum) r 
+			on c.class_num = r.review_classNum
+			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+			order by c.class_regdate desc
+		]]>
+	</select>
 	
 	
 	
@@ -153,7 +167,7 @@
 			select count(*)
 			from frip_class c 
 			left outer join frip_option o on c.class_num = o.option_classNum
-			left outer join (select booking_classnum, count(*) count
+			join (select booking_classnum, count(*) count
 			                 from frip_booking
 			                 where booking_regdate
 			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
@@ -208,7 +222,7 @@
 			select c.class_num, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 
 			left outer join frip_option o on c.class_num = o.option_classNum
-			left outer join (select booking_classnum, count(*) count
+			join (select booking_classnum, count(*) count
 			                 from frip_booking
 			                 where booking_regdate
 			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
@@ -248,7 +262,20 @@
 		]]>
 	</select>
 	
-	
+	<!-- 하위 카테고리 프립 전체 리스트 가져오기 -->
+	<select id="alllist2" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select c.class_num, c.class_hash, c.class_title, c.class_category1, c.class_category2, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			from frip_class c 
+			left outer join frip_option o on c.class_num = o.option_classNum
+			left outer join (select review_classNum, avg(review_score) review_score
+			                 from frip_review
+			                 group by review_classNum) r 
+			on c.class_num = r.review_classNum
+			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			order by c.class_regdate desc
+		]]>
+	</select>
 	
 	
 	

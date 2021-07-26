@@ -4,7 +4,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
-<title>memCategoryList</title>
+<title>memCategoryAllList</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -33,44 +33,18 @@
 					<div>
 						<!-- 소분류 -->
 						<div class="Small_Category">
-							<a href="<%=request.getContextPath() %>/cooking_alllist.do?num=${cate_name.getCate_num() }">전체</a>
+							<a href="<%=request.getContextPath() %>/category_all_list.do?num=${cate_name.getCate_num() }">전체</a>
 							<c:set var="list" value="${CategoryNameList }" />
 							<c:if test="${!empty list }">
 								<c:forEach items="${list }" var="dto">
-									<a href="<%=request.getContextPath() %>/cooking_list.do?num=${dto.getCate_num() }">${dto.getCate_two() }</a>
+									<a href="<%=request.getContextPath() %>/category_list.do?num=${dto.getCate_num() }">${dto.getCate_two() }</a>
 								</c:forEach>
 							</c:if>
 						</div>
 					</div>
 					
 					<div class="Category_Main3">
-						<!-- 필터 -->
-						<div class="Category_Filter">
-							<div class="Category_Filter_When">
-								<div class="Category_Filter1">
-									<button height="auto" color="initial" font-size="14px"
-										font-weight="500" class="Category_Filter2">언제</button>
-								</div>
-							</div>
-							<div class="Category_Filter_Where">
-								<div class="Category_Filter1">
-									<button height="auto" color="initial" font-size="14px"
-										font-weight="500" class="Category_Filter2">어디서</button>
-								</div>
-							</div>
-							<div>
-								<div class="Category_Filter1">
-									<button height="auto" color="initial" font-size="14px"
-										font-weight="500" class="Category_Filter2">누구와</button>
-								</div>
-							</div>
-							<div>
-								<div class="Category_Filter1">
-									<button height="auto" color="initial" font-size="14px"
-										font-weight="500" class="Category_Filter2">필터</button>
-								</div>
-							</div>
-						</div>
+						<br><br>
 						<div>
 							<!-- 카테고리 리스트 메인부분 -->
 							<div class="Category_Main2" style="opacity: 1; display: block;">
@@ -83,7 +57,10 @@
 											<span class="Category_Title_Count">${TotalAllCount }</span>
 										</div>
 										<div class="Category_List_All">
-											<a class="Category_List_All1" href="#">전체 보기</a>
+											<a class="Category_List_All1"
+												href="<%=request.getContextPath() %>/category_more_all_bestlist.do?num=${cate_name.getCate_num() }&title1=인기&title2=프립">
+												전체 보기
+											</a>
 										</div>
 									</div>
 									
@@ -164,7 +141,10 @@
 											<span class="Category_Title_Count">${WeekAllCount }</span>
 										</div>
 										<div class="Category_List_All">
-											<a class="Category_List_All1" href="#">전체 보기</a>
+											<a class="Category_List_All1"
+												href="<%=request.getContextPath() %>/category_more_all_weeklist.do?num=${cate_name.getCate_num() }&title1=금주의&title2=프립">
+												전체 보기
+											</a>
 										</div>
 									</div>
 									<div class="Category_Main2" style="opacity: 1; display: block;">
@@ -241,7 +221,10 @@
 											<span class="Category_Title_Count">${NewAllCount }</span>
 										</div>
 										<div class="Category_List_All">
-											<a class="Category_List_All1" href="#">전체 보기</a>
+											<a class="Category_List_All1"
+												href="<%=request.getContextPath() %>/category_more_all_newlist.do?num=${cate_name.getCate_num() }&title1=신규&title2=프립">
+												전체 보기
+											</a>
 										</div>
 									</div>
 									<div class="Category_Main2" style="opacity: 1; display: block;">
@@ -311,7 +294,10 @@
 								</div>
 	      						
 								<div class="Category_List_All2" font-size="13px">
-									<a class="Category_List_All3" href="#">${TotalAllCount }개의 ${cate_name.getClass_category1() } 전체보기</a>
+									<a class="Category_List_All3" href="<%=request.getContextPath() %>/category_more_all_list.do?num=${cate_name.getCate_num() }&title1=전체&title2=프립">
+										${TotalAllCount }개의 ${cate_name.getClass_category1() }
+										전체보기
+									</a>
 								</div>
 							</div>
 						</div>

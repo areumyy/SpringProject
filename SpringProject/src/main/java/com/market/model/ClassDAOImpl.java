@@ -61,6 +61,18 @@ public class ClassDAOImpl implements ClassDAO {
 	}
 	
 	@Override
+	public List<ClassDTO> getClassAllList(int num) {
+		
+		return this.sqlSession.selectList("alllist1", num);
+	}
+
+	@Override
+	public List<ClassDTO> getClassList(int num) {
+		
+		return this.sqlSession.selectList("alllist2", num);
+	}
+	
+	@Override
 	public int insertClass(ClassDTO dto) {
 		// TODO Auto-generated method stub
 		return 0;
