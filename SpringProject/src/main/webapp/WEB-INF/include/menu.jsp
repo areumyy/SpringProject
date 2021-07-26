@@ -120,10 +120,9 @@ $(function(){
 							    </li>
 							    <li><a class="dropdown-item" href="#">스포츠</a>
 							    	<ul>
-							    		<li><a href="#">서핑</a></li>
-							    		<li><a href="#">캠핑</a></li>
-							    		<li><a href="#">등산/트래킹</a></li>
-							    		<li><a href="#">기타</a></li>
+							    		<li><a href="#">클라이밍</a></li>
+							    		<li><a href="#">구기스포츠</a></li>
+							    		<li><a href="#">수영</a></li>
 							    	</ul>
 							    </li>
 							    <li><a class="dropdown-item" href="#">쿠킹</a>

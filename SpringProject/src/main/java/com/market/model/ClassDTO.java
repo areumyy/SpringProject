@@ -31,4 +31,5 @@ public class ClassDTO {
 	private int class_pass; // 디폴트 0: 등록신청, 1: 등록승인
 	private String class_regdate;
 	private String class_cal; // 디폴트 0: 미정산, 1: 정산신청, 2: 정산완료
+	private String class_pass_regdate;
 }

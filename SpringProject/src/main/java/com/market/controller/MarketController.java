@@ -27,6 +27,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.JsonObject;
 import com.market.model.BookingDAO;
 import com.market.model.BookingDTO;
+import com.market.model.CalculateDAO;
+import com.market.model.CalculateDTO;
 import com.market.model.CategoryDAO;
 import com.market.model.CategoryDTO;
 import com.market.model.ClassDAO;
@@ -76,7 +78,9 @@ public class MarketController {
 	private BookingDAO bookingDao;
 	@Autowired
 	private Class_qnaDAO class_qnaDao;
-
+	@Autowired
+	private CalculateDAO calculateDao;
+	
 	@RequestMapping("main.do")
 	public String main() {
 		return "home";
@@ -806,33 +810,74 @@ public class MarketController {
 			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
 		}
 
-		// DB 상의 전체 게시물의 수를 확인하는 작업.
-		totalRecord = this.classDao.getCount_endClass(mem_num);
-
+		totalRecord = this.calculateDao.getCountAll(mem_num);
+		
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 
 		map.put("mem_num", mem_num);
 		map.put("class_pass", 1);
-		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
-		List<ClassDTO> classList = this.classDao.getList_endClass(map);
+		
+		
+		List<ClassDTO> classList = this.classDao.getList_endClass(map); // 종료된 클래스 리스트 
+		System.out.println(classList);
+		List<CalculateDTO> calList = this.calculateDao.getListAll(classList);
+		System.out.println(calList);
+		
+		/*
 		List<Integer> classBuy = new ArrayList<Integer>();
 		List<Integer> classEnter = new ArrayList<Integer>();
 		
+		
 		for(int i =0; i<classList.size(); i++) {
+			
+			CalculateDTO calDto = new CalculateDTO();
+			calDto.setCal_classNum(classList.get(i).getClass_num());
+			calDto.setCal_startDate(classList.get(i).getClass_startDate());
+			calDto.setCal_endDate(classList.get(i).getClass_endDate());
+			calDto.setCal_name(classList.get(i).getClass_title());
+			calDto.setCal_buyCount(this.bookingDao.getCount(classList.get(i).getClass_num()));
+			calDto.setCal_enterCount(this.bookingDao.getCountEnter(classList.get(i).getClass_num()));
+			calDto.setCal_enterNoCount(calDto.getCal_buyCount() - calDto.getCal_enterCount());
+			calDto.setCal_sal(cal_sal);
+			calDto.setCal_total(calDto.getCal_sal() * 0.9);
+			
 			classBuy.add(this.bookingDao.getCount(classList.get(i).getClass_num()));
 			classEnter.add(this.bookingDao.getCountEnter(classList.get(i).getClass_num()));
 		}
-		
-		model.addAttribute("list", classList);
 		model.addAttribute("buyList", classBuy);
 		model.addAttribute("enterList", classEnter);
+		*/
+		
+		model.addAttribute("list", calList);
 		model.addAttribute("Paging", dto);
 		
 		return "host/hostCalculateReq";
 	}
 
+	@RequestMapping(value = "/cal_req", method = RequestMethod.POST)
+	@ResponseBody
+	public void calReq(HttpServletResponse response, @RequestParam("target") int target)
+			throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		int res = 0;
+
+		int result1 = this.calculateDao.requestCal(target);
+		int result2 = this.classDao.requestCal(target);
+		
+		if (result1 > 0 && result2 > 0) {
+			res = 1;
+		} else {
+			res = -1;
+		}
+
+		JSONObject obj = new JSONObject();
+		obj.put("res", res);
+
+		response.getWriter().print(obj);
+	}
+	
 	@RequestMapping("hostNotice_list.do")
 	public String hostNotice(Model model, HttpServletRequest request) {
 		int totalRecord = 0;

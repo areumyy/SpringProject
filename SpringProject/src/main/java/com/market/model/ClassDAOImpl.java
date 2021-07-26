@@ -55,7 +55,8 @@ public class ClassDAOImpl implements ClassDAO {
 	}
 
 	@Override
-	public int getCount_endClass(int mem_num) {
-		return this.sqlSession.selectOne("count_endClass", mem_num);
+	public int requestCal(int target) {
+		return this.sqlSession.update("class_req_cal", target);
 	}
+
 }
