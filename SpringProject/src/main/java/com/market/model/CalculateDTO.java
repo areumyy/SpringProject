@@ -16,5 +16,6 @@ public class CalculateDTO {
 	private int cal_sal; // 정산 프립 매출액
 	private int cal_total; // 매출액 * 0.9
 	private int cal_status; // 0: 정산신청 전, 1: 정산신청 중, 2: 정산완료
-
+	private String cal_regdate; // 정산 신청 일자
+	private String cal_okDate; // 정산 완료 일자
 }

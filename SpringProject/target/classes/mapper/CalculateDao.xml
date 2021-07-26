@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.model.CalculateDAO">
+	<select id="cal_count_all" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) from frip_calculate where cal_classNum in 
+			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_endDate < sysdate)
+		]]>
+	</select>
+	
+	<select id="cal_cont" parameterType="int" resultType="com.market.model.CalculateDTO">
+		select * from frip_calculate where cal_classNum = #{target}
+	</select>
+	
+	<update id="req_cal" parameterType="int">
+		update frip_calculate set cal_status = 1 where cal_classNum = #{target}
+	</update>
+</mapper>
+
