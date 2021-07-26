@@ -13,4 +13,32 @@
 		insert into frip_option values(#{option_num}, #{option_classNum}, #{option_name},#{option_price},
 			#{option_price})
 	</insert>
+	
+	<select id="getOptionList" parameterType="int" resultType="com.market.model.OptionDTO">
+		select * from frip_option where option_classnum = #{num}
+	</select>
+	
+	<select id="getOptionCount" parameterType="int" resultType="int">
+		select count(*) from frip_option where option_classnum = #{num}
+	</select>
+	
+	<delete id="deleteOption" parameterType="int">
+		delete from frip_option where option_classNum = #{num}
+	</delete>
+	
+	<select id="getmaxoptionNum" parameterType="int" resultType="int">
+		select max(option_num) from frip_option where option_classNum = #{num}
+	</select>
+	
+	<select id="getcountoption" parameterType="int" resultType="int">
+		select count(*) from frip_option where option_classNum = #{num}
+	</select>
+	 
+	<update id="optionNumdown" parameterType="java.util.Map">
+		<![CDATA[
+			update frip_option 
+			set option_num = option_num - #{optionCount}
+			where option_num > #{maxNum}
+		]]>
+	</update>
 </mapper>

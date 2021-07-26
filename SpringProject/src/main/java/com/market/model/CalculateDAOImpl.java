@@ -5,13 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class HostDAOImpl implements HostDAO {
+public class CalculateDAOImpl implements CalculateDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
-	@Override
-	public int insertHost(HostDTO dto) {
-		return this.sqlSession.insert("insert_host", dto);
-	}
 }

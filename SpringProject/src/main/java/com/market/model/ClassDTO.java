@@ -19,7 +19,9 @@ public class ClassDTO {
 	private String class_endDate;
 	private int class_count;
 	private String class_startArea;
+	private String class_startAreaDetail;
 	private String class_endArea;
+	private String class_endAreaDetail;
 	private String class_cont;
 	private String class_plan;
 	private String class_include;

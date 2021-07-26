@@ -38,7 +38,7 @@
 					<h1 class="Main_title">프립 만들기</h1>
 					
 						<div class="btn-group buttonGroup" role="group" aria-label="Basic radio toggle button group">
-						  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="1" autocomplete="off" checked onclick="change_div(1)">
+						  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="a1" autocomplete="off" checked onclick="change_div(1)">
 						  <label class="btn btn-outline-primary" for="btnradio1">카테고리</label>	
 						  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="" autocomplete="off" onclick="change_div(2)">
 						  <label class="btn btn-outline-primary" for="btnradio2">프립명</label>
@@ -284,18 +284,18 @@
 											name="class_endArea2" placeholder="기본주소" disabled>
 									<input type="button" class="findAddress"
 											value="주소 찾기" onclick="findAddr()" >	
-									<input type="text" class="detailAddress" 
-											name="endArea_detail" placeholder="상세주소">
+									<input type="text" class="detailAddress" id="detailAddress"
+											name="class_endAreaDetail" placeholder="상세주소">
 								</div>
 								<input type="hidden" name="class_endArea" value="">
 								<div class="little_title">집결지<small>선택사항</small></div>
 								<div class="choiseLocation">
 									<input type="text" id="address2" class="address" 
-											name="startArea" placeholder="기본주소" disabled>
+											name="class_startArea" placeholder="기본주소" disabled>
 									<input type="button" class="findAddress"
 											value="주소 찾기" onclick="findAddr2()" >	
-									<input type="text" class="detailAddress" 
-											name="startArea_detail" placeholder="상세주소">
+									<input type="text" class="detailAddress" id="detailAddress"
+											name="class_startAreaDetail" placeholder="상세주소">
 								</div>
 							</div>
 							<div class="Main_line_2">

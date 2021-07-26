@@ -102,6 +102,7 @@ public class Upload {
 					e.printStackTrace();
 				}
 			}
+			break;
 		}  // while 문 end
 		
 		return result;

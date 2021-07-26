@@ -83,6 +83,7 @@ function checkDel(){
 									<input type="hidden" name="sort" value="${sort }">
 									<select class="form-select search_select" aria-label="Default select example" name="field">
 										<option value="total" selected>전체</option>
+										<option value="email">아이디(이메일)</option>
 										<option value="name">이름</option>
 										<option value="nick">닉네임</option>
 										<option value="phone">핸드폰 번호</option>
@@ -97,7 +98,7 @@ function checkDel(){
 								<div>회원번호</div>
 								<div>아이디(이메일)</div>
 								<div>닉네임</div>
-								<div>핸드폰 번호</div>
+								<div>이름</div>
 								<div>가입일</div>
 								<div>상태</div>
 								<div><input type="checkbox" onclick="checkAll()" name="checkAll" id="checkAll"></div>
@@ -116,7 +117,7 @@ function checkDel(){
 												</span>	
 												<span>${dto.getMem_nick() }</span>
 											</div>
-											<div>${dto.getMem_phone() }</div>
+											<div>${dto.getMem_name() }</div>
 											<div>${dto.getMem_regdate().substring(0,10) }</div>
 											<div>
 												<c:if test="${dto.getMem_status() == 2}">

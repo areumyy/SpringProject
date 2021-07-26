@@ -54,6 +54,33 @@ function uploadSummernoteImageFile(file, el) {
 		}
 	});
 }
+//써머노트에 넣어줄 컨텐츠 따로가져오는 메서드(수정일떄만)
+function summernoteCont() {
+	var num = $("[name=class_num]").val();
+
+	if(num.length >=1) {
+		$.ajax({
+		    type : "post",
+		    url : '/controller/summerCont.do', 
+		    data : {"class_num":num},
+		    dataType: 'json',
+		    error : function(error) {
+		    	console.log("error");
+		    },
+		    success : function(data) {
+		    	var dto = data.dto;
+		    	//집결지가 있으면
+		    	if(dto.class_startArea != "null") {
+		    		document.getElementById("address2").value = dto.class_startArea;
+		    		$("[name=class_startAreaDetail]").val(dto.class_startAreaDetail);
+		    	}
+		    	//기본주소 value 바꿔주기
+		    	//$("[name=class_endArea2]").val(dto.class_endArea);
+		    	$("#summernote").summernote('code', dto.class_cont);
+		    }
+		}); 
+	}
+}
 
 //이전 버튼
 function prevSelect() {
@@ -312,10 +339,6 @@ function checkIt() {
 		}else if($("[name=class_title]").val().length==0) { // 프립명
 			alert("프립명을 확인해 주세요!");
 			$("#btnradio2").trigger("click");
-			return false;			
-		}else if($("#upload").val().length==0) { // 이미지
-			alert("대표이미지를 업로드해 주세요!");
-			$("#btnradio3").trigger("click");
 			return false;			
 		}else if($("[name=option_startDate]").val().length == 0) { // 진행일
 			alert("시작일을 확인해 주세요!");

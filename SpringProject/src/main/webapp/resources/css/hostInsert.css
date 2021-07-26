@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+.Frame_Frame {
+	padding-left: 0px;
+}
+
+.Main {
+	align-items: center;
+}
+
+.insert_page {
+	margin-top: 10px;
+	padding: 0px;
+	width: 70%;
+	margin-left: 0px;
+}
+
+.insert_header {
+	display: flex;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
+	margin-bottom: 17px;
+	margin-top: 10px;
+}
+
+.insert_title {
+	line-height: 18px;
+	font-weight: bold;
+}
+
+.insert_body {
+	background-color: white;
+}
+
+.insert_ex {
+	margin-bottom: 10px;
+}
+
+.insert_example {
+	padding: 10px;
+	font-weight: bold;
+}
+
+.insert_cont {
+	border: none;
+	border-radius: 10px;
+	background-color: #EDEFF2;
+	width: 100%;
+	padding: 10px;
+	font-size: 14px;
+	margin: 10px 0px 30px;
+	resize: none;
+}
+
+.insert_cont:focus {
+	outline: none;
+}
+
+.insert_section {
+	width: 60%;
+	margin: auto;
+}
+
+.btn_section {
+	display: flex;
+	justify-content: center;
+}
+
+.insert_btn {
+	margin-bottom: 20px;
+	width: 30%;
+}
+
+@media ( max-width : 768px) {
+	.insert_section {
+		width: 90%;
+	}
+}

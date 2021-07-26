@@ -10,6 +10,35 @@
 <link href="<%=request.getContextPath()%>/resources/css/menu.css"
 	rel="stylesheet" />
 </head>
+<script type="text/javascript">
+$(function(){
+	$("#member_btn").css("display", "none");
+	$("#admin_btn").css("display", "none");
+	$("#guest").css("display", "none");
+	<%
+	String type = null;
+	if (session.getAttribute("loginType") != null) {
+		type = (String) session.getAttribute("loginType");
+	} 
+	
+	if(type != null){ 
+		if (type.equals("member")) {%>
+		$("#member_btn").css("display", "block");
+		$("#admin_btn").css("display", "none");
+		$("#guest").css("display", "none");
+		
+	<%} else if (type.equals("admin")) {%>
+		$("#admin_btn").css("display", "block");
+		$("#member_btn").css("display", "none");
+		$("#guest").css("display", "none");
+	<%} 
+	} else {%>
+		$("#guest").css("display","block");
+		$("#admin_btn").css("display", "none");
+		$("#member_btn").css("display", "none");
+	<%} %>
+})
+</script>
 <body>
 	
 	<!-- 화면 768px 이상일때 메뉴 -->
@@ -18,23 +47,17 @@
 			<div class="menu1-1">
 					<div class="host_btn">
 						<a>
-							<c:if test="${loginType == null }">
-								<div class="host_btn_1" id="guest">로그인이 필요합니다.</div>
-							</c:if>
-							<c:if test="${loginType == 'member' }">
-								<div class="host_btn" id="member_btn">
-									<a href="<%=request.getContextPath() %>/hostMain.do?loginDto=${loginDto}">
-										<div class="host_btn_1">호스트 센터</div>
-									</a>
-								</div>
-							</c:if>
-							<c:if test="${loginType == 'admin' }">
-								<div class="host_btn" id="host_btn">
-									<a href="<%=request.getContextPath() %>/admin_frip_pass.do">
-										<div class="host_btn_1">관리자 센터</div>
-									</a>
-								</div>
-							</c:if>
+							<div class="host_btn_1" id="guest">로그인이 필요합니다.</div>
+							<div class="host_btn" id="member_btn">
+								<a href="<%=request.getContextPath() %>/hostMain.do?loginNum=${loginDto.getMem_num() }" target="_blank">
+									<div class="host_btn_1">호스트 센터</div>
+								</a>
+							</div>
+							<div class="host_btn" id="admin_btn">
+								<a href="<%=request.getContextPath() %>/admin_frip_pass.do" target="_blank">
+									<div class="host_btn_1">관리자 센터</div>
+								</a>
+							</div>
 						</a>
 					</div>
 				<div class="info_btn">

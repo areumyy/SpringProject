@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.model.HostDAO">
+	<insert id="insert_host" parameterType="com.market.model.HostDTO">
+		<selectKey keyProperty="host_num" resultType="int" order="BEFORE">
+			select count(*) + 1 from frip_host
+		</selectKey>
+		
+		insert into frip_host values(#{host_num},#{host_memNum},#{host_cont})
+	</insert>
+	
+</mapper>

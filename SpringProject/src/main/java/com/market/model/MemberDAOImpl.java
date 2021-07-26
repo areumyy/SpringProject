@@ -47,6 +47,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public MemberDTO getMember(int mem_num) {
+		return this.sqlSession.selectOne("get_login_member_num", mem_num);
+	}
+
+	@Override
 	public int insertMember(MemberDTO dto) {
 		return this.sqlSession.insert("insert_member", dto);
 	}
@@ -103,4 +108,10 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<MemberDTO> getSearchMember(PageDTO dto) {
 		return this.sqlSession.selectList("list_" + dto.getField(), dto);
 	}
+
+	@Override
+	public void changeHost(int mem_num) {
+		this.sqlSession.update("change_host", mem_num);
+	}
+
 }
