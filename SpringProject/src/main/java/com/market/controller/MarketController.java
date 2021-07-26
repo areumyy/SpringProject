@@ -396,10 +396,10 @@ public class MarketController {
 		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
 		List<ReviewDTO> classReview1 = this.likeDao.class_review1(host_memNum);
 
-		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명)
+		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명/시작날짜/끝날짜)
 		List<ReviewDTO> classReview2 = this.likeDao.class_review2(host_memNum);
 
-		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명/시작날짜/끝날짜)
+		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명)
 		List<ReviewDTO> classReview3 = this.likeDao.class_review3(host_memNum);
 		
 		HashMap<String, Integer> map = new HashMap<String, Integer>() ;
@@ -532,32 +532,32 @@ public class MarketController {
 		List<Integer> hosfClassScore = this.likeDao.host_class_score(host_memNum);
 		
 		HashMap<String, Integer> map = new HashMap<String, Integer>() ;
-		map.put("mem_num", dto.getMem_num());			// 로그인한 멤버 번호
-		map.put("host_memNum", host_memNum);			// 호스트 멤버 번호
+		map.put("mem_num", dto.getMem_num());	// 로그인한 멤버 번호
+		map.put("host_memNum", host_memNum);	// 호스트 멤버 번호
 
 		// 평점 높은순 
 		List<ReviewDTO> review_highScore1 = this.likeDao.review_highScore1(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
-		List<ReviewDTO> review_highScore2 = this.likeDao.review_highScore2(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2(클래스명) 
-		List<ReviewDTO> review_highScore3 = this.likeDao.review_highScore3(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 옵션명/시작날짜/끝날짜) 
+		List<ReviewDTO> review_highScore2 = this.likeDao.review_highScore2(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명/시작날짜/끝날짜) 
+		List<ReviewDTO> review_highScore3 = this.likeDao.review_highScore3(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명) 
 		List<Integer> highScore_like_list = this.likeDao.highScore_like_list(map);		 // 좋아요 누른 리뷰번호 리스트 가져오기
 		
 		// 평점 낮은순 
-		List<ReviewDTO> review_lowScore1 = this.likeDao.review_lowScore1(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
-		List<ReviewDTO> review_lowScore2 = this.likeDao.review_lowScore2(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2(클래스명) 
-		List<ReviewDTO> review_lowScore3 = this.likeDao.review_lowScore3(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 옵션명/시작날짜/끝날짜) 
-		List<Integer> lowScore_like_list = this.likeDao.lowScore_like_list(map);	   // 좋아요 누른 리뷰번호 리스트 가져오기
+		List<ReviewDTO> review_lowScore1 = this.likeDao.review_lowScore1(host_memNum);
+		List<ReviewDTO> review_lowScore2 = this.likeDao.review_lowScore2(host_memNum);
+		List<ReviewDTO> review_lowScore3 = this.likeDao.review_lowScore3(host_memNum);
+		List<Integer> lowScore_like_list = this.likeDao.lowScore_like_list(map);	   
 		
 		// 최신순 
-		List<ReviewDTO> review_newScore1 = this.likeDao.review_newScore1(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
-		List<ReviewDTO> review_newScore2 = this.likeDao.review_newScore2(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2(클래스명) 
-		List<ReviewDTO> review_newScore3 = this.likeDao.review_newScore3(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 옵션명/시작날짜/끝날짜)
-		List<Integer> newScore_like_list = this.likeDao.newScore_like_list(map);	   // 좋아요 누른 리뷰번호 리스트 가져오기
+		List<ReviewDTO> review_newScore1 = this.likeDao.review_newScore1(host_memNum);
+		List<ReviewDTO> review_newScore2 = this.likeDao.review_newScore2(host_memNum);
+		List<ReviewDTO> review_newScore3 = this.likeDao.review_newScore3(host_memNum);
+		List<Integer> newScore_like_list = this.likeDao.newScore_like_list(map);
 		
 		// 추천순 
-		List<ReviewDTO> review_likeScore1 = this.likeDao.review_likeScore1(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
-		List<ReviewDTO> review_likeScore2 = this.likeDao.review_likeScore2(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2(클래스명) 
-		List<ReviewDTO> review_likeScore3 = this.likeDao.review_likeScore3(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 옵션명/시작날짜/끝날짜) 
-		List<Integer> likeScore_like_list = this.likeDao.likeScore_like_list(map);		 // 좋아요 누른 리뷰번호 리스트 가져오기
+		List<ReviewDTO> review_likeScore1 = this.likeDao.review_likeScore1(host_memNum);
+		List<ReviewDTO> review_likeScore2 = this.likeDao.review_likeScore2(host_memNum);
+		List<ReviewDTO> review_likeScore3 = this.likeDao.review_likeScore3(host_memNum);
+		List<Integer> likeScore_like_list = this.likeDao.likeScore_like_list(map);
 
 		model.addAttribute("hostCont", hostCont);
 		model.addAttribute("hostInfo", hostInfo);
@@ -596,8 +596,6 @@ public class MarketController {
 
 		return "host_info_reviewSort";
 	}
-	
-	
 
 	@RequestMapping("category_list.do")
 	public String cateList() {
@@ -610,8 +608,54 @@ public class MarketController {
 	}
 
 	@RequestMapping("admin_frip_pass.do")
-	public String fripPass() {
+	public String fripPass(Model model) {
+		
+		// 프립 승인대기 목록
+		List<ClassDTO> fripPass_wait = this.classDao.fripPass_wait();
+		
+		// 승인대기 수
+		int wait_count = this.classDao.fripPass_wait_count(); 
+		
+		// 프립 승인완료 목록
+		List<ClassDTO> fripPass_finish = this.classDao.fripPass_finish();
+		
+		// 승인완료 수
+		int finish_count = this.classDao.fripPass_finish_count(); 
+		
+		model.addAttribute("fripPass_wait", fripPass_wait);
+		model.addAttribute("wait_count", wait_count);
+		model.addAttribute("fripPass_finish", fripPass_finish);
+		model.addAttribute("finish_count", finish_count);	
+		
 		return "admin_frip_pass";
+	}
+	
+	@RequestMapping("admin_frip_pass_ok.do")
+	public void fripPass_ok(@RequestParam("class_num") int class_num, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+		
+		System.out.println("프립승인 매핑에 넘어온 클래스 넘버 값입니다 >>> " + class_num);
+
+		int result = this.classDao.fripPass_result(class_num);
+
+		System.out.println("승인완료 result 값 >>> " + result);
+		
+		if (result == 1) { // 승인완료 성공
+			out.println("<script>");
+			out.println("alert('승인처리가 정상적으로 완료되었습니다.')");
+			out.println("location.href='admin_frip_pass.do'");
+			out.println("</script>");
+			
+		} else { // 승인완료 실패
+			out.println("<script>");
+			out.println("alert('승인처리가 실패하였습니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		} 
+		
 	}
 
 	@RequestMapping("admin_cal_pass.do")

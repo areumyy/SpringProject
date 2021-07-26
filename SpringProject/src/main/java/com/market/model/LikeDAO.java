@@ -36,8 +36,8 @@ public interface LikeDAO {
 	
 	// 후기 탭
 	public List<ReviewDTO> class_review1(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
-	public List<ReviewDTO> class_review2(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명)
-	public List<ReviewDTO> class_review3(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명/시작날짜/끝날짜)
+	public List<ReviewDTO> class_review2(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명/시작날짜/끝날짜)
+	public List<ReviewDTO> class_review3(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명)
 	public int review_status(HashMap<String, Integer> map);					// 좋아요 상태
 	public List<Integer> review_like_list(HashMap<String, Integer> map);	// 좋아요 누른 리뷰 리스트
 	public int review_like_plus(int review_no);								// 리뷰 좋아요
@@ -49,24 +49,24 @@ public interface LikeDAO {
 	// host_info_reviewSort.jsp (리뷰 정렬기준)
 	// score_high (평점 높은순)
 	public List<ReviewDTO> review_highScore1(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
-	public List<ReviewDTO> review_highScore2(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명)
-	public List<ReviewDTO> review_highScore3(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명/시작날짜/끝날짜)
+	public List<ReviewDTO> review_highScore2(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명/시작날짜/끝날짜)
+	public List<ReviewDTO> review_highScore3(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명)
 	public List<Integer> highScore_like_list(HashMap<String, Integer> map);		// 좋아요 누른 리뷰 리스트
 	// score_low (평점 낮은순)
-	public List<ReviewDTO> review_lowScore1(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
-	public List<ReviewDTO> review_lowScore2(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명)
-	public List<ReviewDTO> review_lowScore3(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명/시작날짜/끝날짜)
-	public List<Integer> lowScore_like_list(HashMap<String, Integer> map);		// 좋아요 누른 리뷰 리스트
+	public List<ReviewDTO> review_lowScore1(int host_memNum);					
+	public List<ReviewDTO> review_lowScore2(int host_memNum);					
+	public List<ReviewDTO> review_lowScore3(int host_memNum);					
+	public List<Integer> lowScore_like_list(HashMap<String, Integer> map);		
 	// score_new (최신순)
-	public List<ReviewDTO> review_newScore1(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
-	public List<ReviewDTO> review_newScore2(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명)
-	public List<ReviewDTO> review_newScore3(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명/시작날짜/끝날짜)
-	public List<Integer> newScore_like_list(HashMap<String, Integer> map);		// 좋아요 누른 리뷰 리스트
+	public List<ReviewDTO> review_newScore1(int host_memNum);					
+	public List<ReviewDTO> review_newScore2(int host_memNum);					
+	public List<ReviewDTO> review_newScore3(int host_memNum);					
+	public List<Integer> newScore_like_list(HashMap<String, Integer> map);		
 	// score_like (추천순)
-	public List<ReviewDTO> review_likeScore1(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
-	public List<ReviewDTO> review_likeScore2(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명)
-	public List<ReviewDTO> review_likeScore3(int host_memNum);					// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명/시작날짜/끝날짜)
-	public List<Integer> likeScore_like_list(HashMap<String, Integer> map);		// 좋아요 누른 리뷰 리스트
+	public List<ReviewDTO> review_likeScore1(int host_memNum);					
+	public List<ReviewDTO> review_likeScore2(int host_memNum);					
+	public List<ReviewDTO> review_likeScore3(int host_memNum);					
+	public List<Integer> likeScore_like_list(HashMap<String, Integer> map);		
 	
 	
 	

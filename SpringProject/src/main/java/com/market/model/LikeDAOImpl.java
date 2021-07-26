@@ -133,14 +133,14 @@ public class LikeDAOImpl implements LikeDAO {
 		return this.sqlSession.selectList("classReview1", host_memNum);
 	}
 
-	// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명)
+	// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명/시작날짜/끝날짜)
 	@Override
 	public List<ReviewDTO> class_review2(int host_memNum) {
 		
 		return this.sqlSession.selectList("classReview2", host_memNum);
 	}
 
-	// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명/시작날짜/끝날짜)
+	// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명)
 	@Override
 	public List<ReviewDTO> class_review3(int host_memNum) {
 		

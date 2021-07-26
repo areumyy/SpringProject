@@ -42,14 +42,14 @@
 
 
 .pass_box_title {
-	font-size: 20px;
+	font-size: 23px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding-left: 5px;
 }
 
 .pass_count {
-	font-size: 13px;
+	font-size: 15px;
     padding-left: 10px;
 }
 
@@ -110,21 +110,26 @@
 	display: flex;
     flex-flow: column nowrap;
     margin: 0px auto;
-    width: 80%;
+    width: 70%;
     min-width: 0px;
     border: 1px solid rgb(238, 238, 238);
     padding: 0px;
 }
 
-.confirm_img {
+.confirm_img_box {
 	position: relative;
     display: block;
     box-sizing: border-box;
 }
 
+.confirm_img_box .confirm_img {
+	width: 80%;
+}
+
 .final_frip_info {
 	min-height: 1px;
     padding: 0px 24px;
+    text-align: left;
 }
 
 .info_section {
@@ -134,12 +139,13 @@
     padding-bottom: 24px;
     line-height: 22px;
     font-size: 12px;
+    font-weight: bold;
 }
 
 .info_title {
 	width: 100%;
     min-width: 0px;
-    font-size:20px;
+    font-size: 18px;
     margin-bottom:30px;
 }
 
@@ -150,6 +156,11 @@
     flex-wrap: wrap;
     margin-top: 4px;
     font-size:20px;
+}
+
+.salePrice {
+	color: red;
+	margin-right: 10px;
 }
 
 .info_section1 {
@@ -169,8 +180,13 @@
 
 .info_hostInfo_text {
 	margin-left: 15px;
-    display: flex;
     align-items: center;
+}
+
+.count_example {
+	font-size: 12px;
+    margin-top: 3px;
+    color: #aaa;
 }
 
 .info_section2 {
@@ -178,22 +194,33 @@
     padding-top: 24px;
     padding-bottom: 24px;
     line-height: 22px;
-    font-size: 12px;
 }
-.info_title {
-	margin-bottom: 15px;
+.section_title {
+	margin-bottom: 30px;
     line-height: 14px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
 }
 
-.notice p{
+.fripInfo {
+	font-size: 13px;
+}
+
+.notice {
 	color:red;
 }
 
 .btn-primary {
 	background-color: #3397FF;
 	border-color: #3397FF;
+}
+
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 100%;
+    overflow-y: auto;
 }
 
 /* 반응형 */

@@ -34,4 +34,39 @@
 	<select id="getList_classNum" parameterType="int" resultType="com.market.model.ClassDTO">
 		select * from frip_class where class_num = #{class_num}
 	</select>
+	
+	<select id="fripPass_wait" resultType="com.market.model.ClassDTO">
+		select *
+		from frip_class c join frip_member m
+		on c.class_memnum = m.mem_num
+		where c.class_pass = 0 order by class_regdate desc
+	</select>
+	
+	<select id="fripPass_wait_count" resultType="Integer">
+		select count(*)
+		from frip_class c join frip_member m
+		on c.class_memnum = m.mem_num
+		where c.class_pass = 0
+	</select>
+	
+	<select id="fripPass_finish" resultType="com.market.model.ClassDTO">
+		select *
+		from frip_class c join frip_member m
+		on c.class_memnum = m.mem_num
+		where c.class_pass = 1 order by class_regdate desc
+	</select>
+	
+	<select id="fripPass_finish_count" resultType="Integer">
+		select count(*)
+		from frip_class c join frip_member m
+		on c.class_memnum = m.mem_num
+		where c.class_pass = 1
+	</select>
+	
+	<update id="fripPass_result" parameterType="int">
+		update frip_class set class_pass = 1, class_pass_regdate = sysdate where class_num = #{class_num}
+	</update>
+	
+	
+	
 </mapper>
