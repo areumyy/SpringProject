@@ -14,7 +14,7 @@
 				,#{class_category2}, #{class_hash}, #{class_title}, #{class_image},#{class_startDate},#{class_endDate},
 				 #{class_count}, #{class_startArea},#{class_startAreaDetail}, #{class_endArea},#{class_endAreaDetail}, 
 				 #{class_cont}, #{class_plan}, #{class_include},
-				#{class_exclude}, #{class_supply}, #{class_notice}, default, sysdate, default, default)
+				#{class_exclude}, #{class_supply}, #{class_notice}, default, sysdate, default, default,null)
 	</insert>
 	
 	<select id="getList_MemNum" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">

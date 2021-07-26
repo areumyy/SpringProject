@@ -128,11 +128,13 @@
 								</div>
 								<div class="hash">
 									<div class="little_title">캐치프레이즈</div>
-									<input type="text" class="text" name="class_hash" value="${cdto.getClass_hash() }">
+									<input type="text" class="text" name="class_hash" value="${cdto.getClass_hash() }" onkeyup="fn_checkByte(this, 20,2)">
+									<span id="nowByte2" >0</span>/20
 								</div>
 								<div class="frip_title">
 									<div class="little_title">프립명</div>
-									<input type="text" id="fripTitleText" class="text" name="class_title" value="${cdto.getClass_title() }">
+									<input type="text" id="fripTitleText" class="text" name="class_title" value="${cdto.getClass_title() }" onkeyup="fn_checkByte(this, 20,2)">
+									<span id="nowByte2" >0</span>/20
 								</div>
 							</div>
 							
@@ -338,7 +340,8 @@
 								</div> 
 								<div class="timeTableCont">
 									<textarea rows="20" cols="60" 
-									placeholder="예시) 30분 집결 및 간단한 소개" name="class_plan" style='white-space: pre-line;'>${cdto.getClass_plan() }</textarea>
+									placeholder="예시) 30분 집결 및 간단한 소개" name="class_plan" style='white-space: pre-line;' onkeyup="fn_checkByte(this, 500,7)">${cdto.getClass_plan() }</textarea>
+									<div class="nowByte"><span id="nowByte7" >0</span>/500</div>
 								</div>
 								
 							</div>
@@ -366,14 +369,16 @@
 									<div class="little_title">포함사항</div>
 								</div> 
 								<div class="timeTableCont">
-									<textarea rows="10" cols="60" placeholder="포함사항을 입력해주세요" name="class_include" style='white-space: pre-line;'>${cdto.getClass_include() }</textarea>
+									<textarea rows="10" cols="60" placeholder="포함사항을 입력해주세요" name="class_include" style='white-space: pre-line;' onkeyup="fn_checkByte(this, 500,3)">${cdto.getClass_include() }</textarea>
+									<div class="nowByte"><span id="nowByte3" >0</span>/500</div>
 								</div>
 								<br><br>
 								<div class="timeTable">
 									<div class="little_title">불포함사항</div>
 								</div> 
 								<div class="timeTableCont">
-									<textarea rows="10" cols="60" placeholder="불포함사항을 입력해주세요" name="class_exclude" style='white-space: pre-line;'>${cdto.getClass_exclude() }</textarea>
+									<textarea rows="10" cols="60" placeholder="불포함사항을 입력해주세요" name="class_exclude" style='white-space: pre-line;' onkeyup="fn_checkByte(this, 500,4)">${cdto.getClass_exclude() }</textarea>
+									<div class="nowByte"><span id="nowByte4" >0</span>/500</div>
 								</div>
 
 							</div>
@@ -400,14 +405,16 @@
 									<div class="little_title">준비물</div>
 								</div> 
 								<div class="timeTableCont">
-									<textarea rows="10" cols="60" name="class_supply" placeholder="준비물 가이드를 참고하여 작성해주세요." style='white-space: pre-line;'>${cdto.getClass_supply() }</textarea>
+									<textarea rows="10" cols="60" name="class_supply" placeholder="준비물 가이드를 참고하여 작성해주세요." style='white-space: pre-line;' onkeyup="fn_checkByte(this, 500,5)">${cdto.getClass_supply() }</textarea>
+									<div class="nowByte"><span id="nowByte5" >0</span>/500</div>
 								</div>
 								<br><br>
 								<div class="timeTable">
 									<div class="little_title">유의사항</div>
 								</div> 
 								<div class="timeTableCont">
-									<textarea rows="10" cols="60" name="class_notice" placeholder="유의사항 및 신청시 유의사항을 가이드를 참고하여 작성해 주세요" style='white-space: pre-line;'>${cdto.getClass_notice() }</textarea>
+									<textarea rows="10" cols="60" name="class_notice" placeholder="유의사항 및 신청시 유의사항을 가이드를 참고하여 작성해 주세요" style='white-space: pre-line;' onkeyup="fn_checkByte(this, 500,6)">${cdto.getClass_notice() }</textarea>
+									<div class="nowByte"><span id="nowByte6" >0</span>/500</div>
 								</div>
 
 							</div>

@@ -5,7 +5,19 @@
 
 <mapper namespace="com.market.model.ClassDAO">
 	<select id="getClassQnaCount" parameterType="int" resultType="int">
-		select count(*) from frip_class_qna where class_qna_classNum in(select class_num from frip_class where class_memnum = #{mem_num})
+		select count(*) 
+		from frip_class_qna 
+		where class_ans_cont is null 
+		and class_qna_classNum 
+		in(select class_num from frip_class where class_memnum = #{mem_num})
+	</select>
+	
+	<select id="getClassQnaCountComplete" parameterType="int" resultType="int">
+		select count(*) 
+		from frip_class_qna 
+		where class_ans_cont is not null 
+		and class_qna_classNum 
+		in(select class_num from frip_class where class_memnum = #{mem_num})
 	</select>
 	
 	<select id="getQnaList" parameterType="java.util.Map" resultType="com.market.model.Class_qnaDTO">
@@ -17,7 +29,8 @@
 			and q.class_qna_classnum = c.class_num
 			and q.class_qna_writer= m.mem_num
 			and class_qna_classNum 
-			in(select class_num from frip_class where class_memnum = #{mem_num})) 
+			in(select class_num from frip_class where class_memnum = #{mem_num})
+			order by class_qna_num desc) 
 			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
 		]]>
 	</select>
@@ -31,7 +44,8 @@
 			and q.class_qna_classnum = c.class_num
 			and q.class_qna_writer= m.mem_num
 			and class_qna_classNum 
-			in(select class_num from frip_class where class_memnum = #{mem_num})) 
+			in(select class_num from frip_class where class_memnum = #{mem_num})
+			order by class_qna_num desc) 
 			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
 		]]>
 	</select>
@@ -48,6 +62,125 @@
 		update frip_class_qna set class_ans_cont = #{ans_cont}, class_ans_regdate = sysdate 
 		where class_qna_num = #{qna_num}
 	</update>
+	<!-- 답변 안한 문의 검색 -->
+	<!-- 이름검색 -->
+	<select id="getNameSearchCount" parameterType="java.util.Map" resultType="int">
+		select count(*)
+		from frip_class_qna q, frip_class c, frip_member m
+		where class_ans_cont is null
+		and q.class_qna_classnum = c.class_num
+		and q.class_qna_writer= m.mem_num
+		and class_qna_classNum 
+		in(select class_num from frip_class where class_memnum = 1)
+		and mem_name like '%'||#{name}||'%'
+	</select>
+	
+	<select id="getNamesearchList" parameterType="java.util.Map" resultType="com.market.model.Class_qnaDTO">
+		<![CDATA[
+			select * from (select q.*,m.mem_name ,c.class_title,row_number() 
+			over(order by q.class_qna_num) rnum 
+			from frip_class_qna q, frip_class c, frip_member m
+			where class_ans_cont is null
+			and q.class_qna_classnum = c.class_num
+			and q.class_qna_writer= m.mem_num
+			and class_qna_classNum 
+			in(select class_num from frip_class where class_memnum = #{mem_num})
+			and mem_name like '%' || #{name} || '%'
+			order by class_qna_num desc) 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	<!-- 이름검색end -->
+	
+	<!-- 클래스명 검색 -->
+	<select id="getTitleSearchCount" parameterType="java.util.Map" resultType="int">
+		select count(*)
+		from frip_class_qna q, frip_class c, frip_member m
+		where class_ans_cont is null
+		and q.class_qna_classnum = c.class_num
+		and q.class_qna_writer= m.mem_num
+		and class_qna_classNum 
+		in(select class_num from frip_class where class_memnum = 1)
+		and class_title like '%'||#{name}||'%'
+	</select>
+	
+	<select id="getTitlesearchList" parameterType="java.util.Map" resultType="com.market.model.Class_qnaDTO">
+		<![CDATA[
+			select * from (select q.*,m.mem_name ,c.class_title,row_number() 
+			over(order by q.class_qna_num) rnum 
+			from frip_class_qna q, frip_class c, frip_member m
+			where class_ans_cont is null
+			and q.class_qna_classnum = c.class_num
+			and q.class_qna_writer= m.mem_num
+			and class_qna_classNum 
+			in(select class_num from frip_class where class_memnum = #{mem_num})
+			and class_title like '%' || #{name} || '%'
+			order by class_qna_num desc) 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	<!-- 클래스명 검색end -->
+	<!-- 답변 안한 문의 검색 end-->
+	
+	<!-- 답변 한 문의 검색 --> 
+	<!-- 이름검색 -->
+	<select id="CgetNameSearchCount" parameterType="java.util.Map" resultType="int">
+		select count(*)
+		from frip_class_qna q, frip_class c, frip_member m
+		where class_ans_cont is not null
+		and q.class_qna_classnum = c.class_num
+		and q.class_qna_writer= m.mem_num
+		and class_qna_classNum 
+		in(select class_num from frip_class where class_memnum = 1)
+		and mem_name like '%'||#{name}||'%'
+	</select>
+	
+	<select id="CgetNamesearchList" parameterType="java.util.Map" resultType="com.market.model.Class_qnaDTO">
+		<![CDATA[
+			select * from (select q.*,m.mem_name ,c.class_title,row_number() 
+			over(order by q.class_qna_num) rnum 
+			from frip_class_qna q, frip_class c, frip_member m
+			where class_ans_cont is not null
+			and q.class_qna_classnum = c.class_num
+			and q.class_qna_writer= m.mem_num
+			and class_qna_classNum 
+			in(select class_num from frip_class where class_memnum = #{mem_num})
+			and mem_name like '%' || #{name} || '%'
+			order by class_qna_num desc) 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	<!-- 이름검색end -->
+	
+	<!-- 클래스명 검색 -->
+	<select id="CgetTitleSearchCount" parameterType="java.util.Map" resultType="int">
+		select count(*)
+		from frip_class_qna q, frip_class c, frip_member m
+		where class_ans_cont is not null
+		and q.class_qna_classnum = c.class_num
+		and q.class_qna_writer= m.mem_num
+		and class_qna_classNum 
+		in(select class_num from frip_class where class_memnum = 1)
+		and class_title like '%'||#{name}||'%'
+	</select>
+	
+	<select id="CgetTitlesearchList" parameterType="java.util.Map" resultType="com.market.model.Class_qnaDTO">
+		<![CDATA[
+			select * from (select q.*,m.mem_name ,c.class_title,row_number() 
+			over(order by q.class_qna_num) rnum 
+			from frip_class_qna q, frip_class c, frip_member m
+			where class_ans_cont is not null
+			and q.class_qna_classnum = c.class_num
+			and q.class_qna_writer= m.mem_num
+			and class_qna_classNum 
+			in(select class_num from frip_class where class_memnum = #{mem_num})
+			and class_title like '%' || #{name} || '%'
+			order by class_qna_num desc) 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	<!-- 클래스명 검색end -->
+	<!-- 답변 안한 문의 검색 end-->
 </mapper>
 
 

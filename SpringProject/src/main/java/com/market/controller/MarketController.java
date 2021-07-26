@@ -574,10 +574,10 @@ public class MarketController {
 			dto.setClass_startArea("null");
 			dto.setClass_startAreaDetail("null");
 		}
-		if (dto.getClass_endDate() == null) { // 끝나는날이 없으면 공백값
-			dto.setClass_endDate("null");
+		if (request.getParameter("class_endDate").length() == 0) { // 끝나는날이 없으면 시작날로 설정
+			dto.setClass_endDate(dto.getClass_startDate());
 		}
-
+		
 		// 전체 클래스의 수 + 1구하기
 		int count = this.classDao.countClass();
 		dto.setClass_num(count);
@@ -771,7 +771,7 @@ public class MarketController {
 		}
 
 		// DB 상의 전체 게시물의 수를 확인하는 작업.
-		totalRecord = this.class_qnaDao.getCount(mem_num);
+		totalRecord = this.class_qnaDao.getCountComplete(mem_num);
 
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
@@ -1325,6 +1325,94 @@ public class MarketController {
 		this.bookingDao.entercancel(booking_num);
 
 		return "redirect:hostAttendance_member.do?class_num=" + class_num + "&page=" + page;
+	}
+	
+	@RequestMapping("searchAsk.do")
+	public String searchAsk(HttpServletRequest request, Model model) {
+		int mem_num = getMem_num(request);
+
+		int totalRecord = 0;
+		int rowsize = 10;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//받아온 값
+		String field = request.getParameter("search_field");
+		String name = request.getParameter("search_name");
+
+		map.put("name", name);
+		map.put("mem_num", mem_num);
+		
+		if(field.equals("mem_name")) {
+			// DB 상의 전체 게시물의 수를 확인하는 작업.
+			totalRecord = this.class_qnaDao.getNameSearchCount(map);	
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			map.put("dto", dto);
+			
+			List<Class_qnaDTO> qnaList =  this.class_qnaDao.getNamesearchList(map);
+			model.addAttribute("qList", qnaList);
+			model.addAttribute("Paging", dto);
+		}else {
+			// DB 상의 전체 게시물의 수를 확인하는 작업.
+			totalRecord = this.class_qnaDao.getTitleSearchCount(map);	
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			map.put("dto", dto);
+			
+			List<Class_qnaDTO> qnaList =  this.class_qnaDao.getTitlesearchList(map);
+			model.addAttribute("qList", qnaList);
+			model.addAttribute("Paging", dto);
+		}
+		return "host/hostAsk";
+	}
+	
+	@RequestMapping("searchComAsk.do")
+	public String CsearchAsk(HttpServletRequest request, Model model) {
+		int mem_num = getMem_num(request);
+		
+		int totalRecord = 0;
+		int rowsize = 10;
+		int page = 0; // 현재 페이지 변수
+		
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//받아온 값
+		String field = request.getParameter("search_field");
+		String name = request.getParameter("search_name");
+		
+		map.put("name", name);
+		map.put("mem_num", mem_num);
+		
+		if(field.equals("mem_name")) {
+			// DB 상의 전체 게시물의 수를 확인하는 작업.
+			totalRecord = this.class_qnaDao.CgetNameSearchCount(map);	
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			map.put("dto", dto);
+			
+			List<Class_qnaDTO> qnaList =  this.class_qnaDao.CgetNamesearchList(map);
+			model.addAttribute("qList", qnaList);
+			model.addAttribute("Paging", dto);
+		}else {
+			// DB 상의 전체 게시물의 수를 확인하는 작업.
+			totalRecord = this.class_qnaDao.CgetTitleSearchCount(map);	
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			map.put("dto", dto);
+			
+			List<Class_qnaDTO> qnaList =  this.class_qnaDao.CgetTitlesearchList(map);
+			model.addAttribute("qList", qnaList);
+			model.addAttribute("Paging", dto);
+		}
+		return "host/hostAskComplete";
 	}
 
 	public int getMem_num(HttpServletRequest request) {
