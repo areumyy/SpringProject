@@ -26,10 +26,11 @@
 				<div class="Content_Main2" style="opacity: 1; display: block;">
 					<div class="Content_Main3">
 						<div class="Content_Main4">
-							<div class="Content_Head1">
+							<div class="Content_Head1" style="padding-bottom: 24px;">
 								
 								<!-- 호스트 정보 -->
 								<!-- key값 받기 -->
+								<c:set var="fripInfo" value="${fripInfo }" />			<!-- 프립 내용 -->
 								<c:set var="hostCont" value="${hostCont }" />			<!-- 호스트 소개(소개내용) -->
 								<c:set var="hostInfo" value="${hostInfo }" />			<!-- 호스트 상세정보 (이름/프로필) -->
 								<c:set var="classCount" value="${classCount }" />		<!-- 호스트가 운영하는 클래스 개수 -->
@@ -37,45 +38,27 @@
 								<c:set var="likeCount" value="${likeCount }" />			<!-- 호스트 찜 개수 -->
 							
 							
-								<div id="carouselExampleControlsNoTouching" class="carousel slide Content_Head1_Img1"
-									data-bs-touch="false" data-bs-interval="false" style="margin: 0 50px;">
+								<div class="Content_Head1_Img1" style="margin: 0 50px;">
 									<div class="image-slider Content_Head1_Img2 image-initialized" dir="ltr">
-										
-										<div class="carousel-inner image-list">
-											<div class="image-track">
-												<div class="carousel-item active">
-													<img class="d-block w-100 Content_Img3" alt="상품이미지" style="height:500px; width:500px;"
-														src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_0,w_768/1622920435587-0_hwpjzs">
-												</div>
-												<div class="carousel-item">
-													<img class="d-block w-100 Content_Img3" alt="상품이미지" style="height:500px; width:500px;"
-														src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_0,w_768/12_xjkl8n">
-												</div>
+										<div class="image-list">
+											<div>
+												<img class= Content_Img3" alt="상품이미지" style="height:500px; width:500px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_0,w_768/1622920435587-0_hwpjzs">
 											</div>
 										</div>
-
-										<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Previous</span>
-										</button>
-										<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-											<span class="carousel-control-next-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Next</span>
-										</button>
-
 									</div>
 								</div>
 								
 								<div class="Content_Head2">
 									<section class="Content_Head3">
-										<div class="Content_Title1">
+										<div class="Content_Title1" style="padding-bottom: 10px;">
 											<div class="Content_Title2">
-												<label class="Content_Title3">로즈룸에서 쿠킹 &amp; 와인을 즐겨요-</label>
+												<label class="Content_Title3">${fripInfo.getClass_title() }</label>
 											</div>
 										</div>
 										<div class="Content_Price1">
 											<div class="Content_Price2">
-												45,000<span class="Content_Price3">원</span>
+												${fripInfo.getOption_editprice() }<span class="Content_Price3">원</span>
 											</div>
 										</div>
 									</section>

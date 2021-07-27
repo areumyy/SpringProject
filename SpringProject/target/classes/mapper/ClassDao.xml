@@ -378,4 +378,17 @@
 		]]>
 	</select>
 	
+	<!-- 프립 상세 내용 호출 메서드 -->
+	<select id="fripInfo" parameterType="int" resultType="com.market.model.ClassDTO">
+		select *
+		from frip_class c
+		left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+		                 from frip_option
+		                 group by option_classnum) o
+		on c.class_num = o.option_classNum
+		where class_num = #{num}
+	</select>
+	
+	
+	
 </mapper>

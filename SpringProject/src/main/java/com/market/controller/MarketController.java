@@ -1725,11 +1725,7 @@ public class MarketController {
 		// 프립 상세 내용 호출 메서드
 		ClassDTO fripInfo = this.classDao.getclassCont(class_num);
 		
-		
-		
-		
-		
-		
+		model.addAttribute("fripInfo", fripInfo);
 		
 		// 호스트 상세정보 가져오는 메서드
 		MemberDTO hostInfo = this.likeDao.hostInfo(class_memnum);
@@ -1752,11 +1748,6 @@ public class MarketController {
 		model.addAttribute("reviewCount", reviewCount);
 		model.addAttribute("likeCount", likeCount);
 		
-		
-		
-		
 		return "frip_content";
 	}
-	
-	
 }

@@ -120,8 +120,8 @@ public class ClassDAOImpl implements ClassDAO {
 
 	@Override
 	public ClassDTO getclassCont(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.sqlSession.selectOne("fripInfo", num);
 	}
 
 	@Override
