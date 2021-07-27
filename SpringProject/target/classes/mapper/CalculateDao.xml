@@ -57,7 +57,7 @@
 		insert into frip_calculate values(#{cal_num},#{cal_classNum},
 					#{cal_startDate},#{cal_endDate}, #{cal_name},
 					#{cal_buyCount},#{cal_enterCount},#{cal_enterNoCount},
-					#{cal_sal},#{cal_total},default,sysdate,null)
+					#{cal_sal},#{cal_total},3,sysdate,null)
 	</insert>
 </mapper>
 

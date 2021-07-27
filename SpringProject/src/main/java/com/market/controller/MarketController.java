@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,7 @@ import com.market.model.OptionDTO;
 import com.market.model.PageDTO;
 import com.market.model.QnaDAO;
 import com.market.model.QnaDTO;
+import com.market.model.ReviewDAO;
 import com.market.model.ReviewDTO;
 import com.market.model.Upload;
 
@@ -80,7 +82,9 @@ public class MarketController {
 	private Class_qnaDAO class_qnaDao;
 	@Autowired
 	private CalculateDAO calculateDao;
-
+	@Autowired
+	private ReviewDAO reviewDao;
+	
 	@RequestMapping("main.do")
 	public String main() {
 		return "home";
@@ -681,7 +685,7 @@ public class MarketController {
 		
 		model.addAttribute("cList", list);
 		model.addAttribute("Paging", dto);
-		System.out.println(list);
+
 		return "host/hostMyFripWait";
 	}
 	
@@ -895,7 +899,7 @@ public class MarketController {
 		cdto.setCal_enterNoCount(enterNoCount);
 		cdto.setCal_sal(cal_sal);
 		cdto.setCal_total((int)(cal_sal * 0.9));
-		System.out.println(cdto);
+
 		int res = this.calculateDao.insertData(cdto);
 		
 		if(res == 1) {
@@ -1041,8 +1045,60 @@ public class MarketController {
 	}
 
 	@RequestMapping("hostReview.do")
-	public String hostReview() {
+	public String hostReview(HttpServletRequest request,Model model) {
+		int mem_num = getMem_num(request);
+		
+		int totalRecord = 0;
+		int rowsize = 5;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.reviewDao.getCount_memnum(mem_num);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+		
+		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("dto", dto);
+		map.put("mem_num", mem_num);
+		
+		List<ReviewDTO> rList = this.reviewDao.getList_memnum(map);
+		
+		int sum = 0;
+		for(int i=0; i<rList.size(); i++) {
+			sum += rList.get(i).getReview_score();
+		}
+		double average = sum/rList.size();
+		
+		model.addAttribute("total", totalRecord);
+		model.addAttribute("average", average);
+		model.addAttribute("rList", rList);
+		model.addAttribute("Paging", dto);
+		
 		return "host/hostReview";
+	}
+	
+	@RequestMapping("reviewReplyOk.do")
+	public String reviewReplyOk(HttpServletRequest request) {
+		int review_num = Integer.parseInt(request.getParameter("review_num"));
+		int page = Integer.parseInt(request.getParameter("page"));
+		String review_reply = request.getParameter("review_reply");
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("review_num", review_num);
+		map.put("review_reply", review_reply);
+		
+		int res = this.reviewDao.insertReply(map);
+		System.out.println(res);
+		
+		return "redirect:hostReview.do?page="+page;
 	}
 
 	@RequestMapping("mypage.do")
