@@ -9,4 +9,5 @@ public interface CalculateDAO {
 	public List<CalculateDTO> getListAll(List<ClassDTO> list);
 	
 	public int requestCal(int target);
+	public int insertData(CalculateDTO dto);
 }

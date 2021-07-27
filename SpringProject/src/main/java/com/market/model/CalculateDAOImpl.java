@@ -35,4 +35,9 @@ public class CalculateDAOImpl implements CalculateDAO {
 		return this.sqlSession.update("req_cal", target);
 	}
 
+	@Override
+	public int insertData(CalculateDTO dto) {
+		return this.sqlSession.insert("insertData", dto);
+	}
+
 }

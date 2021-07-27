@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("#btnradio1").trigger("click");
+	//$("#btnradio1").trigger("click");
 });
 
 
