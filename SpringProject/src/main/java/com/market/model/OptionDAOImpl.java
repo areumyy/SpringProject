@@ -43,4 +43,9 @@ public class OptionDAOImpl implements OptionDAO {
 		return this.sqlSession.update("updateOption", dto);
 	}
 
+	@Override
+	public OptionDTO getOptionCont(int option_num) {
+		return this.sqlSession.selectOne("get_option_cont", option_num);
+	}
+
 }

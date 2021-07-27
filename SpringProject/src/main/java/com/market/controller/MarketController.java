@@ -83,7 +83,7 @@ public class MarketController {
 	private CalculateDAO calculateDao;
 	@Autowired
 	private ReviewDAO reviewDao;
-	
+
 	@RequestMapping("main.do")
 	public String main() {
 		return "home";
@@ -410,7 +410,7 @@ public class MarketController {
 
 		// 호스트가 운영하는 클래스 옵션 상세정보 가져오는 메서드
 		List<OptionDTO> hostClassOption = this.likeDao.host_classOption(host_memNum);
-		
+
 		// 호스트가 운영하는 클래스 별 별점
 		List<Integer> hosfClassScore = this.likeDao.host_class_score(host_memNum);
 
@@ -422,11 +422,11 @@ public class MarketController {
 
 		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명)
 		List<ReviewDTO> classReview3 = this.likeDao.class_review3(host_memNum);
-		
-		HashMap<String, Integer> map = new HashMap<String, Integer>() ;
-		map.put("mem_num", dto.getMem_num());			// 로그인한 멤버 번호
-		map.put("host_memNum", host_memNum);			// 호스트 번호
-		
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("mem_num", dto.getMem_num()); // 로그인한 멤버 번호
+		map.put("host_memNum", host_memNum); // 호스트 번호
+
 		// 좋아요 누른 리뷰번호 리스트 가져오기
 		List<Integer> like_list = this.likeDao.review_like_list(map);
 
@@ -445,22 +445,23 @@ public class MarketController {
 
 		return "host_info";
 	}
-	
-	// 저장페이지 - 리뷰 좋아요 매핑 
+
+	// 저장페이지 - 리뷰 좋아요 매핑
 	@RequestMapping(value = "/like_status.do", method = RequestMethod.POST)
 	@ResponseBody
-	public void likeStatus(HttpServletResponse response, @RequestParam("reviewNum") int reviewNum, HttpServletRequest request) throws IOException {
-		
+	public void likeStatus(HttpServletResponse response, @RequestParam("reviewNum") int reviewNum,
+			HttpServletRequest request) throws IOException {
+
 		response.setContentType("text/html; charset=UTF-8");
 
 		// 세션값 가져오기
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
-		
-		HashMap<String, Integer> map = new HashMap<String, Integer>() ;
-		map.put("like_writer", dto.getMem_num());	// 로그인한 멤버 번호
-		map.put("like_target", reviewNum);			// 좋아요 누른 리뷰 번호
-		
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("like_writer", dto.getMem_num()); // 로그인한 멤버 번호
+		map.put("like_target", reviewNum); // 좋아요 누른 리뷰 번호
+
 		System.out.println("멤버 번호1 >>> " + dto.getMem_num());
 		System.out.println("리뷰 번호1 >>> " + reviewNum);
 
@@ -470,60 +471,61 @@ public class MarketController {
 
 		int state = 0;
 		int likeCount = 0;
-		
-		if(like_status > 0) {	// 좋아요 누른 상태
-			
+
+		if (like_status > 0) { // 좋아요 누른 상태
+
 			System.out.println("멤버 번호2 >>> " + dto.getMem_num());
 			System.out.println("리뷰 번호2 >>> " + reviewNum);
-			
+
 			// 리뷰 좋아요 취소 (-1)
 			int like_minus = this.likeDao.review_like_minus(reviewNum);
-			
+
 			// 좋아요 DB 삭제
 			this.likeDao.review_like_del(map);
-			
+
 			// 리뷰 좋아요 개수 가져오는 메서드
 			int like_count = this.likeDao.review_like_count(reviewNum);
-			
+
 			if (like_minus > 0) {
 				state = 1;
 				likeCount = like_count;
-			} 
-			
-		} else if(like_status == 0) { // 좋아요 안 누른 상태
-			
+			}
+
+		} else if (like_status == 0) { // 좋아요 안 누른 상태
+
 			System.out.println("멤버 번호3 >>> " + dto.getMem_num());
 			System.out.println("리뷰 번호3 >>> " + reviewNum);
-			
+
 			// 리뷰 좋아요 (+1)
 			int like_plus = this.likeDao.review_like_plus(reviewNum);
-			
+
 			// 좋아요 DB 추가
 			this.likeDao.review_like_add(map);
 
 			// 리뷰 좋아요 개수 가져오는 메서드
 			int like_count = this.likeDao.review_like_count(reviewNum);
-			
+
 			if (like_plus > 0) {
 				state = 2;
 				likeCount = like_count;
-			} 
+			}
 		}
-		
+
 		JSONObject obj = new JSONObject();
 		obj.put("state", state);
 		obj.put("likeCount", likeCount);
 
 		response.getWriter().print(obj);
 	}
-	
+
 	// 저장페이지 - 호스트 리뷰 기준별 조회 매핑 (평점 높은순/평점 낮은순/최신순/추천순)
 	@RequestMapping("review_sort.do")
-	public String reviewSort(@RequestParam("sort") String sort, @RequestParam("hostMemNum") int host_memNum, HttpServletRequest request, Model model) {
-		
+	public String reviewSort(@RequestParam("sort") String sort, @RequestParam("hostMemNum") int host_memNum,
+			HttpServletRequest request, Model model) {
+
 		System.out.println("sort >>> " + sort);
 		System.out.println("host_memNum >>> " + host_memNum);
-		
+
 		// 세션값 가져오기
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
@@ -548,33 +550,37 @@ public class MarketController {
 
 		// 호스트가 운영하는 클래스 옵션 상세정보 가져오는 메서드
 		List<OptionDTO> hostClassOption = this.likeDao.host_classOption(host_memNum);
-		
+
 		// 호스트가 운영하는 클래스 별 별점
 		List<Integer> hosfClassScore = this.likeDao.host_class_score(host_memNum);
-		
-		HashMap<String, Integer> map = new HashMap<String, Integer>() ;
-		map.put("mem_num", dto.getMem_num());	// 로그인한 멤버 번호
-		map.put("host_memNum", host_memNum);	// 호스트 멤버 번호
 
-		// 평점 높은순 
-		List<ReviewDTO> review_highScore1 = this.likeDao.review_highScore1(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일)
-		List<ReviewDTO> review_highScore2 = this.likeDao.review_highScore2(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명/시작날짜/끝날짜) 
-		List<ReviewDTO> review_highScore3 = this.likeDao.review_highScore3(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명) 
-		List<Integer> highScore_like_list = this.likeDao.highScore_like_list(map);		 // 좋아요 누른 리뷰번호 리스트 가져오기
-		
-		// 평점 낮은순 
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("mem_num", dto.getMem_num()); // 로그인한 멤버 번호
+		map.put("host_memNum", host_memNum); // 호스트 멤버 번호
+
+		// 평점 높은순
+		List<ReviewDTO> review_highScore1 = this.likeDao.review_highScore1(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는
+																							// 메서드1
+																							// (회원이름/회원프로필/리뷰내용/리뷰작성일)
+		List<ReviewDTO> review_highScore2 = this.likeDao.review_highScore2(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는
+																							// 메서드2 (클래스명/시작날짜/끝날짜)
+		List<ReviewDTO> review_highScore3 = this.likeDao.review_highScore3(host_memNum); // 호스트가 운영하는 클래스 모든 리뷰 가져오는
+																							// 메서드3 (옵션명)
+		List<Integer> highScore_like_list = this.likeDao.highScore_like_list(map); // 좋아요 누른 리뷰번호 리스트 가져오기
+
+		// 평점 낮은순
 		List<ReviewDTO> review_lowScore1 = this.likeDao.review_lowScore1(host_memNum);
 		List<ReviewDTO> review_lowScore2 = this.likeDao.review_lowScore2(host_memNum);
 		List<ReviewDTO> review_lowScore3 = this.likeDao.review_lowScore3(host_memNum);
-		List<Integer> lowScore_like_list = this.likeDao.lowScore_like_list(map);	   
-		
-		// 최신순 
+		List<Integer> lowScore_like_list = this.likeDao.lowScore_like_list(map);
+
+		// 최신순
 		List<ReviewDTO> review_newScore1 = this.likeDao.review_newScore1(host_memNum);
 		List<ReviewDTO> review_newScore2 = this.likeDao.review_newScore2(host_memNum);
 		List<ReviewDTO> review_newScore3 = this.likeDao.review_newScore3(host_memNum);
 		List<Integer> newScore_like_list = this.likeDao.newScore_like_list(map);
-		
-		// 추천순 
+
+		// 추천순
 		List<ReviewDTO> review_likeScore1 = this.likeDao.review_likeScore1(host_memNum);
 		List<ReviewDTO> review_likeScore2 = this.likeDao.review_likeScore2(host_memNum);
 		List<ReviewDTO> review_likeScore3 = this.likeDao.review_likeScore3(host_memNum);
@@ -589,31 +595,31 @@ public class MarketController {
 		model.addAttribute("hostClassOption", hostClassOption);
 		model.addAttribute("hosfClassScore", hosfClassScore);
 		model.addAttribute("sort", sort);
-		
-		if(sort.equals("score_high")) {		// 평점 높은순 
+
+		if (sort.equals("score_high")) { // 평점 높은순
 			model.addAttribute("classReview1", review_highScore1);
 			model.addAttribute("classReview2", review_highScore2);
 			model.addAttribute("classReview3", review_highScore3);
 			model.addAttribute("like_list", highScore_like_list);
-			
-		} else if(sort.equals("score_low")) {	// 평점 낮은순
+
+		} else if (sort.equals("score_low")) { // 평점 낮은순
 			model.addAttribute("classReview1", review_lowScore1);
 			model.addAttribute("classReview2", review_lowScore2);
 			model.addAttribute("classReview3", review_lowScore3);
 			model.addAttribute("like_list", lowScore_like_list);
-			
-		} else if(sort.equals("score_new")) {	// 최신순
+
+		} else if (sort.equals("score_new")) { // 최신순
 			model.addAttribute("classReview1", review_newScore1);
 			model.addAttribute("classReview2", review_newScore2);
 			model.addAttribute("classReview3", review_newScore3);
 			model.addAttribute("like_list", newScore_like_list);
-			
-		} else if(sort.equals("score_like")) {	// 추천순
+
+		} else if (sort.equals("score_like")) { // 추천순
 			model.addAttribute("classReview1", review_likeScore1);
 			model.addAttribute("classReview2", review_likeScore2);
 			model.addAttribute("classReview3", review_likeScore3);
 			model.addAttribute("like_list", likeScore_like_list);
-		}			
+		}
 		return "host_info_reviewSort";
 	}
 
@@ -624,128 +630,140 @@ public class MarketController {
 
 	@RequestMapping("option_select.do")
 	public String optionSel(@RequestParam("class_num") int class_num, Model model) {
-		
+
 		model.addAttribute("class_num", class_num);
-		
-		
-		
+
 		return "option_select";
 	}
 
 	@RequestMapping("admin_frip_pass.do")
 	public String fripPass(Model model) {
-		
+
 		// 프립 승인대기 목록
 		List<ClassDTO> fripPass_wait = this.classDao.fripPass_wait();
-		
+
 		// 승인대기 수
-		int wait_count = this.classDao.fripPass_wait_count(); 
-		
+		int wait_count = this.classDao.fripPass_wait_count();
+
 		// 프립 승인완료 목록
 		List<ClassDTO> fripPass_finish = this.classDao.fripPass_finish();
-		
+
 		// 승인완료 수
-		int finish_count = this.classDao.fripPass_finish_count(); 
-		
+		int finish_count = this.classDao.fripPass_finish_count();
+
 		model.addAttribute("fripPass_wait", fripPass_wait);
 		model.addAttribute("wait_count", wait_count);
 		model.addAttribute("fripPass_finish", fripPass_finish);
-		model.addAttribute("finish_count", finish_count);	
-		
+		model.addAttribute("finish_count", finish_count);
+
 		return "admin_frip_pass";
 	}
-	
+
 	@RequestMapping("admin_frip_pass_ok.do")
-	public void fripPass_ok(@RequestParam("class_num") int class_num, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
+	public void fripPass_ok(@RequestParam("class_num") int class_num, HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+
 		response.setContentType("text/html; charset=UTF-8");
 
 		PrintWriter out = response.getWriter();
-		
+
 		System.out.println("프립승인 매핑에 넘어온 클래스 넘버 값입니다 >>> " + class_num);
 
 		int result = this.classDao.fripPass_result(class_num);
 
 		System.out.println("승인완료 result 값 >>> " + result);
-		
+
 		if (result == 1) { // 승인완료 성공
 			out.println("<script>");
 			out.println("alert('승인처리가 정상적으로 완료되었습니다.')");
 			out.println("location.href='admin_frip_pass.do'");
 			out.println("</script>");
-			
+
 		} else { // 승인완료 실패
 			out.println("<script>");
 			out.println("alert('승인처리가 실패하였습니다.')");
 			out.println("history.back()");
 			out.println("</script>");
-		} 
-		
+		}
+
 	}
 
 	@RequestMapping("admin_cal_pass.do")
 	public String calPass(Model model) {
-		
+
 		// 프립 승인대기 목록
 		List<CalculateDTO> calPass_wait = this.calculateDao.calPass_wait();
-		
+
 		// 승인대기 목록 호스트 이름
 		List<ClassDTO> wait_host = this.calculateDao.calPass_wait_host();
-		
+
 		// 승인대기 수
-		int wait_count = this.calculateDao.calPass_wait_count(); 
-		
+		int wait_count = this.calculateDao.calPass_wait_count();
+
 		// 프립 승인완료 목록
 		List<CalculateDTO> calPass_finish = this.calculateDao.calPass_finish();
-		
+
 		// 승인완료 목록 호스트 이름
 		List<ClassDTO> finish_host = this.calculateDao.calPass_finish_host();
-		
+
 		// 승인완료 수
-		int finish_count = this.calculateDao.calPass_finish_count(); 
-		
-		
-		 model.addAttribute("calPass_wait", calPass_wait);
-		 model.addAttribute("wait_host", wait_host);
-		 model.addAttribute("wait_count", wait_count);
-		 model.addAttribute("calPass_finish", calPass_finish);
-		 model.addAttribute("finish_count", finish_count);
-		 model.addAttribute("finish_host", finish_host);
-		 
+		int finish_count = this.calculateDao.calPass_finish_count();
+
+		model.addAttribute("calPass_wait", calPass_wait);
+		model.addAttribute("wait_host", wait_host);
+		model.addAttribute("wait_count", wait_count);
+		model.addAttribute("calPass_finish", calPass_finish);
+		model.addAttribute("finish_count", finish_count);
+		model.addAttribute("finish_host", finish_host);
+
 		return "admin_cal_pass";
 	}
-	
+
 	@RequestMapping("admin_cal_pass_ok.do")
-	public void calPass_ok(@RequestParam("class_num") int class_num, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
+	public void calPass_ok(@RequestParam("class_num") int class_num, HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+
 		response.setContentType("text/html; charset=UTF-8");
 
 		PrintWriter out = response.getWriter();
-		
+
 		System.out.println("정산승인 매핑에 넘어온 클래스 넘버 값입니다 >>> " + class_num);
 
 		int result = this.calculateDao.calPass_result(class_num);
 		int result2 = this.calculateDao.calPass_result2(class_num);
 
 		if (result == 1) { // 승인완료 성공
-			if(result2 == 1) {
+			if (result2 == 1) {
 				out.println("<script>");
 				out.println("alert('승인처리가 정상적으로 완료되었습니다.')");
 				out.println("location.href='admin_cal_pass.do'");
 				out.println("</script>");
 			}
-			
+
 		} else { // 승인완료 실패
 			out.println("<script>");
 			out.println("alert('승인처리가 실패하였습니다.')");
 			out.println("history.back()");
 			out.println("</script>");
-		} 
-		
+		}
+
 	}
 
 	@RequestMapping("payment.do")
-	public String pay() {
+	public String pay(Model model) {
+		BookingDTO bookDto = new BookingDTO();
+		bookDto.setBooking_writer(4);
+		bookDto.setBooking_classNum(1);
+		bookDto.setBooking_option(1);
+		bookDto.setBooking_enterCheck("no");
+
+		ClassDTO classDto = this.classDao.getclassCont(bookDto.getBooking_classNum());
+		OptionDTO optionDto = this.optionDao.getOptionCont(bookDto.getBooking_option());
+
+		model.addAttribute("bookDto", bookDto);
+		model.addAttribute("classDto", classDto);
+		model.addAttribute("optionDto", optionDto);
+
 		return "payment";
 	}
 
@@ -883,7 +901,7 @@ public class MarketController {
 		if (request.getParameter("class_endDate").length() == 0) { // 끝나는날이 없으면 시작날로 설정
 			dto.setClass_endDate(dto.getClass_startDate());
 		}
-		
+
 		// 전체 클래스의 수 + 1구하기
 		int count = this.classDao.countClass();
 		dto.setClass_num(count);
@@ -922,7 +940,7 @@ public class MarketController {
 	@RequestMapping("hostMyFrip.do")
 	public String hostMyFrip(HttpServletRequest request, Model model) {
 		int mem_num = getMem_num(request);
-		
+
 		int totalRecord = 0;
 		int rowsize = 8;
 		int page = 0; // 현재 페이지 변수
@@ -932,92 +950,92 @@ public class MarketController {
 		} else {
 			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
 		}
-		
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("mem_num", mem_num);
 		int class_pass = 1;
 
 		map.put("class_pass", class_pass);
-		
+
 		// DB 상의 전체 게시물의 수를 확인하는 작업.
 		totalRecord = this.classDao.countclass_myfrip(map);
 
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 		map.put("dto", dto);
-		
+
 		List<ClassDTO> list = this.classDao.getList_myFrip(map);
-		
+
 		model.addAttribute("cList", list);
 		model.addAttribute("Paging", dto);
-		
+
 		return "host/hostMyFrip";
 	}
-	
+
 	@RequestMapping("hostMyFripWait.do")
 	public String hostMyFripWait(HttpServletRequest request, Model model) {
 		int mem_num = getMem_num(request);
-		
+
 		int totalRecord = 0;
 		int rowsize = 8;
 		int page = 0; // 현재 페이지 변수
-		
+
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		} else {
 			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
 		}
-		
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("mem_num", mem_num);
 		int class_pass = 0;
-		
+
 		map.put("class_pass", class_pass);
-		
+
 		// DB 상의 전체 게시물의 수를 확인하는 작업.
 		totalRecord = this.classDao.countclass_myfrip(map);
-		
+
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 		map.put("dto", dto);
-		
+
 		List<ClassDTO> list = this.classDao.getList_myFrip(map);
-		
+
 		model.addAttribute("cList", list);
 		model.addAttribute("Paging", dto);
 		System.out.println(list);
 		return "host/hostMyFripWait";
 	}
-	
+
 	@RequestMapping("hostMyFripEnd.do")
 	public String hostMyFripEnd(HttpServletRequest request, Model model) {
 		int mem_num = getMem_num(request);
-		
+
 		int totalRecord = 0;
 		int rowsize = 8;
 		int page = 0; // 현재 페이지 변수
-		
+
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		} else {
 			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
 		}
-		
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("mem_num", mem_num);
 		int class_pass = 1;
-		
+
 		map.put("class_pass", class_pass);
-		
+
 		// DB 상의 전체 게시물의 수를 확인하는 작업.
 		totalRecord = this.classDao.countclass_end(map);
-		
+
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 		map.put("dto", dto);
-		
+
 		List<ClassDTO> list = this.classDao.getList_end(map);
-		
+
 		model.addAttribute("cList", list);
 		model.addAttribute("Paging", dto);
-		
+
 		return "host/hostMyFripEnd";
 	}
 
@@ -1159,58 +1177,57 @@ public class MarketController {
 		return "host/hostAskComplete";
 	}
 
-	
 	@RequestMapping("hostEndCheck.do")
-	public String hostEndCheck(HttpServletRequest request, Model model,HttpServletResponse response) {
-		
+	public String hostEndCheck(HttpServletRequest request, Model model, HttpServletResponse response) {
+
 		int nowPage = Integer.parseInt(request.getParameter("page"));
 		int class_num = Integer.parseInt(request.getParameter("class_num"));
-		 
+
 		CalculateDTO cdto = new CalculateDTO();
-		
+
 		ClassDTO classdto = this.classDao.getList_classNum(class_num);
-		
+
 		int allCount = this.bookingDao.getCount(class_num);
 		int enterCount = this.bookingDao.getCountEnter(class_num);
 		int enterNoCount = allCount - enterCount;
-		
+
 		List<OptionDTO> odto = this.optionDao.getOptionList(class_num);
-		
+
 		int cal_sal = 0;
-		
-		for(int i=0; i<odto.size(); i++) {
-			//옵션을 구매한 사람의 수를 구하기
+
+		for (int i = 0; i < odto.size(); i++) {
+			// 옵션을 구매한 사람의 수를 구하기
 			int optionCount = this.bookingDao.getcount_option_num(odto.get(i).getOption_num());
-			if(odto.get(i).getOption_price() == odto.get(i).getOption_editPrice()) {
+			if (odto.get(i).getOption_price() == odto.get(i).getOption_editPrice()) {
 				cal_sal += (odto.get(i).getOption_price() * optionCount);
-			}else if(odto.get(i).getOption_price() != odto.get(i).getOption_editPrice()) {
+			} else if (odto.get(i).getOption_price() != odto.get(i).getOption_editPrice()) {
 				cal_sal += (odto.get(i).getOption_editPrice() * optionCount);
 			}
 		}
-		
+
 		cdto.setCal_classNum(class_num);
-		cdto.setCal_startDate(classdto.getClass_startDate().substring(0,10));
-		cdto.setCal_endDate(classdto.getClass_endDate().substring(0,10));
+		cdto.setCal_startDate(classdto.getClass_startDate().substring(0, 10));
+		cdto.setCal_endDate(classdto.getClass_endDate().substring(0, 10));
 		cdto.setCal_name(classdto.getClass_title());
 		cdto.setCal_buyCount(allCount);
 		cdto.setCal_enterCount(enterCount);
 		cdto.setCal_enterNoCount(enterNoCount);
 		cdto.setCal_sal(cal_sal);
-		cdto.setCal_total((int)(cal_sal * 0.9));
+		cdto.setCal_total((int) (cal_sal * 0.9));
 		System.out.println(cdto);
 		int res = this.calculateDao.insertData(cdto);
-		
-		if(res == 1) {
+
+		if (res == 1) {
 			this.classDao.changeCalState(class_num);
 		}
-		
-		return "redirect:hostMyFripEnd.do?page="+nowPage;
+
+		return "redirect:hostMyFripEnd.do?page=" + nowPage;
 	}
-	
+
 	@RequestMapping("hostCalculateReq.do")
 	public String hostCalReq(HttpServletRequest request, Model model, @RequestParam("type") String type) {
 		HttpSession session = request.getSession();
-		
+
 		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
 
 		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
@@ -1230,11 +1247,11 @@ public class MarketController {
 		if (type.equals("total")) {
 			totalRecord = this.calculateDao.getCountAll(mem_num);
 			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
-			
+
 			HashMap<String, Integer> map = new HashMap<String, Integer>();
 			map.put("mem_num", mem_num);
 			map.put("status", 0);
-			
+
 			List<ClassDTO> classList = this.classDao.getList_endOkAll(map); // 종료확인된 클래스 리스트
 			calList = this.calculateDao.getListAll(classList);
 			model.addAttribute("Paging", dto);
@@ -1272,7 +1289,7 @@ public class MarketController {
 
 		model.addAttribute("list", calList);
 		model.addAttribute("type", type);
-		
+
 		return "host/hostCalculateReq";
 	}
 
@@ -1350,9 +1367,9 @@ public class MarketController {
 	}
 
 	@RequestMapping("hostReview.do")
-	public String hostReview(HttpServletRequest request,Model model) {
+	public String hostReview(HttpServletRequest request, Model model) {
 		int mem_num = getMem_num(request);
-		
+
 		int totalRecord = 0;
 		int rowsize = 5;
 		int page = 0; // 현재 페이지 변수
@@ -1367,43 +1384,43 @@ public class MarketController {
 		totalRecord = this.reviewDao.getCount_memnum(mem_num);
 
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
-		
+
 		// 페이지에 해당하는 게시물을 가져오는 메서드 호출
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("dto", dto);
 		map.put("mem_num", mem_num);
-		
+
 		List<ReviewDTO> rList = this.reviewDao.getList_memnum(map);
-		
+
 		int sum = 0;
-		for(int i=0; i<rList.size(); i++) {
+		for (int i = 0; i < rList.size(); i++) {
 			sum += rList.get(i).getReview_score();
 		}
-		double average = (double)sum/rList.size();
-		
+		double average = (double) sum / rList.size();
+
 		model.addAttribute("total", totalRecord);
 		model.addAttribute("average", average);
 		model.addAttribute("rList", rList);
 		model.addAttribute("Paging", dto);
-		
+
 		return "host/hostReview";
 	}
-	
+
 	@RequestMapping("reviewReplyOk.do")
 	public String reviewReplyOk(HttpServletRequest request) {
 		int review_num = Integer.parseInt(request.getParameter("review_num"));
 		int page = Integer.parseInt(request.getParameter("page"));
 		String review_reply = request.getParameter("review_reply");
-		
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("review_num", review_num);
 		map.put("review_reply", review_reply);
-		
+
 		int res = this.reviewDao.insertReply(map);
 		System.out.println(res);
-		
-		return "redirect:hostReview.do?page="+page;
+
+		return "redirect:hostReview.do?page=" + page;
 	}
 
 	@RequestMapping("mypage.do")
@@ -1745,78 +1762,78 @@ public class MarketController {
 
 	@RequestMapping("hostUpdateFripOk.do")
 	public void hostUpdateFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
-		  HttpServletRequest request, HttpServletResponse response) throws IOException {
-		  response.setContentType("text/html; charset=UTF-8");
-		  HttpSession session = request.getSession();
-		  MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
-		 
-		  int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
-		  
-		  dto.setClass_memNum(mem_num); // 회원 번호 넣어주기
+			HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		HttpSession session = request.getSession();
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
 
-		  //원래 클래스의 정보
-		  ClassDTO classList = this.classDao.getList_classNum(dto.getClass_num());
-		  
-		  //사진을 수정했는지 여부 확인
-		  if(dto.getClass_image2().getSize() == 0 ) {
-			  dto.setClass_image(classList.getClass_image());
-		  }else {
-			  dto.setClass_image(upload.fileUpload(mRequest)); // 파일 이름으로 변환		  
-		  }
-		  
-		  if(request.getParameter("startArea") == null) {
-			  dto.setClass_startArea("null"); 
-			  dto.setClass_startAreaDetail("null"); 
-		  } 
-		  if(dto.getClass_endDate() == null) { // 끝나는날이 없으면 공백값 
-			  dto.setClass_endDate("null"); 
-		  }
-		 
-		  odto.setOption_classNum(dto.getClass_num());
-		  System.out.println(dto);
-		  int result = this.classDao.UpdateClass(dto); 
-		
-		  //원래 옵션 개수
-		  int optionCount = this.optionDao.getcountoption(dto.getClass_num());
-		  
-		  //옵션 
-		  int result2 = 0;
-		  //옵션 개수
-		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
-		  
-		  for(int i=1; i<=optionCount; i++) {
-			  odto.setOption_num(Integer.parseInt(request.getParameter("option_num"+i)));
-			  odto.setOption_editPrice(Integer.parseInt(request.getParameter("option_price"+i))); 
+		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
 
-			  result2 = this.optionDao.updateOption(odto); 
-		  }
-		  
-		  //옵션을 추가했을 때 발생
-		  if(Qtt > optionCount) {
-			  for(int i=(optionCount+1); i<=Qtt; i++) {
-				  odto.setOption_name(request.getParameter("option_name"+i));
-				  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
+		dto.setClass_memNum(mem_num); // 회원 번호 넣어주기
 
-				  result2 = this.optionDao.insertOption(odto); 
-			  }
-		  }
-		 
-		 PrintWriter out = response.getWriter();
+		// 원래 클래스의 정보
+		ClassDTO classList = this.classDao.getList_classNum(dto.getClass_num());
 
-		  if(result == 1 && result2 == 1) { 
-			  out.println("<script>");
-			  out.println("alert('수정 성공!')"); 
-			  out.println("location.href='hostMyFrip.do'");
-			  out.println("</script>"); 
-		  }else { 
-			  out.println("<script>");
-			  out.println("alert('수정 실패!')"); 
-			  out.println("history.back()");
-			  out.println("</script>"); 
-		  }
+		// 사진을 수정했는지 여부 확인
+		if (dto.getClass_image2().getSize() == 0) {
+			dto.setClass_image(classList.getClass_image());
+		} else {
+			dto.setClass_image(upload.fileUpload(mRequest)); // 파일 이름으로 변환
+		}
+
+		if (request.getParameter("startArea") == null) {
+			dto.setClass_startArea("null");
+			dto.setClass_startAreaDetail("null");
+		}
+		if (dto.getClass_endDate() == null) { // 끝나는날이 없으면 공백값
+			dto.setClass_endDate("null");
+		}
+
+		odto.setOption_classNum(dto.getClass_num());
+		System.out.println(dto);
+		int result = this.classDao.UpdateClass(dto);
+
+		// 원래 옵션 개수
+		int optionCount = this.optionDao.getcountoption(dto.getClass_num());
+
+		// 옵션
+		int result2 = 0;
+		// 옵션 개수
+		int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
+
+		for (int i = 1; i <= optionCount; i++) {
+			odto.setOption_num(Integer.parseInt(request.getParameter("option_num" + i)));
+			odto.setOption_editPrice(Integer.parseInt(request.getParameter("option_price" + i)));
+
+			result2 = this.optionDao.updateOption(odto);
+		}
+
+		// 옵션을 추가했을 때 발생
+		if (Qtt > optionCount) {
+			for (int i = (optionCount + 1); i <= Qtt; i++) {
+				odto.setOption_name(request.getParameter("option_name" + i));
+				odto.setOption_price(Integer.parseInt(request.getParameter("option_price" + i)));
+
+				result2 = this.optionDao.insertOption(odto);
+			}
+		}
+
+		PrintWriter out = response.getWriter();
+
+		if (result == 1 && result2 == 1) {
+			out.println("<script>");
+			out.println("alert('수정 성공!')");
+			out.println("location.href='hostMyFrip.do'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('수정 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
 
 	}
-	
+
 	@RequestMapping("entercheck.do")
 	public String entercheck(HttpServletRequest request) {
 		int booking_num = Integer.parseInt(request.getParameter("booking_num"));
@@ -1837,7 +1854,7 @@ public class MarketController {
 
 		return "redirect:hostAttendance_member.do?class_num=" + class_num + "&page=" + page;
 	}
-	
+
 	@RequestMapping("searchAsk.do")
 	public String searchAsk(HttpServletRequest request, Model model) {
 		int mem_num = getMem_num(request);
@@ -1852,74 +1869,74 @@ public class MarketController {
 			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		//받아온 값
+
+		// 받아온 값
 		String field = request.getParameter("search_field");
 		String name = request.getParameter("search_name");
 
 		map.put("name", name);
 		map.put("mem_num", mem_num);
-		
-		if(field.equals("mem_name")) {
+
+		if (field.equals("mem_name")) {
 			// DB 상의 전체 게시물의 수를 확인하는 작업.
-			totalRecord = this.class_qnaDao.getNameSearchCount(map);	
+			totalRecord = this.class_qnaDao.getNameSearchCount(map);
 			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 			map.put("dto", dto);
-			
-			List<Class_qnaDTO> qnaList =  this.class_qnaDao.getNamesearchList(map);
+
+			List<Class_qnaDTO> qnaList = this.class_qnaDao.getNamesearchList(map);
 			model.addAttribute("qList", qnaList);
 			model.addAttribute("Paging", dto);
-		}else {
+		} else {
 			// DB 상의 전체 게시물의 수를 확인하는 작업.
-			totalRecord = this.class_qnaDao.getTitleSearchCount(map);	
+			totalRecord = this.class_qnaDao.getTitleSearchCount(map);
 			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 			map.put("dto", dto);
-			
-			List<Class_qnaDTO> qnaList =  this.class_qnaDao.getTitlesearchList(map);
+
+			List<Class_qnaDTO> qnaList = this.class_qnaDao.getTitlesearchList(map);
 			model.addAttribute("qList", qnaList);
 			model.addAttribute("Paging", dto);
 		}
 		return "host/hostAsk";
 	}
-	
+
 	@RequestMapping("searchComAsk.do")
 	public String CsearchAsk(HttpServletRequest request, Model model) {
 		int mem_num = getMem_num(request);
-		
+
 		int totalRecord = 0;
 		int rowsize = 10;
 		int page = 0; // 현재 페이지 변수
-		
+
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		} else {
 			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		//받아온 값
+
+		// 받아온 값
 		String field = request.getParameter("search_field");
 		String name = request.getParameter("search_name");
-		
+
 		map.put("name", name);
 		map.put("mem_num", mem_num);
-		
-		if(field.equals("mem_name")) {
+
+		if (field.equals("mem_name")) {
 			// DB 상의 전체 게시물의 수를 확인하는 작업.
-			totalRecord = this.class_qnaDao.CgetNameSearchCount(map);	
+			totalRecord = this.class_qnaDao.CgetNameSearchCount(map);
 			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 			map.put("dto", dto);
-			
-			List<Class_qnaDTO> qnaList =  this.class_qnaDao.CgetNamesearchList(map);
+
+			List<Class_qnaDTO> qnaList = this.class_qnaDao.CgetNamesearchList(map);
 			model.addAttribute("qList", qnaList);
 			model.addAttribute("Paging", dto);
-		}else {
+		} else {
 			// DB 상의 전체 게시물의 수를 확인하는 작업.
-			totalRecord = this.class_qnaDao.CgetTitleSearchCount(map);	
+			totalRecord = this.class_qnaDao.CgetTitleSearchCount(map);
 			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 			map.put("dto", dto);
-			
-			List<Class_qnaDTO> qnaList =  this.class_qnaDao.CgetTitlesearchList(map);
+
+			List<Class_qnaDTO> qnaList = this.class_qnaDao.CgetTitlesearchList(map);
 			model.addAttribute("qList", qnaList);
 			model.addAttribute("Paging", dto);
 		}
@@ -1935,129 +1952,126 @@ public class MarketController {
 
 		return mem_num;
 	}
-	
-	// 선택 카테고리 전체 리스트 
+
+	// 선택 카테고리 전체 리스트
 	@RequestMapping("category_all_list.do")
 	public String category_all_list(@RequestParam("num") int category_num, Model model) {
-		
+
 		// 카테고리의 전체 프립 수
 		int totalallcount = this.classDao.getAllListCount(category_num);
 		// 카테고리의 금주의 프립 수
 		int weekallcount = this.classDao.getWeekAllListCount(category_num);
 		// 카테고리의 신규 프립 수
 		int newallcount = this.classDao.getNewAllListCount(category_num);
-		
+
 		model.addAttribute("TotalAllCount", totalallcount);
 		model.addAttribute("WeekAllCount", weekallcount);
 		model.addAttribute("NewAllCount", newallcount);
-		
+
 		// 카테고리 이름
 		ClassDTO categoryname = this.classDao.getCategoryName(category_num);
 		// 하위카테고리 이름 리스트 가져오기
 		List<ClassDTO> categorynameList = this.classDao.getCategoryNameList(category_num);
-		
+
 		model.addAttribute("CategoryName", categoryname);
 		model.addAttribute("CategoryNameList", categorynameList);
-		
+
 		// 인기 프립 리스트 가져오기
 		List<ClassDTO> bestclassallList = this.classDao.getBestClassAllList(category_num);
 		// 금주의 프립 리스트 가져오기
 		List<ClassDTO> weekclassallList = this.classDao.getWeekClassAllList(category_num);
 		// 신규 프립 리스트 가져오기
 		List<ClassDTO> newclassallList = this.classDao.getNewClassAllList(category_num);
-		
+
 		model.addAttribute("BestAllList", bestclassallList);
 		model.addAttribute("WeekAllList", weekclassallList);
 		model.addAttribute("NewAllList", newclassallList);
-		
+
 		return "category_all_list";
 	}
-	
-	
-	// 선택 카테고리 리스트 
+
+	// 선택 카테고리 리스트
 	@RequestMapping("category_list.do")
 	public String category_list(@RequestParam("num") int category_num, Model model) {
-		
+
 		// 카테고리의 전체 프립 수
 		int totalcount = this.classDao.getListCount(category_num);
 		// 카테고리의 금주의 프립 수
 		int weekcount = this.classDao.getWeekListCount(category_num);
 		// 카테고리의 신규 프립 수
 		int newcount = this.classDao.getNewListCount(category_num);
-		
+
 		model.addAttribute("TotalCount", totalcount);
 		model.addAttribute("WeekCount", weekcount);
 		model.addAttribute("NewCount", newcount);
-		
+
 		// 카테고리 이름
 		ClassDTO categoryname = this.classDao.getCategoryName(category_num);
 		// 하위카테고리 이름 리스트 가져오기
 		List<ClassDTO> categorynameList = this.classDao.getCategoryNameList(category_num);
-		
+
 		model.addAttribute("CategoryName", categoryname);
 		model.addAttribute("CategoryNameList", categorynameList);
-		
+
 		// 인기 프립 리스트 가져오기
 		List<ClassDTO> bestclassList = this.classDao.getBestClassList(category_num);
 		// 금주의 프립 리스트 가져오기
 		List<ClassDTO> weekclassList = this.classDao.getWeekClassList(category_num);
 		// 신규 프립 리스트 가져오기
 		List<ClassDTO> newclassList = this.classDao.getNewClassList(category_num);
-		
+
 		model.addAttribute("BestList", bestclassList);
 		model.addAttribute("WeekList", weekclassList);
 		model.addAttribute("NewList", newclassList);
-		
+
 		return "category_list";
 	}
-	
+
 	//////////////////
 	// 선택 카테고리 전체 리스트
 	@RequestMapping("category_more_all_list.do")
-	public String category_more_all_list(@RequestParam("num") int category_num, 
-			@RequestParam("title1") String title1, @RequestParam("title2") String title2, Model model) {
+	public String category_more_all_list(@RequestParam("num") int category_num, @RequestParam("title1") String title1,
+			@RequestParam("title2") String title2, Model model) {
 
 		model.addAttribute("Title1", title1);
 		model.addAttribute("Title2", title2);
-		
+
 		// 카테고리의 전체 프립 수
 		int totalallcount = this.classDao.getAllListCount(category_num);
-		
+
 		model.addAttribute("TotalAllCount", totalallcount);
-		
+
 		// 카테고리 이름
 		ClassDTO categoryname = this.classDao.getCategoryName(category_num);
 		// 하위카테고리 이름 리스트 가져오기
 		List<ClassDTO> categorynameList = this.classDao.getCategoryNameList(category_num);
-		
+
 		model.addAttribute("CategoryName", categoryname);
 		model.addAttribute("CategoryNameList", categorynameList);
-		
+
 		// 프립 리스트 가져오기
 		List<ClassDTO> classAllList = this.classDao.getClassAllList(category_num);
-		
+
 		model.addAttribute("AllList", classAllList);
 
 		return "category_more_all_list";
 	}
-	
-	
-	
+
 	// 선택 카테고리 인기 프립 전체 리스트
 	@RequestMapping("category_more_all_bestlist.do")
-	public String category_more_all_bestlist(@RequestParam("num") int category_num, 
+	public String category_more_all_bestlist(@RequestParam("num") int category_num,
 			@RequestParam("title1") String title1, @RequestParam("title2") String title2, Model model) {
-		
+
 		model.addAttribute("Title1", title1);
 		model.addAttribute("Title2", title2);
-		
+
 		model.addAttribute("category_num", category_num);
 
 		// 카테고리의 전체 프립 수
 		int totalallcount = this.classDao.getAllListCount(category_num);
-		
+
 		model.addAttribute("TotalAllCount", totalallcount);
-		
+
 		// 카테고리 이름
 		ClassDTO categoryname = this.classDao.getCategoryName(category_num);
 		// 하위카테고리 이름 리스트 가져오기
@@ -2068,13 +2082,12 @@ public class MarketController {
 
 		// 인기 프립 리스트 가져오기
 		List<ClassDTO> bestclassallList = this.classDao.getBestClassAllList(category_num);
-		
+
 		model.addAttribute("BestAllList", bestclassallList);
-		
+
 		return "category_more_all_list";
 	}
-	
-	
+
 	// 선택 카테고리 금주의 프립 전체 리스트
 	@RequestMapping("category_more_all_weeklist.do")
 	public String category_more_all_weeklist(@RequestParam("num") int category_num,
@@ -2084,12 +2097,12 @@ public class MarketController {
 		model.addAttribute("Title2", title2);
 
 		model.addAttribute("category_num", category_num);
-		
+
 		// 카테고리의 금주의 프립 수
 		int weekallcount = this.classDao.getWeekAllListCount(category_num);
-		
+
 		model.addAttribute("WeekAllCount", weekallcount);
-		
+
 		// 카테고리 이름
 		ClassDTO categoryname = this.classDao.getCategoryName(category_num);
 		// 하위카테고리 이름 리스트 가져오기
@@ -2097,29 +2110,28 @@ public class MarketController {
 
 		model.addAttribute("CategoryName", categoryname);
 		model.addAttribute("CategoryNameList", categorynameList);
-		
+
 		// 금주의 프립 리스트 가져오기
 		List<ClassDTO> weekclassallList = this.classDao.getWeekClassAllList(category_num);
-		
+
 		model.addAttribute("WeekAllList", weekclassallList);
-		
+
 		return "category_more_all_list";
 	}
-	
-	
+
 	// 선택 카테고리 신규 프립 전체 리스트
 	@RequestMapping("category_more_all_newlist.do")
 	public String category_more_all_newlist(@RequestParam("num") int category_num,
 			@RequestParam("title1") String title1, @RequestParam("title2") String title2, Model model) {
-		
+
 		model.addAttribute("Title1", title1);
 		model.addAttribute("Title2", title2);
 
 		model.addAttribute("category_num", category_num);
-		
+
 		// 카테고리의 신규 프립 수
 		int newallcount = this.classDao.getNewAllListCount(category_num);
-		
+
 		model.addAttribute("NewAllCount", newallcount);
 
 		// 카테고리 이름
@@ -2129,29 +2141,29 @@ public class MarketController {
 
 		model.addAttribute("CategoryName", categoryname);
 		model.addAttribute("CategoryNameList", categorynameList);
-		
+
 		// 신규 프립 리스트 가져오기
 		List<ClassDTO> newclassallList = this.classDao.getNewClassAllList(category_num);
-		
+
 		model.addAttribute("NewAllList", newclassallList);
 
 		return "category_more_all_list";
 	}
-	
+
 	////////////////////////////
 	// 선택 카테고리 리스트
 	@RequestMapping("category_more_list.do")
-	public String category_more_list(@RequestParam("num") int category_num, 
-			@RequestParam("title1") String title1, @RequestParam("title2") String title2, Model model) {
+	public String category_more_list(@RequestParam("num") int category_num, @RequestParam("title1") String title1,
+			@RequestParam("title2") String title2, Model model) {
 
 		model.addAttribute("Title1", title1);
 		model.addAttribute("Title2", title2);
-		
+
 		// 카테고리의 전체 프립 수
 		int totalcount = this.classDao.getListCount(category_num);
-		
+
 		model.addAttribute("TotalCount", totalcount);
-		
+
 		// 카테고리 이름
 		ClassDTO categoryname = this.classDao.getCategoryName(category_num);
 		// 하위카테고리 이름 리스트 가져오기
@@ -2159,57 +2171,55 @@ public class MarketController {
 
 		model.addAttribute("CategoryName", categoryname);
 		model.addAttribute("CategoryNameList", categorynameList);
-		
+
 		// 프립 리스트 가져오기
 		List<ClassDTO> classAllList = this.classDao.getClassList(category_num);
-		
+
 		model.addAttribute("AllList", classAllList);
 
 		return "category_more_list";
 	}
-	
-	
-	// 선택 카테고리 인기프립 전체 리스트 
+
+	// 선택 카테고리 인기프립 전체 리스트
 	@RequestMapping("category_more_bestlist.do")
-	public String category_more_bestlist(@RequestParam("num") int category_num, 
-			@RequestParam("title1") String title1, @RequestParam("title2") String title2, Model model) {
-		
+	public String category_more_bestlist(@RequestParam("num") int category_num, @RequestParam("title1") String title1,
+			@RequestParam("title2") String title2, Model model) {
+
 		model.addAttribute("Title1", title1);
 		model.addAttribute("Title2", title2);
-		
+
 		// 카테고리의 전체 프립 수
 		int totalcount = this.classDao.getListCount(category_num);
-		
+
 		model.addAttribute("TotalCount", totalcount);
-		
+
 		// 카테고리 이름
 		ClassDTO categoryname = this.classDao.getCategoryName(category_num);
 		// 하위카테고리 이름 리스트 가져오기
 		List<ClassDTO> categorynameList = this.classDao.getCategoryNameList(category_num);
-		
+
 		model.addAttribute("CategoryName", categoryname);
 		model.addAttribute("CategoryNameList", categorynameList);
-		
+
 		// 인기 프립 리스트 가져오기
 		List<ClassDTO> bestclassList = this.classDao.getBestClassList(category_num);
-		
+
 		model.addAttribute("BestList", bestclassList);
-		
+
 		return "category_more_list";
 	}
-	
-	
+
 	// 선택 카테고리 금주의 프립 전체 리스트
 	@RequestMapping("category_more_weeklist.do")
-	public String category_more_weeklist(@RequestParam("num") int category_num, 
-			@RequestParam("title1") String title1, @RequestParam("title2") String title2, Model model) {
+	public String category_more_weeklist(@RequestParam("num") int category_num, @RequestParam("title1") String title1,
+			@RequestParam("title2") String title2, Model model) {
 
 		model.addAttribute("Title1", title1);
 		model.addAttribute("Title2", title2);
-		
+
 		// 카테고리의 금주의 프립 수
 		int weekcount = this.classDao.getWeekListCount(category_num);
-		
+
 		model.addAttribute("WeekCount", weekcount);
 
 		// 카테고리 이름
@@ -2219,27 +2229,26 @@ public class MarketController {
 
 		model.addAttribute("CategoryName", categoryname);
 		model.addAttribute("CategoryNameList", categorynameList);
-		
+
 		// 금주의 프립 리스트 가져오기
 		List<ClassDTO> weekclassList = this.classDao.getWeekClassList(category_num);
-		
+
 		model.addAttribute("WeekList", weekclassList);
 
 		return "category_more_list";
 	}
-	
 
 	// 선택 카테고리 신규 프립 전체 리스트
 	@RequestMapping("category_more_newlist.do")
-	public String category_more_newlist(@RequestParam("num") int category_num, 
-			@RequestParam("title1") String title1, @RequestParam("title2") String title2, Model model) {
-		
+	public String category_more_newlist(@RequestParam("num") int category_num, @RequestParam("title1") String title1,
+			@RequestParam("title2") String title2, Model model) {
+
 		model.addAttribute("Title1", title1);
 		model.addAttribute("Title2", title2);
-		
+
 		// 카테고리의 신규 프립 수
 		int newcount = this.classDao.getNewListCount(category_num);
-		
+
 		model.addAttribute("NewCount", newcount);
 
 		// 카테고리 이름
@@ -2249,25 +2258,24 @@ public class MarketController {
 
 		model.addAttribute("CategoryName", categoryname);
 		model.addAttribute("CategoryNameList", categorynameList);
-		
+
 		// 신규 프립 리스트 가져오기
 		List<ClassDTO> newclassList = this.classDao.getNewClassList(category_num);
-		
+
 		model.addAttribute("NewList", newclassList);
 
 		return "category_more_list";
 	}
-	
-	
+
 	@RequestMapping("frip_content.do")
-	public String frip_content(@RequestParam("num") int class_num,
-			@RequestParam("memnum") int class_memnum, Model model) {
-		
+	public String frip_content(@RequestParam("num") int class_num, @RequestParam("memnum") int class_memnum,
+			Model model) {
+
 		// 프립 상세 내용 호출 메서드
 		ClassDTO fripInfo = this.classDao.getclassCont(class_num);
-		
+
 		model.addAttribute("fripInfo", fripInfo);
-		
+
 		// 호스트 상세정보 가져오는 메서드
 		MemberDTO hostInfo = this.likeDao.hostInfo(class_memnum);
 
@@ -2288,9 +2296,35 @@ public class MarketController {
 		model.addAttribute("classCount", classCount);
 		model.addAttribute("reviewCount", reviewCount);
 		model.addAttribute("likeCount", likeCount);
-		
+
 		return "frip_content";
 	}
-	
-	
+
+	@RequestMapping(value = "/usePoint", method = RequestMethod.POST)
+	@ResponseBody
+	public void usePoint(HttpServletResponse response, @RequestParam("havePoint") int havePoint,
+			@RequestParam("optionPrice") int optionPrice) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		int state = 0;
+		int change = -1;
+		
+		JSONObject obj = new JSONObject();
+
+		if (havePoint >= 100) { // 보유 포인트가 100이상일때
+			if (havePoint > optionPrice) {
+				change = havePoint - optionPrice;
+				state = 1;
+			} else if (havePoint <= optionPrice) {
+				change= optionPrice - havePoint;
+				state = 2;
+			}
+		} else { // 보유 포인트가 100보다 작을때
+			state = -1;
+		}
+		obj.put("state", state);
+		obj.put("change", change);
+
+		response.getWriter().print(obj);
+	}
+
 }

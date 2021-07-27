@@ -449,7 +449,6 @@ button {
 	border-radius: 5px;
 	font-size: 13px;
 	word-break: keep-all;
-	width: 100px;
 }
 
 .agreement {
@@ -500,6 +499,10 @@ button {
 	border-radius: 5px;
 	color: white;
 	font-size: 14px;
+}
+
+.active {
+	border: 2px solid rgb(51, 151, 255);
 }
 
 @media ( max-width : 768px) {
