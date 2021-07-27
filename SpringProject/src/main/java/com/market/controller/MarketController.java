@@ -625,9 +625,13 @@ public class MarketController {
 	@RequestMapping("option_select.do")
 	public String optionSel(@RequestParam("class_num") int class_num, Model model) {
 		
-		model.addAttribute("class_num", class_num);
+		ClassDTO cdto = this.classDao.getList_classNum(class_num);
+		List<OptionDTO> odto = this.optionDao.getOptionList(class_num);
+		int bookingCount = this.bookingDao.getCount(class_num);
 		
-		
+		model.addAttribute("cdto", cdto);
+		model.addAttribute("odto", odto);
+		model.addAttribute("bookingCount", bookingCount);
 		
 		return "option_select";
 	}
@@ -745,7 +749,15 @@ public class MarketController {
 	}
 
 	@RequestMapping("payment.do")
-	public String pay() {
+	public String pay(HttpServletRequest request) {
+		int mem_num = getMem_num(request);
+		
+		BookingDTO bdto = new BookingDTO();
+		bdto.setBooking_classNum(Integer.parseInt(request.getParameter("class_num")));
+		bdto.setBooking_option(Integer.parseInt(request.getParameter("option_num")));
+		bdto.setBooking_enterCheck("no");
+		bdto.setBooking_writer(mem_num);
+		System.out.println(bdto);
 		return "payment";
 	}
 
@@ -2261,7 +2273,9 @@ public class MarketController {
 	
 	@RequestMapping("frip_content.do")
 	public String frip_content(@RequestParam("num") int class_num,
-			@RequestParam("memnum") int class_memnum, Model model) {
+			HttpServletRequest request, Model model) {
+		
+		int class_memnum = getMem_num(request);
 		
 		// 프립 상세 내용 호출 메서드
 		ClassDTO fripInfo = this.classDao.getclassCont(class_num);
