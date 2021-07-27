@@ -23,7 +23,7 @@
 	<jsp:include page="../hostInclude/hostMenuBar.jsp"></jsp:include>
 	
 		<div class="Frame"> 
-			<div class="Frame_Frame">
+			<div class="Frame_Frame"> 
 				<jsp:include page="../hostInclude/hostSideBar.jsp"></jsp:include>
 	
 				<div class="Main">
@@ -80,42 +80,46 @@
 												</div>
 											</c:forEach>
 										</c:if>
-										
-										<c:if test="${empty list }">
-											프립이 없습니다.
-										</c:if>
 									</div>
 								</c:forEach>
+								<c:if test="${empty list }">
+									프립이 없습니다.
+								</c:if>
 						</div>
+						<!-- 페이징 처리 부분 -->
+						<nav aria-label="Page navigation example" class="list_footer">
+							<ul class="pagination">
+								<c:if test="${Paging.getPage() > Paging.getBlock() }">
+									<li class="page-item">
+										<a class="page_link" href="hostMyFripEnd.do?page=1">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+										<a class="page_link" href="hostMyFripEnd.do?page=${Paging.getPage() - 1 }">	
+											<span aria-hidden="true">&lt;</span>
+										</a>
+									</li>
+								</c:if>
+								<c:forEach begin="${Paging.getStartBlock() }" end="${Paging.getEndBlock() }" var="i">
+									<c:if test="${i == Paging.getPage() }">
+										<li class="page-item"><a class="page_link paging_active">${i }</a></li>
+									</c:if>
+									<c:if test="${i != Paging.getPage() }">
+										<li class="page-item"><a class="page_link" href="hostMyFripEnd.do?page=${i }">${i }</a></li>
+									</c:if>
+								</c:forEach>
+								<c:if test="${Paging.getEndBlock() < Paging.getAllPage() }">
+									<li class="page-item">
+										<a class="page_link" href="hostMyFripEnd.do?page=${Paging.getPage() + 1 }">	
+											<span aria-hidden="true">&gt;</span>
+										</a>
+										<a class="page_link" href="hostMyFripEnd.do?page=${Paging.getAllPage() }">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</c:if>
+							</ul>
+						</nav>
 					</div>
-					
-					<!-- 페이징 처리 부분 -->
-					<nav aria-label="Page navigation example" class="qna_list_footer">
-						<ul class="pagination">
-							<c:if test="${Paging.getPage() > Paging.getBlock() }">
-								<li class="page-item">
-									<a class="page_link" href="hostMyFripWait.do?page=1">
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-								</li>
-							</c:if>
-							<c:forEach begin="${Paging.getStartBlock() }" end="${Paging.getEndBlock() }" var="i">
-								<c:if test="${i == Paging.getPage() }">
-									<li class="page-item"><a class="page_link active">${i }</a></li>
-								</c:if>
-								<c:if test="${i != Paging.getPage() }">
-									<li class="page-item"><a class="page_link" href="hostMyFripWait.do?page=${i }">${i }</a></li>
-								</c:if>
-							</c:forEach>
-							<c:if test="${Paging.getEndBlock() < Paging.getAllPage() }">
-								<li class="page-item">
-									<a class="page-link" href="hostMyFripWait.do?page=${Paging.getAllPage() }" style="color: black;">
-										<span aria-hidden="true">&raquo;</span>
-									</a>
-								</li>
-							</c:if>
-						</ul>
-					</nav>
 				</div>
 			</div>
 		</div>
