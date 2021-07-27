@@ -33,11 +33,10 @@ public class CalculateDAOImpl implements CalculateDAO {
 	public int getCountAfter(int mem_num) {
 		return this.sqlSession.selectOne("cal_count_after", mem_num);
 	}
-	
+
 	@Override
 	public List<CalculateDTO> getListAll(List<ClassDTO> list) {
 		List<CalculateDTO> newList = new ArrayList<CalculateDTO>();
-
 		for (int i = 0; i < list.size(); i++) {
 			int target = list.get(i).getClass_num();
 			newList.add((CalculateDTO) this.sqlSession.selectOne("cal_cont", target));
@@ -55,7 +54,7 @@ public class CalculateDAOImpl implements CalculateDAO {
 		}
 		return newList;
 	}
-	
+
 	@Override
 	public List<CalculateDTO> getListIng(List<ClassDTO> list) {
 		List<CalculateDTO> newList = new ArrayList<CalculateDTO>();
@@ -66,7 +65,7 @@ public class CalculateDAOImpl implements CalculateDAO {
 		}
 		return newList;
 	}
-	
+
 	@Override
 	public List<CalculateDTO> getListAfter(List<ClassDTO> list) {
 		List<CalculateDTO> newList = new ArrayList<CalculateDTO>();
@@ -77,7 +76,7 @@ public class CalculateDAOImpl implements CalculateDAO {
 		}
 		return newList;
 	}
-	
+
 	@Override
 	public int requestCal(int target) {
 		return this.sqlSession.update("req_cal", target);

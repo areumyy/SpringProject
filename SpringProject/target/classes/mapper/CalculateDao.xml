@@ -7,34 +7,34 @@
 	<select id="cal_count_all" parameterType="int" resultType="int">
 		<![CDATA[
 			select count(*) from frip_calculate where cal_classNum in 
-			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_endDate < sysdate)
+			(select class_num from frip_class where class_memnum = #{mem_num} and class_delcheck = 'no' and class_cal != 0)
 		]]>
 	</select>
 	<select id="cal_count_before" parameterType="int" resultType="int">
 		<![CDATA[
 			select count(*) from frip_calculate where cal_classNum in 
-			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_endDate < sysdate and class_cal = 0)
+			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_cal = 3)
 		]]>
 	</select>
 	<select id="cal_count_ing" parameterType="int" resultType="int">
 		<![CDATA[
 			select count(*) from frip_calculate where cal_classNum in 
-			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_endDate < sysdate and class_cal = 1)
+			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_cal = 1)
 		]]>
 	</select>
 	<select id="cal_count_after" parameterType="int" resultType="int">
 		<![CDATA[
 			select count(*) from frip_calculate where cal_classNum in 
-			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_endDate < sysdate and class_cal = 2)
+			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_cal = 2)
 		]]>
 	</select>
 	
 	<select id="cal_cont" parameterType="int" resultType="com.market.model.CalculateDTO">
-		select * from frip_calculate where cal_classNum = #{target}
+		select * from frip_calculate where cal_classNum = #{target} and cal_status != 0
 	</select>
 	
 	<select id="cal_cont_before" parameterType="int" resultType="com.market.model.CalculateDTO">
-		select * from frip_calculate where cal_classNum = #{target} and cal_status = 0
+		select * from frip_calculate where cal_classNum = #{target} and cal_status = 3
 	</select>
 	
 	<select id="cal_cont_ing" parameterType="int" resultType="com.market.model.CalculateDTO">
@@ -57,7 +57,7 @@
 		insert into frip_calculate values(#{cal_num},#{cal_classNum},
 					#{cal_startDate},#{cal_endDate}, #{cal_name},
 					#{cal_buyCount},#{cal_enterCount},#{cal_enterNoCount},
-					#{cal_sal},#{cal_total},default,sysdate,null)
+					#{cal_sal},#{cal_total},3,sysdate,null)
 	</insert>
 </mapper>
 

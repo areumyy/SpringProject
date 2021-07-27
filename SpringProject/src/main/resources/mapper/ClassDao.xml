@@ -34,10 +34,17 @@
 		]]>
 	</select>
 	
-	<select id="getList_endOk" parameterType="int" resultType="com.market.model.ClassDTO">
+	<select id="getList_endOkAll" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
 		<![CDATA[
 		select * from frip_class where class_memnum = #{mem_num}  
-			and class_delcheck = 'no' and class_cal = 3 order by class_num desc
+			and class_delcheck = 'no' and class_cal != #{status} order by class_num desc
+		]]>
+	</select>
+	
+	<select id="getList_endOk" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+		select * from frip_class where class_memnum = #{mem_num}  
+			and class_delcheck = 'no' and class_cal = #{status} order by class_num desc
 		]]>
 	</select>
 	

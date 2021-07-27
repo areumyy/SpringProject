@@ -34,8 +34,13 @@ public class ClassDAOImpl implements ClassDAO {
 	}
 
 	@Override
-	public List<ClassDTO> getList_endOk(int mem_num) {
-		return this.sqlSession.selectList("getList_endOk", mem_num);
+	public List<ClassDTO> getList_endOkAll(HashMap<String, Integer> map) {
+		return this.sqlSession.selectList("getList_endOkAll", map);
+	}
+	
+	@Override
+	public List<ClassDTO> getList_endOk(HashMap<String, Integer> map) {
+		return this.sqlSession.selectList("getList_endOk", map);
 	}
 	
 	@Override
@@ -188,5 +193,4 @@ public class ClassDAOImpl implements ClassDAO {
 	public int changeCalState(int class_num) {
 		return this.sqlSession.update("changeCalState", class_num);
 	}
-
 }
