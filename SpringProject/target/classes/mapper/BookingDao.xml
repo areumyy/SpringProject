@@ -36,5 +36,13 @@
 	<select id="getcount_option_num" parameterType="int" resultType="int">
 		select count(*) from frip_booking where booking_option = #{option_num}
 	</select>
+	
+	<insert id="insert_booking" parameterType="com.market.model.BookingDTO">
+		<selectKey keyProperty="booking_num" resultType="int" order="BEFORE">
+			select count(*) + 1 from frip_booking
+		</selectKey>
+		
+		insert into frip_booking values(#{booking_num},#{booking_writer},#{booking_classNum},#{booking_option},default,sysdate)
+	</insert>
 </mapper>
 

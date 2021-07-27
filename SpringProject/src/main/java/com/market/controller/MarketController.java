@@ -768,7 +768,25 @@ public class MarketController {
 	}
 
 	@RequestMapping("payment_ok.do")
-	public String payOk() {
+	public String payOk(BookingDTO dto, @RequestParam("usedPoint") int usedPoint,
+			@RequestParam("payMethod") String payMethod, @RequestParam("option_price") int option_price, Model model) {
+		this.bookingDao.insertBooking(dto);
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("mem_num", dto.getBooking_writer());
+		map.put("usedPoint", usedPoint);
+		map.put("addPoint", (int) (option_price * 0.1));
+		this.memberDao.usePoint(map);
+
+		this.memberDao.addPoint(map);
+
+		ClassDTO classDto = this.classDao.getclassCont(dto.getBooking_classNum());
+		OptionDTO optionDto = this.optionDao.getOptionCont(dto.getBooking_option());
+		model.addAttribute("sal_price", usedPoint);
+		model.addAttribute("payMethod", payMethod);
+		model.addAttribute("classDto", classDto);
+		model.addAttribute("optionDto", optionDto);
+		
 		return "payment_ok";
 	}
 
@@ -2307,7 +2325,7 @@ public class MarketController {
 		response.setContentType("text/html; charset=UTF-8");
 		int state = 0;
 		int change = -1;
-		
+
 		JSONObject obj = new JSONObject();
 
 		if (havePoint >= 100) { // 보유 포인트가 100이상일때
@@ -2315,7 +2333,7 @@ public class MarketController {
 				change = havePoint - optionPrice;
 				state = 1;
 			} else if (havePoint <= optionPrice) {
-				change= optionPrice - havePoint;
+				change = optionPrice - havePoint;
 				state = 2;
 			}
 		} else { // 보유 포인트가 100보다 작을때

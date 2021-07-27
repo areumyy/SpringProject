@@ -42,4 +42,9 @@ public class BookingDAOImpl implements BookingDAO {
 	public int getcount_option_num(int option_num) {
 		return this.sqlSession.selectOne("getcount_option_num", option_num);
 	}
+
+	@Override
+	public void insertBooking(BookingDTO dto) {
+		this.sqlSession.insert("insert_booking", dto);
+	}
 }

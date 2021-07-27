@@ -131,4 +131,12 @@
 	<update id="change_host" parameterType="int">
 		update frip_member set mem_status = 2 where mem_num = #{mem_num}
 	</update>
+	
+	<update id="use_point" parameterType="java.util.Map">
+		update frip_member set mem_point = mem_point - #{usedPoint} where mem_num = #{mem_num}
+	</update>
+	
+	<update id="add_point" parameterType="java.util.Map">
+		update frip_member set mem_point = mem_point + #{addPoint} where mem_num = #{mem_num}
+	</update>
 </mapper>

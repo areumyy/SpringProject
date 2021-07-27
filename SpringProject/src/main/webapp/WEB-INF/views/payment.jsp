@@ -43,6 +43,7 @@ function usePoint(havePoint, optionPrice){
             } else if(state == 2){
             	$("#havePoint").text("0");
             	$("#usePoint_input").val(havePoint);
+            	$("#usePoint_input").attr('value',havePoint);
             	$("#salePrice").text(havePoint);
             	$("#finalPrice").text(change);
             	$("#finalPrice2").text(change);
@@ -64,6 +65,8 @@ function selectCard(){
 			$("#card").addClass('active');
 		}
 	}
+	$("#payMethod2").val($("#card").val());
+	console.log($("#payMethod2").val());
 }
 function selectCash(){
 	if($("#cash").hasClass('active') == true){
@@ -76,10 +79,21 @@ function selectCash(){
 			$("#cash").addClass('active');
 		}
 	}
+	$("#payMethod2").val($("#cash").val());
+	console.log($("#payMethod2").val());
 }
 
 function checkPayment(){
-	
+	if(($("#cash").hasClass('active') == false && $("#card").hasClass('active') == false)){
+		console.log($("#usePoint_input").val());
+		
+		alert("결제방법을 선택해주세요.");
+		return false;
+	}
+	if($("#payAgree").is(":checked") == false){
+		alert("약관 동의를 해주세요.");
+		return false;
+	}
 }
 </script>
 <body>
@@ -91,6 +105,10 @@ function checkPayment(){
 
 				<div class="pay_page">
 					<form method="post" action="<%=request.getContextPath() %>/payment_ok.do" onsubmit="return checkPayment();">
+						<input type="hidden" name="booking_writer" value="${bookDto.getBooking_writer() }">
+						<input type="hidden" name="booking_classNum" value="${bookDto.getBooking_classNum() }">
+						<input type="hidden" name="booking_option" value="${bookDto.getBooking_option() }">
+						<input type="hidden" name="option_price" value="${optionDto.getOption_price() }">
 						<div class="pay_div">
 							<div class="pay_header">결제</div>
 							<div class="pay_body">
@@ -120,7 +138,7 @@ function checkPayment(){
 														<div>
 															<div>${optionDto.getOption_name() }</div>
 														</div>
-														<span class="item_price"><fmt:formatNumber value="${optionDto.getOption_price() }" />원</span>
+														<span class="item_price">${optionDto.getOption_price() }원</span>
 													</div>
 												</div>
 											</div>
@@ -130,7 +148,7 @@ function checkPayment(){
 								<div class="payment_section">
 									<div class="payment_list">
 										<div class="payment_list_title">상품 금액</div>
-										<div class="payment_list_price"><fmt:formatNumber value="${optionDto.getOption_price() }" />원</div>
+										<div class="payment_list_price">${optionDto.getOption_price() }원</div>
 									</div>
 									<!-- <div class="payment_list">
 										<div class="payment_list_title">쿠폰</div>
@@ -212,7 +230,7 @@ function checkPayment(){
 										</div>
 										<div class="payment_list_price">
 											<label>
-												<input type="text" id="usePoint_input" class="use_point" disabled>P</label>
+												<input type="text" id="usePoint_input" class="use_point" name="usedPoint" disabled value="0">P</label>
 											<input  type="button" class="coupon_btn" onclick="usePoint(${loginDto.getMem_point() }, ${optionDto.getOption_price() });" value="전체 사용">
 										</div>
 									</div>
@@ -239,17 +257,18 @@ function checkPayment(){
 								<div class="pay_method_list">
 									<input type="button" class="pay_method_btn" id="card" onclick="selectCard();" value="신용/체크 카드" >
 									<input type="button" class="pay_method_btn" id="cash" onclick="selectCash();" value="실시간 계좌이체">
+									<input type="hidden" name="payMethod" value="" id="payMethod2">
 								</div>
 							</div>
 						</div>
 						<div class="agreement">
 							<label class="agreement_label">
-								<input type="checkbox" class="agreement_checkbox">
+								<input type="checkbox" class="agreement_checkbox" id="payAgree">
 								<div>개인정보 제 3자 제공 동의, 결제 대행 서비스 이용 약관 등 모든 약관에 동의합니다.</div>
 							</label>
 						</div>
 						<div class="final_pay">
-							<button class="final_pay_btn" onclick="location.href='payment_ok.do'">
+							<button type="submit" class="final_pay_btn">
 								<div style="display: flex; justify-content: center;">
 									<div id="finalPrice2">${optionDto.getOption_price() }</div>원 결제하기
 								</div>

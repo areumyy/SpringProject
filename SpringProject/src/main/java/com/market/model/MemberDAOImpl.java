@@ -1,5 +1,6 @@
 package com.market.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -117,6 +118,16 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void changeHost(int mem_num) {
 		this.sqlSession.update("change_host", mem_num);
+	}
+
+	@Override
+	public void usePoint(HashMap<String, Integer> map) {
+		this.sqlSession.update("use_point", map);
+	}
+
+	@Override
+	public void addPoint(HashMap<String, Integer> map) {
+		this.sqlSession.update("add_point", map);
 	}
 
 }
