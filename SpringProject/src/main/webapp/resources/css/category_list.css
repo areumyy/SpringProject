@@ -107,7 +107,7 @@ div {
 	flex-flow: column nowrap;
 	align-content: flex-start;
 	margin: 0px auto;
-	max-width: 808px;
+	max-width: 1240px;
 	width: 100%;
 	padding: 0px 20px;
 	min-height: 1px;
@@ -246,10 +246,10 @@ div {
 .Category_List1>* {
 	margin-right: 15px;
 	margin-bottom: 30px;
-	width: calc(25% - 11.25px) !important;
+	width: calc(20% - 12px) !important;
 }
 
-.Category_List1>:nth-child(4n) {
+.Category_List1>:nth-child(5n) {
 	margin-right: 0px;
 }
 

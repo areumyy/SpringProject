@@ -32,4 +32,10 @@ public class ClassDTO {
 	private String class_regdate;
 	private String class_cal; // 디폴트 0: 미정산, 1: 정산신청, 2: 정산완료
 	private String class_pass_regdate;
+	
+	private int option_price;
+	private int option_editprice;
+	private float review_score;
+	private String cate_two;
+	private int cate_num;
 }

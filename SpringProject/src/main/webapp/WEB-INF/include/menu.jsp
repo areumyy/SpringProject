@@ -105,7 +105,7 @@ $(function(){
 							<ul class="dropdown-menu category_list" aria-labelledby="category_btn">
 							    <li><a class="dropdown-item" href="#">아웃도어</a>
 							    	<ul>
-							    		<li><a href="<%=request.getContextPath() %>/category_list.do">서핑</a></li>
+							    		<li><a href="#">서핑</a></li>
 							    		<li><a href="<%=request.getContextPath() %>/frip_content.do">캠핑</a></li>
 							    		<li><a href="#">등산/트래킹</a></li>
 							    		<li><a href="#">기타</a></li>
@@ -125,11 +125,11 @@ $(function(){
 							    		<li><a href="#">수영</a></li>
 							    	</ul>
 							    </li>
-							    <li><a class="dropdown-item" href="#">쿠킹</a>
+							    <li><a class="dropdown-item" href="<%=request.getContextPath() %>/category_all_list.do?num=11">쿠킹</a>
 							    	<ul>
-							    		<li><a href="#">요리</a></li>
-							    		<li><a href="#">음료</a></li>
-							    		<li><a href="#">베이킹</a></li>
+							    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=11">요리</a></li>
+							    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=12">음료</a></li>
+							    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=13">베이킹</a></li>
 							    	</ul>
 							    </li>
 							    <li><a class="dropdown-item" href="#">공예</a>

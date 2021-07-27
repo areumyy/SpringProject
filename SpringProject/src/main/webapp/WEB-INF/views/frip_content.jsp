@@ -30,17 +30,18 @@
 							
 							
 							
-								<div id="carouselExampleControlsNoTouching" class="carousel slide Content_Head1_Img1" data-bs-touch="false" data-bs-interval="false">
+								<div id="carouselExampleControlsNoTouching" class="carousel slide Content_Head1_Img1"
+									data-bs-touch="false" data-bs-interval="false" style="margin: 0 50px;">
 									<div class="image-slider Content_Head1_Img2 image-initialized" dir="ltr">
 										
 										<div class="carousel-inner image-list">
 											<div class="image-track">
 												<div class="carousel-item active">
-													<img class="d-block w-100 Content_Img3" alt="상품이미지" style="height:375px; width:375px;"
+													<img class="d-block w-100 Content_Img3" alt="상품이미지" style="height:500px; width:500px;"
 														src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_0,w_768/1622920435587-0_hwpjzs">
 												</div>
 												<div class="carousel-item">
-													<img class="d-block w-100 Content_Img3" alt="상품이미지" style="height:375px; width:375px;"
+													<img class="d-block w-100 Content_Img3" alt="상품이미지" style="height:500px; width:500px;"
 														src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_0,w_768/12_xjkl8n">
 												</div>
 											</div>
@@ -707,7 +708,8 @@
 												<br>
 											</p>
 											<p style="text-align: center; line-height: 2;">
-												<img src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/ca5ibcannwk3gjozuh7j.jpg">
+												<img style="height:600px; width:800px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/ca5ibcannwk3gjozuh7j.jpg">
 											</p>
 											<p style="text-align: center; line-height: 2;">
 												<br>
@@ -716,7 +718,8 @@
 												<br>
 											</p>
 											<p style="text-align: center; line-height: 2;">
-												<img src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/dzf60k5tpkegj1nm3m0d.jpg">
+												<img style="height:600px; width:800px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/dzf60k5tpkegj1nm3m0d.jpg">
 											</p>
 											<p style="text-align: center; line-height: 2;">
 												<br>
@@ -752,7 +755,8 @@
 												<br>
 											</p>
 											<p style="text-align: center; line-height: 2;">
-												<img src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/bio7othpxoicwqqyyasb.jpg">
+												<img style="height:600px; width:800px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/bio7othpxoicwqqyyasb.jpg">
 											</p>
 											<p style="line-height: 2;">
 												<br>
@@ -776,7 +780,8 @@
 												<br>
 											</p>
 											<p style="text-align: center; line-height: 2;">
-												<img src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/kh10t2exsnkvcx3or18c.jpg">
+												<img style="height:600px; width:800px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/kh10t2exsnkvcx3or18c.jpg">
 											</p>
 											<p style="text-align: center; line-height: 2;">
 												<br>
@@ -960,8 +965,9 @@
 											<p>
 												<br>
 											</p>
-											<p>
-												<img src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/bottom-corona-notice_u2r6sx.jpg">
+											<p style="text-align: center;">
+												<img style="height:800px; width:800px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/bottom-corona-notice_u2r6sx.jpg">
 											</p>
 										</div>
 									</div>
@@ -1047,16 +1053,12 @@
 									<p>서울 성동구 마조로1길 42 3층 로즈룸</p>
 								</section>
 								
-								<div class="accordion-item">
-									<div>
-										<div>
-											<h4 class="accordion-header" id="flush-headingOne">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-													자주 묻는 질문
-												</button>
-											</h4>
+								<div class="accordion" id="accordionExample">
+									<div class="Content_Qna1">
+										<div class="Content_Qna2" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true">
+											자주 묻는 질문
 										</div>
-										<div class="accordion-collapse collapse" id="flush-collapseOne" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+										<div class="accordion-collapse collapse" id="collapse1" data-bs-parent="#accordionExample" style="background-color: rgb(239, 247, 255);">
 											<div class="accordion-body">
 												<div class="Content_Main13">
 													<img
@@ -1235,21 +1237,22 @@
 										</div>
 									</div>
 								</div>
+								
+								
+								
 								<a class="Content_Main15" href="#">문의하기
 									<img
-										src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath d='M18 0H0v18h18z'/%3E %3Cpath stroke='%23000' stroke-width='1.5' d='M7 5l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"
+										style="padding-right: 20px;"
+										src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath d='M18 0H0v18h18z'/%3E %3Cpath stroke='%23000' stroke-width='1.5' d='M7 5l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"
 										alt="/products/151306/qnas">
 								</a>
-								<div class="accordion-item">
-									<div>
-										<div>
-											<h4 class="accordion-header" id="flush-headingTwo">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo" style="border-color: white !important;">
-													환불 정책
-												</button>
-											</h4>
+								
+								<div class="accordion" id="accordionExample">
+									<div class="Content_Qna1">
+										<div class="Content_Qna2" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true">
+											환불 정책
 										</div>
-										<div class="accordion-collapse collapse" id="flush-collapseTwo" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+										<div class="accordion-collapse collapse" id="collapse2" data-bs-parent="#accordionExample" style="background-color: rgb(239, 247, 255);">
 											<div class="accordion-body">
 												<div class="Content_Intro5">
 													<p>[국내 환불규정]</p>
@@ -1299,6 +1302,8 @@
 							</div>
 						</div>
 					</div>
+					
+					
 					<section class="Content_Intro2 Content_Recommend1">
 						<header class="Content_Intro3">
 							<h4 class="Content_Intro4">이런 프립은 어때요?</h4>
@@ -1319,6 +1324,7 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="생활소믈리에 기초 와인 강의 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/WINE_MAIN_01_1504598552674">
 															</div>
 														</div>
@@ -1360,6 +1366,7 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="Tea+Cocktail 차 마시며 배우는 테마가 있는 칵테일 만들기 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/1586175181732_bf1jwj">
 															</div>
 														</div>
@@ -1402,6 +1409,7 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="신사 / 가로수길 칵테일 클래스 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/product_banner_1560603284574_547509">
 															</div>
 														</div>
@@ -1444,6 +1452,50 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="술술 놀면서 수제 맥주 만들기 썸네일" width="192"
+																	class="Content_Img3"
+																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="Content_Recommend_State1">
+												<div class="Content_Recommend_State2">판매중</div>
+											</div>
+										</div>
+										<div class="Frip_Title1">19세이상｜맥주를 즐기는 방법</div>
+										<div class="Frip_Title2">술술 놀면서 수제 맥주 만들기</div>
+										<div class="Frip_Price1">
+											<span class="Frip_Price2">40,000원</span>
+											<span class="Frip_Price3"></span>
+										</div>
+										<div class="Frip_Grade1">
+											<div class="Frip_Grade2">
+												<img
+													src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
+													alt="별점 icon">
+												<span>4.80</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="Content_Recommend3">
+								<a class="Content_Recommend4" href="#">
+									<div class="Content_Recommend5">
+										<div class="Content_Recommend6">
+											<div class="Content_Recommend_Place1">
+												<span class="Content_Recommend_Place2"><span>송파/강동구</span></span>
+											</div>
+											<div class="Content_Img1">
+												<img class="Content_Img2" width="192"
+													src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
+												<div class="Content_Main2" style="opacity: 1; display: block;">
+													<div style="display: block;">
+														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																<img alt="술술 놀면서 수제 맥주 만들기 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
 															</div>
 														</div>
@@ -1480,8 +1532,6 @@
 			<jsp:include page="../include/footer.jsp" />
 		</div>
 	</div>
-<!-- 
-	document.querySelector("#app > div > div.Content_Main1 > div > div > div.Content_Main4 > div.Content_Intro1 > div:nth-child(8) > div > div.Content_Main7 > div")
- -->
+
 </body>
 </html>
