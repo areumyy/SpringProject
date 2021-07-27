@@ -18,6 +18,31 @@
 <link href="<%=request.getContextPath()%>/resources/css/hostExam.css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/resources/css/hostCalculateReq.css" rel="stylesheet" />
 </head>
+<script type="text/javascript">
+function calReq(target){
+	$.ajax({
+        type : "post",
+        url : '/controller/cal_req', 
+        data : {"target": target},
+        dataType: 'json',
+        error : function(error) {
+            console.log("error");
+        },
+        success : function(data) {
+            var res = data.res;
+            
+            if(res == 1) { // 정산 신청 성공
+            	$("#btn" + target).removeClass('btn-primary');
+            	$("#btn" + target).addClass('btn-secondary');
+            	$("#btn" + target).attr('disabled','disabled');
+            	$("#btn" + target).text('정산 요청중');
+            } else { // 실패
+            	$("#btn" + target).css("color", "black");
+            }
+        }
+    });
+}
+</script>
 <body>
 	<div class="mainFrame">
 		<jsp:include page="../hostInclude/hostMenuBar.jsp"></jsp:include>
@@ -55,27 +80,32 @@
 								<c:if test="${!empty list }">
 									<c:forEach items="${list }" var="dto" varStatus="status">
 										<div class="cal_item">
-											<div>${dto.getClass_startDate() }</div>
-											<div class="item_title"><p>${dto.getClass_title() }</p></div>
-											<div>${buyList[status.index] }</div>
-											<div>${enterList[status.index] }</div>
-											<div>${buyList[status.index] - enterList[status.index] }</div>
-											<div>100,000</div>
-											<div>100,000</div>
-											<div>100,000</div>
+											<div>${dto.getCal_startDate() }</div>
+											<div class="item_title"><p>${dto.getCal_name() }</p></div>
+											<div>${dto.getCal_buyCount() }</div>
+											<div>${dto.getCal_enterCount() }</div>
+											<div>${dto.getCal_enterNoCount() }</div>
+											<div>${dto.getCal_sal() }</div>
+											<div>${dto.getCal_sal() * 0.1 }</div>
+											<div>${dto.getCal_total() }</div>
 											<div>
-												<c:if test="${dto.getClass_cal() == 0 }">
-													<button class="btn btn-primary">정산 요청</button>
+												<c:if test="${dto.getCal_status() == 0 }">
+													<button class="btn btn-primary" onclick="calReq(${dto.getCal_num()})" id="btn${dto.getCal_num() }">정산 요청</button>
 												</c:if>
-												<c:if test="${dto.getClass_cal() == 1 }">
-													<div><button class="btn btn-secondary" disabled>정산 요청 완료</button></div>
+												<c:if test="${dto.getCal_status() == 1 }">
+													<button class="btn btn-secondary" disabled>정산 요청중</button>
 												</c:if>
-												<c:if test="${dto.getClass_cal() == 2 }">
-													<div><button class="btn btn-success" disabled>정산 완료</button></div>
+												<c:if test="${dto.getCal_status() == 2 }">
+													<button class="btn btn-success" disabled>정산 완료</button>
 												</c:if>
 											</div>
 										</div>
 									</c:forEach>
+								</c:if>
+								<c:if test="${empty list}">
+									<div class="cal_item">
+											<h3>종료된 프립이 없습니다.</h3>
+										</div>
 								</c:if>
 							</div>
 						</div>
