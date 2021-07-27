@@ -51,6 +51,6 @@ public interface ClassDAO {
 	public ClassDTO getCategoryName(int num);				// 카테고리의 이름을 가져오는 메서드.
 	public List<ClassDTO> getCategoryNameList(int num);		// 하위카테고리의 이름 리스트를 가져오는 메서드.
 	
-	public ClassDTO classCont(int num);						// 프립 상세 내용 호출 추상메서드.
+	public ClassDTO getclassCont(int num);						// 프립 상세 내용 호출 추상메서드.
 	
 }
