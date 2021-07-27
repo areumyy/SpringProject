@@ -86,7 +86,10 @@
 		<![CDATA[
 			select count(*)
 			from frip_class c 
-			left outer join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			join (select booking_classnum, count(*) count
 			                 from frip_booking
 			                 where booking_regdate
@@ -104,7 +107,10 @@
 		<![CDATA[
 			select count(*)
 			from frip_class c 
-			left join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			join (select class_num, count(*) count
 			                 from frip_class
 			                 where class_regdate
@@ -120,9 +126,12 @@
 	<!-- 인기프립 리스트 가져오기 -->
 	<select id="bestalllist" parameterType="int" resultType="com.market.model.ClassDTO">
 		<![CDATA[
-			select c.class_num, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 
-			left outer join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			left outer join (select booking_classNum, count(*) count
 			      from frip_booking
 			      group by booking_classNum
@@ -139,9 +148,12 @@
 	<!-- 금주의프립 리스트 가져오기 -->
 	<select id="weekalllist" parameterType="int" resultType="com.market.model.ClassDTO">
 		<![CDATA[
-			select c.class_num, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 
-			left outer join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			join (select booking_classnum, count(*) count
 			                 from frip_booking
 			                 where booking_regdate
@@ -162,9 +174,12 @@
 	<!-- 신규프립 리스트 가져오기 -->
 	<select id="newalllist" parameterType="int" resultType="com.market.model.ClassDTO">
 		<![CDATA[
-			select c.class_num, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 
-			left join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			join (select class_num, count(*) count
 			                 from frip_class
 			                 where class_regdate
@@ -204,9 +219,12 @@
 	<!-- 프립 전체 리스트 가져오기 -->
 	<select id="alllist1" parameterType="int" resultType="com.market.model.ClassDTO">
 		<![CDATA[
-			select c.class_num, c.class_hash, c.class_title, c.class_category1, c.class_category2, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_category1, c.class_category2, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 
-			left outer join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			left outer join (select review_classNum, avg(review_score) review_score
 			                 from frip_review
 			                 group by review_classNum) r 
@@ -231,7 +249,10 @@
 		<![CDATA[
 			select count(*)
 			from frip_class c 
-			left outer join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			join (select booking_classnum, count(*) count
 			                 from frip_booking
 			                 where booking_regdate
@@ -249,7 +270,10 @@
 		<![CDATA[
 			select count(*)
 			from frip_class c 
-			left join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			join (select class_num, count(*) count
 			                 from frip_class
 			                 where class_regdate
@@ -265,9 +289,12 @@
 	<!-- 하위카테고리 인기프립 리스트 가져오기 -->
 	<select id="bestlist" parameterType="int" resultType="com.market.model.ClassDTO">
 		<![CDATA[
-			select c.class_num, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 
-			left outer join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			left outer join (select booking_classNum, count(*) count
 			      from frip_booking
 			      group by booking_classNum
@@ -284,9 +311,12 @@
 	<!-- 하위카테고리 금주의프립 리스트 가져오기 -->
 	<select id="weeklist" parameterType="int" resultType="com.market.model.ClassDTO">
 		<![CDATA[
-			select c.class_num, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 
-			left outer join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			join (select booking_classnum, count(*) count
 			                 from frip_booking
 			                 where booking_regdate
@@ -307,9 +337,12 @@
 	<!-- 하위카테고리 신규프립 리스트 가져오기 -->
 	<select id="newlist" parameterType="int" resultType="com.market.model.ClassDTO">
 		<![CDATA[
-			select c.class_num, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 
-			left join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			join (select class_num, count(*) count
 			                 from frip_class
 			                 where class_regdate
@@ -330,9 +363,12 @@
 	<!-- 하위 카테고리 프립 전체 리스트 가져오기 -->
 	<select id="alllist2" parameterType="int" resultType="com.market.model.ClassDTO">
 		<![CDATA[
-			select c.class_num, c.class_hash, c.class_title, c.class_category1, c.class_category2, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_category1, c.class_category2, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 
-			left outer join frip_option o on c.class_num = o.option_classNum
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
 			left outer join (select review_classNum, avg(review_score) review_score
 			                 from frip_review
 			                 group by review_classNum) r 

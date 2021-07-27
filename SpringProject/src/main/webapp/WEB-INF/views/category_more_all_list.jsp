@@ -97,7 +97,7 @@
 													<c:forEach items="${list }" var="dto" begin="0" end="24">
 													
 														<div class="Category_List2" style="margin-bottom: 60px">
-															<a class="Category_List3" href="#">
+															<a class="Category_List3" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }">
 																<div class="Category_List4">
 																	<div class="Category_List5">
 																		<div class="Category_List6">
@@ -127,8 +127,10 @@
 																	<div class="Frip_Title">${dto.getClass_hash() }</div>
 																	<div class="Frip_Title1">${dto.getClass_title() }</div>
 																	<div class="Frip_Price">
-																		<span class="Frip_Price1">${dto.getOption_price() }원</span>
-																		<span class="Frip_Price2">${dto.getOption_editprice() }원</span>
+																		<span class="Frip_Price1">${dto.getOption_editprice() }원</span>
+																		<c:if test="${dto.getOption_price() != dto.getOption_editprice()}">
+																			<span class="Frip_Price2">${dto.getOption_price() }원</span>
+																		</c:if>
 																	</div>
 																	<div class="Frip_Grade">
 																		<div class="Frip_Grade1">

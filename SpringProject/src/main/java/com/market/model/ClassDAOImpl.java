@@ -119,7 +119,7 @@ public class ClassDAOImpl implements ClassDAO {
 	}
 
 	@Override
-	public ClassDTO classCont(int num) {
+	public ClassDTO getclassCont(int num) {
 		// TODO Auto-generated method stub
 		return null;
 	}

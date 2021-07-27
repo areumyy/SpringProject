@@ -1363,12 +1363,7 @@ public class MarketController {
 		}
 
 	}
-
-	@RequestMapping("frip_content.do")
-	public String fripContent() {
-		return "frip_content";
-	}
-
+	
 	@RequestMapping("entercheck.do")
 	public String entercheck(HttpServletRequest request) {
 		int booking_num = Integer.parseInt(request.getParameter("booking_num"));
@@ -1721,5 +1716,47 @@ public class MarketController {
 
 		return "category_more_list";
 	}
+	
+	
+	@RequestMapping("frip_content.do")
+	public String frip_content(@RequestParam("num") int class_num,
+			@RequestParam("memnum") int class_memnum, Model model) {
+		
+		// 프립 상세 내용 호출 메서드
+		ClassDTO fripInfo = this.classDao.getclassCont(class_num);
+		
+		
+		
+		
+		
+		
+		
+		// 호스트 상세정보 가져오는 메서드
+		MemberDTO hostInfo = this.likeDao.hostInfo(class_memnum);
+
+		// 호스트 소개 가져오는 메서드
+		HostDTO hostCont = this.likeDao.hostCont(class_memnum);
+
+		// 호스트가 운영하는 클래스 개수 가져오는 메서드
+		int classCount = this.likeDao.class_count(class_memnum);
+
+		// 호스트 후기 개수 가져오는 메서드
+		int reviewCount = this.likeDao.review_count(class_memnum);
+
+		// 호스트 찜 개수 가져오는 메서드
+		int likeCount = this.likeDao.like_count(class_memnum);
+
+		model.addAttribute("hostInfo", hostInfo);
+		model.addAttribute("hostCont", hostCont);
+		model.addAttribute("classCount", classCount);
+		model.addAttribute("reviewCount", reviewCount);
+		model.addAttribute("likeCount", likeCount);
+		
+		
+		
+		
+		return "frip_content";
+	}
+	
 	
 }
