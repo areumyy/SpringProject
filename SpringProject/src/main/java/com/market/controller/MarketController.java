@@ -428,7 +428,12 @@ public class MarketController {
 	 */
 
 	@RequestMapping("option_select.do")
-	public String optionSel() {
+	public String optionSel(@RequestParam("class_num") int class_num, Model model) {
+		
+		model.addAttribute("class_num", class_num);
+		
+		
+		
 		return "option_select";
 	}
 
@@ -1750,4 +1755,6 @@ public class MarketController {
 		
 		return "frip_content";
 	}
+	
+	
 }

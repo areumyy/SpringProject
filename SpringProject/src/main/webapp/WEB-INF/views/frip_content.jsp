@@ -1286,7 +1286,8 @@
 										alt="상품 저장">
 									<span class="Frip_Pick_Count">135</span>
 								</button>
-								<button class="Under_Bar3 Under_Bar4" width="100%" height="56px" color="white" font-size="16px">
+								<button class="Under_Bar3 Under_Bar4" width="100%" height="56px" color="white" font-size="16px"
+									onclick="location.href='<%=request.getContextPath() %>/option_select.do?class_num=${fripInfo.getClass_num() }'">
 									<div class="Under_Bar5">참여하기</div>
 								</button>
 							</div>
