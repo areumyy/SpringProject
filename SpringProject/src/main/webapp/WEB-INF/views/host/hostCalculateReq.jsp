@@ -91,7 +91,7 @@ $(function(){
 								<c:if test="${!empty list }">
 									<c:forEach items="${list }" var="dto" varStatus="status">
 										<div class="cal_item">
-											<div>${dto.getCal_startDate() }</div>
+											<div>${dto.getCal_startDate().substring(0,10) }</div>
 											<div class="item_title"><p>${dto.getCal_name() }</p></div>
 											<div>${dto.getCal_buyCount() }</div>
 											<div>${dto.getCal_enterCount() }</div>
