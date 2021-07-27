@@ -34,6 +34,11 @@ public class ClassDAOImpl implements ClassDAO {
 	}
 
 	@Override
+	public List<ClassDTO> getList_endOk(int mem_num) {
+		return this.sqlSession.selectList("getList_endOk", mem_num);
+	}
+	
+	@Override
 	public ClassDTO getList_classNum(int class_num) {
 		return this.sqlSession.selectOne("getList_classNum", class_num);
 	}

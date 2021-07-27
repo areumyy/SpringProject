@@ -100,8 +100,8 @@ $(function(){
 											<div>${dto.getCal_sal() * 0.1 }</div>
 											<div>${dto.getCal_total() }</div>
 											<div>
-												<c:if test="${dto.getCal_status() == 0 }">
-													<button class="btn btn-primary" onclick="calReq(${dto.getCal_num()})" id="btn${dto.getCal_num() }">정산 요청</button>
+												<c:if test="${dto.getCal_status() == 3 }">
+													<button class="btn btn-primary" onclick="calReq(${dto.getCal_classNum()})" id="btn${dto.getCal_classNum() }">정산 요청</button>
 												</c:if>
 												<c:if test="${dto.getCal_status() == 1 }">
 													<button class="btn btn-secondary" disabled>정산 요청중</button>

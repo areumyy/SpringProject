@@ -928,38 +928,22 @@ public class MarketController {
 		if (type.equals("total")) {
 			totalRecord = this.calculateDao.getCountAll(mem_num);
 			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
-			HashMap<String, Integer> map = new HashMap<String, Integer>();
-
-			map.put("mem_num", mem_num);
-			map.put("class_pass", 1);
-
-			List<ClassDTO> classList = this.classDao.getList_endClass(map); // 종료된 클래스 리스트
+			
+			List<ClassDTO> classList = this.classDao.getList_endOk(mem_num); // 종료확인된 클래스 리스트
 			calList = this.calculateDao.getListAll(classList);
 			model.addAttribute("Paging", dto);
 		} else if (type.equals("before")) {
 			totalRecord = this.calculateDao.getCountBefore(mem_num);
-
 			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
-			HashMap<String, Integer> map = new HashMap<String, Integer>();
-
-			map.put("mem_num", mem_num);
-			map.put("class_pass", 1);
-
-			List<ClassDTO> classList = this.classDao.getList_endClass(map); // 종료된 클래스 리스트
+			List<ClassDTO> classList = this.classDao.getList_endOk(mem_num); // 종료된 클래스 리스트
 			calList = this.calculateDao.getListBefore(classList);
 			model.addAttribute("Paging", dto);
 		} else if (type.equals("ing")) {
 			totalRecord = this.calculateDao.getCountIng(mem_num);
-
 			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
-			HashMap<String, Integer> map = new HashMap<String, Integer>();
-
-			map.put("mem_num", mem_num);
-			map.put("class_pass", 1);
-
-			List<ClassDTO> classList = this.classDao.getList_endClass(map); // 종료된 클래스 리스트
+			List<ClassDTO> classList = this.classDao.getList_endOk(mem_num); // 종료된 클래스 리스트
 			calList = this.calculateDao.getListIng(classList);
 			model.addAttribute("Paging", dto);
 		} else if (type.equals("after")) {
