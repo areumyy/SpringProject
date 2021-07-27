@@ -225,6 +225,11 @@ public class MarketController {
 			out.println("alert('존재하지 않는 아이디입니다.')");
 			out.println("history.back()");
 			out.println("</script>");
+		} else if (result == -2) { // 탈퇴한 아이디
+			out.println("<script>");
+			out.println("alert('탈퇴한 아이디입니다.')");
+			out.println("history.back()");
+			out.println("</script>");
 		}
 	}
 
