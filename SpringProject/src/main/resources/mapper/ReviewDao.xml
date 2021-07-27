@@ -25,6 +25,7 @@
 			and r.review_classnum = c.class_num
 			and r.review_writer = b.booking_writer
 			and b.booking_option = o.option_num
+			and m.mem_num = r.review_writer
 			order by review_num desc) 
 			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
 		]]>

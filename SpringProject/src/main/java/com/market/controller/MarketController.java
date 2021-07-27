@@ -1075,7 +1075,7 @@ public class MarketController {
 		for(int i=0; i<rList.size(); i++) {
 			sum += rList.get(i).getReview_score();
 		}
-		double average = sum/rList.size();
+		double average = (double)sum/rList.size();
 		
 		model.addAttribute("total", totalRecord);
 		model.addAttribute("average", average);
