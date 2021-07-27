@@ -30,7 +30,7 @@
 	<select id="getList_endClass" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
 		<![CDATA[
 		select * from frip_class where class_memnum = #{mem_num}  
-			and class_pass = #{class_pass} and class_delcheck = 'no' and class_endDate < sysdate
+			and class_pass = #{class_pass} and class_delcheck = 'no' and class_endDate < sysdate order by class_num desc
 		]]>
 	</select>
 	

@@ -10,13 +10,44 @@
 			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_endDate < sysdate)
 		]]>
 	</select>
+	<select id="cal_count_before" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) from frip_calculate where cal_classNum in 
+			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_endDate < sysdate and class_cal = 0)
+		]]>
+	</select>
+	<select id="cal_count_ing" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) from frip_calculate where cal_classNum in 
+			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_endDate < sysdate and class_cal = 1)
+		]]>
+	</select>
+	<select id="cal_count_after" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) from frip_calculate where cal_classNum in 
+			(select class_num from frip_class where class_memnum = #{mem_num} and class_pass = 1 and class_delcheck = 'no' and class_endDate < sysdate and class_cal = 2)
+		]]>
+	</select>
 	
 	<select id="cal_cont" parameterType="int" resultType="com.market.model.CalculateDTO">
 		select * from frip_calculate where cal_classNum = #{target}
 	</select>
 	
+	<select id="cal_cont_before" parameterType="int" resultType="com.market.model.CalculateDTO">
+		select * from frip_calculate where cal_classNum = #{target} and cal_status = 0
+	</select>
+	
+	<select id="cal_cont_ing" parameterType="int" resultType="com.market.model.CalculateDTO">
+		select * from frip_calculate where cal_classNum = #{target} and cal_status = 1
+	</select>
+	
+	<select id="cal_cont_after" parameterType="int" resultType="com.market.model.CalculateDTO">
+		select * from frip_calculate where cal_classNum = #{target} and cal_status = 2
+	</select>
+	
 	<update id="req_cal" parameterType="int">
 		update frip_calculate set cal_status = 1 where cal_classNum = #{target}
 	</update>
+	
 </mapper>
 

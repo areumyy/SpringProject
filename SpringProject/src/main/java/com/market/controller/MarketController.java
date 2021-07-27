@@ -80,7 +80,7 @@ public class MarketController {
 	private Class_qnaDAO class_qnaDao;
 	@Autowired
 	private CalculateDAO calculateDao;
-	
+
 	@RequestMapping("main.do")
 	public String main() {
 		return "home";
@@ -793,15 +793,15 @@ public class MarketController {
 	}
 
 	@RequestMapping("hostCalculateReq.do")
-	public String hostCalReq(HttpServletRequest request, Model model) {
+	public String hostCalReq(HttpServletRequest request, Model model, @RequestParam("type") String type) {
 		HttpSession session = request.getSession();
-
+		
 		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
 
 		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
 
 		int totalRecord = 0;
-		int rowsize = 5;
+		int rowsize = 3;
 		int page = 0; // 현재 페이지 변수
 
 		if (request.getParameter("page") != null) {
@@ -810,62 +810,75 @@ public class MarketController {
 			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
 		}
 
-		totalRecord = this.calculateDao.getCountAll(mem_num);
-		
-		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+		List<CalculateDTO> calList = new ArrayList<CalculateDTO>();
 
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		if (type.equals("total")) {
+			totalRecord = this.calculateDao.getCountAll(mem_num);
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
 
-		map.put("mem_num", mem_num);
-		map.put("class_pass", 1);
-		
-		
-		List<ClassDTO> classList = this.classDao.getList_endClass(map); // 종료된 클래스 리스트 
-		System.out.println(classList);
-		List<CalculateDTO> calList = this.calculateDao.getListAll(classList);
-		System.out.println(calList);
-		
-		/*
-		List<Integer> classBuy = new ArrayList<Integer>();
-		List<Integer> classEnter = new ArrayList<Integer>();
-		
-		
-		for(int i =0; i<classList.size(); i++) {
-			
-			CalculateDTO calDto = new CalculateDTO();
-			calDto.setCal_classNum(classList.get(i).getClass_num());
-			calDto.setCal_startDate(classList.get(i).getClass_startDate());
-			calDto.setCal_endDate(classList.get(i).getClass_endDate());
-			calDto.setCal_name(classList.get(i).getClass_title());
-			calDto.setCal_buyCount(this.bookingDao.getCount(classList.get(i).getClass_num()));
-			calDto.setCal_enterCount(this.bookingDao.getCountEnter(classList.get(i).getClass_num()));
-			calDto.setCal_enterNoCount(calDto.getCal_buyCount() - calDto.getCal_enterCount());
-			calDto.setCal_sal(cal_sal);
-			calDto.setCal_total(calDto.getCal_sal() * 0.9);
-			
-			classBuy.add(this.bookingDao.getCount(classList.get(i).getClass_num()));
-			classEnter.add(this.bookingDao.getCountEnter(classList.get(i).getClass_num()));
+			map.put("mem_num", mem_num);
+			map.put("class_pass", 1);
+
+			List<ClassDTO> classList = this.classDao.getList_endClass(map); // 종료된 클래스 리스트
+			calList = this.calculateDao.getListAll(classList);
+			model.addAttribute("Paging", dto);
+		} else if (type.equals("before")) {
+			totalRecord = this.calculateDao.getCountBefore(mem_num);
+
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+
+			map.put("mem_num", mem_num);
+			map.put("class_pass", 1);
+
+			List<ClassDTO> classList = this.classDao.getList_endClass(map); // 종료된 클래스 리스트
+			calList = this.calculateDao.getListBefore(classList);
+			model.addAttribute("Paging", dto);
+		} else if (type.equals("ing")) {
+			totalRecord = this.calculateDao.getCountIng(mem_num);
+
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+
+			map.put("mem_num", mem_num);
+			map.put("class_pass", 1);
+
+			List<ClassDTO> classList = this.classDao.getList_endClass(map); // 종료된 클래스 리스트
+			calList = this.calculateDao.getListIng(classList);
+			model.addAttribute("Paging", dto);
+		} else if (type.equals("after")) {
+			totalRecord = this.calculateDao.getCountAfter(mem_num);
+
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+
+			map.put("mem_num", mem_num);
+			map.put("class_pass", 1);
+
+			List<ClassDTO> classList = this.classDao.getList_endClass(map); // 종료된 클래스 리스트
+			calList = this.calculateDao.getListAfter(classList);
+			model.addAttribute("Paging", dto);
 		}
-		model.addAttribute("buyList", classBuy);
-		model.addAttribute("enterList", classEnter);
-		*/
-		
+
 		model.addAttribute("list", calList);
-		model.addAttribute("Paging", dto);
+		model.addAttribute("type", type);
 		
 		return "host/hostCalculateReq";
 	}
 
 	@RequestMapping(value = "/cal_req", method = RequestMethod.POST)
 	@ResponseBody
-	public void calReq(HttpServletResponse response, @RequestParam("target") int target)
-			throws IOException {
+	public void calReq(HttpServletResponse response, @RequestParam("target") int target) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		int res = 0;
 
 		int result1 = this.calculateDao.requestCal(target);
 		int result2 = this.classDao.requestCal(target);
-		
+
 		if (result1 > 0 && result2 > 0) {
 			res = 1;
 		} else {
@@ -877,7 +890,7 @@ public class MarketController {
 
 		response.getWriter().print(obj);
 	}
-	
+
 	@RequestMapping("hostNotice_list.do")
 	public String hostNotice(Model model, HttpServletRequest request) {
 		int totalRecord = 0;
