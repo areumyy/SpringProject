@@ -27,6 +27,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.JsonObject;
 import com.market.model.BookingDAO;
 import com.market.model.BookingDTO;
+import com.market.model.CalculateDAO;
+import com.market.model.CalculateDTO;
 import com.market.model.CategoryDAO;
 import com.market.model.CategoryDTO;
 import com.market.model.ClassDAO;
@@ -76,6 +78,8 @@ public class MarketController {
 	private BookingDAO bookingDao;
 	@Autowired
 	private Class_qnaDAO class_qnaDao;
+	@Autowired
+	private CalculateDAO calculateDao;
 
 
 	@RequestMapping("main.do")
@@ -669,8 +673,64 @@ public class MarketController {
 	}
 
 	@RequestMapping("admin_cal_pass.do")
-	public String calPass() {
+	public String calPass(Model model) {
+		
+		// 프립 승인대기 목록
+		List<CalculateDTO> calPass_wait = this.calculateDao.calPass_wait();
+		
+		// 승인대기 목록 호스트 이름
+		List<ClassDTO> wait_host = this.calculateDao.calPass_wait_host();
+		
+		// 승인대기 수
+		int wait_count = this.calculateDao.calPass_wait_count(); 
+		
+		// 프립 승인완료 목록
+		List<CalculateDTO> calPass_finish = this.calculateDao.calPass_finish();
+		
+		// 승인완료 목록 호스트 이름
+		List<ClassDTO> finish_host = this.calculateDao.calPass_finish_host();
+		
+		// 승인완료 수
+		int finish_count = this.calculateDao.calPass_finish_count(); 
+		
+		
+		 model.addAttribute("calPass_wait", calPass_wait);
+		 model.addAttribute("wait_host", wait_host);
+		 model.addAttribute("wait_count", wait_count);
+		 model.addAttribute("calPass_finish", calPass_finish);
+		 model.addAttribute("finish_count", finish_count);
+		 model.addAttribute("finish_host", finish_host);
+		 
 		return "admin_cal_pass";
+	}
+	
+	@RequestMapping("admin_cal_pass_ok.do")
+	public void calPass_ok(@RequestParam("class_num") int class_num, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+		
+		System.out.println("정산승인 매핑에 넘어온 클래스 넘버 값입니다 >>> " + class_num);
+
+		int result = this.calculateDao.calPass_result(class_num);
+		int result2 = this.calculateDao.calPass_result2(class_num);
+
+		if (result == 1) { // 승인완료 성공
+			if(result2 == 1) {
+				out.println("<script>");
+				out.println("alert('승인처리가 정상적으로 완료되었습니다.')");
+				out.println("location.href='admin_cal_pass.do'");
+				out.println("</script>");
+			}
+			
+		} else { // 승인완료 실패
+			out.println("<script>");
+			out.println("alert('승인처리가 실패하였습니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		} 
+		
 	}
 
 	@RequestMapping("payment.do")

@@ -231,7 +231,7 @@
 							      				<div class="user_name">${dto2.getMem_name() }</div>
 							      				<div>
 							      					<c:forEach begin="1" end="${dto2.getReview_score() }"><img alt="review_score" src="<%=request.getContextPath() %>/resources/image/like/review_star_icon.svg"></c:forEach>
-							      					<span class="review_regdate">${dto2.getReview_regdate() } 작성</span>
+							      					<span class="review_regdate">${dto2.getReview_regdate().substring(0,10) } 작성</span>
 							      				</div>
 							      			</div>
 							      		</div>

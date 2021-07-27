@@ -16,6 +16,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <!-- CSS 파일 -->
+<link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath()%>/resources/css/admin_frip_pass.css" rel="stylesheet" />
 
 <script type="text/javascript">
@@ -76,10 +77,7 @@
 							      <td>${dto.getClass_title() }</td>
 							      <td>${dto.getClass_category1() }</td>
 							      <td>${dto.getClass_category2() }</td>
-							      <td> 
-							      	<fmt:parseDate value="${dto.getClass_regdate() }" var="class_regdate" pattern="yyyy-MM-dd" />
-							      	<fmt:formatDate value="${class_regdate}" pattern="yyyy-MM-dd" />
-							      </td>
+							      <td>${dto.getClass_regdate().substring(0, 10) }</td>
 							      <c:if test="${dto.getClass_pass() == 0}">
 							      	<td>대기</td>
 							      </c:if>
@@ -93,8 +91,7 @@
 												<div>
 													<div class="modal-header">
 														프립 상세보기
-														<button type="button" class="btn-close"
-															data-bs-dismiss="modal" aria-label="Close"></button>
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 													</div>
 													
 													<form action="<%=request.getContextPath() %>/admin_frip_pass_ok.do" method="post">
@@ -107,7 +104,7 @@
 																	<div class="final_confirm_frame">
 																		<div class="confirm_img_box">
 																			<!-- 사진 수정필요(클래스 사진) -->
-																			<img width="100%" alt="${dto.getClass_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto.getClass_image() }" name="confirm_img" class="comfirm_img">
+																			<img alt="${dto.getClass_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto.getClass_image() }" name="confirm_img" class="confirm_img">
 																		</div>
 																		<div class="final_frip_info">
 																			<section class="info_section">
@@ -191,13 +188,13 @@
 																</div>
 															</div>
 														</div><!-- 프립 소개 end -->
-													  
 													</div>
 													<div class="modal-footer" style="display: block;">
 														<button type="submit" class="btn btn-primary">승인처리</button>
 													</div>
 												  </form>
-												</div>
+												  
+											  </div>
 											</div>
 										 </div>
 									  </div>  <!-- Modal end -->
@@ -242,10 +239,7 @@
 								      <td>${dto2.getClass_title() }</td>
 								      <td>${dto2.getClass_category1() }</td>
 								      <td>${dto2.getClass_category2() }</td>
-								      <td>
-								      	<fmt:parseDate value="${dto2.getClass_pass_regdate() }" var="class_pass_regdate" pattern="yyyy-MM-dd" />
-							      		<fmt:formatDate value="${class_pass_regdate}" pattern="yyyy-MM-dd" />
-								      </td>
+								      <td>${dto2.getClass_pass_regdate().substring(0, 10) }</td>
 								      <c:if test="${dto2.getClass_pass() == 1}">
 								      	<td>완료</td>
 								      </c:if>
@@ -259,8 +253,7 @@
 													<div>
 														<div class="modal-header">
 															프립 상세보기
-															<button type="button" class="btn-close"
-																data-bs-dismiss="modal" aria-label="Close"></button>
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 														</div>
 														
 														<form action="<%=request.getContextPath() %>/admin_frip_pass_ok.do" method="post">
@@ -273,7 +266,7 @@
 																		<div class="final_confirm_frame">
 																			<div class="confirm_img_box">
 																				<!-- 사진 수정필요(클래스 사진) -->
-																				<img width="100%" alt="${dto2.getClass_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto2.getClass_image() }" name="confirm_img" class="comfirm_img">
+																				<img alt="${dto2.getClass_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto2.getClass_image() }" name="confirm_img" class="confirm_img">
 																			</div>
 																			<div class="final_frip_info">
 																				<section class="info_section">
@@ -360,6 +353,7 @@
 															<button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
 														</div>
 													  </form>
+													  
 													</div>
 												</div>
 											 </div>

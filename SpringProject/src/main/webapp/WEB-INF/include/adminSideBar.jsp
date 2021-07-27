@@ -62,6 +62,7 @@
 					<div id="menuFrame1"class="menubutton">
 						<button type="button" id="1" class="ul" onclick="location.href='admin_frip_pass.do'">
 							<span class="glyphicon glyphicon-tent"  aria-hidden="true"></span>
+							<i class="fa fa-map-o" aria-hidden="true"></i>
 							 프립 승인
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
 						</button>
@@ -70,14 +71,16 @@
 					<div id="menuFrame2"class="menubutton">
 						<button type="button" id="2" class="ul" onclick="location.href='admin_cal_pass.do'">
 							<span class="glyphicon glyphicon-user"  aria-hidden="true"></span>
+							<i class="fa fa-krw" aria-hidden="true"></i>	
 							정산 승인
-								<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
 						</button>
 					</div>
 					
 					<div id="menuFrame3"class="menubutton">
 						<button type="button" id="3" class="ul" onclick="location.href='admin_notice.do?sort=total'">
 							<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+							<i class="fa fa-microphone" aria-hidden="true"></i>
 							공지사항 관리
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
 						</button>
@@ -86,13 +89,14 @@
 					<div id="menuFrame4" class="menubutton">
 						<button type="button" id="4" class="ul" onclick="location.href='admin_member_list.do?sort=total'">
 							<span class="glyphicon glyphicon-question-sign"  aria-hidden="true"></span>
+							<i class="fa fa-user" aria-hidden="true"></i>
 							회원 조회
 							<span class="glyphicon glyphicon-menu-down icon"  aria-hidden="true"></span>
 						</button>  
 					</div>
 					
 					<div class="ul logout">
-							<button>로그아웃</button>
+						<button>로그아웃</button>
 					</div>
 	  			</div>  
 			</div>

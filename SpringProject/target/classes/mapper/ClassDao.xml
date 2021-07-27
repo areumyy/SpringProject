@@ -40,7 +40,7 @@
 		select *
 		from frip_class c join frip_member m
 		on c.class_memnum = m.mem_num
-		where c.class_pass = 0 order by class_regdate desc
+		where c.class_pass = 0 order by class_regdate desc, class_num
 	</select>
 	
 	<select id="fripPass_wait_count" resultType="Integer">
@@ -54,7 +54,7 @@
 		select *
 		from frip_class c join frip_member m
 		on c.class_memnum = m.mem_num
-		where c.class_pass = 1 order by class_regdate desc
+		where c.class_pass = 1 order by class_pass_regdate desc, class_num
 	</select>
 	
 	<select id="fripPass_finish_count" resultType="Integer">
