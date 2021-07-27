@@ -31,18 +31,24 @@
 					<h1 class="Main_title">내 프립</h1>
 					
 					<div class="searchAsk">
-						<form action="<%=request.getContextPath() %>/searchAsk.do">
-						<input type="text" name="class_qna_cont" placeholder="문의 검색">
+						<form action="<%=request.getContextPath() %>/searchComAsk.do">
+						<select name="search_field">
+							<option value="mem_name">문의자</option>
+							<option value="class_title">클래스 명 </option>
+						</select>
+						<input type="text" name="search_name" placeholder="문의 검색">
 						<button><i class="fa fa-search" aria-hidden="true"></i></button>
 						</form>
 					</div>
 					<div class="info_frame">
 						<div class="state">
 							<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-							  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="location.href='hostAsk.do'">
+							  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" 
+							  onclick="location.href='hostAsk.do'">
 							  <label class="btn btn-outline-primary" for="btnradio1">답변 없는 문의</label>
 							
-							  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked>
+							  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" 
+							  onclick="location.href='hostAskComplete.do'" checked>
 							  <label class="btn btn-outline-primary" for="btnradio2">답변 완료 문의</label>
 							</div><br><br>
 							

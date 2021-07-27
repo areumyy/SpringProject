@@ -17,6 +17,11 @@ public class Class_qnaDAOImpl implements Class_qnaDAO {
 	public int getCount(int mem_num) {
 		return this.sqlSession.selectOne("getClassQnaCount", mem_num);
 	}
+	
+	@Override
+	public int getCountComplete(int mem_num) {
+		return this.sqlSession.selectOne("getClassQnaCountComplete", mem_num);
+	}
 
 	@Override
 	public List<Class_qnaDTO> getQnaList(HashMap<String, Object> map) {
@@ -37,4 +42,49 @@ public class Class_qnaDAOImpl implements Class_qnaDAO {
 	public int insertAnswer(HashMap<String, Object> map) {
 		return this.sqlSession.update("insertAnswer", map);
 	}
+
+	//답변 안한 문의 검색
+	@Override
+	public int getNameSearchCount(HashMap<String, Object> map) {
+		return this.sqlSession.selectOne("getNameSearchCount", map);
+	}
+	
+	@Override
+	public int getTitleSearchCount(HashMap<String, Object> map) {
+		return this.sqlSession.selectOne("getTitleSearchCount", map);
+	}
+
+	@Override
+	public List<Class_qnaDTO> getNamesearchList(HashMap<String, Object> map) {
+		return this.sqlSession.selectList("getNamesearchList", map);
+	}
+
+	@Override
+	public List<Class_qnaDTO> getTitlesearchList(HashMap<String, Object> map) {
+		return this.sqlSession.selectList("getTitlesearchList", map);
+	}
+	
+	//답변 한 문의 검색
+	@Override
+	public int CgetNameSearchCount(HashMap<String, Object> map) {
+		return this.sqlSession.selectOne("CgetNameSearchCount", map);
+	}
+
+	@Override
+	public int CgetTitleSearchCount(HashMap<String, Object> map) {
+		return this.sqlSession.selectOne("CgetTitleSearchCount", map);
+	}
+
+	@Override
+	public List<Class_qnaDTO> CgetNamesearchList(HashMap<String, Object> map) {
+		return this.sqlSession.selectList("CgetNamesearchList", map);
+	}
+
+	@Override
+	public List<Class_qnaDTO> CgetTitlesearchList(HashMap<String, Object> map) {
+		return this.sqlSession.selectList("CgetTitlesearchList", map);
+	}
+
+
+	
 }

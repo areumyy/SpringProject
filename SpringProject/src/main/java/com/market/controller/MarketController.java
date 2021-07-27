@@ -578,10 +578,10 @@ public class MarketController {
 			dto.setClass_startArea("null");
 			dto.setClass_startAreaDetail("null");
 		}
-		if (dto.getClass_endDate() == null) { // 끝나는날이 없으면 공백값
-			dto.setClass_endDate("null");
+		if (request.getParameter("class_endDate").length() == 0) { // 끝나는날이 없으면 시작날로 설정
+			dto.setClass_endDate(dto.getClass_startDate());
 		}
-
+		
 		// 전체 클래스의 수 + 1구하기
 		int count = this.classDao.countClass();
 		dto.setClass_num(count);
@@ -617,41 +617,106 @@ public class MarketController {
 
 	}
 
-	@RequestMapping(value = "/hostClassList.do", method = RequestMethod.POST)
-	@ResponseBody
-	public void hostClassList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession();
-
-		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
-
-		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
-		int class_pass = Integer.parseInt(request.getParameter("class_pass")); // 승인 상태 번호
-
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-
-		map.put("mem_num", mem_num);
-		List<ClassDTO> list = null;
-		if (class_pass == 2) {
-			class_pass = 1;
-			map.put("class_pass", class_pass);
-			list = this.classDao.getList_endClass(map);
-		} else {
-			map.put("class_pass", class_pass);
-			list = this.classDao.getList_MemNum(map);
-		}
-		JSONObject obj = new JSONObject();
-
-		JSONArray ja = JSONArray.fromObject(list);
-
-		obj.put("clist", ja);
-
-		response.getWriter().print(obj);
-	}
-
 	@RequestMapping("hostMyFrip.do")
 	public String hostMyFrip(HttpServletRequest request, Model model) {
+		int mem_num = getMem_num(request);
+		
+		int totalRecord = 0;
+		int rowsize = 8;
+		int page = 0; // 현재 페이지 변수
 
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_num", mem_num);
+		int class_pass = 1;
+
+		map.put("class_pass", class_pass);
+		
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.classDao.countclass_myfrip(map);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+		map.put("dto", dto);
+		
+		List<ClassDTO> list = this.classDao.getList_myFrip(map);
+		
+		model.addAttribute("cList", list);
+		model.addAttribute("Paging", dto);
+		
 		return "host/hostMyFrip";
+	}
+	
+	@RequestMapping("hostMyFripWait.do")
+	public String hostMyFripWait(HttpServletRequest request, Model model) {
+		int mem_num = getMem_num(request);
+		
+		int totalRecord = 0;
+		int rowsize = 8;
+		int page = 0; // 현재 페이지 변수
+		
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_num", mem_num);
+		int class_pass = 0;
+		
+		map.put("class_pass", class_pass);
+		
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.classDao.countclass_myfrip(map);
+		
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+		map.put("dto", dto);
+		
+		List<ClassDTO> list = this.classDao.getList_myFrip(map);
+		
+		model.addAttribute("cList", list);
+		model.addAttribute("Paging", dto);
+		System.out.println(list);
+		return "host/hostMyFripWait";
+	}
+	
+	@RequestMapping("hostMyFripEnd.do")
+	public String hostMyFripEnd(HttpServletRequest request, Model model) {
+		int mem_num = getMem_num(request);
+		
+		int totalRecord = 0;
+		int rowsize = 8;
+		int page = 0; // 현재 페이지 변수
+		
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_num", mem_num);
+		int class_pass = 1;
+		
+		map.put("class_pass", class_pass);
+		
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.classDao.countclass_end(map);
+		
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+		map.put("dto", dto);
+		
+		List<ClassDTO> list = this.classDao.getList_end(map);
+		
+		model.addAttribute("cList", list);
+		model.addAttribute("Paging", dto);
+		
+		return "host/hostMyFripEnd";
 	}
 
 	@RequestMapping("hostAttendance.do")
@@ -775,7 +840,7 @@ public class MarketController {
 		}
 
 		// DB 상의 전체 게시물의 수를 확인하는 작업.
-		totalRecord = this.class_qnaDao.getCount(mem_num);
+		totalRecord = this.class_qnaDao.getCountComplete(mem_num);
 
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
@@ -792,6 +857,54 @@ public class MarketController {
 		return "host/hostAskComplete";
 	}
 
+	
+	@RequestMapping("hostEndCheck.do")
+	public String hostEndCheck(HttpServletRequest request, Model model,HttpServletResponse response) {
+		
+		int nowPage = Integer.parseInt(request.getParameter("page"));
+		int class_num = Integer.parseInt(request.getParameter("class_num"));
+		 
+		CalculateDTO cdto = new CalculateDTO();
+		
+		ClassDTO classdto = this.classDao.getList_classNum(class_num);
+		
+		int allCount = this.bookingDao.getCount(class_num);
+		int enterCount = this.bookingDao.getCountEnter(class_num);
+		int enterNoCount = allCount - enterCount;
+		
+		List<OptionDTO> odto = this.optionDao.getOptionList(class_num);
+		
+		int cal_sal = 0;
+		
+		for(int i=0; i<odto.size(); i++) {
+			//옵션을 구매한 사람의 수를 구하기
+			int optionCount = this.bookingDao.getcount_option_num(odto.get(i).getOption_num());
+			if(odto.get(i).getOption_price() == odto.get(i).getOption_editPrice()) {
+				cal_sal += (odto.get(i).getOption_price() * optionCount);
+			}else if(odto.get(i).getOption_price() != odto.get(i).getOption_editPrice()) {
+				cal_sal += (odto.get(i).getOption_editPrice() * optionCount);
+			}
+		}
+		
+		cdto.setCal_classNum(class_num);
+		cdto.setCal_startDate(classdto.getClass_startDate().substring(0,10));
+		cdto.setCal_endDate(classdto.getClass_endDate().substring(0,10));
+		cdto.setCal_name(classdto.getClass_title());
+		cdto.setCal_buyCount(allCount);
+		cdto.setCal_enterCount(enterCount);
+		cdto.setCal_enterNoCount(enterNoCount);
+		cdto.setCal_sal(cal_sal);
+		cdto.setCal_total((int)(cal_sal * 0.9));
+		System.out.println(cdto);
+		int res = this.calculateDao.insertData(cdto);
+		
+		if(res == 1) {
+			this.classDao.changeCalState(class_num);
+		}
+		
+		return "redirect:hostMyFripEnd.do?page="+nowPage;
+	}
+	
 	@RequestMapping("hostCalculateReq.do")
 	public String hostCalReq(HttpServletRequest request, Model model, @RequestParam("type") String type) {
 		HttpSession session = request.getSession();
@@ -1287,80 +1400,75 @@ public class MarketController {
 
 	@RequestMapping("hostUpdateFripOk.do")
 	public void hostUpdateFrip(ClassDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
-			HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.setContentType("text/html; charset=UTF-8");
-		HttpSession session = request.getSession();
-		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
+		  HttpServletRequest request, HttpServletResponse response) throws IOException {
+		  response.setContentType("text/html; charset=UTF-8");
+		  HttpSession session = request.getSession();
+		  MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
+		 
+		  int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
+		  
+		  dto.setClass_memNum(mem_num); // 회원 번호 넣어주기
 
-		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
+		  //원래 클래스의 정보
+		  ClassDTO classList = this.classDao.getList_classNum(dto.getClass_num());
+		  
+		  //사진을 수정했는지 여부 확인
+		  if(dto.getClass_image2().getSize() == 0 ) {
+			  dto.setClass_image(classList.getClass_image());
+		  }else {
+			  dto.setClass_image(upload.fileUpload(mRequest)); // 파일 이름으로 변환		  
+		  }
+		  
+		  if(request.getParameter("startArea") == null) {
+			  dto.setClass_startArea("null"); 
+			  dto.setClass_startAreaDetail("null"); 
+		  } 
+		  if(dto.getClass_endDate() == null) { // 끝나는날이 없으면 공백값 
+			  dto.setClass_endDate("null"); 
+		  }
+		 
+		  odto.setOption_classNum(dto.getClass_num());
+		  System.out.println(dto);
+		  int result = this.classDao.UpdateClass(dto); 
+		
+		  //원래 옵션 개수
+		  int optionCount = this.optionDao.getcountoption(dto.getClass_num());
+		  
+		  //옵션 
+		  int result2 = 0;
+		  //옵션 개수
+		  int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
+		  
+		  for(int i=1; i<=optionCount; i++) {
+			  odto.setOption_num(Integer.parseInt(request.getParameter("option_num"+i)));
+			  odto.setOption_editPrice(Integer.parseInt(request.getParameter("option_price"+i))); 
 
-		dto.setClass_memNum(mem_num); // 회원 번호 넣어주기
+			  result2 = this.optionDao.updateOption(odto); 
+		  }
+		  
+		  //옵션을 추가했을 때 발생
+		  if(Qtt > optionCount) {
+			  for(int i=(optionCount+1); i<=Qtt; i++) {
+				  odto.setOption_name(request.getParameter("option_name"+i));
+				  odto.setOption_price(Integer.parseInt(request.getParameter("option_price"+i))); 
 
-		// 원래 클래스의 정보
-		ClassDTO classList = this.classDao.getList_classNum(dto.getClass_num());
+				  result2 = this.optionDao.insertOption(odto); 
+			  }
+		  }
+		 
+		 PrintWriter out = response.getWriter();
 
-		// 사진을 수정했는지 여부 확인
-		if (dto.getClass_image2().getSize() == 0) {
-			dto.setClass_image(classList.getClass_image());
-		} else {
-			dto.setClass_image(upload.fileUpload(mRequest)); // 파일 이름으로 변환
-		}
-
-		if (request.getParameter("startArea") == null) {
-			dto.setClass_startArea("null");
-			dto.setClass_startAreaDetail("null");
-		}
-		if (dto.getClass_endDate() == null) { // 끝나는날이 없으면 공백값
-			dto.setClass_endDate("null");
-		}
-
-		odto.setOption_classNum(dto.getClass_num());
-		System.out.println(dto);
-		int result = this.classDao.UpdateClass(dto);
-
-		// 옵션 삭제후 재생성
-		int maxNum = this.optionDao.getmaxoptionNum(dto.getClass_num());
-		int optionCount = this.optionDao.getcountoption(dto.getClass_num());
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("maxNum", maxNum);
-		map.put("optionCount", optionCount);
-
-		// 옵션 삭제
-		this.optionDao.deleteOption(dto.getClass_num());
-
-		// 옵션 번호가 방금 지운 번호보다 높은 번호를 방금 지운 숫자만큼 삭제
-		this.optionDao.optionNumdown(map);
-		System.out.println(odto);
-
-		// 옵션
-		int result2 = 0;
-		// 옵션 개수
-		int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
-		System.out.println(Qtt);
-		for (int i = 1; i <= Qtt; i++) {
-			System.out.println(request.getParameter("option_name" + i));
-			System.out.println(Integer.parseInt(request.getParameter("option_price" + i)));
-			odto.setOption_name(request.getParameter("option_name" + i));
-			odto.setOption_price(Integer.parseInt(request.getParameter("option_price" + i)));
-			System.out.println(odto.getOption_name());
-			System.out.println(odto.getOption_price());
-			result2 = this.optionDao.insertOption(odto);
-		}
-
-		PrintWriter out = response.getWriter();
-		System.out.println(result);
-		System.out.println(result2);
-		if (result == 1 && result2 == 1) {
-			out.println("<script>");
-			out.println("alert('수정 성공!')");
-			out.println("location.href='hostMyFrip.do'");
-			out.println("</script>");
-		} else {
-			out.println("<script>");
-			out.println("alert('수정 실패!')");
-			out.println("history.back()");
-			out.println("</script>");
-		}
+		  if(result == 1 && result2 == 1) { 
+			  out.println("<script>");
+			  out.println("alert('수정 성공!')"); 
+			  out.println("location.href='hostMyFrip.do'");
+			  out.println("</script>"); 
+		  }else { 
+			  out.println("<script>");
+			  out.println("alert('수정 실패!')"); 
+			  out.println("history.back()");
+			  out.println("</script>"); 
+		  }
 
 	}
 
@@ -1388,6 +1496,94 @@ public class MarketController {
 		this.bookingDao.entercancel(booking_num);
 
 		return "redirect:hostAttendance_member.do?class_num=" + class_num + "&page=" + page;
+	}
+	
+	@RequestMapping("searchAsk.do")
+	public String searchAsk(HttpServletRequest request, Model model) {
+		int mem_num = getMem_num(request);
+
+		int totalRecord = 0;
+		int rowsize = 10;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//받아온 값
+		String field = request.getParameter("search_field");
+		String name = request.getParameter("search_name");
+
+		map.put("name", name);
+		map.put("mem_num", mem_num);
+		
+		if(field.equals("mem_name")) {
+			// DB 상의 전체 게시물의 수를 확인하는 작업.
+			totalRecord = this.class_qnaDao.getNameSearchCount(map);	
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			map.put("dto", dto);
+			
+			List<Class_qnaDTO> qnaList =  this.class_qnaDao.getNamesearchList(map);
+			model.addAttribute("qList", qnaList);
+			model.addAttribute("Paging", dto);
+		}else {
+			// DB 상의 전체 게시물의 수를 확인하는 작업.
+			totalRecord = this.class_qnaDao.getTitleSearchCount(map);	
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			map.put("dto", dto);
+			
+			List<Class_qnaDTO> qnaList =  this.class_qnaDao.getTitlesearchList(map);
+			model.addAttribute("qList", qnaList);
+			model.addAttribute("Paging", dto);
+		}
+		return "host/hostAsk";
+	}
+	
+	@RequestMapping("searchComAsk.do")
+	public String CsearchAsk(HttpServletRequest request, Model model) {
+		int mem_num = getMem_num(request);
+		
+		int totalRecord = 0;
+		int rowsize = 10;
+		int page = 0; // 현재 페이지 변수
+		
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		//받아온 값
+		String field = request.getParameter("search_field");
+		String name = request.getParameter("search_name");
+		
+		map.put("name", name);
+		map.put("mem_num", mem_num);
+		
+		if(field.equals("mem_name")) {
+			// DB 상의 전체 게시물의 수를 확인하는 작업.
+			totalRecord = this.class_qnaDao.CgetNameSearchCount(map);	
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			map.put("dto", dto);
+			
+			List<Class_qnaDTO> qnaList =  this.class_qnaDao.CgetNamesearchList(map);
+			model.addAttribute("qList", qnaList);
+			model.addAttribute("Paging", dto);
+		}else {
+			// DB 상의 전체 게시물의 수를 확인하는 작업.
+			totalRecord = this.class_qnaDao.CgetTitleSearchCount(map);	
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			map.put("dto", dto);
+			
+			List<Class_qnaDTO> qnaList =  this.class_qnaDao.CgetTitlesearchList(map);
+			model.addAttribute("qList", qnaList);
+			model.addAttribute("Paging", dto);
+		}
+		return "host/hostAskComplete";
 	}
 
 	public int getMem_num(HttpServletRequest request) {

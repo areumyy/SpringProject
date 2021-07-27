@@ -13,6 +13,11 @@ public interface ClassDAO {
 	public ClassDTO getList_classNum(int class_num);
 	public int countClass(int mem_num);
 	public List<ClassDTO> getList(HashMap<String, Object> map);
+	public int countclass_myfrip(HashMap<String, Object> map);
+	public int countclass_end(HashMap<String, Object> map);
+	public List<ClassDTO> getList_myFrip(HashMap<String, Object> map);
+	public List<ClassDTO> getList_end(HashMap<String, Object> map);
+	public int changeCalState(int class_num);
 	
 	public int requestCal(int target);
 	

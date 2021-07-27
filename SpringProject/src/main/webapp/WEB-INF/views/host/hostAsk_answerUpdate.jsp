@@ -49,6 +49,7 @@
 									<textarea rows="7" cols="60" name="ans_cont" style='white-space: pre-line;'>${dto.getClass_ans_cont() }</textarea>
 									<br>
 									<input type="submit" class="btn btn-primary writeButton" value="수정하기">
+									<input type="button" class="btn btn-outline-primary writeButton" value="취소" onclick="history.back()">
 								</div>
 							</form>
 						</div>

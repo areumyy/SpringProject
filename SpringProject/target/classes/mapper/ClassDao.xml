@@ -14,7 +14,7 @@
 				,#{class_category2}, #{class_hash}, #{class_title}, #{class_image},#{class_startDate},#{class_endDate},
 				 #{class_count}, #{class_startArea},#{class_startAreaDetail}, #{class_endArea},#{class_endAreaDetail}, 
 				 #{class_cont}, #{class_plan}, #{class_include},
-				#{class_exclude}, #{class_supply}, #{class_notice}, default, sysdate, default, default)
+				#{class_exclude}, #{class_supply}, #{class_notice}, default, sysdate, default, default,null)
 	</insert>
 	
 	<select id="getList_MemNum" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
@@ -61,14 +61,6 @@
 			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
 		]]>
 	</select>
-	
-	<update id="entercheck" parameterType="int">
-		update frip_booking set booking_entercheck = 'yes' where booking_num = #{booking_num}
-	</update>
-	
-	<update id="entercancel" parameterType="int">
-		update frip_booking set booking_entercheck = 'no' where booking_num = #{booking_num}
-	</update>
 	
 	<update id="class_req_cal" parameterType="int">
 		update frip_class set class_cal = 1 where class_num = #{target}
@@ -342,4 +334,51 @@
 		]]>
 	</select>
 	
+	<select id="countclass_myfrip" parameterType="java.util.Map" resultType="int">
+		select count(*) from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass} 
+			and class_delcheck = 'no'
+            and class_enddate >= sysdate
+	</select>
+	
+	<select id="getList_myFrip" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select * from (select distinct f.*,
+			row_number() over(order by class_num) rnum
+			from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass}
+			and class_delcheck = 'no'
+			and class_enddate >= sysdate) 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	
+	<select id="countclass_end" parameterType="java.util.Map" resultType="int">
+		<![CDATA[
+			select count(*) from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass} 
+			and class_delcheck = 'no'
+	        and class_enddate < sysdate
+	    ]]>
+	</select>
+	
+	<select id="getList_end" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select * from (select distinct f.*,
+			row_number() over(order by class_num) rnum
+			from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass}
+			and class_delcheck = 'no'
+			and class_enddate < sysdate) 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	
+	<update id="changeCalState" parameterType="int">
+		update frip_class set class_cal = 3 where class_num = #{class_num}
+	</update>
 </mapper>

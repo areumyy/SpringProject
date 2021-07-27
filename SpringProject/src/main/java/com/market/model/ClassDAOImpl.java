@@ -35,7 +35,6 @@ public class ClassDAOImpl implements ClassDAO {
 
 	@Override
 	public ClassDTO getList_classNum(int class_num) {
-
 		return this.sqlSession.selectOne("getList_classNum", class_num);
 	}
 
@@ -158,6 +157,31 @@ public class ClassDAOImpl implements ClassDAO {
 	public List<ClassDTO> getNewClassList(int num) {
 
 		return this.sqlSession.selectList("newlist", num);
+	}
+	
+	@Override
+	public int countclass_myfrip(HashMap<String, Object> map) {
+		return this.sqlSession.selectOne("countclass_myfrip", map);
+	}
+
+	@Override
+	public List<ClassDTO> getList_myFrip(HashMap<String, Object> map) {
+		return this.sqlSession.selectList("getList_myFrip", map);
+	}
+
+	@Override
+	public int countclass_end(HashMap<String, Object> map) {
+		return this.sqlSession.selectOne("countclass_end", map);
+	}
+
+	@Override
+	public List<ClassDTO> getList_end(HashMap<String, Object> map) {
+		return this.sqlSession.selectList("getList_end", map);
+	}
+
+	@Override
+	public int changeCalState(int class_num) {
+		return this.sqlSession.update("changeCalState", class_num);
 	}
 
 }

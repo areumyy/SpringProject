@@ -20,4 +20,5 @@ public interface CalculateDAO {
 	
 	public int requestCal(int target);
 	
+	public int insertData(CalculateDTO dto);
 }

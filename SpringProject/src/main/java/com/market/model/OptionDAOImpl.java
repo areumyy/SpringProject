@@ -34,18 +34,13 @@ public class OptionDAOImpl implements OptionDAO {
 	}
 
 	@Override
-	public int getmaxoptionNum(int num) {
-		return this.sqlSession.selectOne("getmaxoptionNum",num);
-	}
-
-	@Override
 	public int getcountoption(int num) {
 		return this.sqlSession.selectOne("getcountoption", num);
 	}
 
 	@Override
-	public int optionNumdown(HashMap<String, Integer> map) {
-		return this.sqlSession.update("optionNumdown", map);
+	public int updateOption(OptionDTO dto) {
+		return this.sqlSession.update("updateOption", dto);
 	}
 
 }

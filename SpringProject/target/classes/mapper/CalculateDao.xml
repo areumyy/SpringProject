@@ -49,5 +49,15 @@
 		update frip_calculate set cal_status = 1 where cal_classNum = #{target}
 	</update>
 	
+	<insert id="insertData" parameterType="com.market.model.CalculateDTO">
+		<selectKey keyProperty="cal_num" resultType="int" order="BEFORE">
+			select count(*)+1 from frip_calculate
+		</selectKey>
+		
+		insert into frip_calculate values(#{cal_num},#{cal_classNum},
+					#{cal_startDate},#{cal_endDate}, #{cal_name},
+					#{cal_buyCount},#{cal_enterCount},#{cal_enterNoCount},
+					#{cal_sal},#{cal_total},default,sysdate,null)
+	</insert>
 </mapper>
 

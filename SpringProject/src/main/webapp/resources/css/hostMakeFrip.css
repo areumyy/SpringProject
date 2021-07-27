@@ -237,7 +237,7 @@
 }
 
 .timeTableCont{
-	display:flex;
+	position:relative;
 	width:100%;
 	padding: 16px 0px 0px;
 	min-height:50px;
@@ -353,6 +353,12 @@ textarea {
 }
 .optionQtt {
 	visibility:hidden;
+}
+
+.nowByte {
+	position:absolute;
+	bottom:12px;
+	right:12px;
 }
 #naverEditor{
 	height:50%;

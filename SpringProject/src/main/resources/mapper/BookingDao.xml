@@ -24,5 +24,17 @@
 	<select id="count_class_enter" parameterType="int" resultType="int">
 		select count(*) from frip_booking where booking_classNum = #{class_num} and booking_enterCheck = 'yes'
 	</select>
+	
+		<update id="entercheck" parameterType="int">
+		update frip_booking set booking_entercheck = 'yes' where booking_num = #{booking_num}
+	</update>
+	
+	<update id="entercancel" parameterType="int">
+		update frip_booking set booking_entercheck = 'no' where booking_num = #{booking_num}
+	</update>
+	
+	<select id="getcount_option_num" parameterType="int" resultType="int">
+		select count(*) from frip_booking where booking_option = #{option_num}
+	</select>
 </mapper>
 

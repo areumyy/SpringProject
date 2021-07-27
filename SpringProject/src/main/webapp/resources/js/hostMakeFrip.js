@@ -6,7 +6,7 @@ $(document).ready(function() {
 		  minHeight: 500,             // 최소 높이
 		  maxHeight: null,             // 최대 높이
 		  lang: "ko-KR",					// 한글 설정
-		  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
+		  placeholder: '프립을 소개해주세요',	//placeholder 설정
 		  toolbar: [
 			    // [groupName, [list of button]]
 			    ['fontname', ['fontname']],
@@ -33,9 +33,7 @@ $(document).ready(function() {
 	            		}
 	            	}
 	            }
-          
 	});//썸머노트 end
-	summernoteCont();
 });
 //써머노트에 이미지 업로드하는 메서드
 function uploadSummernoteImageFile(file, el) {
@@ -305,11 +303,11 @@ function checkIt() {
 			alert("카테고리를 확인해 주세요!");
 			$("#btnradio1").trigger("click");
 			return false;
-		}else if($("[name=class_hash]").val().length==0) { // 프립명
+		}else if($("[name=class_hash]").val().length==0 || $("#nowByte1").text() > 20) { // 프립명
 			alert("캐치프레이즈를 확인해 주세요!");
 			$("#btnradio2").trigger("click");
 			return false;			
-		}else if($("[name=class_title]").val().length==0) { // 프립명
+		}else if($("[name=class_title]").val().length==0 || $("#nowByte2").text() > 20) { // 프립명
 			alert("프립명을 확인해 주세요!");
 			$("#btnradio2").trigger("click");
 			return false;			
@@ -334,17 +332,21 @@ function checkIt() {
 			alert("프립 진행지를 확인해주세요");
 			$("#btnradio6").trigger("click");
 			return false;
-		}else if($("[name=class_plan]").val().length == 0) {
+		}else if($("[name=class_plan]").val().length == 0 || $("#nowByte7").text() > 500) {
 			alert("상세 일정을 확인해 주세요");
 			$("#btnradio7").trigger("click");
 			return false;
-		}else if($("[name=class_include]").val().length==0) {
+		}else if($("[name=class_include]").val().length==0 || $("#nowByte3").text() > 500) {
 			alert("포함사항을 확인해 주세요");
 			$("#btnradio8").trigger("click");
 			return false;
-		}else if($("[name=class_exclude]").val().length==0) {
+		}else if($("[name=class_exclude]").val().length==0 || $("#nowByte4").text() > 500) {
 			alert("불포함사항을 확인해 주세요");
 			$("#btnradio8").trigger("click");
+			return false;
+		}else if($("#nowByte5").text() > 500 || $("#nowByte6").text() > 500) {
+			alert("준비물과 유의사항 글자수를 확인해주세요");
+			$("#btnradio9").trigger("click");
 			return false;
 		}else if($("#summernote").val().length==0) {
 			alert("프립 소개를 확인해 주세요");
@@ -369,3 +371,30 @@ function checkIt() {
 	}
 }
 
+function fn_checkByte(obj ,mb, id){
+    var maxByte = mb; //최대 1000바이트
+    var text_val = obj.value; //입력한 문자
+    var text_len = text_val.length; //입력한 문자수
+    
+    var totalByte=0;
+    for(let i=0; i<text_len; i++){
+    	var each_char = text_val.charAt(i);
+        var uni_char = escape(each_char); //유니코드 형식으로 변환
+        if(uni_char.length>4){
+        	// 한글 : 2Byte
+            totalByte += 1;
+        }else{
+        	// 영문,숫자,특수문자 : 1Byte
+            totalByte += 1;
+        }
+    }
+    
+    if(totalByte>maxByte){
+    	alert('최대 '+mb+'Byte까지만 입력가능합니다.');
+        	document.getElementById("nowByte"+id).innerText = totalByte;
+            document.getElementById("nowByte"+id).style.color = "red";
+        }else{
+        	document.getElementById("nowByte"+id).innerText = totalByte;
+            document.getElementById("nowByte"+id).style.color = "green";
+        }
+    }
