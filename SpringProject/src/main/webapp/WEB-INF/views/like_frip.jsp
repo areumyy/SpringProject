@@ -11,14 +11,10 @@
 <!-- 반응형 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 부트스트랩 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <!-- CSS 파일 -->
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/like.css" rel="stylesheet"/>
@@ -53,42 +49,75 @@
 											<div class="place_like">
 												<span class="class_place">${dto.getClass_endArea() }</span>
 												<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"></button>
-												<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button>
+												<%-- <button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button> --%>
 											</div>
-											<!-- 사진 수정필요 -->
-											<img alt="class_img" src="<%=request.getContextPath() %>/resources/image/like/class_img.jpg" class="class_img">
+											<!-- 사진 수정필요(클래스 사진) -->
+											<img alt="${dto.getClass_image() }" src="<%=request.getContextPath() %>/resources/upload/${dto.getClass_image() }" class="class_img">
 										</div>
 										<div class="class_hash">${dto.getClass_hash() }</div>
 										<div class="class_title">${dto.getClass_title() }</div>
-										<div class="class_price"> <fmt:formatNumber value="${optionCont[status.index].getOption_price() }" />원 </div>
-										<div class="class_score">
+										
+										<c:if test="${optionCont[status.index].getOption_editPrice() eq 0 || optionCont[status.index].getOption_editPrice() eq optionCont[status.index].getOption_price()}">
+											<div class="class_price"> 
+												<fmt:formatNumber value="${optionCont[status.index].getOption_price() }" />원 
+											</div>
+										</c:if>
+										<c:if test="${optionCont[status.index].getOption_editPrice() ne 0 && optionCont[status.index].getOption_editPrice() ne optionCont[status.index].getOption_price()}">
+											<div class="class_price"> 
+												<span><fmt:formatNumber value="${optionCont[status.index].getOption_editPrice() }" /> 원</span>
+												<span class="class_editPrice"><fmt:formatNumber value="${optionCont[status.index].getOption_price() }" /></span>
+											</div>
+										</c:if>
+										
+										<div class="class_score">	
 											<img alt="class_score" src="<%=request.getContextPath() %>/resources/image/like/star_icon.svg">
-											<span>${classScore[status.index] }</span>
+											<span> <fmt:formatNumber value="${classScore[status.index] }" pattern="0.0"/> </span>
 										</div>
 									</a>
 								</div>
 							</c:forEach>
 						</c:if>
-						
-						<c:if test="${empty classList }">
-							<h1>저장된 프립이 없습니다.</h1>
-						</c:if>
 					</div>
+					
+					<c:if test="${empty classList }">
+							<div class="likePage_list_none">
+								<div>저장된 프립이 없습니다.</div>
+							</div>
+					</c:if>
 						
 					<!-- 페이징 처리 -->
-					<nav aria-label="Page navigation example" class="like_page_footer">
+					<%-- <nav aria-label="Page navigation example" class="list_footer">
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Previous" style="color: black;"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<li class="page-item active"><a class="page-link" href="#" style="color: white;">1</a></li>
-							<li class="page-item"><a class="page-link" href="#" style="color: black;">2</a></li>
-							<li class="page-item"><a class="page-link" href="#" style="color: black;">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Next" style="color: black;"> <span aria-hidden="true">&raquo;</span>
-							</a></li>
+							<c:if test="${Paging.getPage() > Paging.getBlock() }">
+								<li class="page-item">
+									<a class="page_link" href="qna_list.do?page=1">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+									<a class="page_link" href="qna_list.do?page=${Paging.getPage() - 1 }">	
+										<span aria-hidden="true">&lt;</span>
+									</a>
+								</li>
+							</c:if>
+							<c:forEach begin="${Paging.getStartBlock() }" end="${Paging.getEndBlock() }" var="i">
+								<c:if test="${i == Paging.getPage() }">
+									<li class="page-item"><a class="page_link paging_active">${i }</a></li>
+								</c:if>
+								<c:if test="${i != Paging.getPage() }">
+									<li class="page-item"><a class="page_link" href="qna_list.do?page=${i }">${i }</a></li>
+								</c:if>
+							</c:forEach>
+							<c:if test="${Paging.getEndBlock() < Paging.getAllPage() }">
+								<li class="page-item">
+									<a class="page_link" href="qna_list.do?page=${Paging.getPage() + 1 }">	
+										<span aria-hidden="true">&gt;</span>
+									</a>
+									<a class="page_link" href="qna_list.do?page=${Paging.getAllPage() }">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</c:if>
 						</ul>
-					</nav>
+					</nav> --%>
 				</div>	
 			</div>
 			<jsp:include page="../include/footer.jsp" />

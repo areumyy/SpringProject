@@ -42,14 +42,14 @@
 
 
 .pass_box_title {
-	font-size: 20px;
+	font-size: 32px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding-left: 5px;
 }
 
 .pass_count {
-	font-size: 13px;
+	font-size: 18px;
     padding-left: 10px;
 }
 
@@ -72,14 +72,14 @@
 	width: 7%;
 }
 .table th:nth-child(3) { 
-	width: 7%;
+	width: 5%;
 }
 .table th:nth-child(n+6):nth-child(-n+9) {
 	width: 7%;
 }
 
 .table th:nth-child(4) {
-	width: 13%;
+	width: 15%;
 }
 .table th:nth-child(5) {
 	width: 30%;
@@ -141,52 +141,6 @@
 
 .section02 {
 	padding: 10px;
-	border-bottom: 1px solid #eee;
-}
-
-.option_box1 {
-	width: 100%;
-    position: relative;
-    padding: 20px 0;
-    border-bottom: 1px solid #eee;
-}
-.option {
-    text-align: left;
-    font-size: 12px;
-    /* font-weight: bold; */
-    margin-bottom: 5px;
-    color: #9b9b9b;
-}
-
-.option_box2 {
-	width: 100%;
-    position: relative;
-    padding: 20px 0;
-}
-
-.option_box_inner {
-	display: flex;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.option_name {
-	text-align: left;
-}
-
-.option_price {
-	
-}
-
-.frip_attendee {
-	text-align: right;
-	font-size: 15px;
-}
-
-.section03 {
-	padding: 10px;
 }
 
 .cal_info_box {
@@ -208,7 +162,7 @@
 	
 }
 
-.section04 {
+.section03 {
 	height: 55px;
 	background-image: linear-gradient(277deg, rgb(98, 201, 255), rgb(51, 151, 255));
     color: white;
