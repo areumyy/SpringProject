@@ -90,6 +90,9 @@ public class Class_qnaDAOImpl implements Class_qnaDAO {
 		return this.sqlSession.selectOne("getallCount", mem_num);
 	}
 
-
-	
+	@Override
+	public List<Class_qnaDTO> getclassQnaList(int num) {
+		
+		return this.sqlSession.selectList("classqnalist", num);
+	}
 }

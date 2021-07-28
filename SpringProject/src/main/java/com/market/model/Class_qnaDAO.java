@@ -11,6 +11,7 @@ public interface Class_qnaDAO {
 	public List<Class_qnaDTO> getQnaCompleteList(HashMap<String, Object> map);
 	public Class_qnaDTO getContent(int qna_num);
 	public int insertAnswer(HashMap<String, Object> map);
+	
 	// 답변안한 문의 검색
 	public int getNameSearchCount(HashMap<String, Object> map);
 	public int getTitleSearchCount(HashMap<String, Object> map);
@@ -24,4 +25,5 @@ public interface Class_qnaDAO {
 	public List<Class_qnaDTO> CgetTitlesearchList(HashMap<String, Object> map);
 	
 	public int getallCount(int mem_num);
+	public List<Class_qnaDTO> getclassQnaList(int num);
 }

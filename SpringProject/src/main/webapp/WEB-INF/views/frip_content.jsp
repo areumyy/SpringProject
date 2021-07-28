@@ -1,6 +1,14 @@
 <%@page import="com.market.model.MemberDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" pageEncoding="UTF-8"%>
+<%
+	// 줄바꿈
+	pageContext.setAttribute("br", "<br/>");
+	pageContext.setAttribute("cn", "\n");
+	
+%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
@@ -245,7 +253,12 @@ $(function(){
 										<p class="Content_Grade5">•</p>
 										<p class="Content_Grade6">${reviewInfo.getReview_count() }개 후기</p>
 									</div>
-									<p class="Content_Grade7">경험한 대원의 ${reviewPercent }%가 ${reviewInfo.getReview_max() }점을 줬어요!</p>
+									<c:if test="${reviewPercent == 0 }">
+										<p class="Content_Grade7">아직 경험한 대원이 없습니다!</p>
+									</c:if>
+									<c:if test="${reviewPercent != 0 }">
+										<p class="Content_Grade7">경험한 대원의 ${reviewPercent }%가 ${reviewInfo.getReview_max() }점을 줬어요!</p>
+									</c:if>
 								</div>
 								<div class="Content_Review2">
 									<div class="Content_Review3">
@@ -333,286 +346,7 @@ $(function(){
 									</header>
 									<div>
 										<div class="Content_Intro5" style="text-align: center; line-height: 2;">
-											${fripInfo.getClass_cont() }
-											<!-- <p style="line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">안녕하세요~&nbsp;</p>
-											<p style="text-align: center; line-height: 2;">로즈룸입니다🌹❤</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<img style="height:600px; width:800px;"
-													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/ca5ibcannwk3gjozuh7j.jpg">
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<img style="height:600px; width:800px;"
-													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/dzf60k5tpkegj1nm3m0d.jpg">
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<strong>때로는 정해진 인연보다&nbsp;</strong>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<strong>우연한 인연이 더 소중하다고 생각합니다.</strong>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												비슷한 것 같기도, 다른 것 같기도 한&nbsp;</p>
-											<p style="text-align: center; line-height: 2;">
-												우리들의 사는 이야기&nbsp;</p>
-											<p style="text-align: center; line-height: 2;">
-												소중한 사람들과 함께 나눠봐요😚</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<img style="height:600px; width:800px;"
-													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/bio7othpxoicwqqyyasb.jpg">
-											</p>
-											<p style="line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<strong>와인 메뉴 같이 만들어 먹으면서</strong>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<strong>와인도 한 잔씩-!&nbsp;🍷</strong>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<img style="height:600px; width:800px;"
-													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/kh10t2exsnkvcx3or18c.jpg">
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">.</p>
-											<p style="text-align: center; line-height: 2;">.</p>
-											<p style="text-align: center; line-height: 2;">.</p>
-											<p style="text-align: center; line-height: 2;">.</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<strong>"저.. 요리를 잘 못하는데 괜찮을까요?"</strong>
-											</p>
-											<p style="text-align: center; line-height: 2;">.</p>
-											<p style="text-align: center; line-height: 2;">..</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<strong>네!!!! 걱정마세요!!!!!</strong>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<strong>기가막힌 레시피를 쉽게 알려드립니다🍕</strong>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												호스트가 직접 참여하진 않는 프립이지만</p>
-											<p style="text-align: center; line-height: 2;">
-												도움이 필요하시면 언제든 불러주세요!</p>
-											<p style="text-align: center; line-height: 2;">
-												바로 달려갑니다-!</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												메뉴에 필요한 모든 재료와 와인 2병이 제공됩니다 :)</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												메뉴는</p>
-											<p style="text-align: center;">
-												<strong>소고기 크림 파스타 &amp; 리조또</strong>
-											</p>
-											<p style="text-align: center;">
-												<strong>스테이크 &amp; 감바스</strong>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												대원님께서 원하시는 메뉴로 날짜를 선택해주세요!</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												와인은 White Wine과 Red Wine 각 1병씩 !</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center;">
-												<strong>White wine : 모스카토</strong>
-											</p>
-											<p style="text-align: center;">
-												<strong>Red wine : 카베르네 쇼비뇽 혹은 멜롯</strong>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												현재 와인모임은 두 타임으로 진행됩니다!!</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<ol>
-												<li style="text-align: center; line-height: 2; font-weight: bold;">
-													<strong>주말 오후 3시 30분 - 6시 30분 (3시간)</strong>
-												</li>
-												<li style="text-align: center; line-height: 2; font-weight: bold;">
-													<strong>주말 저녁 7시 - 10시 (3시간)</strong>
-												</li>
-											</ol>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												최소 인원 : 2명 / 최대 인원 : 4명 (남자 2명, 여자 2명)</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												마지막 20분 동안에는</p>
-											<p style="text-align: center; line-height: 2;">
-												다 같이 뒷 정리를 해주세요💛</p>
-											<p style="text-align: center; line-height: 2;">
-												설거지, 음식물쓰레기, 분리수거 등</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												이에 대한 더 자세한 내용은</p>
-											<p style="text-align: center; line-height: 2;">
-												추후 알려드리도록 하겠습니다.</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												다양한 조리기구도 있으니</p>
-											<p style="text-align: center; line-height: 2;">
-												취향대로 같이 요리를 해보세요.</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												감성 공간에서</p>
-											<p style="text-align: center; line-height: 2;">
-												내가 만든 음식에 와인까지 곁들이면</p>
-											<p style="text-align: center; line-height: 2;">
-												최고의 분위기를 느끼실 수 있습니다 🌹</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												로즈룸에서</p>
-											<p style="text-align: center; line-height: 2;">
-												행복한 추억을 만들어보세요😊</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p style="text-align: center; line-height: 2;">
-												<br>
-											</p>
-											<p>
-												<br>
-											</p>
-											<p>
-												<br>
-											</p>
-											<p style="text-align: center;">
-												<img style="height:800px; width:800px;"
-													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/bottom-corona-notice_u2r6sx.jpg">
-											</p> -->
+											${fn:replace(fripInfo.getClass_cont(), cn, br) }
 										</div>
 									</div>
 								</section>
@@ -622,11 +356,7 @@ $(function(){
 									</header>
 									<div>
 										<div class="Content_Intro5">
-											<p>장소 이용료</p>
-											<p>재료비</p>
-											<p>와인 2병</p>
-											<p>다양한 조리 기구</p>
-											<p>무선 와이파이</p>
+											${fn:replace(fripInfo.getClass_include(), cn, br) }
 										</div>
 									</div>
 								</section>
@@ -636,8 +366,7 @@ $(function(){
 									</header>
 									<div>
 										<div class="Content_Intro5">
-											<p>주차</p>
-											<p>뒤풀이 비용</p>
+											${fn:replace(fripInfo.getClass_exclude(), cn, br) }
 										</div>
 									</div>
 								</section>
@@ -647,20 +376,9 @@ $(function(){
 									</header>
 									<div>
 										<table class="Content_Plan1">
-											<tbody>
-												<tr class="Content_Plan2">
-													<td class="Content_Plan3">30분</td>
-													<td>간단한 자기소개</td>
-												</tr>
-												<tr class="Content_Plan2">
-													<td class="Content_Plan3">120분</td>
-													<td>와인 메뉴 만들며 와인 즐기기</td>
-												</tr>
-												<tr class="Content_Plan2">
-													<td class="Content_Plan3">30분</td>
-													<td>마무리 및 뒤풀이</td>
-												</tr>
-											</tbody>
+											<div class="Content_Intro5">
+												${fn:replace(fripInfo.getClass_plan(), cn, br) }
+											</div>
 										</table>
 									</div>
 								</section>
@@ -668,7 +386,9 @@ $(function(){
 									<header class="Content_Intro3">
 										<h4 class="Content_Intro4">준비물</h4>
 									</header>
-									<p>기본매너와 건강한 마인드셋</p>
+									<div class="Content_Intro5">
+										${fn:replace(fripInfo.getClass_supply(), cn, br) }
+									</div>
 								</section>
 								<section class="Content_Intro2">
 									<header class="Content_Intro3">
@@ -679,14 +399,7 @@ $(function(){
 									</div>
 									<div>
 										<div class="Content_Intro5">
-											<p>
-												<strong>·&nbsp;</strong>
-												최소 인원 미달로 인한 취소 시 프립 마감 시간 24시간 전에 안내를 드리며 참가비는 전액 환불해 드립니다.
-											</p>
-											<p>
-												<strong>·&nbsp;</strong>
-												1인당 최대 구매 가능 수량 : 2장
-											</p>
+											${fn:replace(fripInfo.getClass_notice(), cn, br) }
 										</div>
 									</div>
 								</section>
@@ -694,7 +407,9 @@ $(function(){
 									<header class="Content_Intro3">
 										<h4 class="Content_Intro4">진행 장소</h4>
 									</header>
-									<p>서울 성동구 마조로1길 42 3층 로즈룸</p>
+									<div class="Content_Intro5">
+										${fn:replace(fripInfo.getClass_endAreaDetail(), cn, br) }
+									</div>
 								</section>
 								
 								<div class="accordion" id="accordionExample">
@@ -703,185 +418,30 @@ $(function(){
 											자주 묻는 질문
 										</div>
 										<div class="accordion-collapse collapse" id="collapse1" data-bs-parent="#accordionExample" style="background-color: rgb(239, 247, 255);">
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>신청한 프립은 어디서 확인하나요?</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>[마이]의 [신청 내역] 탭에서 신청하신 프립을 확인하실 수 있습니다.</div>
-												</div>
-											</div>
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>환불 신청했는데 언제 환불되나요?</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>환불 신청한 날로부터 영업일 기준 최대 5일 이내에 환불될 예정입니다.</div>
-												</div>
-											</div>
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>두 명 신청하고 싶은데 어떻게 하나요?</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>프립에 따라 한 번에 여러명 신청하는 것이 가능하며, 1회 최대 신청 가능 인원 수는
-														프립별로 다를 수 있으니 확인 부탁드립니다. 추가 신청을 원하시는 경우 추가 결제가 가능하니 참고
-														부탁드립니다.</div>
-												</div>
-											</div>
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>인원 증원은 안되나요?</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>정해진 인원으로 진행되는 프립이기에 인원 증원이 어려운 점 양해 부탁드립니다. '대기
-														알림' 또는 '대기 신청'을 하시면 공석이 생겼을 때, 알림 설정에 동의하신 분들에 한해 Push 알림과
-														이메일로 안내해 드리고 있습니다.</div>
-												</div>
-											</div>
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>대기신청했을 경우 따로 연락을 주시나요?</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>공석이 생겼을 때, 알림 설정에 동의하신 분들에 한해 Push 알림과 이메일로 안내해
-														드리고 있습니다.</div>
-												</div>
-											</div>
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>혼자 참석하기 민망하고 어색해요.</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>괜찮아요:) 참석하시는 97% 이상의 분들이 혼자 신청하셔서 오십니다! 어색함을 깨기
-														위한 다양한 프로그램과 유머감각을 갖춘 호스트들이 있기 때문에 걱정 안 하셔도 됩니다!</div>
-												</div>
-											</div>
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>요리를 못하는데 괜찮을까요?</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>전혀 문제가 되지 않습니다! 호스트들이 기가막힌 레시피를 미리 알려드립니다 :)</div>
-												</div>
-											</div>
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>음식 재료와 와인은 어떻게 제공되는 건가요?</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>구매하신 프립에 모두 포함되어 있는 사항입니다.</div>
-												</div>
-											</div>
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>남녀 성비는 어떻게 되나요?</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>남녀 성비는 1:1로 맞춰서 진행됩니다.</div>
-												</div>
-											</div>
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>최대 참석 가능 인원수는 몇 명인가요?</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>5인이상 집합금지 정부 지침에 따라 4인까지만 신청받습니다.</div>
-												</div>
-											</div>
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>우천 시 프립 진행은 어떻게 되나요?</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>프라이빗한 장소가 제공되기 때문에 우천 시에도 문제없이 좋은 시간을 보내실 수 있습니다 :)</div>
-												</div>
-											</div>
-											<div class="accordion-body">
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>주차 가능한가요?</div>
-												</div>
-												<div class="Content_Main13">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-														class="Content_Main14">
-													<div>왕십리역 6번출구 인근 복잡한 관계로 주차가 불가능합니다. 근처 공영주차장 혹은
-														왕십리역 비트플렉스 주차장(유료) 이용 부탁드립니다.</div>
-												</div>
-											</div>
+											
+											<c:set var="list" value="${ClassQnaList }" />
+											<c:if test="${!empty list }">
+												<c:forEach items="${list }" var="dto" begin="0" end="8">
+													<div class="accordion-body">
+														<div class="Content_Main13">
+															<img
+																src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
+																class="Content_Main14">
+															<div>${dto.getClass_qna_cont() }</div>
+														</div>
+														<div class="Content_Main13">
+															<img
+																src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
+																class="Content_Main14">
+															<div>${dto.getClass_ans_cont() }</div>
+														</div>
+													</div>
+												</c:forEach>
+											</c:if>
+											
 										</div>
 									</div>
 								</div>
-								
 								
 								
 								<a class="Content_Main15" href="#">문의하기
@@ -961,220 +521,68 @@ $(function(){
 							<h4 class="Content_Intro4">이런 프립은 어때요?</h4>
 						</header>
 						<div class="Content_Recommend2">
-							<div class="Content_Recommend3">
-								<a class="Content_Recommend4" href="#">
-									<div class="Content_Recommend5">
-										<div class="Content_Recommend6">
-											<div class="Content_Recommend_Place1">
-												<span class="Content_Recommend_Place2"><span>용산구</span></span>
-											</div>
-											<div class="Content_Img1">
-												<img class="Content_Img2" width="192"
-													src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/WINE_MAIN_01_1504598552674">
-												<div class="Content_Main2" style="opacity: 1; display: block;">
-													<div style="display: block;">
-														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
-															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
-																<img alt="생활소믈리에 기초 와인 강의 썸네일" width="192"
-																	class="Content_Img3"
-																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/WINE_MAIN_01_1504598552674">
+
+							<jsp:useBean id="weekago" class="java.util.Date" />
+							<jsp:setProperty name="weekago" property="time"
+								value="${weekago.time - 60*60*24*1000*7}" />
+							<fmt:formatDate var="weekago1" value="${weekago }"
+								pattern="yyyy-MM-dd HH:mm:ss" />
+							<c:set var="list" value="${BestAllList }" />
+							<c:if test="${!empty list }">
+								<c:forEach items="${list }" var="dto" begin="0" end="4">
+									<div class="Content_Recommend3">
+										<a class="Content_Recommend4"
+											href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }&cate_num=${dto.getCate_num() }">
+											<div class="Content_Recommend5">
+												<div class="Content_Recommend6">
+													<div class="Content_Recommend_Place1">
+														<span class="Content_Recommend_Place2"><span>${dto.getClass_endArea() }</span></span>
+													</div>
+													<div class="Content_Img1">
+														<img class="Content_Img2" width="192"
+															src="<%=request.getContextPath() %>/resources/image/class/${dto.getClass_image() }">
+														<div class="Content_Main2"
+															style="opacity: 1; display: block;">
+															<div style="display: block;">
+																<div
+																	style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+																	<div
+																		style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																		<img class="Content_Img3" width="192"
+																			src="<%=request.getContextPath() %>/resources/image/class/${dto.getClass_image() }">
+																	</div>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-											<div class="Content_Recommend_State1">
-												<div class="Content_Recommend_State2">판매중</div>
-											</div>
-										</div>
-										<div class="Frip_Title1">19세이상｜이도경 강사와 함께하는</div>
-										<div class="Frip_Title2">생활소믈리에 기초 와인 강의</div>
-										<div class="Frip_Price1">
-											<span class="Frip_Price2">50,000원</span>
-											<span class="Frip_Price3">65,000</span>
-										</div>
-										<div class="Frip_Grade1">
-											<div class="Frip_Grade2">
-												<img
-													src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
-													alt="별점 icon"><span>4.92</span>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="Content_Recommend3">
-								<a class="Content_Recommend4" href="#">
-									<div class="Content_Recommend5">
-										<div class="Content_Recommend6">
-											<div class="Content_Recommend_Place1">
-												<span class="Content_Recommend_Place2"><span>강남/서초구</span></span>
-											</div>
-											<div class="Content_Img1">
-												<img class="Content_Img2" width="192"
-													src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/1586175181732_bf1jwj">
-												<div class="Content_Main2" style="opacity: 1; display: block;">
-													<div style="display: block;">
-														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
-															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
-																<img alt="Tea+Cocktail 차 마시며 배우는 테마가 있는 칵테일 만들기 썸네일" width="192"
-																	class="Content_Img3"
-																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/1586175181732_bf1jwj">
-															</div>
-														</div>
+												<div class="Frip_Title1">${dto.getClass_hash() }</div>
+												<div class="Frip_Title2">${dto.getClass_title() }</div>
+												<div class="Frip_Price1">
+													<span class="Frip_Price2">${dto.getOption_editprice() }원</span>
+													<c:if
+														test="${dto.getOption_price() != dto.getOption_editprice()}">
+														<span class="Frip_Price3">${dto.getOption_price() }원</span>
+													</c:if>
+												</div>
+												<div class="Frip_Grade1">
+													<div class="Frip_Grade2">
+														<img
+															src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
+															alt="별점 icon"><span>${dto.getReview_score() }</span>
 													</div>
+													<c:if test="${dto.getClass_regdate() > weekago1}">
+														<img class="Frip_New"
+															src="<%=request.getContextPath() %>/resources/image/class/new.JPG"
+															width='30' height='16'>
+													</c:if>
 												</div>
 											</div>
-											<div class="Content_Recommend_State1">
-												<div class="Content_Recommend_State2">판매중</div>
-											</div>
-										</div>
-										<div class="Frip_Title1">19세이상｜직접 바텐더가 되어 만들어보는</div>
-										<div class="Frip_Title2">Tea+Cocktail 차 마시며 배우는 테마가 있는 칵테일 만들기</div>
-										<div class="Frip_Price1">
-											<span class="Frip_Price2">43,000원</span>
-											<span class="Frip_Price3"></span>
-										</div>
-										<div class="Frip_Grade1">
-											<div class="Frip_Grade2">
-												<img
-													src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
-													alt="별점 icon">
-												<span>4.90</span>
-											</div>
-										</div>
+										</a>
 									</div>
-								</a>
-							</div>
-							<div class="Content_Recommend3">
-								<a class="Content_Recommend4" href="#">
-									<div class="Content_Recommend5">
-										<div class="Content_Recommend6">
-											<div class="Content_Recommend_Place1">
-												<span class="Content_Recommend_Place2"><span>강남/서초구</span></span>
-											</div>
-											<div class="Content_Img1">
-												<img class="Content_Img2" width="192"
-													src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/product_banner_1560603284574_547509">
-												<div class="Content_Main2" style="opacity: 1; display: block;">
-													<div style="display: block;">
-														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
-															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
-																<img alt="신사 / 가로수길 칵테일 클래스 썸네일" width="192"
-																	class="Content_Img3"
-																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/product_banner_1560603284574_547509">
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="Content_Recommend_State1">
-												<div class="Content_Recommend_State2">판매중</div>
-											</div>
-										</div>
-										<div class="Frip_Title1">19세이상｜바 안에서 만드는 칵테일</div>
-										<div class="Frip_Title2">신사 / 가로수길 칵테일 클래스</div>
-										<div class="Frip_Price1">
-											<span class="Frip_Price2">35,000원</span>
-											<span class="Frip_Price3">49,000</span>
-										</div>
-										<div class="Frip_Grade1">
-											<div class="Frip_Grade2">
-												<img
-													src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
-													alt="별점 icon">
-												<span>4.91</span>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="Content_Recommend3">
-								<a class="Content_Recommend4" href="#">
-									<div class="Content_Recommend5">
-										<div class="Content_Recommend6">
-											<div class="Content_Recommend_Place1">
-												<span class="Content_Recommend_Place2"><span>송파/강동구</span></span>
-											</div>
-											<div class="Content_Img1">
-												<img class="Content_Img2" width="192"
-													src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
-												<div class="Content_Main2" style="opacity: 1; display: block;">
-													<div style="display: block;">
-														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
-															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
-																<img alt="술술 놀면서 수제 맥주 만들기 썸네일" width="192"
-																	class="Content_Img3"
-																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="Content_Recommend_State1">
-												<div class="Content_Recommend_State2">판매중</div>
-											</div>
-										</div>
-										<div class="Frip_Title1">19세이상｜맥주를 즐기는 방법</div>
-										<div class="Frip_Title2">술술 놀면서 수제 맥주 만들기</div>
-										<div class="Frip_Price1">
-											<span class="Frip_Price2">40,000원</span>
-											<span class="Frip_Price3"></span>
-										</div>
-										<div class="Frip_Grade1">
-											<div class="Frip_Grade2">
-												<img
-													src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
-													alt="별점 icon">
-												<span>4.80</span>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
-							<div class="Content_Recommend3">
-								<a class="Content_Recommend4" href="#">
-									<div class="Content_Recommend5">
-										<div class="Content_Recommend6">
-											<div class="Content_Recommend_Place1">
-												<span class="Content_Recommend_Place2"><span>송파/강동구</span></span>
-											</div>
-											<div class="Content_Img1">
-												<img class="Content_Img2" width="192"
-													src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
-												<div class="Content_Main2" style="opacity: 1; display: block;">
-													<div style="display: block;">
-														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
-															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
-																<img alt="술술 놀면서 수제 맥주 만들기 썸네일" width="192"
-																	class="Content_Img3"
-																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="Content_Recommend_State1">
-												<div class="Content_Recommend_State2">판매중</div>
-											</div>
-										</div>
-										<div class="Frip_Title1">19세이상｜맥주를 즐기는 방법</div>
-										<div class="Frip_Title2">술술 놀면서 수제 맥주 만들기</div>
-										<div class="Frip_Price1">
-											<span class="Frip_Price2">40,000원</span>
-											<span class="Frip_Price3"></span>
-										</div>
-										<div class="Frip_Grade1">
-											<div class="Frip_Grade2">
-												<img
-													src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
-													alt="별점 icon">
-												<span>4.80</span>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
+								</c:forEach>
+							</c:if>
+							
 						</div>
 					</section>
 				</div>

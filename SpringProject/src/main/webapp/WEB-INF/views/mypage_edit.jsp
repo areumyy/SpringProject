@@ -26,6 +26,7 @@
 				<div class="pg_main">
 					<div class="pg_wrapper">
 						<form class="pg_container" method="post" action="<%=request.getContextPath() %>/mypage_edit_ok.do">
+							<input type="hidden" name="mem_num" value="${loginDto.getMem_num() }">
 							<c:set var="dto" value="${list }" />
 
 							<c:if test="${!empty list }">

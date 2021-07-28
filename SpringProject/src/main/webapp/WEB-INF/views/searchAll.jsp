@@ -35,7 +35,7 @@
 					<fmt:formatDate var="weekago1" value="${weekago }" pattern="yyyy-MM-dd HH:mm:ss" />
 					<div class="class_list">
 						<div class="cateImg_list_div1" style="opacity: 1; display: block;">
-							<section class="class_list_section">
+							<section class="class_list_section" style="margin-top: 30px;">
 								<div class="class_list_title_div1">
 									<div class="class_list_title_div2">
 										<h2 class="class_list_title">"${search_input}" &nbsp;검색결과</h2>
@@ -48,7 +48,7 @@
 										<c:if test="${!empty cList}">
 											<c:forEach items="${cList }" var="dto">
 												<div class="class_item">
-													<a class="class_item_link" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }">
+													<a class="class_item_link" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }&cate_num=${dto.getCate_num()}">
 														<div class="class_item_div">
 															<div class="class_item_thumbnail">
 																<div class="class_item_top">

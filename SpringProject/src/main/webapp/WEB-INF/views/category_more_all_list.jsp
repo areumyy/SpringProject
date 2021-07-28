@@ -69,7 +69,6 @@
 											</c:if>
 											
 										</div>
-										
 									</div>
 									
 									<div class="Category_Main2" style="opacity: 1; display: block;">
@@ -97,7 +96,7 @@
 													<c:forEach items="${list }" var="dto" begin="0" end="24">
 													
 														<div class="Category_List2" style="margin-bottom: 60px">
-															<a class="Category_List3" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }">
+															<a class="Category_List3" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }&cate_num=${cate_name.getCate_num() }">
 																<div class="Category_List4">
 																	<div class="Category_List5">
 																		<div class="Category_List6">

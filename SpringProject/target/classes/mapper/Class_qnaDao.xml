@@ -62,6 +62,7 @@
 		update frip_class_qna set class_ans_cont = #{ans_cont}, class_ans_regdate = sysdate 
 		where class_qna_num = #{qna_num}
 	</update>
+	
 	<!-- 답변 안한 문의 검색 -->
 	<!-- 이름검색 -->
 	<select id="getNameSearchCount" parameterType="java.util.Map" resultType="int">
@@ -187,6 +188,11 @@
 		from frip_class_qna 
 		where class_qna_classNum 
 		in(select class_num from frip_class where class_memnum = #{mem_num}) 
+	</select>
+	
+	
+	<select id="classqnalist" parameterType="int" resultType="com.market.model.Class_qnaDTO">
+		select * from frip_class_qna where class_qna_classnum = #{num}
 	</select>
 </mapper>
 

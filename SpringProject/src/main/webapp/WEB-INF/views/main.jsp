@@ -168,7 +168,7 @@
 									<c:if test="${!empty weekBestList}">
 										<c:forEach items="${weekBestList }" begin="0" end="4" var="dto">
 											<div class="class_item">
-												<a class="class_item_link" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }">
+												<a class="class_item_link" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }&cate_num=${dto.getCate_num()}">
 													<div class="class_item_div">
 														<div class="class_item_thumbnail">
 															<div class="class_item_top">
@@ -236,7 +236,7 @@
 									<c:if test="${!empty newList}">
 										<c:forEach items="${newList }" begin="0" end="4" var="dto">
 											<div class="class_item">
-												<a class="class_item_link" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }">
+												<a class="class_item_link" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }&cate_num=${dto.getCate_num()}">
 													<div class="class_item_div">
 														<div class="class_item_thumbnail">
 															<div class="class_item_top">
@@ -304,7 +304,7 @@
 									<c:if test="${!empty saleList}">
 										<c:forEach items="${saleList }" begin="0" end="4" var="dto">
 											<div class="class_item">
-												<a class="class_item_link" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }">
+												<a class="class_item_link" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }&cate_num=${dto.getCate_num()}">
 													<div class="class_item_div">
 														<div class="class_item_thumbnail">
 															<div class="class_item_top">

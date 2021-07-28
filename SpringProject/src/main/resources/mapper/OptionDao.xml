@@ -19,7 +19,7 @@
 	</select>
 	
 	<select id="getOptionCheck" parameterType="int" resultType="com.market.model.OptionDTO">
-		select * from frip_option where option_classnum = #{num}
+		select * from frip_option where option_num = #{num}
 	</select>
 	
 	<select id="getOptionCount" parameterType="int" resultType="int">
