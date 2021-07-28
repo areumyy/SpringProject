@@ -18,7 +18,27 @@
 <link href="<%=request.getContextPath() %>/resources/css/frip_review.css" rel="stylesheet"/>
 
 <script type="text/javascript">
+	$(document).ready(function() {
+		 $.ajax({
+	            type : "post",
+	            url : '/controller/class_like_list.do', 
+	            data : {},
+	            dataType: 'json',
+	            error : function(error) {
+	                console.log("error");
+	            },
+	            success : function(data) {
+	            	var clist = data.clist;
 
+	                for(var i=0; i<clist.length; i++) {
+	                	console.log(clist[i].like_target);
+	                	document.getElementById('like_txt' + clist[i].like_target).style.color="#3397FF";
+	                	$("#like_btn_img"+clist[i].like_target).attr("src", "./resources/image/like/review_like_on.svg");
+	                }
+	                
+	            }
+	        });
+	});
 	// 리뷰 좋아요 버튼 클릭시 실행함수
 	function like_btn(reviewNum) {
 		

@@ -362,5 +362,7 @@
 		where review_classnum in(select class_num from frip_class where class_memnum = #{host_memNum}) order by review_like desc
 	</select>
 
-	
+	<select id="getTarget" parameterType="int" resultType="com.market.model.LikeDTO">
+		select like_target from frip_like where like_writer = #{mem_num} and like_flag = 3
+	</select>
 </mapper>
