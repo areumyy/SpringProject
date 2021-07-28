@@ -175,6 +175,8 @@
 	min-height: 1px;
 	border-radius: 5px;
 	background-color: rgb(250, 250, 250);
+	width: 224px; 
+	height: 224px;
 }
 
 .class_item_top {

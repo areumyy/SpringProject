@@ -53,4 +53,7 @@ public interface ClassDAO {
 	
 	public ClassDTO getclassCont(int num);					// 프립 상세 내용 호출 추상메서드.
 	
+	public List<ClassDTO> getBestListAll();
+	public List<ClassDTO> getNewListAll();
+	public List<ClassDTO> getSaleListAll();
 }

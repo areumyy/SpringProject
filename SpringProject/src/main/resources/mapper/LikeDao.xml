@@ -23,6 +23,11 @@
 		]]>  -->
 	</select>
 	
+	<select id="nolikeClass" parameterType="int" resultType="com.market.model.ClassDTO">
+		select * from frip_class 
+		where not class_num in(select like_target from frip_like where like_writer = #{mem_num} and like_flag = 1)
+	</select>
+	
 	<!-- 찜 클래스 별 옵션 상세정보 (가격) -->
 	<select id="option_cont" parameterType="int" resultType="com.market.model.OptionDTO">
 		select * from frip_option 

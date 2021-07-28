@@ -229,7 +229,19 @@ public class ClassDAOImpl implements ClassDAO {
 		return this.sqlSession.update("fripPass_result", class_num);
 	}
 
-	
-	
+	@Override
+	public List<ClassDTO> getBestListAll() {
+		return this.sqlSession.selectList("all_best_list");
+	}
+
+	@Override
+	public List<ClassDTO> getNewListAll() {
+		return this.sqlSession.selectList("all_new_list");
+	}
+
+	@Override
+	public List<ClassDTO> getSaleListAll() {
+		return this.sqlSession.selectList("all_sale_list");
+	}
 	
 }

@@ -9,6 +9,7 @@ public interface LikeDAO {
 	// ---------------- 찜한 클래스/호스트별 정보 ----------------------------------
 	// like_frip.jsp
 	public List<ClassDTO> getLikeClassList(int mem_num);					// 찜 클래스 목록 (장소/해시태그/제목/이미지)
+	public List<ClassDTO> getNoLikeClassList(int mem_num);
 	// public List<ClassDTO> getLikeClassList(HashMap<String, Object> map);	// 찜 클래스 목록 (장소/해시태그/제목/이미지) - 페이징 처리 
 	public List<OptionDTO> getOption(int mem_num);							// 찜 클래스 별 옵션 상세정보 (가격)
 	public List<Integer> class_score(int mem_num);							// 찜 클래스 별 별점

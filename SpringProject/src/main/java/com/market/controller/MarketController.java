@@ -85,8 +85,28 @@ public class MarketController {
 	private ReviewDAO reviewDao;
 
 	@RequestMapping("main.do")
-	public String main() {
-		return "home";
+	public String main(Model model, HttpServletRequest request) {
+		int mem_num = 0;
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("loginDto") != null) {
+			MemberDTO dto = (MemberDTO)session.getAttribute("loginDto");
+			mem_num= dto.getMem_num();
+		} 
+		
+		List<ClassDTO> likeList = this.likeDao.getLikeClassList(mem_num);
+		List<ClassDTO> nolikeList = this.likeDao.getNoLikeClassList(mem_num);
+		List<ClassDTO> weekBestList = this.classDao.getBestListAll();
+		List<ClassDTO> newList = this.classDao.getNewListAll();
+		List<ClassDTO> saleList = this.classDao.getSaleListAll();
+		
+		model.addAttribute("likeList", likeList);
+		model.addAttribute("nolikeList", nolikeList);
+		model.addAttribute("weekBestList", weekBestList);
+		model.addAttribute("newList", newList);
+		model.addAttribute("saleList", saleList);
+		
+		return "main";
 	}
 
 	@RequestMapping("join.do")
@@ -2376,4 +2396,16 @@ public class MarketController {
 		response.getWriter().print(obj);
 	}
 
+	@RequestMapping("frip_all.do")
+	public String fripAll(Model model, @RequestParam("type") String type) {
+		if(type.equals("best")) {
+			
+		} else if(type.equals("new")) {
+			
+		} else if(type.equals("sale")) {
+			
+		}
+		
+		return "frip_all";
+	}
 }
