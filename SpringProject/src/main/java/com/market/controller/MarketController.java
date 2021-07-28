@@ -2344,10 +2344,122 @@ public class MarketController {
 	}
 
 	@RequestMapping("frip_review.do")
-	public String fripReview() {
+	public String fripReview(@RequestParam("classNo") int class_num, Model model, HttpServletRequest request) {
 		
+		int mem_num = 0;
+		
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("loginDto") != null) {
+			MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+			mem_num = dto.getMem_num();
+		}
+		
+		// 프립 리뷰 평점 평균 / 리뷰 갯수
+		ReviewDTO reviewInfo = this.reviewDao.reviewInfo(class_num);
+		// 최고평점 비율(%)
+		int reviewPercent = this.reviewDao.reviewPercent(class_num);
+		// 프립후기 리스트를 가져오는 메서드
+		List<ReviewDTO> reviewList = this.reviewDao.getReviewList(class_num);
+		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명/시작날짜/끝날짜)
+		List<ReviewDTO> classReview = this.reviewDao.class_reviewList(class_num);
+		// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명)
+		List<ReviewDTO> classReview2 = this.reviewDao.class_reviewList2(class_num);
+
+		
+		// 로그인 상태이면 좋아요 누른 리뷰번호 리스트 넘기기 
+		if(mem_num > 0) { 
+			 
+		  HashMap<String, Integer> map = new HashMap<String, Integer>(); 
+		  map.put("mem_num", mem_num); // 로그인한 멤버 번호 
+		  map.put("class_num", class_num); // 클래스 번호
+	  
+		  List<Integer> like_list = this.reviewDao.reviewLike_list(map);
+		  
+		  model.addAttribute("like_list", like_list); 
+		}
+		 	
+		model.addAttribute("reviewInfo", reviewInfo);
+		model.addAttribute("reviewPercent", reviewPercent);
+		model.addAttribute("ReviewList", reviewList);
+		model.addAttribute("classReview", classReview);
+		model.addAttribute("classReview2", classReview2);
+
 		return "frip_review";
 	}
+	
+	// 클래스 상세페이지 - 리뷰 좋아요 매핑
+	@RequestMapping(value = "/class_like_status.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void classLike_Status(HttpServletResponse response, @RequestParam("reviewNum") int reviewNum,
+			HttpServletRequest request) throws IOException {
+
+		response.setContentType("text/html; charset=UTF-8");
+
+		// 세션값 가져오기
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("like_writer", dto.getMem_num()); // 로그인한 멤버 번호
+		map.put("like_target", reviewNum); // 좋아요 누른 리뷰 번호
+
+		System.out.println("멤버 번호1 >>> " + dto.getMem_num());
+		System.out.println("리뷰 번호1 >>> " + reviewNum);
+
+		// 해당 리뷰에 대한 좋아요 상태 체크하는 메서드 (0: 안 누른 상태 / 1: 누른 상태)
+		int like_status = this.likeDao.review_status(map);
+		System.out.println("리뷰 좋아요 상태입니다 >>> " + like_status);
+
+		int state = 0;
+		int likeCount = 0;
+
+		if (like_status > 0) { // 좋아요 누른 상태
+
+			System.out.println("멤버 번호2 >>> " + dto.getMem_num());
+			System.out.println("리뷰 번호2 >>> " + reviewNum);
+
+			// 리뷰 좋아요 취소 (-1)
+			int like_minus = this.likeDao.review_like_minus(reviewNum);
+
+			// 좋아요 DB 삭제
+			this.likeDao.review_like_del(map);
+
+			// 리뷰 좋아요 개수 가져오는 메서드
+			int like_count = this.likeDao.review_like_count(reviewNum);
+
+			if (like_minus > 0) {
+				state = 1;
+				likeCount = like_count;
+			}
+
+		} else if (like_status == 0) { // 좋아요 안 누른 상태
+
+			System.out.println("멤버 번호3 >>> " + dto.getMem_num());
+			System.out.println("리뷰 번호3 >>> " + reviewNum);
+
+			// 리뷰 좋아요 (+1)
+			int like_plus = this.likeDao.review_like_plus(reviewNum);
+
+			// 좋아요 DB 추가
+			this.likeDao.review_like_add(map);
+
+			// 리뷰 좋아요 개수 가져오는 메서드
+			int like_count = this.likeDao.review_like_count(reviewNum);
+
+			if (like_plus > 0) {
+				state = 2;
+				likeCount = like_count;
+			}
+		}
+
+		JSONObject obj = new JSONObject();
+		obj.put("state", state);
+		obj.put("likeCount", likeCount);
+
+		response.getWriter().print(obj);
+	}
+	
 	
 	@RequestMapping(value = "/usePoint", method = RequestMethod.POST)
 	@ResponseBody

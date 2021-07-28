@@ -214,8 +214,8 @@
 					 	<!-- 후기 탭 -->
 					 	<div class="contbox cont02">
 					 		<!-- key값 받기 -->
-					 		<c:set var="classReview1" value="${classReview1 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일/시작날짜/끝날짜) -->
-					 		<c:set var="classReview2" value="${classReview2 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명) -->
+					 		<c:set var="classReview1" value="${classReview1 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일) -->
+					 		<c:set var="classReview2" value="${classReview2 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명/시작날짜/끝날짜) -->
 					 		<c:set var="classReview3" value="${classReview3 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명) -->
 					 		<c:set var="likeList" value="${like_list }" />			<!-- 좋아요 누른 리뷰번호 리스트 가져오기 -->
 					 		<c:set var="sort" value="${sort }" />	

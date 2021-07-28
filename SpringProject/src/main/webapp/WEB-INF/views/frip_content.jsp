@@ -320,7 +320,7 @@ $(function(){
 										</div>
 									</div>
 									<div class="Content_Review_All1">
-										<a class="Content_Review_All2" href="<%=request.getContextPath() %>/frip_review.do">${reviewInfo.getReview_count() }개 후기 더보기
+										<a class="Content_Review_All2" href="<%=request.getContextPath() %>/frip_review.do?classNo=${fripInfo.getClass_num() }">${reviewInfo.getReview_count() }개 후기 더보기
 											<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E %3Cpath fill='%230075EF' fill-rule='evenodd' d='M3.97 1.72c.293-.293.767-.293 1.06 0L9.31 6l-4.28 4.28c-.293.293-.767.293-1.06 0-.293-.293-.293-.767 0-1.06L7.19 6 3.97 2.78c-.293-.293-.293-.767 0-1.06z' clip-rule='evenodd'/%3E %3C/svg%3E">
 										</a>
 									</div>

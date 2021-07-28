@@ -44,4 +44,22 @@ public class ReviewDAOImpl implements ReviewDAO {
 		
 		return this.sqlSession.selectList("reviewlist", num);
 	}
+
+	@Override
+	public List<ReviewDTO> class_reviewList(int class_num) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.selectList("class_reviewList", class_num);
+	}
+
+	@Override
+	public List<ReviewDTO> class_reviewList2(int class_num) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.selectList("class_reviewList2", class_num);
+	}
+	
+	@Override
+	public List<Integer> reviewLike_list(HashMap<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.selectList("reviewLike_list", map);
+	}
 }

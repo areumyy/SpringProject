@@ -42,5 +42,30 @@
 		where review_classnum = #{num}
 		order by review_regdate desc, review_num asc
 	</select>
+	
+	<!-- 호스트가 운영하는 클래스 모든 리뷰2 (클래스명/시작날짜/끝날짜) -->
+	<select id="class_reviewList"  parameterType="int" resultType="com.market.model.ReviewDTO">
+		select r.review_num, c.class_title, c.class_startDate, c.class_endDate
+		from frip_class c join frip_review r 
+		on c.class_num = r.review_classnum
+		where review_classnum = #{class_num} order by review_num
+	</select>
+	
+	<!-- 호스트가 운영하는 클래스 모든 리뷰3 (옵션명) -->
+	<select id="class_reviewList2"  parameterType="int" resultType="com.market.model.ReviewDTO">
+		select r.review_num, o.option_name
+		from frip_option o join frip_review r 
+		on o.option_classnum = r.review_classnum
+		where review_classnum  = #{class_num} order by review_num
+	</select>
+
+	<!-- 좋아요 누른 리뷰 리스트 -->
+	<select id="reviewLike_list" parameterType="java.util.Map"  resultType="Integer">
+		select NVL(like_target, 0) from frip_review
+		left outer join (select like_target from frip_like where like_writer = #{mem_num} and like_flag = 3 order by like_target)
+		on review_num  = like_target
+		where review_classnum  = #{class_num} order by review_num
+	</select>
+	
 
 </mapper>
