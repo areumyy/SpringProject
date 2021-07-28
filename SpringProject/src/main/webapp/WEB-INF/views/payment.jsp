@@ -108,7 +108,12 @@ function checkPayment(){
 						<input type="hidden" name="booking_writer" value="${bookDto.getBooking_writer() }">
 						<input type="hidden" name="booking_classNum" value="${bookDto.getBooking_classNum() }">
 						<input type="hidden" name="booking_option" value="${bookDto.getBooking_option() }">
-						<input type="hidden" name="option_price" value="${optionDto.getOption_price() }">
+						<c:if test="${optionDto.getOption_price() != optionDto.getOption_editPrice() }">
+							<input type="hidden" name="option_price" value="${optionDto.getOption_editPrice() }">
+						</c:if>
+						<c:if test="${optionDto.getOption_price() == optionDto.getOption_editPrice() }">
+							<input type="hidden" name="option_price" value="${optionDto.getOption_price() }">
+						</c:if>
 						<div class="pay_div">
 							<div class="pay_header">결제</div>
 							<div class="pay_body">
@@ -138,7 +143,12 @@ function checkPayment(){
 														<div>
 															<div>${optionDto.getOption_name() }</div>
 														</div>
-														<span class="item_price">${optionDto.getOption_price() }원</span>
+														<c:if test="${optionDto.getOption_price() != optionDto.getOption_editPrice() }">
+															<span class="item_price">${optionDto.getOption_editPrice() }원</span>
+														</c:if>
+														<c:if test="${optionDto.getOption_price() == optionDto.getOption_editPrice() }">
+															<span class="item_price">${optionDto.getOption_price() }원</span>
+														</c:if>
 													</div>
 												</div>
 											</div>
@@ -148,7 +158,12 @@ function checkPayment(){
 								<div class="payment_section">
 									<div class="payment_list">
 										<div class="payment_list_title">상품 금액</div>
-										<div class="payment_list_price">${optionDto.getOption_price() }원</div>
+										<c:if test="${optionDto.getOption_price() != optionDto.getOption_editPrice() }">
+											<div class="payment_list_price">${optionDto.getOption_editPrice() }원</div>
+										</c:if>
+										<c:if test="${optionDto.getOption_price() == optionDto.getOption_editPrice() }">
+											<div class="payment_list_price">${optionDto.getOption_price() }원</div>
+										</c:if>
 									</div>
 									<!-- <div class="payment_list">
 										<div class="payment_list_title">쿠폰</div>
@@ -230,8 +245,13 @@ function checkPayment(){
 										</div>
 										<div class="payment_list_price">
 											<label>
-												<input type="text" id="usePoint_input" class="use_point" name="usedPoint" disabled value="0">P</label>
-											<input  type="button" class="coupon_btn" onclick="usePoint(${loginDto.getMem_point() }, ${optionDto.getOption_price() });" value="전체 사용">
+												<input type="text" id="usePoint_input" class="use_point" name="usedPoint" readonly value="0">P</label>
+												<c:if test="${optionDto.getOption_price() != optionDto.getOption_editPrice() }">
+													<input type="button" class="coupon_btn" onclick="usePoint(${loginDto.getMem_point() }, ${optionDto.getOption_editPrice() });" value="전체 사용">
+												</c:if>
+												<c:if test="${optionDto.getOption_price() == optionDto.getOption_editPrice() }">
+													<input type="button" class="coupon_btn" onclick="usePoint(${loginDto.getMem_point() }, ${optionDto.getOption_price() });" value="전체 사용">
+												</c:if>
 										</div>
 									</div>
 									<ul class="notice_list">
@@ -245,7 +265,16 @@ function checkPayment(){
 										</div>
 										<div class="final_div">
 											<div class="final_div_title">최종 결제 금액</div>
-											<div class="final_div_price" style="display: flex;"><div id="finalPrice">${optionDto.getOption_price() }</div> 원</div>
+											<div class="final_div_price" style="display: flex;">
+												<div id="finalPrice">
+													<c:if test="${optionDto.getOption_price() != optionDto.getOption_editPrice() }">
+														${optionDto.getOption_editPrice() }
+													</c:if>
+													<c:if test="${optionDto.getOption_price() == optionDto.getOption_editPrice() }">
+														${optionDto.getOption_price() }
+													</c:if>
+												</div> 원
+											</div>
 										</div>
 									</div>
 								</div>
@@ -257,7 +286,7 @@ function checkPayment(){
 								<div class="pay_method_list">
 									<input type="button" class="pay_method_btn" id="card" onclick="selectCard();" value="신용/체크 카드" >
 									<input type="button" class="pay_method_btn" id="cash" onclick="selectCash();" value="실시간 계좌이체">
-									<input type="hidden" name="payMethod" value="" id="payMethod2">
+									<input type="hidden" name="payMethod" id="payMethod2">
 								</div>
 							</div>
 						</div>
@@ -270,7 +299,12 @@ function checkPayment(){
 						<div class="final_pay">
 							<button type="submit" class="final_pay_btn">
 								<div style="display: flex; justify-content: center;">
-									<div id="finalPrice2">${optionDto.getOption_price() }</div>원 결제하기
+									<c:if test="${optionDto.getOption_price() != optionDto.getOption_editPrice() }">
+										<div id="finalPrice2">${optionDto.getOption_editPrice() }</div>원 결제하기
+									</c:if>
+									<c:if test="${optionDto.getOption_price() == optionDto.getOption_editPrice() }">
+										<div id="finalPrice2">${optionDto.getOption_price() }</div>원 결제하기
+									</c:if>
 								</div>
 							</button>
 						</div>

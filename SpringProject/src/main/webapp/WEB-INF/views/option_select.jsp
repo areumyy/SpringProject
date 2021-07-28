@@ -39,11 +39,15 @@
 		}else {
 			return;
 		}
+		$(".next_btn").css("background-color","rgb(0, 117, 239)");
+		$(".next_btn").removeAttr("disabled");
 		
 	}
 	
 	function deleteOption(index) {
 		$("#b"+index).remove();
+		$(".next_btn").attr("disabled","disabled");
+		$(".next_btn").css("background-color","#c9c9c9");
 	}
 	
 	function plusSu(index) {
@@ -65,6 +69,13 @@
 			return;
 		}
 	}
+	
+	$(function start(){
+		if($(".sel_section").length == 0) {
+			$(".next_btn").attr("disabled","disabled");
+			$(".next_btn").css("background-color","#c9c9c9");
+		}
+	})
 </script>
 </head>
 <body>

@@ -42,29 +42,21 @@
 										<div class="sel_option_content2">
 											<div class="Product__ImageWrapper-sc-1lkmgat-4 hNCWrM">
 												<div>
-													<img src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,w_130/1610_Gongbang_01_1477457672181">
+													<img style="width: 130px; height: 130px;" src="<%=request.getContextPath() %>/resources/upload/${classDto.getClass_image()}">
 												</div>
 											</div>
 											<div class="item_content">
-												<span class="item_hash">도예 공방에서 세상에서 단 하나뿐인</span>
-												<span class="item_title">도예 공방 원데이 / 도자기 그릇 만들기 (예약가능)</span>
+												<span class="item_hash">${classDto.getClass_hash() }</span>
+												<span class="item_title">${classDto.getClass_title() }</span>
 											</div>
 										</div>
 										<div class="sel_option_section">
 											<div class="payment_div">
 												<div class="payment_item">
 													<div>
-														<div>1인 이용권 x 1개</div>
+														<div>${optionDto.getOption_name() }</div>
 													</div>
-													<span class="item_price">32,000원</span>
-												</div>
-											</div>
-											<div class="payment_div">
-												<div class="payment_item">
-													<div>
-														<div>1인 이용권 x 1개</div>
-													</div>
-													<span class="item_price">32,000원</span>
+													<span class="item_price"><fmt:formatNumber value="${option_price }"/>원</span>
 												</div>
 											</div>
 										</div>
@@ -74,25 +66,25 @@
 							<div class="payment_section">
 								<div class="payment_list">
 									<div class="payment_list_title">상품 금액</div>
-									<div class="payment_list_price">32,000 원</div>
+									<div class="payment_list_price"><fmt:formatNumber value="${option_price }"/> 원</div>
 								</div>
 								<div class="payment_list">
 									<div class="payment_list_title">할인</div>
-									<div class="payment_list_price">- 0 원</div>
+									<div class="payment_list_price">- <fmt:formatNumber value="${usedPoint }"/> 원</div>
 								</div>
 								<div class="payment_list">
 									<div class="payment_list_title">결제 금액</div>
-									<div class="payment_list_price">32,000 원</div>
+									<div class="payment_list_price"><fmt:formatNumber value="${option_price - usedPoint }"/>원 원</div>
 								</div>
 								<div class="payment_list">
 									<div class="payment_list_title">결제 수단</div>
-									<div class="payment_list_price">실시간 계좌이체</div>
+									<div class="payment_list_price">${payMethod }</div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="final_pay">
-						<button class="final_pay_btn" onclick="location.href='payment_ok.do'">확인</button>
+						<button class="final_pay_btn" onclick="location.href='main.do'">확인</button>
 					</div>
 				</div>
 			

@@ -774,27 +774,35 @@ public class MarketController {
 		
 		return "payment";
 	}
-
+	
 	@RequestMapping("payment_ok.do")
-	public String payOk(BookingDTO dto, @RequestParam("usedPoint") int usedPoint,
-			@RequestParam("payMethod") String payMethod, @RequestParam("option_price") int option_price, Model model) {
+	public String payOk(BookingDTO dto, Model model, HttpServletRequest request) {
+		int usedPoint = Integer.parseInt(request.getParameter("usedPoint"));
+		String payMethod = request.getParameter("payMethod");
+		int option_price = Integer.parseInt(request.getParameter("option_price"));
+		
 		this.bookingDao.insertBooking(dto);
 
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("mem_num", dto.getBooking_writer());
 		map.put("usedPoint", usedPoint);
-		map.put("addPoint", (int) (option_price * 0.1));
+		map.put("addPoint", (int)Math.round((option_price * 0.1)));
+		
 		this.memberDao.usePoint(map);
 
 		this.memberDao.addPoint(map);
 
 		ClassDTO classDto = this.classDao.getclassCont(dto.getBooking_classNum());
 		OptionDTO optionDto = this.optionDao.getOptionCont(dto.getBooking_option());
-		model.addAttribute("sal_price", usedPoint);
+		model.addAttribute("usedPoint", usedPoint);
 		model.addAttribute("payMethod", payMethod);
 		model.addAttribute("classDto", classDto);
 		model.addAttribute("optionDto", optionDto);
+		model.addAttribute("option_price", option_price);
 		
+		System.out.println(usedPoint);
+		System.out.println(payMethod);
+		System.out.println(option_price);
 		return "payment_ok";
 	}
 
