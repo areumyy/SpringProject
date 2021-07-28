@@ -32,12 +32,12 @@ $(function() {
 		<div class="main">
 			<jsp:include page="../include/menu.jsp" />
 			<div class="article">
-
+				<c:set var="blist" value="${blist }" />
 				<c:set var="clist" value="${clist }" />
 
 				<div class="pg_main">
 					<div class="pg_wrapper">
-						<form class="pg_container" method="post" action="<%=request.getContextPath()%>/mypage_reviewWriteOk.do">
+						<form class="pg_container" method="post" action="<%=request.getContextPath()%>/mypage_reviewWriteOk.do?no=${blist.getBooking_num()}">
 							<header class="mypage_reviewWrite_header_wrapper">
 								<h1 class="pg_header_txt">후기 작성하기</h1>
 							</header>

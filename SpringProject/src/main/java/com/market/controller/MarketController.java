@@ -1468,13 +1468,23 @@ public class MarketController {
 		MemberDTO list = this.memberDao.getMember(dto.getMem_num());
 		
 		// frip_booking 테이블에서 회원의 예약정보 받아옴.
-		BookingDTO blist = this.bookingDao.getBookingWorks(dto.getMem_num());
+		List<BookingDTO> blist = this.bookingDao.getBookingWorks(dto.getMem_num());
 		
 		// 클래스 번호에 맞는 정보를 받아오는 메서드 
-		ClassDTO clist = this.classDao.getList_classNum(blist.getBooking_classNum());
+		// ClassDTO clist = this.classDao.getList_classNum(blist.getBooking_classNum());
+		List<ClassDTO> clist = this.classDao.getList_classNum(blist);
 		
-		OptionDTO olist = this.optionDao.getOptionCheck(clist.getClass_num());
+		List<OptionDTO> olist = this.optionDao.getOptionCheck(blist);
 
+		
+		
+		List<Object> test = new ArrayList<Object>();
+		test.add(list);
+		test.add(blist);
+		test.add(clist);
+		test.add(olist);
+		
+		model.addAttribute("test",test);
 		model.addAttribute("list", list);
 		model.addAttribute("blist", blist);
 		model.addAttribute("clist", clist);
@@ -1527,31 +1537,30 @@ public class MarketController {
 		return "mypage_coupon";
 	}
 
-	@RequestMapping("mypage_purchases.do")
-	public String myPagePurchases(HttpServletRequest request, Model model) {
-
-		HttpSession session = request.getSession();
-
-		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
-
-		// 회원 번호에 맞는 회원의 정보를 받아오는 메서드
-		MemberDTO list = this.memberDao.getMember(dto.getMem_num());
-		
-		// frip_booking 테이블에서 회원의 예약정보 받아옴.
-		BookingDTO blist = this.bookingDao.getBookingWorks(dto.getMem_num());
-		
-		// 클래스 번호에 맞는 정보를 받아오는 메서드 
-		ClassDTO clist = this.classDao.getList_classNum(blist.getBooking_classNum());
-		
-		OptionDTO olist = this.optionDao.getOptionCheck(clist.getClass_num());
-
-		model.addAttribute("list", list);
-		model.addAttribute("blist", blist);
-		model.addAttribute("clist", clist);
-		model.addAttribute("olist", olist);
-
-		return "mypage_purchases";
-	}
+	/*
+	 * @RequestMapping("mypage_purchases.do") public String
+	 * myPagePurchases(HttpServletRequest request, Model model) {
+	 * 
+	 * HttpSession session = request.getSession();
+	 * 
+	 * MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+	 * 
+	 * // 회원 번호에 맞는 회원의 정보를 받아오는 메서드 MemberDTO list =
+	 * this.memberDao.getMember(dto.getMem_num());
+	 * 
+	 * // frip_booking 테이블에서 회원의 예약정보 받아옴. BookingDTO blist =
+	 * this.bookingDao.getBookingWorks(dto.getMem_num());
+	 * 
+	 * // 클래스 번호에 맞는 정보를 받아오는 메서드 ClassDTO clist =
+	 * this.classDao.getList_classNum(blist.getBooking_classNum());
+	 * 
+	 * OptionDTO olist = this.optionDao.getOptionCheck(clist.getClass_num());
+	 * 
+	 * model.addAttribute("list", list); model.addAttribute("blist", blist);
+	 * model.addAttribute("clist", clist); model.addAttribute("olist", olist);
+	 * 
+	 * return "mypage_purchases"; }
+	 */
 
 	@RequestMapping("mypage_energy.do")
 	public String myPageEnergy() {
@@ -1563,54 +1572,54 @@ public class MarketController {
 		return "mypage_review";
 	}
 
-	@RequestMapping("mypage_productDetail.do")
-	public String myPageProductDetail(HttpServletRequest request, Model model) {
-		
-		HttpSession session = request.getSession();
+	/*
+	 * @RequestMapping("mypage_productDetail.do") public String
+	 * myPageProductDetail(HttpServletRequest request, Model model) {
+	 * 
+	 * HttpSession session = request.getSession();
+	 * 
+	 * MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+	 * 
+	 * // 회원 번호에 맞는 회원의 정보를 받아오는 메서드 MemberDTO list =
+	 * this.memberDao.getMember(dto.getMem_num());
+	 * 
+	 * // frip_booking 테이블에서 회원의 예약정보 받아옴. BookingDTO blist =
+	 * this.bookingDao.getBookingWorks(dto.getMem_num());
+	 * 
+	 * // 클래스 번호에 맞는 정보를 받아오는 메서드 ClassDTO clist =
+	 * this.classDao.getList_classNum(blist.getBooking_classNum());
+	 * 
+	 * OptionDTO olist = this.optionDao.getOptionCheck(clist.getClass_num());
+	 * 
+	 * model.addAttribute("list", list); model.addAttribute("blist", blist);
+	 * model.addAttribute("clist", clist); model.addAttribute("olist", olist);
+	 * return "mypage_productDetail"; }
+	 */
 
-		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
-
-		// 회원 번호에 맞는 회원의 정보를 받아오는 메서드
-		MemberDTO list = this.memberDao.getMember(dto.getMem_num());
-		
-		// frip_booking 테이블에서 회원의 예약정보 받아옴.
-		BookingDTO blist = this.bookingDao.getBookingWorks(dto.getMem_num());
-		
-		// 클래스 번호에 맞는 정보를 받아오는 메서드 
-		ClassDTO clist = this.classDao.getList_classNum(blist.getBooking_classNum());
-		
-		OptionDTO olist = this.optionDao.getOptionCheck(clist.getClass_num());
-
-		model.addAttribute("list", list);
-		model.addAttribute("blist", blist);
-		model.addAttribute("clist", clist);
-		model.addAttribute("olist", olist);
-		return "mypage_productDetail";
-	}
-
-	@RequestMapping("mypage_reviewWrite.do")
-	public String myPageReviewWrite(HttpServletRequest request, @RequestParam("no") int booking_num, Model model) {
-		
-		HttpSession session = request.getSession();
-
-		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
-		
-		// 회원 번호에 맞는 회원의 정보를 받아오는 메서드
-		MemberDTO list = this.memberDao.getMember(dto.getMem_num());
-		
-		// frip_booking 테이블에서 회원의 예약정보 받아옴.
-		BookingDTO blist = this.bookingDao.getBookingWorks(dto.getMem_num());
-		
-		// 클래스 번호에 맞는 정보를 받아오는 메서드 
-		ClassDTO clist = this.classDao.getList_classNum(blist.getBooking_classNum());
-		
-		model.addAttribute("clist", clist);
-		
-		return "mypage_reviewWrite";
-		
-		// booking_num = review_num 
-	}
-	
+	/*
+	 * @RequestMapping("mypage_reviewWrite.do") public String
+	 * myPageReviewWrite(HttpServletRequest request, @RequestParam("no") int
+	 * booking_num, Model model) {
+	 * 
+	 * HttpSession session = request.getSession();
+	 * 
+	 * MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+	 * 
+	 * // 회원 번호에 맞는 회원의 정보를 받아오는 메서드 MemberDTO list =
+	 * this.memberDao.getMember(dto.getMem_num());
+	 * 
+	 * // frip_booking 테이블에서 회원의 예약정보 받아옴. BookingDTO blist =
+	 * this.bookingDao.getBookingWorks(dto.getMem_num());
+	 * 
+	 * // 클래스 번호에 맞는 정보를 받아오는 메서드 ClassDTO clist =
+	 * this.classDao.getList_classNum(blist.getBooking_classNum());
+	 * 
+	 * model.addAttribute("clist", clist);
+	 * 
+	 * return "mypage_reviewWrite";
+	 * 
+	 * // booking_num = review_num }
+	 */
 	@RequestMapping("mypage_reviewWriteOk.do")
 	public String myPageReviewWriteOk(ReviewDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
 			HttpServletRequest request, HttpServletResponse response, @RequestParam("no") int booking_num, Model model) {

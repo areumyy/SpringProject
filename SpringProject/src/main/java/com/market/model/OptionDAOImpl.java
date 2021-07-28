@@ -1,5 +1,6 @@
 package com.market.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,8 +25,13 @@ public class OptionDAOImpl implements OptionDAO {
 	}
 	
 	@Override
-	public OptionDTO getOptionCheck(int num) {
-		return this.sqlSession.selectOne("getOptionCheck", num);
+	public List<OptionDTO> getOptionCheck(List<BookingDTO> list) {
+		List<OptionDTO> newList = new ArrayList<OptionDTO>();
+		for(int i =0; i<list.size(); i++) {
+			int target = list.get(i).getBooking_option();
+			newList.add((OptionDTO)this.sqlSession.selectOne("getOptionCheck", target));
+		}
+		return newList;
 	}
 
 	@Override
