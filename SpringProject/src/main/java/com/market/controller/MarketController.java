@@ -1595,6 +1595,28 @@ public class MarketController {
 
 		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
 		
+		// 회원 번호에 맞는 회원의 정보를 받아오는 메서드
+		MemberDTO list = this.memberDao.getMember(dto.getMem_num());
+		
+		// frip_booking 테이블에서 회원의 예약정보 받아옴.
+		BookingDTO blist = this.bookingDao.getBookingWorks(dto.getMem_num());
+		
+		// 클래스 번호에 맞는 정보를 받아오는 메서드 
+		ClassDTO clist = this.classDao.getList_classNum(blist.getBooking_classNum());
+		
+		model.addAttribute("clist", clist);
+		
+		return "mypage_reviewWrite";
+		
+		// booking_num = review_num 
+	}
+	
+	@RequestMapping("mypage_reviewWriteOk.do")
+	public String myPageReviewWriteOk(ReviewDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
+			HttpServletRequest request, HttpServletResponse response, @RequestParam("no") int booking_num, Model model) {
+		
+		
+		
 		return "mypage_reviewWrite";
 	}
 

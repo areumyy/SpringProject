@@ -28,4 +28,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return this.sqlSession.update("insertReply", map);
 	}
 
+	@Override
+	public int insert_review(ReviewDTO dto) {
+		return this.sqlSession.insert("insert_review", dto);
+	}
 }

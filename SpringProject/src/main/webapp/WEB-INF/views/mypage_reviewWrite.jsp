@@ -33,34 +33,34 @@ $(function() {
 			<jsp:include page="../include/menu.jsp" />
 			<div class="article">
 
-
+				<c:set var="clist" value="${clist }" />
 
 				<div class="pg_main">
 					<div class="pg_wrapper">
-						<div class="pg_container">
+						<form class="pg_container" method="post" action="<%=request.getContextPath()%>/mypage_reviewWriteOk.do">
 							<header class="mypage_reviewWrite_header_wrapper">
 								<h1 class="pg_header_txt">후기 작성하기</h1>
 							</header>
 							<div class="mypage_reviewWrite_cont">
 								<div class="reviewWrite_img">
 									<img class="img_style"
-										src="<%=request.getContextPath()%>/resources/image/mypage/profile/${dto.getMem_profileimg() }">
+										src="<%=request.getContextPath() %>/resources/upload/${clist.getClass_image()}">
 								</div>
 								<h3 class="reviewWrite_question">
-									<p>{dto.getClass_title() }</p>
+									<p>${clist.getClass_title() }</p>
 									만족하셨나요?
 								</h3>
 								<div class="reviewWrite_star">
 									<div id="dataReview" style="font-size: 1.5em;"
 										data-rating-stars="5" data-rating-value="3"
-										data-rating-input="#dataInput"></div>
+										data-rating-input="#dataInput" name="#dataInput"></div>
 
 									<p class="reviewWrite_comment">선택해주세요.</p>
 
 								</div>
 							</div>
 							<div class="mypage_reviewWrite_textarea">
-								<textarea placeholder="15글자 이상의 사진후기를 작성해주시면 500에너지가 적립됩니다.&#13;&#10;무분별한 비방 또는 욕설이 포함된 후기는 사전고지 없이 삭제될 수 있습니다." maxlength="1000" class="textarea_style" id="content">{dto.getReview_cont() }</textarea>
+								<textarea placeholder="15글자 이상의 사진후기를 작성해주시면 500에너지가 적립됩니다.&#13;&#10;무분별한 비방 또는 욕설이 포함된 후기는 사전고지 없이 삭제될 수 있습니다." maxlength="1000" class="textarea_style" id="content" name="review_cont"></textarea>
 								<p class="textarea_count" id="counter"></p>
 							</div>
 							<div>
@@ -72,11 +72,8 @@ $(function() {
 							<div class="mypage_reviewWrite_footer">
 								<input type="submit" class="reviewWrite_button" value="등록하기">
 							</div>
-						</div>
+						</form>
 					</div>
-
-
-
 				</div>
 				<jsp:include page="../include/footer.jsp" />
 			</div>

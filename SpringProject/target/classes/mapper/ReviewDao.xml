@@ -37,5 +37,12 @@
 		set review_reply = #{review_reply}, review_replydate = sysdate 
 		where review_num = #{review_num}
 	</update>
+	
+	<insert id="insert_review" parameterType="com.market.model.ReviewDTO">
+
+	insert into frip_review
+	values(#{review_num},#{review_writer},#{review_classNum},default,#{review_score}
+	,#{review_cont},sysdate,null,null,null)
+	</insert>
 
 </mapper>

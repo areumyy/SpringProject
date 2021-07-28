@@ -10,4 +10,6 @@ public interface ReviewDAO {
 	public List<ReviewDTO> getList_memnum(HashMap<String, Object> map);
 
 	public int insertReply(HashMap<String, Object> map);
+	
+	public int insert_review(ReviewDTO dto);
 }
