@@ -2334,6 +2334,12 @@ public class MarketController {
 		return "frip_content";
 	}
 
+	@RequestMapping("frip_review.do")
+	public String fripReview() {
+		
+		return "frip_review";
+	}
+	
 	@RequestMapping(value = "/usePoint", method = RequestMethod.POST)
 	@ResponseBody
 	public void usePoint(HttpServletResponse response, @RequestParam("havePoint") int havePoint,
