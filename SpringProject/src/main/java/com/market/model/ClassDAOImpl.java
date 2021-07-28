@@ -1,5 +1,6 @@
 package com.market.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -244,6 +245,16 @@ public class ClassDAOImpl implements ClassDAO {
 		return this.sqlSession.selectList("all_sale_list");
 	}
 	
+	@Override
+	public List<ClassDTO> getList_classNum(List<BookingDTO> list) {
+		List<ClassDTO> newList = new ArrayList<ClassDTO>();
+		for(int i =0; i<list.size(); i++) {
+			int target = list.get(i).getBooking_classNum();
+			newList.add((ClassDTO)this.sqlSession.selectOne("getList_classNum", target));
+		}
+		return newList;
+	}
+
 	public int getMonthFrip(int mem_num) {
 		return this.sqlSession.selectOne("getMonthFrip", mem_num);
 	}

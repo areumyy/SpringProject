@@ -121,6 +121,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public int updateMember(MemberDTO dto) {
+		return this.sqlSession.update("update_nick", dto);
+
+	}
+
 	public void usePoint(HashMap<String, Integer> map) {
 		this.sqlSession.update("use_point", map);
 	}

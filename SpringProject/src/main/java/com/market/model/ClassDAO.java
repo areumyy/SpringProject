@@ -20,6 +20,7 @@ public interface ClassDAO {
 	public int fripPass_result(int class_num);	// 프립승인 시 '대기' => '완료'로 상태 변경 + 승일일자 업데이트
 
 	public ClassDTO getList_classNum(int class_num);
+	public List<ClassDTO> getList_classNum(List<BookingDTO> list);
 	public int countClass(int mem_num);
 	public List<ClassDTO> getList(HashMap<String, Object> map);
 	public int countclass_myfrip(HashMap<String, Object> map);

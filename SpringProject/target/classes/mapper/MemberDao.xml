@@ -77,6 +77,10 @@
 		]]>
 	</select>
 	
+	<update id="update_nick" parameterType="com.market.model.MemberDTO">
+		update frip_member set mem_nick = #{mem_nick} where mem_num = #{mem_num}
+	</update>
+	
 	<update id="update_del" parameterType="int">
 		update frip_member set mem_status = 3 where mem_num = #{target}
 	</update>

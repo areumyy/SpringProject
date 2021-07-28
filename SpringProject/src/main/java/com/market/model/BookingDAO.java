@@ -12,5 +12,8 @@ public interface BookingDAO {
 	public int getCountEnter(int class_num);
 	public int getcount_memnum(int mem_num); // 전체 신청완료
 	
+	public List<BookingDTO> getBookingWorks(int booking_writer);
+	public int getCountWorks(int booking_writer);
 	public void insertBooking(BookingDTO dto);
+
 }

@@ -28,6 +28,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return this.sqlSession.update("insertReply", map);
 	}
 
+	@Override
 	public ReviewDTO reviewInfo(int num) {
 		
 		return this.sqlSession.selectOne("reviewInfo", num);
@@ -50,4 +51,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return this.sqlSession.selectList("getReviewList_memnum", mem_num);
 	}
 
+	@Override
+	public int insert_review(ReviewDTO dto) {
+		return this.sqlSession.insert("insert_review", dto);
+	}
 }

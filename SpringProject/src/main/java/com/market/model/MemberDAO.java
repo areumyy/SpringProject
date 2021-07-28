@@ -16,6 +16,8 @@ public interface MemberDAO {
 	public MemberDTO getMember(int mem_num);
 	
 	public int insertMember(MemberDTO dto);
+	
+	public int updateMember(MemberDTO dto);
 
 	public int getAllCount();
 

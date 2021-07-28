@@ -18,6 +18,10 @@
 		select * from frip_option where option_classnum = #{num} order by option_num
 	</select>
 	
+	<select id="getOptionCheck" parameterType="int" resultType="com.market.model.OptionDTO">
+		select * from frip_option where option_classnum = #{num}
+	</select>
+	
 	<select id="getOptionCount" parameterType="int" resultType="int">
 		select count(*) from frip_option where option_classnum = #{num}
 	</select>

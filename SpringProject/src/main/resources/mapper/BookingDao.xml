@@ -25,7 +25,16 @@
 		select count(*) from frip_booking where booking_classNum = #{class_num} and booking_enterCheck = 'yes'
 	</select>
 	
-		<update id="entercheck" parameterType="int">
+
+	<select id="get_booking_works" parameterType="int" resultType="com.market.model.BookingDTO">
+		select * from frip_booking where booking_writer = #{booking_writer} and booking_enterCheck = 'no'
+	</select>
+	
+	<select id="count_booking_works" parameterType="int" resultType="int">
+		select count(*) from frip_booking where booking_writer = #{booking_writer} and booking_enterCheck = 'no'
+	</select>
+	
+	<update id="entercheck" parameterType="int">
 		update frip_booking set booking_entercheck = 'yes' where booking_num = #{booking_num}
 	</update>
 	
@@ -52,5 +61,6 @@
 		
 		insert into frip_booking values(#{booking_num},#{booking_writer},#{booking_classNum},#{booking_option},default,sysdate)
 	</insert>
+
 </mapper>
 

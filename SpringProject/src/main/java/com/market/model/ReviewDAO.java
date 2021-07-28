@@ -10,7 +10,12 @@ public interface ReviewDAO {
 	public List<ReviewDTO> getReviewList(int num);		// 프립후기 리스트를 가져오는 메서드
 
 	public int getCount_memnum(int mem_num);
+
 	public List<ReviewDTO> getList_memnum(HashMap<String, Object> map);
+
 	public int insertReply(HashMap<String, Object> map);
+	
 	public List<ReviewDTO> getReviewList_memnum(int mem_num);
+	
+	public int insert_review(ReviewDTO dto);
 }
