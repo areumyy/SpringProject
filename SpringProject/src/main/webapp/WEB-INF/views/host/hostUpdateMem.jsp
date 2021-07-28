@@ -111,7 +111,7 @@ function submitCheck(){
 											<span id="pwd_res"></span>
 										</li>
 										<li><span class="txt">이 름 :</span>
-											<input type="text" name="mem_name" class="joinForm_txt" placeholder="이름" required value="${loginDto.getMem_name() }"></li>
+											<input type="text" id="name" name="mem_name" class="joinForm_txt" placeholder="이름" readonly value="${loginDto.getMem_name() }" ></li>
 										<li>
 											<span class="txt">닉네임 :</span>
 											<input type="text" id="input_nick" name="mem_nick" class="joinForm_txt" placeholder="닉네임" required value="${loginDto.getMem_nick() }">

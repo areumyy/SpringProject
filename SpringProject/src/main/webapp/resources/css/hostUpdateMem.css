@@ -88,7 +88,7 @@
 .paging_active {
 	color: rgb(51, 151, 255);
 }
-#input_email {
+#input_email, #name {
 	background-color : #909090;
 }
 .joinForm {
