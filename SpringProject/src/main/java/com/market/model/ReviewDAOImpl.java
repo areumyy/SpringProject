@@ -28,4 +28,20 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return this.sqlSession.update("insertReply", map);
 	}
 
+	public ReviewDTO reviewInfo(int num) {
+		
+		return this.sqlSession.selectOne("reviewInfo", num);
+	}
+
+	@Override
+	public int reviewPercent(int num) {
+		
+		return this.sqlSession.selectOne("reviewPercent", num);
+	}
+
+	@Override
+	public List<ReviewDTO> getReviewList(int num) {
+		
+		return this.sqlSession.selectList("reviewlist", num);
+	}
 }
