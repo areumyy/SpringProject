@@ -234,6 +234,11 @@ public class ClassDAOImpl implements ClassDAO {
 		return this.sqlSession.selectOne("getMonthFrip", mem_num);
 	}
 
+	@Override
+	public int countClass_memnum(int mem_num) {
+		return this.sqlSession.selectOne("countClass_memnum2", mem_num);
+	}
+
 	
 	
 	

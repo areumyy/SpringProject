@@ -44,5 +44,13 @@
 		in (select class_num 
 		from frip_class where class_memnum = #{mem_num})
 	</select>
+	
+	<insert id="insert_booking" parameterType="com.market.model.BookingDTO">
+		<selectKey keyProperty="booking_num" resultType="int" order="BEFORE">
+			select count(*) + 1 from frip_booking
+		</selectKey>
+		
+		insert into frip_booking values(#{booking_num},#{booking_writer},#{booking_classNum},#{booking_option},default,sysdate)
+	</insert>
 </mapper>
 

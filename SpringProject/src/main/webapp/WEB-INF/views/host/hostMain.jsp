@@ -18,6 +18,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath()%>/resources/css/hostMain.css"
 	rel="stylesheet" />
+
 </head>
 <body>
 	<div class="mainFrame">
@@ -46,7 +47,7 @@
 										</c:if>
 									</div>
 								</div>
-								<a class="hostInfo_infoUpdate">
+								<a href="<%=request.getContextPath() %>/hostUpdateMem.do" class="hostInfo_infoUpdate">
 									회원 정보 수정
 								</a>
 							</div>

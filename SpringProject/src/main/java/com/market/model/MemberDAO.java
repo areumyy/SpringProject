@@ -1,5 +1,6 @@
 package com.market.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface MemberDAO {
@@ -37,4 +38,12 @@ public interface MemberDAO {
 	public List<MemberDTO> getSearchMember(PageDTO dto);
 	
 	public void changeHost(int mem_num);
+	
+	public void usePoint(HashMap<String, Integer> map);
+	
+	public void addPoint(HashMap<String, Integer> map);
+	
+	public int getMember_memNick(String mem_nick);
+	
+	public int updateInfo(MemberDTO dto);
 }

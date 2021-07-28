@@ -484,4 +484,11 @@
 			and class_memnum = #{mem_num}
 		]]>
 	</select>
+	
+	<select id="countClass_memnum2" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) from frip_class where class_memnum = #{mem_num}
+			and class_startdate < sysdate
+		]]>
+	</select>
 </mapper>

@@ -1095,9 +1095,11 @@ div[Attributes Style] {
 .Frip_Grade2 > img {
     margin-right: 2px;
 }
-
-
-
+@media (max-width: 768px){
+	.navbar{
+		visibility: hidden !important;
+	}
+}
 
 
 

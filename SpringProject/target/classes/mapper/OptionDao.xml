@@ -33,5 +33,8 @@
 	<update id="updateOption" parameterType="com.market.model.OptionDTO">
 		update frip_option set option_editprice = #{option_editPrice} where option_num = #{option_num}
 	</update>
-
+	
+	<select id="get_option_cont" parameterType="int" resultType="com.market.model.OptionDTO">
+		select * from frip_option where option_num = #{option_num} 
+	</select>
 </mapper>

@@ -29,8 +29,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public List<ReviewDTO> getList_memnum(int mem_num) {
-		return this.sqlSession.selectList("getList_memnum", mem_num);
+	public List<ReviewDTO> getReviewList_memnum(int mem_num) {
+		return this.sqlSession.selectList("getReviewList_memnum", mem_num);
 	}
 
 }

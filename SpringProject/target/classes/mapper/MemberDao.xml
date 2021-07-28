@@ -131,4 +131,21 @@
 	<update id="change_host" parameterType="int">
 		update frip_member set mem_status = 2 where mem_num = #{mem_num}
 	</update>
+	
+	<update id="use_point" parameterType="java.util.Map">
+		update frip_member set mem_point = mem_point - #{usedPoint} where mem_num = #{mem_num}
+	</update>
+	
+	<update id="add_point" parameterType="java.util.Map">
+		update frip_member set mem_point = mem_point + #{addPoint} where mem_num = #{mem_num}
+	</update>
+	
+	<select id="getMember_memNick" parameterType="String" resultType="int">
+		select mem_num from frip_member where mem_nick = #{mem_nick}
+	</select>
+	
+	<update id="updateInfo" parameterType="com.market.model.MemberDTO">
+		update frip_member set mem_nick = #{mem_nick}, mem_phone = #{mem_phone},
+				mem_pwd = #{mem_pwd} where mem_num = #{mem_num}
+	</update>
 </mapper>

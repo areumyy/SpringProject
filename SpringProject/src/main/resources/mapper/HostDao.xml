@@ -12,4 +12,11 @@
 		insert into frip_host values(#{host_num},#{host_memNum},#{host_cont})
 	</insert>
 	
+	<select id="getInfo_memnum" parameterType="int" resultType="com.market.model.HostDTO">
+		select * from frip_host where host_memnum = #{mem_num}
+	</select>
+	
+	<update id="updateHostInfo" parameterType="com.market.model.HostDTO">
+		update frip_host set host_cont = #{host_cont} where host_memnum = #{host_memNum}
+	</update>
 </mapper>

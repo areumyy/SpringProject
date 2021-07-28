@@ -20,51 +20,51 @@
 <link href="<%=request.getContextPath() %>/resources/css/option_select.css" rel="stylesheet"/>
 <script>
 	function Option(index) {
-		var title = $("#a"+index).find(".option_item_date").text();
-		var optionPrice = $("#optionPrice"+index).val();
-		var option_num = $("#option_num"+index).val();
 		
-		if($("#b"+index).length == 0) {
-			$(".sel_section").remove();
-			$("form").prepend
-			("<div id='b"+index+"' class='sel_section'>"+
-			 "<div class='sel_div'><button class='option_btn sel_cancle_btn'" +
-			 "type='button' onclick='deleteOption("+index+")'>" +
-			 "<i class='fa fa-times' aria-hidden='true' class='option_img'></i>"+
-			 "</button><div class='sel_name'><div>2021년 7월 17일(토요일) 06:50</div>"+
-			 "<div class='sel_title'>"+title+"</div></div>"+
-			 "<div class='price_ctn_section'><div class='sel_price'>"+optionPrice+"</div>"+
-			 "</div></div></div></div>");
-			$("[name=option_num]").val(option_num);
-		}else {
-			return;
+		var bookingCount = $(".bookingCount").eq(0).text();
+		var class_count = $(".class_count").eq(0).text();
+		
+		if(bookingCount == class_count) {
+			alert('마감되었습니다.');
+		}else{
+			
+			var title = $("#a"+index).find(".option_item_date").text();
+			var optionPrice = $("#optionPrice"+index).val();
+			var option_num = $("#option_num"+index).val();
+			
+			if($("#b"+index).length == 0) {
+				$(".sel_section").remove();
+				$("form").prepend
+				("<div id='b"+index+"' class='sel_section'>"+
+				 "<div class='sel_div'><button class='option_btn sel_cancle_btn'" +
+				 "type='button' onclick='deleteOption("+index+")'>" +
+				 "<i class='fa fa-times' aria-hidden='true' class='option_img'></i>"+
+				 "</button><div class='sel_name'><div>2021년 7월 17일(토요일) 06:50</div>"+
+				 "<div class='sel_title'>"+title+"</div></div>"+
+				 "<div class='price_ctn_section'><div class='sel_price'>"+optionPrice+"</div>"+
+				 "</div></div></div></div>");
+				$("[name=option_num]").val(option_num);
+			}else {
+				return;
+			}
+			$(".next_btn").css("background-color","rgb(0, 117, 239)");
+			$(".next_btn").removeAttr("disabled");
 		}
 		
 	}
 	
 	function deleteOption(index) {
 		$("#b"+index).remove();
+		$(".next_btn").attr("disabled","disabled");
+		$(".next_btn").css("background-color","#c9c9c9");
 	}
 	
-	function plusSu(index) {
-		var su = Number($("#n"+index).val()) +1;
-		$("#n"+index).val(su);
-		$("#minusIcon").attr("class", "far fa-minus-square");
-	}
-	
-	function minusSu(index){
-		console.log($("#n"+index).val());
-		if($("#n"+index).val() != 1) {
-			var su = Number($("#n"+index).val()) -1;
-			$("#n"+index).val(su);	
-			
-			if($("#n"+index).val() == 2) {
-				$("#minusIcon").attr("class", "far fa-minus-square gray");
-			}
-		}else if($("#n"+index).val() == 1) {
-			return;
+	$(function start(){
+		if($(".sel_section").length == 0) {
+			$(".next_btn").attr("disabled","disabled");
+			$(".next_btn").css("background-color","#c9c9c9");
 		}
-	}
+	})
 </script>
 </head>
 <body>
@@ -78,7 +78,7 @@
 					<div class="option_page3">
 					
 						<header class="option_header">
-							<button class="option_btn" type="button">
+							<button class="option_btn" type="button" onclick="window.history.back();">
 								<img
 									src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cg fill='none' fill-rule='nonzero'%3E %3Cpath d='M0 0h24v24H0z'/%3E %3Cpath stroke='%23000' stroke-width='2' d='M12 19.071L4.929 12 12 4.929M5 12h15'/%3E %3C/g%3E %3C/svg%3E"
 									class="option_img">
@@ -107,7 +107,9 @@
 												</c:if>
 												<input type="hidden" value="${dto.getOption_num() }" id="option_num${index.count }">
 												<div class="option_item_date">${dto.getOption_name() }</div>
-												<div class="option_item_name">${bookingCount } / ${cdto.getClass_count() }명</div>
+												<div class="option_item_name">
+												<span class="bookingCount">${bookingCount }</span> / 
+												<span class="class_count">${cdto.getClass_count() }</span>명</div>
 											</div>
 										</c:forEach>
 									</div>

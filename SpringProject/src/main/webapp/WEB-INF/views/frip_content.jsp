@@ -1,3 +1,4 @@
+<%@page import="com.market.model.MemberDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false" pageEncoding="UTF-8"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
@@ -16,6 +17,15 @@
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/frip_content.css" rel="stylesheet"/>
 </head>
+<script type="text/javascript">
+$(function(){
+	<% HttpSession session =request.getSession();
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+		System.out.println(dto);
+	%>
+	
+})
+</script>
 <body>
 
 	<div id="app">
@@ -1286,10 +1296,17 @@
 										alt="상품 저장">
 									<span class="Frip_Pick_Count">135</span>
 								</button>
-								<button class="Under_Bar3 Under_Bar4" width="100%" height="56px" color="white" font-size="16px"
-									onclick="location.href='<%=request.getContextPath() %>/option_select.do?class_num=${fripInfo.getClass_num() }'">
-									<div class="Under_Bar5">참여하기</div>
-								</button>
+								<%if(dto != null) {%>
+									<button class="Under_Bar3 Under_Bar4" width="100%" height="56px" color="white" font-size="16px"
+										onclick="location.href='<%=request.getContextPath() %>/option_select.do?class_num=${fripInfo.getClass_num() }'">
+										<div class="Under_Bar5">참여하기</div>
+									</button>
+								<%} else if(dto == null) {%>
+									<button class="Under_Bar3 Under_Bar4" width="100%" height="56px" color="white" font-size="16px"
+										onclick="location.href='<%=request.getContextPath() %>/login.do'">
+										<div class="Under_Bar5">참여하기</div>
+									</button>
+								<%} %>
 							</div>
 						</div>
 					</div>
