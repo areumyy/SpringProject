@@ -491,4 +491,26 @@
 			and class_startdate < sysdate
 		]]>
 	</select>
+	
+	<select id="getSearchListCount" parameterType="String" resultType="int">
+		<![CDATA[
+			select count(distinct c.class_num) from frip_class c, frip_member m
+			where c.class_title like '%'||#{input}||'%'
+			or c.class_cont like '%'||#{input}||'%'
+			or m.member_name like '%'||#{input}||'%'
+			and c.class_memnum = m.mem_num
+		]]>
+	</select>
+	
+	<select id="getSearchClassList" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select * from (select distinct c.*, row_number() over(order by class_num) rnum from frip_class c, frip_member m
+			where c.class_title like '%'||#{input}||'%'
+			or c.class_cont like '%'||#{input}||'%'
+			or m.member_name like '%'||#{input}||'%'
+			and c.class_memnum = m.mem_num) 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	
 </mapper>

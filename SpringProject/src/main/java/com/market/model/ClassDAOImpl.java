@@ -239,7 +239,14 @@ public class ClassDAOImpl implements ClassDAO {
 		return this.sqlSession.selectOne("countClass_memnum2", mem_num);
 	}
 
-	
-	
-	
+	@Override
+	public List<ClassDTO> getSearchClassList(HashMap<String, Object> map) {
+		return this.sqlSession.selectList("getSearchClassList", map);
+	}
+
+	@Override
+	public int getSearchListCount(String input) {
+		return this.sqlSession.selectOne("getSearchListCount", input);
+	}
+
 }

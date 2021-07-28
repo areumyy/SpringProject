@@ -2452,4 +2452,29 @@ public class MarketController {
 		
 		return "redirect:hostMain.do";
 	}
+	@RequestMapping("search.do")
+	public String search(@RequestParam("search_input") String search_input, HttpServletRequest request) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int totalRecord = 0;
+		int rowsize = 10;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.classDao.getSearchListCount(search_input);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+		
+		map.put("input", search_input);
+		map.put("dto", dto);
+		List<ClassDTO> cList = this.classDao.getSearchClassList(map);
+		
+		return "searchAll";
+	}
 }

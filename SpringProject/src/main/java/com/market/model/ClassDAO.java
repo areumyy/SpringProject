@@ -55,5 +55,6 @@ public interface ClassDAO {
 	
 	public int getMonthFrip(int mem_num); 					// 이번달 진행프립
 	public int countClass_memnum(int mem_num);				// 진행프립 오늘 전까지만
-
+	public List<ClassDTO> getSearchClassList(HashMap<String, Object> map);  // 검색리스트
+	public int getSearchListCount(String input);
 }
