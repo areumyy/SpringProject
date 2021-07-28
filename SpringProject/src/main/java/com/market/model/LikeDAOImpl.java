@@ -296,5 +296,10 @@ public class LikeDAOImpl implements LikeDAO {
 		return this.sqlSession.selectList("likeScore_like_list", map);
 	}
 
+	@Override
+	public List<ClassDTO> getNoLikeClassList(int mem_num) {
+		return this.sqlSession.selectList("nolikeClass", mem_num);
+	}
+
 
 }

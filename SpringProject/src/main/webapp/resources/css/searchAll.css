@@ -11,7 +11,7 @@
 	flex-flow: column nowrap;
 	align-content: flex-start;
 	margin: 0px auto;
-	/* max-width: 808px; */
+	/* max-width: 808px; */ 
 	/* max-width: 1003.75px; */
 	max-width: 1240px;
 	width: 100%;
@@ -142,7 +142,7 @@
 
 .class_group {
 	display: flex;
-	/* flex-flow: row wrap; */
+	flex-flow: row wrap;
 	min-height: 1px;
 }
 
@@ -157,7 +157,7 @@
 .class_group>* {
 	margin-right: 20px;
 	margin-bottom: 30px;
-	width: calc(25% - 11.25px) !important;
+	width: 224px;
 }
 
 .class_item_link {

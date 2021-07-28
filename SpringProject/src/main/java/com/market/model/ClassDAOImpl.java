@@ -230,6 +230,20 @@ public class ClassDAOImpl implements ClassDAO {
 	}
 
 	@Override
+	public List<ClassDTO> getBestListAll() {
+		return this.sqlSession.selectList("all_best_list");
+	}
+
+	@Override
+	public List<ClassDTO> getNewListAll() {
+		return this.sqlSession.selectList("all_new_list");
+	}
+
+	@Override
+	public List<ClassDTO> getSaleListAll() {
+		return this.sqlSession.selectList("all_sale_list");
+	}
+	
 	public int getMonthFrip(int mem_num) {
 		return this.sqlSession.selectOne("getMonthFrip", mem_num);
 	}
@@ -241,12 +255,21 @@ public class ClassDAOImpl implements ClassDAO {
 
 	@Override
 	public List<ClassDTO> getSearchClassList(HashMap<String, Object> map) {
-		return this.sqlSession.selectList("getSearchClassList", map);
+		if(this.sqlSession.selectList("getSearchClassList", map) != null) {
+			return this.sqlSession.selectList("getSearchClassList", map);
+		}else {
+			return null;
+		}
 	}
 
 	@Override
-	public int getSearchListCount(String input) {
-		return this.sqlSession.selectOne("getSearchListCount", input);
+	public int getSearchListCount(String search_input) {
+		if(this.sqlSession.selectOne("getSearchListCount", search_input) != null) {
+			return this.sqlSession.selectOne("getSearchListCount", search_input);
+		}else {
+			return 0;
+		}
 	}
 
+	
 }

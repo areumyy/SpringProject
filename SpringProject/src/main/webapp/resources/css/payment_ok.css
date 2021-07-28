@@ -205,10 +205,10 @@ button {
 }
 
 @media ( max-width : 768px) {
-	.notice_list {
-		list-style: none;
-	}
-	.notice_item {
-		font-size: 11px;
-	}
+    .navbar{
+        display: none !important;
+    }
+    .final_pay{
+    	padding-bottom: 30px;
+    }
 }

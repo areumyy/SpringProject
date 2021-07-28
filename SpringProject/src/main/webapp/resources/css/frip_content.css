@@ -249,11 +249,7 @@ button {
 .Content_Img1 {
     min-height: 1px;
 }
-/* 
-.image-slide img {
-    display: block;
-}
- */
+
 .Content_Img2 {
     display: none !important;
 }
@@ -566,8 +562,8 @@ div[Attributes Style] {
 }
 
 .Content_Review6 {
-    margin: 0px 6px 12px;
-    width: 232px;
+    margin: 0px 14px 12px;
+    width: 248px;
 }
 
 .Content_Review4 .image-list {
@@ -582,10 +578,10 @@ div[Attributes Style] {
 .Content_Review_Img1 {
     border-radius: 3px;
     overflow: hidden;
-    min-height: 232px;
+    min-height: 248px;
     background-color: rgb(250, 250, 250);
     margin-bottom: 18px;
-    width: 232px;
+    width: 248px;
 }
 
 .Content_Review_Img2 {
@@ -631,22 +627,11 @@ div[Attributes Style] {
     margin-bottom: 1px;
 }
 
-.Content_Review8 {
-    color: rgb(170, 170, 170);
-    font-size: 12px;
-    line-height: 16px;
-    letter-spacing: -0.36px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    margin-bottom: 10px;
-}
-
 .Content_Review_Comment {
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     color: rgb(51, 51, 51);
     letter-spacing: -0.42px;
@@ -654,7 +639,7 @@ div[Attributes Style] {
     word-break: break-all;
     font-size: 14px;
     line-height: 22px;
-    height: 66px;
+    height: 88px;
 }
 
 .Good_Review_Btn {
@@ -1095,10 +1080,11 @@ div[Attributes Style] {
 .Frip_Grade2 > img {
     margin-right: 2px;
 }
+
 @media (max-width: 768px){
-	.navbar{
-		visibility: hidden !important;
-	}
+    .navbar{
+        visibility: hidden !important;
+    }
 }
 
 

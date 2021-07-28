@@ -86,8 +86,28 @@ public class MarketController {
 	private ReviewDAO reviewDao;
 
 	@RequestMapping("main.do")
-	public String main() {
-		return "home";
+	public String main(Model model, HttpServletRequest request) {
+		int mem_num = 0;
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("loginDto") != null) {
+			MemberDTO dto = (MemberDTO)session.getAttribute("loginDto");
+			mem_num= dto.getMem_num();
+		} 
+		
+		List<ClassDTO> likeList = this.likeDao.getLikeClassList(mem_num);
+		List<ClassDTO> nolikeList = this.likeDao.getNoLikeClassList(mem_num);
+		List<ClassDTO> weekBestList = this.classDao.getBestListAll();
+		List<ClassDTO> newList = this.classDao.getNewListAll();
+		List<ClassDTO> saleList = this.classDao.getSaleListAll();
+		
+		model.addAttribute("likeList", likeList);
+		model.addAttribute("nolikeList", nolikeList);
+		model.addAttribute("weekBestList", weekBestList);
+		model.addAttribute("newList", newList);
+		model.addAttribute("saleList", saleList);
+		
+		return "main";
 	}
 
 	@RequestMapping("join.do")
@@ -2047,12 +2067,13 @@ public class MarketController {
 	}
 
 	public int getMem_num(HttpServletRequest request) {
+		
 		HttpSession session = request.getSession();
 
 		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
-
+		
 		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
-
+		
 		return mem_num;
 	}
 
@@ -2375,6 +2396,14 @@ public class MarketController {
 			Model model,HttpServletRequest request) {
 		int class_memnum = getMem_num(request);
 		
+		// 프립 리뷰 평점 평균 / 리뷰 갯수
+		ReviewDTO reviewInfo = this.reviewDao.reviewInfo(class_num);
+		// 최고평점 비율(%)
+		int reviewPercent = this.reviewDao.reviewPercent(class_num);
+		
+		model.addAttribute("reviewInfo", reviewInfo);
+		model.addAttribute("reviewPercent", reviewPercent);
+		
 		// 프립 상세 내용 호출 메서드
 		ClassDTO fripInfo = this.classDao.getclassCont(class_num);
 
@@ -2382,16 +2411,12 @@ public class MarketController {
 
 		// 호스트 상세정보 가져오는 메서드
 		MemberDTO hostInfo = this.likeDao.hostInfo(class_memnum);
-
 		// 호스트 소개 가져오는 메서드
 		HostDTO hostCont = this.likeDao.hostCont(class_memnum);
-
 		// 호스트가 운영하는 클래스 개수 가져오는 메서드
 		int classCount = this.likeDao.class_count(class_memnum);
-
 		// 호스트 후기 개수 가져오는 메서드
 		int reviewCount = this.likeDao.review_count(class_memnum);
-
 		// 호스트 찜 개수 가져오는 메서드
 		int likeCount = this.likeDao.like_count(class_memnum);
 
@@ -2400,10 +2425,21 @@ public class MarketController {
 		model.addAttribute("classCount", classCount);
 		model.addAttribute("reviewCount", reviewCount);
 		model.addAttribute("likeCount", likeCount);
-
+		
+		// 프립후기 리스트를 가져오는 메서드
+		List<ReviewDTO> reviewList = this.reviewDao.getReviewList(class_num);
+		
+		model.addAttribute("ReviewList", reviewList);
+		
 		return "frip_content";
 	}
 
+	@RequestMapping("frip_review.do")
+	public String fripReview() {
+		
+		return "frip_review";
+	}
+	
 	@RequestMapping(value = "/usePoint", method = RequestMethod.POST)
 	@ResponseBody
 	public void usePoint(HttpServletResponse response, @RequestParam("havePoint") int havePoint,
@@ -2430,6 +2466,19 @@ public class MarketController {
 
 		response.getWriter().print(obj);
 	}
+
+	@RequestMapping("frip_all.do")
+	public String fripAll(Model model, @RequestParam("type") String type) {
+		if(type.equals("best")) {
+			
+		} else if(type.equals("new")) {
+			
+		} else if(type.equals("sale")) {
+			
+		}
+		
+		return "frip_all";
+	}
 	
 	@RequestMapping("hostUpdateMem.do")
 	public String hostUpdateMem(HttpServletRequest request, Model model) {
@@ -2440,6 +2489,7 @@ public class MarketController {
 		
 		return "host/hostUpdateMem";
 	}
+	
 	@RequestMapping("hostUpdateMemOk.do")
 	public String hostUpdateMemOk(HostDTO hdto, MemberDTO mdto,
 									HttpServletRequest request) {
@@ -2453,7 +2503,16 @@ public class MarketController {
 		return "redirect:hostMain.do";
 	}
 	@RequestMapping("search.do")
-	public String search(@RequestParam("search_input") String search_input, HttpServletRequest request) {
+	public String search(HttpServletRequest request, Model model) {
+		String search_input = request.getParameter("search_input");
+		System.out.println(search_input);
+		
+		HttpSession session = request.getSession();
+		int mem_num = 0;
+		if(session.getAttribute("loginDto") != null) {
+			MemberDTO dto = (MemberDTO)session.getAttribute("loginDto");
+			mem_num= dto.getMem_num();
+		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		int totalRecord = 0;
@@ -2471,9 +2530,17 @@ public class MarketController {
 
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 		
-		map.put("input", search_input);
+		map.put("search_input", search_input);
 		map.put("dto", dto);
 		List<ClassDTO> cList = this.classDao.getSearchClassList(map);
+		List<ClassDTO> likeList = this.likeDao.getLikeClassList(mem_num);
+		List<ClassDTO> nolikeList = this.likeDao.getNoLikeClassList(mem_num);
+		
+		model.addAttribute("likeList", likeList);
+		model.addAttribute("nolikeList", nolikeList);
+		model.addAttribute("cList", cList);
+		model.addAttribute("Paging", dto);
+		model.addAttribute("search_input", search_input);
 		
 		return "searchAll";
 	}

@@ -51,10 +51,14 @@ public interface ClassDAO {
 	public ClassDTO getCategoryName(int num);				// 카테고리의 이름을 가져오는 메서드.
 	public List<ClassDTO> getCategoryNameList(int num);		// 하위카테고리의 이름 리스트를 가져오는 메서드.
 	
-	public ClassDTO getclassCont(int num);						// 프립 상세 내용 호출 추상메서드.
+	public ClassDTO getclassCont(int num);					// 프립 상세 내용 호출 추상메서드.
+	
+	public List<ClassDTO> getBestListAll();
+	public List<ClassDTO> getNewListAll();
+	public List<ClassDTO> getSaleListAll();
 	
 	public int getMonthFrip(int mem_num); 					// 이번달 진행프립
 	public int countClass_memnum(int mem_num);				// 진행프립 오늘 전까지만
 	public List<ClassDTO> getSearchClassList(HashMap<String, Object> map);  // 검색리스트
-	public int getSearchListCount(String input);
+	public int getSearchListCount(String search_input);
 }

@@ -280,6 +280,41 @@ a {
 	margin-right: 92px;
 }
 
+
+.category_list1>li>a {
+	color: #838383;
+	margin-bottom: 15px;
+	margin-right: 7px;
+}
+
+.category_list1>li>a:hover {
+	font-weight: bold;
+	background-color: white;
+}
+
+.category_list1 ul {
+	padding-left: 20px;
+}
+
+.category_list1 li ul li {
+	list-style: none;
+	margin: 5px 0px;
+	color: #a6a6a6;
+	font-size: 14px;
+}
+
+.category_list1 li ul li a:hover {
+	font-weight: bold;
+	color: #a6a6a6;
+}
+
+.category_list1>div {
+	display: flex;
+}
+
+.category_list1>div>li {
+	width: 120px;
+}
 /* 반응형 */
 @media ( max-width : 768px) {
 	.menu1 {

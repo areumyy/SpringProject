@@ -304,7 +304,7 @@
 											name="class_endArea2"  disabled value="${cdto.getClass_endArea() }">
 									<input type="button" class="findAddress"
 											value="주소 찾기" onclick="findAddr()" >	
-									<input type="text" class="detailAddress" 
+									<input type="text" class="detailAddress" id="detailAddress"
 											name="class_endAreaDetail" placeholder="상세주소" value="${cdto.getClass_endAreaDetail() }">
 								</div>
 								<input type="hidden" name="class_endArea" value="">
@@ -314,7 +314,7 @@
 											name="class_startArea" placeholder="기본주소" disabled>
 									<input type="button" class="findAddress"
 											value="주소 찾기" onclick="findAddr2()" >	
-									<input type="text" class="detailAddress" 
+									<input type="text" class="detailAddress" id="detailAddress2"
 											name="class_startAreaDetail" placeholder="상세주소" >
 								</div>
 							</div>
