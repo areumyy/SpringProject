@@ -2391,9 +2391,8 @@ public class MarketController {
 	}
 
 	@RequestMapping("frip_content.do")
-	public String frip_content(@RequestParam("num") int class_num,
+	public String frip_content(@RequestParam("num") int class_num, @RequestParam("memnum") int class_memnum,
 			Model model,HttpServletRequest request) {
-		int class_memnum = getMem_num(request);
 		
 		// 프립 리뷰 평점 평균 / 리뷰 갯수
 		ReviewDTO reviewInfo = this.reviewDao.reviewInfo(class_num);
@@ -2468,13 +2467,25 @@ public class MarketController {
 
 	@RequestMapping("frip_all.do")
 	public String fripAll(Model model, @RequestParam("type") String type) {
+		String title = null;
+		List<ClassDTO> list = new ArrayList<ClassDTO>();
+		
 		if(type.equals("best")) {
+			title = "이번주 PICK💖";
+			list = this.classDao.getBestListAll();
 			
 		} else if(type.equals("new")) {
+			title = "신규 등록💖";
+			list = this.classDao.getNewListAll();
 			
 		} else if(type.equals("sale")) {
-			
+			title = "특가 할인💖";
+			list = this.classDao.getSaleListAll();
 		}
+		
+		model.addAttribute("type", type);
+		model.addAttribute("list", list);
+		model.addAttribute("title", title);
 		
 		return "frip_all";
 	}

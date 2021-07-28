@@ -498,7 +498,7 @@
 		]]>
 	</select>
 	
-	<select id="all_new_list" parameterType="int" resultType="com.market.model.ClassDTO">
+	<select id="all_new_list" resultType="com.market.model.ClassDTO">
 		<![CDATA[
 			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 
@@ -518,11 +518,11 @@
 			                 from frip_review
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
-			order by c.class_regdate, c.class_num asc
+			order by c.class_regdate desc, c.class_num asc
 		]]>
 	</select>
 	
-	<select id="all_sale_list" parameterType="int" resultType="com.market.model.ClassDTO">
+	<select id="all_sale_list" resultType="com.market.model.ClassDTO">
 		<![CDATA[
 			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_category1, c.class_category2, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
 			from frip_class c 

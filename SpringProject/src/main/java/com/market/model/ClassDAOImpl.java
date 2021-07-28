@@ -252,5 +252,5 @@ public class ClassDAOImpl implements ClassDAO {
 	public int countClass_memnum(int mem_num) {
 		return this.sqlSession.selectOne("countClass_memnum2", mem_num);
 	}
-	
+
 }
