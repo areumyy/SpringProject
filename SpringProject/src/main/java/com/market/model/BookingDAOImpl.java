@@ -37,4 +37,14 @@ public class BookingDAOImpl implements BookingDAO {
 	public int getCountEnter(int class_num) {
 		return this.sqlSession.selectOne("count_class_enter", class_num);
 	}
+
+	@Override
+	public BookingDTO getBookingWorks(int booking_writer) {
+		return this.sqlSession.selectOne("get_booking_works", booking_writer);
+	}
+	
+	@Override
+	public int getCountWorks(int booking_writer) {
+		return this.sqlSession.selectOne("count_booking_works", booking_writer);
+	}
 }

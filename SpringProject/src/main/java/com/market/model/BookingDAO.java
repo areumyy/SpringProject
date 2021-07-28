@@ -10,4 +10,7 @@ public interface BookingDAO {
 	public int entercancel(int booking_num);
 	
 	public int getCountEnter(int class_num);
+	public BookingDTO getBookingWorks(int booking_writer);
+	public int getCountWorks(int booking_writer);
+	
 }

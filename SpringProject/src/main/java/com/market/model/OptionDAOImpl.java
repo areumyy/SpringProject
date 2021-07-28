@@ -22,6 +22,11 @@ public class OptionDAOImpl implements OptionDAO {
 	public List<OptionDTO> getOptionList(int num) {
 		return this.sqlSession.selectList("getOptionList", num);
 	}
+	
+	@Override
+	public OptionDTO getOptionCheck(int num) {
+		return this.sqlSession.selectOne("getOptionCheck", num);
+	}
 
 	@Override
 	public int getOptionCount(int num) {
@@ -47,5 +52,7 @@ public class OptionDAOImpl implements OptionDAO {
 	public int optionNumdown(HashMap<String, Integer> map) {
 		return this.sqlSession.update("optionNumdown", map);
 	}
+
+
 
 }

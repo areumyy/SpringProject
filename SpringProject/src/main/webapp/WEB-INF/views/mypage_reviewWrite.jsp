@@ -20,7 +20,7 @@
 $(function() {
     $('#content').keyup(function (e){
         var content = $(this).val();
-        $('#counter').html(content.length + ' / 1200');
+        $('#counter').html(content.length + ' / 1000');
     });
     $('#content').keyup();
 });
@@ -39,15 +39,15 @@ $(function() {
 					<div class="pg_wrapper">
 						<div class="pg_container">
 							<header class="mypage_reviewWrite_header_wrapper">
-								<h1 class="pg_header_txt">후기 편집하기</h1>
+								<h1 class="pg_header_txt">후기 작성하기</h1>
 							</header>
 							<div class="mypage_reviewWrite_cont">
 								<div class="reviewWrite_img">
 									<img class="img_style"
-										src="<%=request.getContextPath()%>/resources/image/mypage/profile/nana.jpg">
+										src="<%=request.getContextPath()%>/resources/image/mypage/profile/${dto.getMem_profileimg() }">
 								</div>
 								<h3 class="reviewWrite_question">
-									<p>(제품이름)</p>
+									<p>{dto.getClass_title() }</p>
 									만족하셨나요?
 								</h3>
 								<div class="reviewWrite_star">
@@ -60,7 +60,7 @@ $(function() {
 								</div>
 							</div>
 							<div class="mypage_reviewWrite_textarea">
-								<textarea placeholder="15글자 이상의 사진후기를 작성해주시면 500에너지가 적립됩니다.&#13;&#10;무분별한 비방 또는 욕설이 포함된 후기는 사전고지 없이 삭제될 수 있습니다." maxlength="1200" class="textarea_style" id="content"></textarea>
+								<textarea placeholder="15글자 이상의 사진후기를 작성해주시면 500에너지가 적립됩니다.&#13;&#10;무분별한 비방 또는 욕설이 포함된 후기는 사전고지 없이 삭제될 수 있습니다." maxlength="1000" class="textarea_style" id="content">{dto.getReview_cont() }</textarea>
 								<p class="textarea_count" id="counter"></p>
 							</div>
 							<div>
@@ -70,7 +70,7 @@ $(function() {
 								</label>
 							</div>
 							<div class="mypage_reviewWrite_footer">
-								<button class="reviewWrite_button">등록하기</button>
+								<input type="submit" class="reviewWrite_button" value="등록하기">
 							</div>
 						</div>
 					</div>

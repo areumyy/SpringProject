@@ -1,5 +1,7 @@
 package com.market.model;
 
-public interface ReviewDAO {
 
+public interface ReviewDAO {
+	
+	
 }

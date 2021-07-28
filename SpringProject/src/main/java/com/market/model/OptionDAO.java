@@ -7,6 +7,7 @@ public interface OptionDAO {
 
 	public int insertOption(OptionDTO dto);
 	public List<OptionDTO> getOptionList(int num);
+	public OptionDTO getOptionCheck(int num);
 	public int getOptionCount(int num);
 	public int deleteOption(int num);
 	public int getmaxoptionNum(int num);

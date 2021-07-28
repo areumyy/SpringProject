@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,38 +25,41 @@
 
 				<div class="pg_main">
 					<div class="pg_wrapper">
-						<div class="pg_container">
-							<form>
+						<form class="pg_container" method="post" action="<%=request.getContextPath() %>/mypage_edit_ok.do">
+							<c:set var="dto" value="${list }" />
+
+							<c:if test="${!empty list }">
 								<header class="pg_header_wrapper">
 									<h1 class="pg_header_txt">내 프로필</h1>
-									<button type="submit" class="edit_button">저장하기</button>
+									<input type="submit" class="edit_button" value="저장하기">
 								</header>
 								<div class="mypage_information_container">
 									<div class="information_info_wrapper">
 										<div class="information_info_title">닉네임</div>
 										<div class="information_info_content">
-											<input class="mem_nick" name="mem_nick" placeholder="입력">
+											<input class="mem_nick" name="mem_nick"
+												value="${dto.getMem_nick() }" placeholder="입력">
 										</div>
 									</div>
 									<div class="information_info_wrapper">
-										<div class="information_info_title">연락처</div>
-										<div class="information_info_content edit_style" disabled>01012345678</div>
+										<div class="information_info_title">이름</div>
+										<div class="information_info_content edit_style" disabled>${dto.getMem_name() }</div>
 									</div>
 									<div class="information_info_wrapper">
 										<div class="information_info_title">이메일</div>
-										<div class="information_info_content edit_style" disabled>frip@frip.com</div>
+										<div class="information_info_content edit_style" disabled>${dto.getMem_email() }</div>
 									</div>
 									<div class="information_info_wrapper">
-										<div class="information_info_title">생년월일</div>
-										<div class="information_info_content edit_style" disabled>19901223</div>
+										<div class="information_info_title">연락처</div>
+										<div class="information_info_content edit_style" disabled>${dto.getMem_phone() }</div>
 									</div>
 									<div class="information_info_wrapper">
-										<div class="information_info_title">성별</div>
-										<div class="information_info_content edit_style" disabled>F</div>
+										<div class="information_info_title">가입일</div>
+										<div class="information_info_content edit_style" disabled>${dto.getMem_regdate().substring(0,10) }</div>
 									</div>
 								</div>
-							</form>
-						</div>
+							</c:if>
+						</form>
 					</div>
 				</div>
 

@@ -80,7 +80,8 @@ public class MarketController {
 	private Class_qnaDAO class_qnaDao;
 	@Autowired
 	private CalculateDAO calculateDao;
-	
+	private Object reviewDao;
+
 	@RequestMapping("main.do")
 	public String main() {
 		return "home";
@@ -811,61 +812,59 @@ public class MarketController {
 		}
 
 		totalRecord = this.calculateDao.getCountAll(mem_num);
-		
+
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 
 		map.put("mem_num", mem_num);
 		map.put("class_pass", 1);
-		
-		
-		List<ClassDTO> classList = this.classDao.getList_endClass(map); // 종료된 클래스 리스트 
+
+		List<ClassDTO> classList = this.classDao.getList_endClass(map); // 종료된 클래스 리스트
 		System.out.println(classList);
 		List<CalculateDTO> calList = this.calculateDao.getListAll(classList);
 		System.out.println(calList);
-		
+
 		/*
-		List<Integer> classBuy = new ArrayList<Integer>();
-		List<Integer> classEnter = new ArrayList<Integer>();
-		
-		
-		for(int i =0; i<classList.size(); i++) {
-			
-			CalculateDTO calDto = new CalculateDTO();
-			calDto.setCal_classNum(classList.get(i).getClass_num());
-			calDto.setCal_startDate(classList.get(i).getClass_startDate());
-			calDto.setCal_endDate(classList.get(i).getClass_endDate());
-			calDto.setCal_name(classList.get(i).getClass_title());
-			calDto.setCal_buyCount(this.bookingDao.getCount(classList.get(i).getClass_num()));
-			calDto.setCal_enterCount(this.bookingDao.getCountEnter(classList.get(i).getClass_num()));
-			calDto.setCal_enterNoCount(calDto.getCal_buyCount() - calDto.getCal_enterCount());
-			calDto.setCal_sal(cal_sal);
-			calDto.setCal_total(calDto.getCal_sal() * 0.9);
-			
-			classBuy.add(this.bookingDao.getCount(classList.get(i).getClass_num()));
-			classEnter.add(this.bookingDao.getCountEnter(classList.get(i).getClass_num()));
-		}
-		model.addAttribute("buyList", classBuy);
-		model.addAttribute("enterList", classEnter);
-		*/
-		
+		 * List<Integer> classBuy = new ArrayList<Integer>(); List<Integer> classEnter =
+		 * new ArrayList<Integer>();
+		 * 
+		 * 
+		 * for(int i =0; i<classList.size(); i++) {
+		 * 
+		 * CalculateDTO calDto = new CalculateDTO();
+		 * calDto.setCal_classNum(classList.get(i).getClass_num());
+		 * calDto.setCal_startDate(classList.get(i).getClass_startDate());
+		 * calDto.setCal_endDate(classList.get(i).getClass_endDate());
+		 * calDto.setCal_name(classList.get(i).getClass_title());
+		 * calDto.setCal_buyCount(this.bookingDao.getCount(classList.get(i).getClass_num
+		 * ()));
+		 * calDto.setCal_enterCount(this.bookingDao.getCountEnter(classList.get(i).
+		 * getClass_num())); calDto.setCal_enterNoCount(calDto.getCal_buyCount() -
+		 * calDto.getCal_enterCount()); calDto.setCal_sal(cal_sal);
+		 * calDto.setCal_total(calDto.getCal_sal() * 0.9);
+		 * 
+		 * classBuy.add(this.bookingDao.getCount(classList.get(i).getClass_num()));
+		 * classEnter.add(this.bookingDao.getCountEnter(classList.get(i).getClass_num())
+		 * ); } model.addAttribute("buyList", classBuy); model.addAttribute("enterList",
+		 * classEnter);
+		 */
+
 		model.addAttribute("list", calList);
 		model.addAttribute("Paging", dto);
-		
+
 		return "host/hostCalculateReq";
 	}
 
 	@RequestMapping(value = "/cal_req", method = RequestMethod.POST)
 	@ResponseBody
-	public void calReq(HttpServletResponse response, @RequestParam("target") int target)
-			throws IOException {
+	public void calReq(HttpServletResponse response, @RequestParam("target") int target) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		int res = 0;
 
 		int result1 = this.calculateDao.requestCal(target);
 		int result2 = this.classDao.requestCal(target);
-		
+
 		if (result1 > 0 && result2 > 0) {
 			res = 1;
 		} else {
@@ -877,7 +876,7 @@ public class MarketController {
 
 		response.getWriter().print(obj);
 	}
-	
+
 	@RequestMapping("hostNotice_list.do")
 	public String hostNotice(Model model, HttpServletRequest request) {
 		int totalRecord = 0;
@@ -936,13 +935,68 @@ public class MarketController {
 	}
 
 	@RequestMapping("mypage.do")
-	public String myPage() {
+	public String myPage(HttpServletRequest request, Model model) {
+
+		HttpSession session = request.getSession();
+
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+
+		// 회원 번호에 맞는 회원의 정보를 받아오는 메서드
+		MemberDTO list = this.memberDao.getMember(dto.getMem_num());
+		
+		// frip_booking 테이블에서 회원의 예약정보 받아옴.
+		BookingDTO blist = this.bookingDao.getBookingWorks(dto.getMem_num());
+		
+		// 클래스 번호에 맞는 정보를 받아오는 메서드 
+		ClassDTO clist = this.classDao.getList_classNum(blist.getBooking_classNum());
+		
+		OptionDTO olist = this.optionDao.getOptionCheck(clist.getClass_num());
+
+		model.addAttribute("list", list);
+		model.addAttribute("blist", blist);
+		model.addAttribute("clist", clist);
+		model.addAttribute("olist", olist);
+		
 		return "mypage";
 	}
 
 	@RequestMapping("mypage_edit.do")
-	public String myPageEdit() {
+	public String myPageEdit(HttpServletRequest request, Model model) {
+
+		HttpSession session = request.getSession();
+
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+
+		MemberDTO list = this.memberDao.getMember(dto.getMem_num());
+
+		model.addAttribute("list", list);
+
 		return "mypage_edit";
+	}
+
+	@RequestMapping("mypage_edit_ok.do")
+	public void myPageEditOk(MemberDTO dto, HttpServletResponse response, @RequestParam("mem_nick") String mem_nick,
+			Model model) throws IOException {
+
+		response.setContentType("text/html; charset-UTF-8");
+
+		PrintWriter out = response.getWriter();
+
+		int result = this.memberDao.checkNick(mem_nick);
+
+		if (result > 0) { // 하나 이상 중복되는 닉네임이 있을 경우
+			out.println("<script>");
+			out.println("alert('이미 사용중인 닉네임입니다')");
+			out.println("history.back()");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('닉네임이 변경되었습니다')");
+			out.println("location.href='mypage_edit.do'");
+			out.println("</script>");
+			this.memberDao.updateMember(dto);
+		}
+
 	}
 
 	@RequestMapping("mypage_coupon.do")
@@ -951,7 +1005,28 @@ public class MarketController {
 	}
 
 	@RequestMapping("mypage_purchases.do")
-	public String myPagePurchases() {
+	public String myPagePurchases(HttpServletRequest request, Model model) {
+
+		HttpSession session = request.getSession();
+
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+
+		// 회원 번호에 맞는 회원의 정보를 받아오는 메서드
+		MemberDTO list = this.memberDao.getMember(dto.getMem_num());
+		
+		// frip_booking 테이블에서 회원의 예약정보 받아옴.
+		BookingDTO blist = this.bookingDao.getBookingWorks(dto.getMem_num());
+		
+		// 클래스 번호에 맞는 정보를 받아오는 메서드 
+		ClassDTO clist = this.classDao.getList_classNum(blist.getBooking_classNum());
+		
+		OptionDTO olist = this.optionDao.getOptionCheck(clist.getClass_num());
+
+		model.addAttribute("list", list);
+		model.addAttribute("blist", blist);
+		model.addAttribute("clist", clist);
+		model.addAttribute("olist", olist);
+
 		return "mypage_purchases";
 	}
 
@@ -959,22 +1034,47 @@ public class MarketController {
 	public String myPageEnergy() {
 		return "mypage_energy";
 	}
-	
+
 	@RequestMapping("mypage_review.do")
 	public String myPageReview() {
 		return "mypage_review";
 	}
-	
+
 	@RequestMapping("mypage_productDetail.do")
-	public String myPageProductDetail() {
+	public String myPageProductDetail(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+
+		// 회원 번호에 맞는 회원의 정보를 받아오는 메서드
+		MemberDTO list = this.memberDao.getMember(dto.getMem_num());
+		
+		// frip_booking 테이블에서 회원의 예약정보 받아옴.
+		BookingDTO blist = this.bookingDao.getBookingWorks(dto.getMem_num());
+		
+		// 클래스 번호에 맞는 정보를 받아오는 메서드 
+		ClassDTO clist = this.classDao.getList_classNum(blist.getBooking_classNum());
+		
+		OptionDTO olist = this.optionDao.getOptionCheck(clist.getClass_num());
+
+		model.addAttribute("list", list);
+		model.addAttribute("blist", blist);
+		model.addAttribute("clist", clist);
+		model.addAttribute("olist", olist);
 		return "mypage_productDetail";
 	}
-	
+
 	@RequestMapping("mypage_reviewWrite.do")
-	public String myPageReviewWrite() {
+	public String myPageReviewWrite(HttpServletRequest request, @RequestParam("no") int booking_num, Model model) {
+		
+		HttpSession session = request.getSession();
+
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+		
 		return "mypage_reviewWrite";
 	}
-	
+
 	@RequestMapping("admin_notice.do")
 	public String adminNotice(HttpServletRequest request, Model model, @RequestParam("sort") String sort) {
 		int totalRecord = 0;

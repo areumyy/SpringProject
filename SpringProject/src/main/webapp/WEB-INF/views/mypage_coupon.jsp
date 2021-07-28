@@ -40,11 +40,11 @@
 									<div class="coupon_cont_wrappr">
 										<div class="coupon_content">
 											<div class="coupon_description"> <!-- 쿠폰 종류 -->
-												<div class="coupon_name">프립 #시작지원금 쿠폰 (1)</div>
-												<div class="coupon_price">5,000원</div>
+												<div class="coupon_name">{dto.getCoupon_title()} </div>
+												<div class="coupon_price">{dto.getCoupon_price()}</div>
 											</div>
 											<div class="coupon_condition"> <!-- 쿠폰 상태 -->
-											유효기한 2021-07-21 까지 / 20,000원 이상 프립에 사용 가능 / 최대 할인금액 5,000원
+											{dto.getCoupon_cont()}
 											</div>
 										</div>
 									</div>

@@ -114,4 +114,9 @@ public class MemberDAOImpl implements MemberDAO {
 		this.sqlSession.update("change_host", mem_num);
 	}
 
+	@Override
+	public int updateMember(MemberDTO dto) {
+		return this.sqlSession.update("update_nick", dto);
+	}
+
 }
