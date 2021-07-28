@@ -159,7 +159,7 @@ $(function(){
 								<div>
 									<form class="search_form" method="post" action="<%=request.getContextPath() %>/search.do">
 										<img src="<%=request.getContextPath() %>/resources/image/menu/search.svg" class="search_img">
-										<input type="search" placeholder="검색어를 입력해주세요." class="search_input" autocomplete="off">
+										<input type="search" placeholder="검색어를 입력해주세요." class="search_input" autocomplete="off" name="search_input">
 									</form>
 								</div>
 							</div>

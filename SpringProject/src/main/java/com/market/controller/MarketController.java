@@ -2214,12 +2214,13 @@ public class MarketController {
 	}
 
 	public int getMem_num(HttpServletRequest request) {
+		
 		HttpSession session = request.getSession();
 
 		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
-
+		
 		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
-
+		
 		return mem_num;
 	}
 
@@ -2659,5 +2660,47 @@ public class MarketController {
 		int result2 =this.hostDao.updateHostInfo(hdto);
 		
 		return "redirect:hostMain.do";
+	}
+	@RequestMapping("search.do")
+	public String search(HttpServletRequest request, Model model) {
+		String search_input = request.getParameter("search_input");
+		System.out.println(search_input);
+		
+		HttpSession session = request.getSession();
+		int mem_num = 0;
+		if(session.getAttribute("loginDto") != null) {
+			MemberDTO dto = (MemberDTO)session.getAttribute("loginDto");
+			mem_num= dto.getMem_num();
+		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int totalRecord = 0;
+		int rowsize = 10;
+		int page = 0; // 현재 페이지 변수
+
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
+
+		// DB 상의 전체 게시물의 수를 확인하는 작업.
+		totalRecord = this.classDao.getSearchListCount(search_input);
+
+		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+		
+		map.put("search_input", search_input);
+		map.put("dto", dto);
+		List<ClassDTO> cList = this.classDao.getSearchClassList(map);
+		List<ClassDTO> likeList = this.likeDao.getLikeClassList(mem_num);
+		List<ClassDTO> nolikeList = this.likeDao.getNoLikeClassList(mem_num);
+		
+		model.addAttribute("likeList", likeList);
+		model.addAttribute("nolikeList", nolikeList);
+		model.addAttribute("cList", cList);
+		model.addAttribute("Paging", dto);
+		model.addAttribute("search_input", search_input);
+		
+		return "searchAll";
 	}
 }

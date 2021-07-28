@@ -297,7 +297,7 @@ function findAddr2() {
 //유효성 검사 및 제출 확인 (유효성 추가해야됨)
 function checkIt() {
 	if(confirm('제출하시겠습니까?')){
-		
+		console.log($("#detailAddress").val().length);
 		if($(".selectBox").eq(0).val().length == 0 
 				&& $(".selectBox").eq(1).val().length == 0) { // 카테고리
 			alert("카테고리를 확인해 주세요!");
@@ -315,7 +315,7 @@ function checkIt() {
 			alert("대표이미지를 업로드해 주세요!");
 			$("#btnradio3").trigger("click");
 			return false;			
-		}else if($("[name=option_startDate]").val().length == 0) { // 진행일
+		}else if($("[name=class_startDate]").val().length == 0) { // 진행일
 			alert("시작일을 확인해 주세요!");
 			$("#btnradio4").trigger("click");
 			return false;
@@ -328,7 +328,7 @@ function checkIt() {
 			$("#btnradio5").trigger("click");
 			return false;
 		}else if($("#address").val().length == 0 
-					|| $(".detailAddress").val().length == 0) {
+					|| $("#detailAddress").val().length == 0) {
 			alert("프립 진행지를 확인해주세요");
 			$("#btnradio6").trigger("click");
 			return false;
