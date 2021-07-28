@@ -15,7 +15,7 @@
 	</insert>
 	
 	<select id="getOptionList" parameterType="int" resultType="com.market.model.OptionDTO">
-		select * from frip_option where option_classnum = #{num}
+		select * from frip_option where option_classnum = #{num} order by option_num
 	</select>
 	
 	<select id="getOptionCheck" parameterType="int" resultType="com.market.model.OptionDTO">
@@ -30,19 +30,15 @@
 		delete from frip_option where option_classNum = #{num}
 	</delete>
 	
-	<select id="getmaxoptionNum" parameterType="int" resultType="int">
-		select max(option_num) from frip_option where option_classNum = #{num}
-	</select>
-	
 	<select id="getcountoption" parameterType="int" resultType="int">
 		select count(*) from frip_option where option_classNum = #{num}
 	</select>
 	 
-	<update id="optionNumdown" parameterType="java.util.Map">
-		<![CDATA[
-			update frip_option 
-			set option_num = option_num - #{optionCount}
-			where option_num > #{maxNum}
-		]]>
+	<update id="updateOption" parameterType="com.market.model.OptionDTO">
+		update frip_option set option_editprice = #{option_editPrice} where option_num = #{option_num}
 	</update>
+	
+	<select id="get_option_cont" parameterType="int" resultType="com.market.model.OptionDTO">
+		select * from frip_option where option_num = #{option_num} 
+	</select>
 </mapper>

@@ -45,12 +45,10 @@
 }
 .info_frame{
 	-webkit-box-flex: 1;
-    flex: 1 1 auto;
     background-color: white;
     display: flex;
     flex-flow: column nowrap;
-    height: 100%;
-    margin-top:20px;
+    margin-top:0px;
 }
 .list_inner {
 	margin-right: 14px;
@@ -129,10 +127,9 @@
 	display: flex;
 	/* flex-flow: row wrap; */
 	min-height: 1px;
-	margin-top: 50px;
+	margin-top: 20px;
 	margin-left: 50px;
 	width:90%;
-
 }
 
 .class_item {
@@ -247,6 +244,33 @@
 	font-size:12px;
 	margin-left:45%;
 	margin-top:10px;
+}
+.list_footer {
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-flex: 0;
+	flex: 0 0 auto;
+	width: 100%;
+	padding-right:30px;
+	background-color: white;
+	margin-bottom: 20px;
+}
+
+.page_link {
+	color: black;
+	padding: .375rem .75rem;
+	border-radius: 50%;
+	margin-right: 5px;
+	text-decoration: none;
+}
+
+.page_link:hover {
+	background-color: #dedede;
+}
+
+.paging_active {
+	color: rgb(51, 151, 255);
 }
 @media (max-width: 768px){
 	.MainFrame{

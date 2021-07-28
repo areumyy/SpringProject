@@ -8,9 +8,10 @@ public interface BookingDAO {
 	public List<BookingDTO> getList(HashMap<String, Object> map);
 	public int entercheck(int booking_num);
 	public int entercancel(int booking_num);
-	
+	public int getcount_option_num(int option_num);
 	public int getCountEnter(int class_num);
 	public BookingDTO getBookingWorks(int booking_writer);
 	public int getCountWorks(int booking_writer);
-	
+	public void insertBooking(BookingDTO dto);
+
 }

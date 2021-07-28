@@ -14,7 +14,9 @@
 				,#{class_category2}, #{class_hash}, #{class_title}, #{class_image},#{class_startDate},#{class_endDate},
 				 #{class_count}, #{class_startArea},#{class_startAreaDetail}, #{class_endArea},#{class_endAreaDetail}, 
 				 #{class_cont}, #{class_plan}, #{class_include},
+
 				#{class_exclude}, #{class_supply}, #{class_notice}, default, sysdate, default, default, null)
+
 	</insert>
 	
 	<select id="getList_MemNum" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
@@ -30,13 +32,59 @@
 	<select id="getList_endClass" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
 		<![CDATA[
 		select * from frip_class where class_memnum = #{mem_num}  
-			and class_pass = #{class_pass} and class_delcheck = 'no' and class_endDate < sysdate
+			and class_pass = #{class_pass} and class_delcheck = 'no' and class_endDate < sysdate order by class_num desc
+		]]>
+	</select>
+	
+	<select id="getList_endOkAll" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+		select * from frip_class where class_memnum = #{mem_num}  
+			and class_delcheck = 'no' and class_cal != #{status} order by class_num desc
+		]]>
+	</select>
+	
+	<select id="getList_endOk" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+		select * from frip_class where class_memnum = #{mem_num}  
+			and class_delcheck = 'no' and class_cal = #{status} order by class_num desc
 		]]>
 	</select>
 	
 	<select id="getList_classNum" parameterType="int" resultType="com.market.model.ClassDTO">
 		select * from frip_class where class_num = #{class_num}
 	</select>
+
+	<select id="fripPass_wait" resultType="com.market.model.ClassDTO">
+		select *
+		from frip_class c join frip_member m
+		on c.class_memnum = m.mem_num
+		where c.class_pass = 0 order by class_regdate desc, class_num
+	</select>
+	
+	<select id="fripPass_wait_count" resultType="Integer">
+		select count(*)
+		from frip_class c join frip_member m
+		on c.class_memnum = m.mem_num
+		where c.class_pass = 0
+	</select>
+	
+	<select id="fripPass_finish" resultType="com.market.model.ClassDTO">
+		select *
+		from frip_class c join frip_member m
+		on c.class_memnum = m.mem_num
+		where c.class_pass = 1 order by class_pass_regdate desc, class_num
+	</select>
+	
+	<select id="fripPass_finish_count" resultType="Integer">
+		select count(*)
+		from frip_class c join frip_member m
+		on c.class_memnum = m.mem_num
+		where c.class_pass = 1
+	</select>
+	
+	<update id="fripPass_result" parameterType="int">
+		update frip_class set class_pass = 1, class_pass_regdate = sysdate where class_num = #{class_num}
+	</update>
 	
 	<update id="updateClass" parameterType="com.market.model.ClassDTO" >
 		update frip_class set 
@@ -62,15 +110,371 @@
 		]]>
 	</select>
 	
-	<update id="entercheck" parameterType="int">
-		update frip_booking set booking_entercheck = 'yes' where booking_num = #{booking_num}
-	</update>
-	
-	<update id="entercancel" parameterType="int">
-		update frip_booking set booking_entercheck = 'no' where booking_num = #{booking_num}
-	</update>
-	
 	<update id="class_req_cal" parameterType="int">
 		update frip_class set class_cal = 1 where class_num = #{target}
 	</update>
+	
+	<!-- 전체 프립 수 -->
+	<select id="totalallcount" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) from frip_class where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+		]]>
+	</select>
+	
+	<!-- 금주의 프립 수 -->
+	<select id="weekallcount" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*)
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			join (select booking_classnum, count(*) count
+			                 from frip_booking
+			                 where booking_regdate
+			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
+			                 and sysdate
+			                 group by booking_classnum
+			                 order by count desc) b 
+			on c.class_num = b.booking_classNum
+			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+		]]>
+	</select>
+	
+	<!-- 신규 프립 수 -->
+	<select id="newallcount" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*)
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			join (select class_num, count(*) count
+			                 from frip_class
+			                 where class_regdate
+			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
+			                 and sysdate
+			                 group by class_num
+			                 order by count desc) b 
+			on c.class_num = b.class_num
+			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+		]]>
+	</select>
+	
+	<!-- 인기프립 리스트 가져오기 -->
+	<select id="bestalllist" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			left outer join (select booking_classNum, count(*) count
+			      from frip_booking
+			      group by booking_classNum
+			      order by count desc, booking_classNum asc) b 
+			on c.class_num = b.booking_classNum
+			left outer join (select review_classNum, avg(review_score) review_score
+			      from frip_review
+			      group by review_classNum) r 
+			on c.class_num = r.review_classNum
+			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+		]]>
+	</select>
+	
+	<!-- 금주의프립 리스트 가져오기 -->
+	<select id="weekalllist" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			join (select booking_classnum, count(*) count
+			                 from frip_booking
+			                 where booking_regdate
+			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
+			                 and sysdate
+			                 group by booking_classnum
+			                 order by count desc) b 
+			on c.class_num = b.booking_classNum
+			left outer join (select review_classNum, avg(review_score) review_score
+			                 from frip_review
+			                 group by review_classNum) r 
+			on c.class_num = r.review_classNum
+			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+			order by b.count desc, c.class_num asc
+		]]>
+	</select>
+	
+	<!-- 신규프립 리스트 가져오기 -->
+	<select id="newalllist" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			join (select class_num, count(*) count
+			                 from frip_class
+			                 where class_regdate
+			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
+			                 and sysdate
+			                 group by class_num
+			                 order by count desc) b 
+			on c.class_num = b.class_num
+			left outer join (select review_classNum, avg(review_score) review_score
+			                 from frip_review
+			                 group by review_classNum) r 
+			on c.class_num = r.review_classNum
+			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+			order by c.class_regdate, c.class_num asc
+		]]>
+	</select>
+	
+	
+	<!-- 카테고리의 이름 -->
+	<select id="categoryname" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select distinct c.class_category1, c.class_category2, a.cate_num 
+			from frip_class c 
+			left join frip_category a
+			on c.class_category2 = a.cate_two
+			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+		]]>
+	</select>
+	
+	<!-- 하위 카테고리 리스트 -->
+	<select id="categorynamelist" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select cate_num, cate_two from frip_category where cate_one = (select cate_one from frip_category where cate_num = #{num})
+		]]>
+	</select>
+	
+	<!-- 프립 전체 리스트 가져오기 -->
+	<select id="alllist1" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_category1, c.class_category2, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			left outer join (select review_classNum, avg(review_score) review_score
+			                 from frip_review
+			                 group by review_classNum) r 
+			on c.class_num = r.review_classNum
+			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+			order by c.class_regdate desc
+		]]>
+	</select>
+	
+	
+	
+	<!-- 하위카테고리 -->
+	<!-- 하위카테고리 전체 프립 수 -->
+	<select id="totalcount" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) from frip_class where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+		]]>
+	</select>
+	
+	<!-- 하위카테고리 금주의 프립 수 -->
+	<select id="weekcount" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*)
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			join (select booking_classnum, count(*) count
+			                 from frip_booking
+			                 where booking_regdate
+			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
+			                 and sysdate
+			                 group by booking_classnum
+			                 order by count desc) b 
+			on c.class_num = b.booking_classNum
+			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+		]]>
+	</select>
+	
+	<!-- 하위카테고리 신규 프립 수 -->
+	<select id="newcount" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*)
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			join (select class_num, count(*) count
+			                 from frip_class
+			                 where class_regdate
+			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
+			                 and sysdate
+			                 group by class_num
+			                 order by count desc) b 
+			on c.class_num = b.class_num
+			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+		]]>
+	</select>
+	
+	<!-- 하위카테고리 인기프립 리스트 가져오기 -->
+	<select id="bestlist" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			left outer join (select booking_classNum, count(*) count
+			      from frip_booking
+			      group by booking_classNum
+			      order by count desc, booking_classNum asc) b 
+			on c.class_num = b.booking_classNum
+			left outer join (select review_classNum, avg(review_score) review_score
+			      from frip_review
+			      group by review_classNum) r 
+			on c.class_num = r.review_classNum
+			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+		]]>
+	</select>
+	
+	<!-- 하위카테고리 금주의프립 리스트 가져오기 -->
+	<select id="weeklist" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			join (select booking_classnum, count(*) count
+			                 from frip_booking
+			                 where booking_regdate
+			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
+			                 and sysdate
+			                 group by booking_classnum
+			                 order by count desc) b 
+			on c.class_num = b.booking_classNum
+			left outer join (select review_classNum, avg(review_score) review_score
+			                 from frip_review
+			                 group by review_classNum) r 
+			on c.class_num = r.review_classNum
+			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			order by b.count desc, c.class_num asc
+		]]>
+	</select>
+	
+	<!-- 하위카테고리 신규프립 리스트 가져오기 -->
+	<select id="newlist" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			join (select class_num, count(*) count
+			                 from frip_class
+			                 where class_regdate
+			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
+			                 and sysdate
+			                 group by class_num
+			                 order by count desc) b 
+			on c.class_num = b.class_num
+			left outer join (select review_classNum, avg(review_score) review_score
+			                 from frip_review
+			                 group by review_classNum) r 
+			on c.class_num = r.review_classNum
+			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			order by c.class_regdate, c.class_num asc
+		]]>
+	</select>
+	
+	<!-- 하위 카테고리 프립 전체 리스트 가져오기 -->
+	<select id="alllist2" parameterType="int" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select c.class_num, c.class_memnum, c.class_hash, c.class_title, c.class_category1, c.class_category2, c.class_image, c.class_endArea, c.class_regdate, o.option_price, o.option_editprice, r.review_score
+			from frip_class c 
+			left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+			                 from frip_option
+			                 group by option_classnum) o
+			on c.class_num = o.option_classNum
+			left outer join (select review_classNum, avg(review_score) review_score
+			                 from frip_review
+			                 group by review_classNum) r 
+			on c.class_num = r.review_classNum
+			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			order by c.class_regdate desc
+		]]>
+	</select>
+	
+	<select id="countclass_myfrip" parameterType="java.util.Map" resultType="int">
+		select count(*) from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass} 
+			and class_delcheck = 'no'
+            and class_enddate >= sysdate
+	</select>
+	
+	<select id="getList_myFrip" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select * from (select distinct f.*,
+			row_number() over(order by class_num) rnum
+			from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass}
+			and class_delcheck = 'no'
+			and class_enddate >= sysdate) 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	
+	<select id="countclass_end" parameterType="java.util.Map" resultType="int">
+		<![CDATA[
+			select count(*) from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass} 
+			and class_delcheck = 'no'
+	        and class_enddate < sysdate
+	    ]]>
+	</select>
+	
+	<select id="getList_end" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select * from (select distinct f.*,
+			row_number() over(order by class_num) rnum
+			from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass}
+			and class_delcheck = 'no'
+			and class_enddate < sysdate) 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	
+	<update id="changeCalState" parameterType="int">
+		update frip_class set class_cal = 3 where class_num = #{class_num}
+	</update>
+	
+	<!-- 프립 상세 내용 호출 메서드 -->
+	<select id="fripInfo" parameterType="int" resultType="com.market.model.ClassDTO">
+		select *
+		from frip_class c
+		left outer join (select option_classnum, min(option_price) option_price, min(option_editprice) option_editprice
+		                 from frip_option
+		                 group by option_classnum) o
+		on c.class_num = o.option_classNum
+		where class_num = #{num}
+	</select>
+	
 </mapper>

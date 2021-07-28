@@ -23,7 +23,7 @@
 	<jsp:include page="../hostInclude/hostMenuBar.jsp"></jsp:include>
 	
 		<div class="Frame"> 
-			<div class="Frame_Frame">
+			<div class="Frame_Frame"> 
 				<jsp:include page="../hostInclude/hostSideBar.jsp"></jsp:include>
 	
 				<div class="Main">
@@ -38,7 +38,7 @@
 							  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="location.href='hostMyFripWait.do'">
 							  <label class="btn btn-outline-primary" for="btnradio2">대기중</label>
 							
-							  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="location.href='hostMyFripEnd.do'">
+							  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" checked onclick="location.href='hostMyFripEnd.do'">
 							  <label class="btn btn-outline-primary menuButton" for="btnradio3">종료</label>
 							</div>
 							
@@ -51,7 +51,7 @@
 													<div class="class_item_div">
 														<div class="class_item_thumbnail">
 															<div class="class_item_top">
-																<span class="class_area">${dto.getClass_endArea().substring(0,2) }32</span>
+																<span class="class_area">${dto.getClass_endArea().substring(0,2) }</span>
 								
 															</div>
 															<div class="class_item_image">
@@ -61,32 +61,40 @@
 														</div>
 														<div class="class_item_hash">${dto.getClass_hash() }</div>
 														<div class="class_item_title"><p class="main-block-desc">${dto.getClass_title() }</p></div>
-														<div class="class_item_state">상태 <span class="state_text">판매중</span></div>
+															<div class="class_item_state">상태 <span class="state_text">종료</span></div>
 														<div class="class_Button_div1">
-														<!-- 프립 번호 같이 보내줘야함! -->
-															<a href="<%=request.getContextPath()%>/hostUpdateFrip.do?class_num=${dto.getClass_num()}">수정</a>
+															<c:if test="${dto.getClass_cal() == 0 }">
+																<a href="<%=request.getContextPath()%>/hostEndCheck.do?class_num=${dto.getClass_num()}&page=${Paging.getPage()}">종료확인</a>
+															</c:if>
+															<c:if test="${dto.getClass_cal() == 3 }">
+																<a>종료완료</a>
+															</c:if>
+															<c:if test="${dto.getClass_cal() == 1 }">
+																<a>정산신청완료</a>
+															</c:if>
+															<c:if test="${dto.getClass_cal() == 2 }">
+																<a>정산완료</a>
+															</c:if>
 														</div>
 													</div>
 												</div>
 											</c:forEach>
 										</c:if>
-										
 									</div>
 								</c:forEach>
 								<c:if test="${empty list }">
-									판매중인 프립이 없습니다.
+									프립이 없습니다.
 								</c:if>
 						</div>
-						
 						<!-- 페이징 처리 부분 -->
 						<nav aria-label="Page navigation example" class="list_footer">
 							<ul class="pagination">
 								<c:if test="${Paging.getPage() > Paging.getBlock() }">
 									<li class="page-item">
-										<a class="page_link" href="hostMyFrip.do?page=1">
+										<a class="page_link" href="hostMyFripEnd.do?page=1">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
-										<a class="page_link" href="hostMyFrip.do?page=${Paging.getPage() - 1 }">	
+										<a class="page_link" href="hostMyFripEnd.do?page=${Paging.getPage() - 1 }">	
 											<span aria-hidden="true">&lt;</span>
 										</a>
 									</li>
@@ -96,15 +104,15 @@
 										<li class="page-item"><a class="page_link paging_active">${i }</a></li>
 									</c:if>
 									<c:if test="${i != Paging.getPage() }">
-										<li class="page-item"><a class="page_link" href="hostMyFrip.do?page=${i }">${i }</a></li>
+										<li class="page-item"><a class="page_link" href="hostMyFripEnd.do?page=${i }">${i }</a></li>
 									</c:if>
 								</c:forEach>
 								<c:if test="${Paging.getEndBlock() < Paging.getAllPage() }">
 									<li class="page-item">
-										<a class="page_link" href="hostMyFrip.do?page=${Paging.getPage() + 1 }">	
+										<a class="page_link" href="hostMyFripEnd.do?page=${Paging.getPage() + 1 }">	
 											<span aria-hidden="true">&gt;</span>
 										</a>
-										<a class="page_link" href="hostMyFrip.do?page=${Paging.getAllPage() }">
+										<a class="page_link" href="hostMyFripEnd.do?page=${Paging.getAllPage() }">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>

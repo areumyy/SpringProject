@@ -5,5 +5,37 @@
 
 <mapper namespace="com.market.model.ReviewDAO">
 
+	<select id="getCount_memnum" parameterType="int" resultType="int">
+		select distinct count(*) from frip_review r, frip_class c, frip_option o,frip_booking b
+		where r.review_classNum in
+		(select class_num from frip_class 
+		where frip_class.class_memnum = #{mem_num})
+		and r.review_classnum = c.class_num
+		and r.review_writer = b.booking_writer
+       	and b.booking_option = o.option_num
+	</select>
+	
+	<select id="getList_memnum" parameterType="java.util.Map" resultType="com.market.model.ReviewDTO">
+		<![CDATA[
+			select * from (select distinct r.*,c.class_title, c.class_startdate, o.option_name, m.mem_name,
+			row_number() over(order by review_num) rnum 
+			from frip_review r, frip_class c, frip_option o,frip_booking b,frip_member m
+			where r.review_classNum in
+			(select class_num from frip_class 
+			where frip_class.class_memnum = #{mem_num})
+			and r.review_classnum = c.class_num
+			and r.review_writer = b.booking_writer
+			and b.booking_option = o.option_num
+			and m.mem_num = r.review_writer
+			order by review_num desc) 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	
+	<update id="insertReply">
+		update Frip_review 
+		set review_reply = #{review_reply}, review_replydate = sysdate 
+		where review_num = #{review_num}
+	</update>
 
 </mapper>

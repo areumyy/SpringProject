@@ -1,3 +1,4 @@
+<%@page import="com.market.model.MemberDTO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false" pageEncoding="UTF-8"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
@@ -16,6 +17,15 @@
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/frip_content.css" rel="stylesheet"/>
 </head>
+<script type="text/javascript">
+$(function(){
+	<% HttpSession session =request.getSession();
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+		System.out.println(dto);
+	%>
+	
+})
+</script>
 <body>
 
 	<div id="app">
@@ -26,48 +36,39 @@
 				<div class="Content_Main2" style="opacity: 1; display: block;">
 					<div class="Content_Main3">
 						<div class="Content_Main4">
-							<div class="Content_Head1">
+							<div class="Content_Head1" style="padding-bottom: 24px;">
+								
+								<!-- 호스트 정보 -->
+								<!-- key값 받기 -->
+								<c:set var="fripInfo" value="${fripInfo }" />			<!-- 프립 내용 -->
+								<c:set var="hostCont" value="${hostCont }" />			<!-- 호스트 소개(소개내용) -->
+								<c:set var="hostInfo" value="${hostInfo }" />			<!-- 호스트 상세정보 (이름/프로필) -->
+								<c:set var="classCount" value="${classCount }" />		<!-- 호스트가 운영하는 클래스 개수 -->
+								<c:set var="reviewCount" value="${reviewCount }" />		<!-- 호스트 후기 개수 -->
+								<c:set var="likeCount" value="${likeCount }" />			<!-- 호스트 찜 개수 -->
 							
 							
-							
-								<div id="carouselExampleControlsNoTouching" class="carousel slide Content_Head1_Img1" data-bs-touch="false" data-bs-interval="false">
+								<div class="Content_Head1_Img1" style="margin: 0 50px;">
 									<div class="image-slider Content_Head1_Img2 image-initialized" dir="ltr">
-										
-										<div class="carousel-inner image-list">
-											<div class="image-track">
-												<div class="carousel-item active">
-													<img class="d-block w-100 Content_Img3" alt="상품이미지" style="height:375px; width:375px;"
-														src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_0,w_768/1622920435587-0_hwpjzs">
-												</div>
-												<div class="carousel-item">
-													<img class="d-block w-100 Content_Img3" alt="상품이미지" style="height:375px; width:375px;"
-														src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_0,w_768/12_xjkl8n">
-												</div>
+										<div class="image-list">
+											<div>
+												<img class= Content_Img3" alt="상품이미지" style="height:500px; width:500px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_0,w_768/1622920435587-0_hwpjzs">
 											</div>
 										</div>
-
-										<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Previous</span>
-										</button>
-										<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-											<span class="carousel-control-next-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Next</span>
-										</button>
-
 									</div>
 								</div>
 								
 								<div class="Content_Head2">
 									<section class="Content_Head3">
-										<div class="Content_Title1">
+										<div class="Content_Title1" style="padding-bottom: 10px;">
 											<div class="Content_Title2">
-												<label class="Content_Title3">로즈룸에서 쿠킹 &amp; 와인을 즐겨요-</label>
+												<label class="Content_Title3">${fripInfo.getClass_title() }</label>
 											</div>
 										</div>
 										<div class="Content_Price1">
 											<div class="Content_Price2">
-												45,000<span class="Content_Price3">원</span>
+												${fripInfo.getOption_editprice() }<span class="Content_Price3">원</span>
 											</div>
 										</div>
 									</section>
@@ -85,7 +86,7 @@
 																		<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 																			<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																				<img alt="호스트 프로필 이미지" width="56" height="56"
-																					src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,h_56,q_auto,w_56/Host_15379_25981_1624984289">
+																					src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo.getMem_profileimg() }">
 																			</div>
 																		</div>
 																	</div>
@@ -97,14 +98,14 @@
 														<div class="Host_Profile_Name1">
 															<a href="#">
 																<span class="Host_Profile_Name2">
-																<span>로즈룸</span>
+																<span>${hostInfo.getMem_nick() }</span>
 																	<img
 																		src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 16 16'%3E %3Cpath stroke='%23333' stroke-linecap='round' stroke-width='1.5' d='M6 3l5 5-5 5'/%3E %3C/svg%3E"
 																		alt="arrow-right">
 																</span>
 															</a>
 														</div>
-														<span class="Host_Profile6">프립 2<span>|</span>후기 17<span>|</span>저장 27</span>
+														<span class="Host_Profile6">프립 ${classCount }<span>|</span>후기 ${reviewCount }<span>|</span>저장 ${likeCount }</span>
 													</div>
 												</div>
 												<button class="Host_Pick" width="32px" height="32px">
@@ -419,7 +420,7 @@
 																							<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																								<img
 																									src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFkAAABZCAMAAABi1XidAAAAUVBMVEVHcEzz9Pby9Pb2+/vy8/f09/jq6/L////y9Pfz9ffy9ffz9Pfy8/fz9Pby9Pfy9Pby9Pfz9Pfy8/art8To6++wusi5ws7g5Orw8fTEzNbS1+C1FdKWAAAAEnRSTlMA5bIa8jsuC1GOZLnZzJ7Kt9TwOxZLAAADVklEQVRYw8VZ25arMAhNrdZqb1MgQPL/H3oe6kzb0ZBUJ+vwahfFLWxg41ze9t04NJfzroV2d740w9jt3Xbrj8Md5nYfjv02t1+Qtq/Vzg/XFmxrr4cVfrsGSqzpPo33BKV2+iTufoBPbCjG+7iDz2x3rBFwedj7G6yxW7Z4uhbWWZtJkqPCWlMT7BG22FjLseH6CFstAUinmz3r4mfct7Dd2oXk62/wF3abl8wAf2PD33+9xFfssyREEhk5CmXpqf8EC43B48N8iPoBHgf7t5ER0XMIgT0icrR//toKrA6iGhB9kEekKsEjBjPs00uNmAAzYnhFlwIim3A/66WxHXv59RbibddNCco6dzy51gKkr1ZSLDgGAPFofcbrlMsGYRAmPEREA4+2z5ZfSL41Y8gWopFy5FESjwQ9ZRKvt0okGbIqm0j3WTDCqmcPOAYz5ST5UMzEG5xzdxNmMjxbQN+d24OZc7TuIcDe5AyywjJfCKCzZgzd4nk0OX+L58HiuU0xN+5SKeaLO1eK+ex2lWLeubZSzK2DSpUCVsyg3uQNr2bMO7sJxhUMO+F8Nkcj5ORDm5/hbOYzSBpLQgMpALiYswZoutsFGwxoMrNiTOUd2WMBwJDZp1JBay5kGO2ZDkCWB46YQRmgM3vKA8+FIUm82V4fPcXqgxMes+mQOIcF3AtWH5oNnsRmc/3p3dndRzzyKyDCy1PkbN7oocC1fy4n0Rc4ht45576yP2NEZFEAUGFEo+R/tLyyVVA9MiJyiIERPdsk9zKL9rmFmxBJwrS1BckR83N+tmb+F76kGEKIlOHWt5k/tw3OPMVsNh9Kdqs5K2mWjZqyfXBh2YmZvOuKdtiFBU3VrpVTyd6tcXGpJH6tHWvvXiIPVZXIy4uwEiNyFFXNaSe/9A2VwOw9YjI0jR4RvWf+3vUT+sZ7IUaetAyOlFQQKPKkefDbvx/TOhIxog9RRMhMW1USkRj8m5YwpLUvYvSBAMrUO/2lSixoX996HZWw70JmUlKvmzRGDfl+sdh3giY1xsdXlGxTTrV4Seuizo3WUGTDHZDVlIlpXciPCXA0xfgsQaapNnOgOKwCAwDC4b/dJireUyregGrerSre2mreB2veNGveYWvejjfdu/8BI2K8ok7u95kAAAAASUVORK5CYII="
-																									alt="user-84829-profile" class="bzFlWa">
+																									alt="user-84829-profile" class="Content_Review_Profile3" width="40" height="40">
 																							</div>
 																						</div>
 																					</div>
@@ -475,7 +476,7 @@
 																							<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																								<img
 																									src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFkAAABZCAMAAABi1XidAAAAUVBMVEVHcEzz9Pby9Pb2+/vy8/f09/jq6/L////y9Pfz9ffy9ffz9Pfy8/fz9Pby9Pfy9Pby9Pfz9Pfy8/art8To6++wusi5ws7g5Orw8fTEzNbS1+C1FdKWAAAAEnRSTlMA5bIa8jsuC1GOZLnZzJ7Kt9TwOxZLAAADVklEQVRYw8VZ25arMAhNrdZqb1MgQPL/H3oe6kzb0ZBUJ+vwahfFLWxg41ze9t04NJfzroV2d740w9jt3Xbrj8Md5nYfjv02t1+Qtq/Vzg/XFmxrr4cVfrsGSqzpPo33BKV2+iTufoBPbCjG+7iDz2x3rBFwedj7G6yxW7Z4uhbWWZtJkqPCWlMT7BG22FjLseH6CFstAUinmz3r4mfct7Dd2oXk62/wF3abl8wAf2PD33+9xFfssyREEhk5CmXpqf8EC43B48N8iPoBHgf7t5ER0XMIgT0icrR//toKrA6iGhB9kEekKsEjBjPs00uNmAAzYnhFlwIim3A/66WxHXv59RbibddNCco6dzy51gKkr1ZSLDgGAPFofcbrlMsGYRAmPEREA4+2z5ZfSL41Y8gWopFy5FESjwQ9ZRKvt0okGbIqm0j3WTDCqmcPOAYz5ST5UMzEG5xzdxNmMjxbQN+d24OZc7TuIcDe5AyywjJfCKCzZgzd4nk0OX+L58HiuU0xN+5SKeaLO1eK+ex2lWLeubZSzK2DSpUCVsyg3uQNr2bMO7sJxhUMO+F8Nkcj5ORDm5/hbOYzSBpLQgMpALiYswZoutsFGwxoMrNiTOUd2WMBwJDZp1JBay5kGO2ZDkCWB46YQRmgM3vKA8+FIUm82V4fPcXqgxMes+mQOIcF3AtWH5oNnsRmc/3p3dndRzzyKyDCy1PkbN7oocC1fy4n0Rc4ht45576yP2NEZFEAUGFEo+R/tLyyVVA9MiJyiIERPdsk9zKL9rmFmxBJwrS1BckR83N+tmb+F76kGEKIlOHWt5k/tw3OPMVsNh9Kdqs5K2mWjZqyfXBh2YmZvOuKdtiFBU3VrpVTyd6tcXGpJH6tHWvvXiIPVZXIy4uwEiNyFFXNaSe/9A2VwOw9YjI0jR4RvWf+3vUT+sZ7IUaetAyOlFQQKPKkefDbvx/TOhIxog9RRMhMW1USkRj8m5YwpLUvYvSBAMrUO/2lSixoX996HZWw70JmUlKvmzRGDfl+sdh3giY1xsdXlGxTTrV4Seuizo3WUGTDHZDVlIlpXciPCXA0xfgsQaapNnOgOKwCAwDC4b/dJireUyregGrerSre2mreB2veNGveYWvejjfdu/8BI2K8ok7u95kAAAAASUVORK5CYII="
-																									alt="user-1128429-profile" class="bzFlWa">
+																									alt="user-1128429-profile" class="Content_Review_Profile3" width="40" height="40">
 																							</div>
 																						</div>
 																					</div>
@@ -707,7 +708,8 @@
 												<br>
 											</p>
 											<p style="text-align: center; line-height: 2;">
-												<img src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/ca5ibcannwk3gjozuh7j.jpg">
+												<img style="height:600px; width:800px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/ca5ibcannwk3gjozuh7j.jpg">
 											</p>
 											<p style="text-align: center; line-height: 2;">
 												<br>
@@ -716,7 +718,8 @@
 												<br>
 											</p>
 											<p style="text-align: center; line-height: 2;">
-												<img src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/dzf60k5tpkegj1nm3m0d.jpg">
+												<img style="height:600px; width:800px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/dzf60k5tpkegj1nm3m0d.jpg">
 											</p>
 											<p style="text-align: center; line-height: 2;">
 												<br>
@@ -752,7 +755,8 @@
 												<br>
 											</p>
 											<p style="text-align: center; line-height: 2;">
-												<img src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/bio7othpxoicwqqyyasb.jpg">
+												<img style="height:600px; width:800px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/bio7othpxoicwqqyyasb.jpg">
 											</p>
 											<p style="line-height: 2;">
 												<br>
@@ -776,7 +780,8 @@
 												<br>
 											</p>
 											<p style="text-align: center; line-height: 2;">
-												<img src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/kh10t2exsnkvcx3or18c.jpg">
+												<img style="height:600px; width:800px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/kh10t2exsnkvcx3or18c.jpg">
 											</p>
 											<p style="text-align: center; line-height: 2;">
 												<br>
@@ -960,8 +965,9 @@
 											<p>
 												<br>
 											</p>
-											<p>
-												<img src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/bottom-corona-notice_u2r6sx.jpg">
+											<p style="text-align: center;">
+												<img style="height:800px; width:800px;"
+													src="https://res.cloudinary.com/frientrip/image/upload/c_limit,dpr_3.0,f_auto,q_auto:best,w_500/bottom-corona-notice_u2r6sx.jpg">
 											</p>
 										</div>
 									</div>
@@ -1047,16 +1053,12 @@
 									<p>서울 성동구 마조로1길 42 3층 로즈룸</p>
 								</section>
 								
-								<div class="accordion-item">
-									<div>
-										<div>
-											<h4 class="accordion-header" id="flush-headingOne">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-													자주 묻는 질문
-												</button>
-											</h4>
+								<div class="accordion" id="accordionExample">
+									<div class="Content_Qna1">
+										<div class="Content_Qna2" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true">
+											자주 묻는 질문
 										</div>
-										<div class="accordion-collapse collapse" id="flush-collapseOne" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+										<div class="accordion-collapse collapse" id="collapse1" data-bs-parent="#accordionExample" style="background-color: rgb(239, 247, 255);">
 											<div class="accordion-body">
 												<div class="Content_Main13">
 													<img
@@ -1235,21 +1237,22 @@
 										</div>
 									</div>
 								</div>
+								
+								
+								
 								<a class="Content_Main15" href="#">문의하기
 									<img
-										src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath d='M18 0H0v18h18z'/%3E %3Cpath stroke='%23000' stroke-width='1.5' d='M7 5l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"
+										style="padding-right: 20px;"
+										src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath d='M18 0H0v18h18z'/%3E %3Cpath stroke='%23000' stroke-width='1.5' d='M7 5l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"
 										alt="/products/151306/qnas">
 								</a>
-								<div class="accordion-item">
-									<div>
-										<div>
-											<h4 class="accordion-header" id="flush-headingTwo">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo" style="border-color: white !important;">
-													환불 정책
-												</button>
-											</h4>
+								
+								<div class="accordion" id="accordionExample">
+									<div class="Content_Qna1">
+										<div class="Content_Qna2" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true">
+											환불 정책
 										</div>
-										<div class="accordion-collapse collapse" id="flush-collapseTwo" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+										<div class="accordion-collapse collapse" id="collapse2" data-bs-parent="#accordionExample" style="background-color: rgb(239, 247, 255);">
 											<div class="accordion-body">
 												<div class="Content_Intro5">
 													<p>[국내 환불규정]</p>
@@ -1293,12 +1296,22 @@
 										alt="상품 저장">
 									<span class="Frip_Pick_Count">135</span>
 								</button>
-								<button class="Under_Bar3 Under_Bar4" width="100%" height="56px" color="white" font-size="16px">
-									<div class="Under_Bar5">참여하기</div>
-								</button>
+								<%if(dto != null) {%>
+									<button class="Under_Bar3 Under_Bar4" width="100%" height="56px" color="white" font-size="16px"
+										onclick="location.href='<%=request.getContextPath() %>/option_select.do?class_num=${fripInfo.getClass_num() }'">
+										<div class="Under_Bar5">참여하기</div>
+									</button>
+								<%} else if(dto == null) {%>
+									<button class="Under_Bar3 Under_Bar4" width="100%" height="56px" color="white" font-size="16px"
+										onclick="location.href='<%=request.getContextPath() %>/login.do'">
+										<div class="Under_Bar5">참여하기</div>
+									</button>
+								<%} %>
 							</div>
 						</div>
 					</div>
+					
+					
 					<section class="Content_Intro2 Content_Recommend1">
 						<header class="Content_Intro3">
 							<h4 class="Content_Intro4">이런 프립은 어때요?</h4>
@@ -1319,6 +1332,7 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="생활소믈리에 기초 와인 강의 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/WINE_MAIN_01_1504598552674">
 															</div>
 														</div>
@@ -1360,6 +1374,7 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="Tea+Cocktail 차 마시며 배우는 테마가 있는 칵테일 만들기 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/1586175181732_bf1jwj">
 															</div>
 														</div>
@@ -1402,6 +1417,7 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="신사 / 가로수길 칵테일 클래스 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/product_banner_1560603284574_547509">
 															</div>
 														</div>
@@ -1444,6 +1460,50 @@
 														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																<img alt="술술 놀면서 수제 맥주 만들기 썸네일" width="192"
+																	class="Content_Img3"
+																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="Content_Recommend_State1">
+												<div class="Content_Recommend_State2">판매중</div>
+											</div>
+										</div>
+										<div class="Frip_Title1">19세이상｜맥주를 즐기는 방법</div>
+										<div class="Frip_Title2">술술 놀면서 수제 맥주 만들기</div>
+										<div class="Frip_Price1">
+											<span class="Frip_Price2">40,000원</span>
+											<span class="Frip_Price3"></span>
+										</div>
+										<div class="Frip_Grade1">
+											<div class="Frip_Grade2">
+												<img
+													src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E %3Cpath fill='%233397FF' fill-rule='nonzero' d='M8 12.16l-3.852 1.894a.5.5 0 0 1-.715-.52l.61-4.248-2.991-3.079a.5.5 0 0 1 .273-.84l4.23-.733L7.558.838a.5.5 0 0 1 .884 0l2.003 3.796 4.23.732a.5.5 0 0 1 .273.841l-2.992 3.079.611 4.248a.5.5 0 0 1-.715.52L8 12.16z'/%3E %3C/svg%3E"
+													alt="별점 icon">
+												<span>4.80</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="Content_Recommend3">
+								<a class="Content_Recommend4" href="#">
+									<div class="Content_Recommend5">
+										<div class="Content_Recommend6">
+											<div class="Content_Recommend_Place1">
+												<span class="Content_Recommend_Place2"><span>송파/강동구</span></span>
+											</div>
+											<div class="Content_Img1">
+												<img class="Content_Img2" width="192"
+													src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
+												<div class="Content_Main2" style="opacity: 1; display: block;">
+													<div style="display: block;">
+														<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
+															<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
+																<img alt="술술 놀면서 수제 맥주 만들기 썸네일" width="192"
+																	class="Content_Img3"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_5,w_192/170212_beer_01_1486004849970">
 															</div>
 														</div>
@@ -1480,8 +1540,6 @@
 			<jsp:include page="../include/footer.jsp" />
 		</div>
 	</div>
-<!-- 
-	document.querySelector("#app > div > div.Content_Main1 > div > div > div.Content_Main4 > div.Content_Intro1 > div:nth-child(8) > div > div.Content_Main7 > div")
- -->
+
 </body>
 </html>

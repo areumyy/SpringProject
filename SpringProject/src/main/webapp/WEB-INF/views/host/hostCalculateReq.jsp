@@ -42,6 +42,17 @@ function calReq(target){
         }
     });
 }
+
+function changeType() {
+	var type= $("#type").val();
+	window.location.href="<%=request.getContextPath() %>/hostCalculateReq.do?type=" + type;
+}
+
+$(function(){
+	var typeValue = "<%=request.getAttribute("type") %>";
+	
+	$("#type").val(typeValue).attr('selected', 'selected');
+})
 </script>
 <body>
 	<div class="mainFrame">
@@ -57,11 +68,11 @@ function calReq(target){
 							<div class="cal_header">
 								<h2 class="cal_title">정산 요청</h2>
 								<div style="width: 190px;">
-									<select class="form-select form-select-lg mb-3 cal_select">
-										<option value="">전체</option>
-										<option value="">정산 요청 전</option>
-										<option value="">정산 요청 완료</option>
-										<option value="">정산 완료</option>
+									<select class="form-select form-select-lg mb-3 cal_select" id="type" onchange="changeType();">
+										<option value="total">전체</option>
+										<option value="before">정산 요청 전</option>
+										<option value="ing">정산 요청 완료</option>
+										<option value="after">정산 완료</option>
 									</select>
 								</div>
 							</div>
@@ -80,7 +91,7 @@ function calReq(target){
 								<c:if test="${!empty list }">
 									<c:forEach items="${list }" var="dto" varStatus="status">
 										<div class="cal_item">
-											<div>${dto.getCal_startDate() }</div>
+											<div>${dto.getCal_startDate().substring(0,10) }</div>
 											<div class="item_title"><p>${dto.getCal_name() }</p></div>
 											<div>${dto.getCal_buyCount() }</div>
 											<div>${dto.getCal_enterCount() }</div>
@@ -89,8 +100,8 @@ function calReq(target){
 											<div>${dto.getCal_sal() * 0.1 }</div>
 											<div>${dto.getCal_total() }</div>
 											<div>
-												<c:if test="${dto.getCal_status() == 0 }">
-													<button class="btn btn-primary" onclick="calReq(${dto.getCal_num()})" id="btn${dto.getCal_num() }">정산 요청</button>
+												<c:if test="${dto.getCal_status() == 3 }">
+													<button class="btn btn-primary" onclick="calReq(${dto.getCal_classNum()})" id="btn${dto.getCal_classNum() }">정산 요청</button>
 												</c:if>
 												<c:if test="${dto.getCal_status() == 1 }">
 													<button class="btn btn-secondary" disabled>정산 요청중</button>
@@ -108,6 +119,38 @@ function calReq(target){
 										</div>
 								</c:if>
 							</div>
+							<nav aria-label="Page navigation example" class="list_footer">
+								<ul class="pagination">
+									<c:if test="${Paging.getPage() > Paging.getBlock() }">
+										<li class="page-item">
+											<a class="page_link" href="hostCalculateReq.do?type=${type }">
+												<span aria-hidden="true">&laquo;</span>
+											</a>
+											<a class="page_link" href="hostCalculateReq.do?type=${type }&page=${Paging.getPage() - 1 }">	
+												<span aria-hidden="true">&lt;</span>
+											</a>
+										</li>
+									</c:if>
+									<c:forEach begin="${Paging.getStartBlock() }" end="${Paging.getEndBlock() }" var="i">
+										<c:if test="${i == Paging.getPage() }">
+											<li class="page-item"><a class="page_link paging_active">${i }</a></li>
+										</c:if>
+										<c:if test="${i != Paging.getPage() }">
+											<li class="page-item"><a class="page_link" href="hostCalculateReq.do?type=${type }&page=${i }">${i }</a></li>
+										</c:if>
+									</c:forEach>
+									<c:if test="${Paging.getEndBlock() < Paging.getAllPage() }">
+										<li class="page-item">
+											<a class="page_link" href="hostCalculateReq.do?type=${type }&page=${Paging.getPage() + 1 }">	
+												<span aria-hidden="true">&gt;</span>
+											</a>
+											<a class="page_link" href="hostCalculateReq.do?type=${type }&page=${Paging.getAllPage() }">
+												<span aria-hidden="true">&raquo;</span>
+											</a>
+										</li>
+									</c:if>
+								</ul>
+							</nav>
 						</div>
 				</div>
 			</div>

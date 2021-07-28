@@ -90,7 +90,7 @@
 					</div>
 					
 					<div id="menuFrame3"class="menubutton">
-						<a type="button" href="<%=request.getContextPath() %>/hostCalculateReq.do">
+						<a type="button" href="<%=request.getContextPath() %>/hostCalculateReq.do?type=total">
 							<button type="button" id="3" class="ul">
 								<i class="fa fa-krw" aria-hidden="true"></i>				
 									정산
@@ -167,7 +167,7 @@
 					<span class="glyphicon glyphicon-tent"  aria-hidden="true"></span>
 				</div>
 				<ul class="menuList3">
-					<li class="menutext"><a href="<%=request.getContextPath() %>/hostCalculateReq.do">정산</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostCalculateReq.do?type=total">정산</a></li>
 				</ul>
 			</div>
 			
