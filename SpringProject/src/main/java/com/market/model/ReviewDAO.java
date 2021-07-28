@@ -22,4 +22,6 @@ public interface ReviewDAO {
 	public List<ReviewDTO> class_reviewList(int class_num);				// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명/시작날짜/끝날짜)
 	public List<ReviewDTO> class_reviewList2(int class_num);			// 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명)
 	public List<Integer> reviewLike_list(HashMap<String, Integer> map);	// 좋아요 누른 리뷰 리스트
+	
+	public List<LikeDTO> getTarget(int mem_num);
 }

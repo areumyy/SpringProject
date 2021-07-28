@@ -17,7 +17,6 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,6 +38,7 @@ import com.market.model.Class_qnaDTO;
 import com.market.model.HostDAO;
 import com.market.model.HostDTO;
 import com.market.model.LikeDAO;
+import com.market.model.LikeDTO;
 import com.market.model.MemberDAO;
 import com.market.model.MemberDTO;
 import com.market.model.NoticeDAO;
@@ -2830,4 +2830,21 @@ public class MarketController {
 		
 		return "searchAll";
 	}
+	
+	@RequestMapping(value = "/class_like_list.do", method = RequestMethod.POST)
+    @ResponseBody
+    public void emailCheck(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        int mem_num = getMem_num(request);
+
+        List<LikeDTO> like_list = this.reviewDao.getTarget(mem_num);
+
+        JSONObject obj = new JSONObject();
+
+        JSONArray ja = JSONArray.fromObject(like_list);
+
+        obj.put("clist", ja);
+
+        System.out.println(like_list);
+        response.getWriter().print(obj);
+    }
 }

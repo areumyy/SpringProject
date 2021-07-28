@@ -89,7 +89,7 @@ $(function(){
 											<div class="Host_Profile3">
 												<div class="Host_Profile4">
 													<div class="Host_Profile_Img">
-														<a href="#">
+														<a href="<%=request.getContextPath() %>/host_info.do?hostMemNum=${hostInfo.getMem_num()}">
 															<div class="Content_Img1">
 																<img class="Content_Img2" width="56" height="56"
 																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,h_56,q_auto,w_56/Host_15379_25981_1624984289">
@@ -108,7 +108,7 @@ $(function(){
 													</div>
 													<div class="Host_Profile5">
 														<div class="Host_Profile_Name1">
-															<a href="#">
+															<a href="<%=request.getContextPath() %>/host_info.do?hostMemNum=${hostInfo.getMem_num()}">
 																<span class="Host_Profile_Name2">
 																<span>${hostInfo.getMem_nick() }</span>
 																	<img

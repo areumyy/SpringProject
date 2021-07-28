@@ -73,4 +73,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 		// TODO Auto-generated method stub
 		return this.sqlSession.selectList("reviewLike_list", map);
 	}
+
+	@Override
+    public List<LikeDTO> getTarget(int mem_num) {
+        return this.sqlSession.selectList("getTarget", mem_num);
+    }
 }

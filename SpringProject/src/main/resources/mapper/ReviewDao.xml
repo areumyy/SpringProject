@@ -50,5 +50,8 @@
 	values(#{review_num},#{review_writer},#{review_classNum},default,#{review_score}
 	,#{review_cont},sysdate,null,null,null)
 	</insert>
-
+	
+	<select id="getTarget" parameterType="int" resultType="com.market.model.LikeDTO">
+        select like_target from frip_like where like_writer = #{mem_num} and like_flag = 3
+    </select>
 </mapper>
