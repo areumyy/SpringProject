@@ -106,29 +106,34 @@
 							  </tbody>
 							</table>
 						</div>
-						
 					</div>
 						<!-- 페이징 처리 부분 -->
-						<nav aria-label="Page navigation example" class="qna_list_footer">
+						<nav aria-label="Page navigation example" class="list_footer">
 							<ul class="pagination">
 								<c:if test="${Paging.getPage() > Paging.getBlock() }">
 									<li class="page-item">
-										<a class="page_link" href="hostAsk.do?page=1">
+										<a class="page_link" href="searchAsk.do?page=1&search_field=${field }&search_name=${name}">
 											<span aria-hidden="true">&laquo;</span>
+										</a>
+										<a class="page_link" href="searchAsk.do?page=${Paging.getPage() - 1 }&search_field=${field }&search_name=${name}">	
+											<span aria-hidden="true">&lt;</span>
 										</a>
 									</li>
 								</c:if>
 								<c:forEach begin="${Paging.getStartBlock() }" end="${Paging.getEndBlock() }" var="i">
 									<c:if test="${i == Paging.getPage() }">
-										<li class="page-item"><a class="page_link active">${i }</a></li>
+										<li class="page-item"><a class="page_link paging_active">${i }</a></li>
 									</c:if>
 									<c:if test="${i != Paging.getPage() }">
-										<li class="page-item"><a class="page_link" href="hostAsk.do?page=${i }">${i }</a></li>
+										<li class="page-item"><a class="page_link" href="searchAsk.do?page=${i }&search_field=${field }&search_name=${name}">${i }</a></li>
 									</c:if>
 								</c:forEach>
 								<c:if test="${Paging.getEndBlock() < Paging.getAllPage() }">
 									<li class="page-item">
-										<a class="page-link" href="hostAsk.do?page=${Paging.getAllPage() }" style="color: black;">
+										<a class="page_link" href="searchAsk.do?page=${Paging.getPage() + 1 }&search_field=${field }&search_name=${name}">	
+											<span aria-hidden="true">&gt;</span>
+										</a>
+										<a class="page_link" href="searchAsk.do?page=${Paging.getAllPage() }&search_field=${field }&search_name=${name}">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>

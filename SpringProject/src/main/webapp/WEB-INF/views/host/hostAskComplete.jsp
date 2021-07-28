@@ -17,7 +17,19 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath()%>/resources/css/hostAsk.css"
 	rel="stylesheet" />
-	
+<script>
+<% int su = 10; %>
+	var mql = window.matchMedia("screen and (max-width: 768px)");
+
+	mql.addListener(function(e) {
+	    if(e.matches) {
+	        console.log('모바일 화면 입니다.');
+	    } else {
+	        console.log('데스크탑 화면 입니다.');
+	    }
+	});
+
+</script>
 </head>
 <body>
 	<div class="mainFrame">
@@ -77,7 +89,7 @@
 										<button class="accordion-button collapsed arcodion_selector askTitle" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index.count }" aria-expanded="true" aria-controls="collapse${index.count }">
 											<div class="arcodion_div">
 												<c:if test="${dto.getClass_qna_cont().length() >= 10 }">
-													<div class="arcodion_title">${dto.getClass_qna_cont().substring(0,10) }...</div>
+													<div class="arcodion_title">${dto.getClass_qna_cont().substring(0,5) }...</div>
 												</c:if>
 												<c:if test="${dto.getClass_qna_cont().length() < 10 }">
 													<div class="arcodion_title">${dto.getClass_qna_cont() }</div>
@@ -132,26 +144,32 @@
 					</div>
 					
 					<!-- 페이징 처리 부분 -->
-					<nav aria-label="Page navigation example" class="qna_list_footer">
+					<nav aria-label="Page navigation example" class="list_footer">
 						<ul class="pagination">
 							<c:if test="${Paging.getPage() > Paging.getBlock() }">
 								<li class="page-item">
-									<a class="page_link" href="hostAskComplete.do?page=1">
+									<a class="page_link" href="searchComAsk.do?page=1&search_field=${field }&search_name=${name}">
 										<span aria-hidden="true">&laquo;</span>
+									</a>
+									<a class="page_link" href="searchComAsk.do?page=${Paging.getPage() - 1 }&search_field=${field }&search_name=${name}">	
+										<span aria-hidden="true">&lt;</span>
 									</a>
 								</li>
 							</c:if>
 							<c:forEach begin="${Paging.getStartBlock() }" end="${Paging.getEndBlock() }" var="i">
 								<c:if test="${i == Paging.getPage() }">
-									<li class="page-item"><a class="page_link active">${i }</a></li>
+									<li class="page-item"><a class="page_link paging_active">${i }</a></li>
 								</c:if>
 								<c:if test="${i != Paging.getPage() }">
-									<li class="page-item"><a class="page_link" href="hostAskComplete.do?page=${i }">${i }</a></li>
+									<li class="page-item"><a class="page_link" href="searchComAsk.do?page=${i }&search_field=${field }&search_name=${name}">${i }</a></li>
 								</c:if>
 							</c:forEach>
 							<c:if test="${Paging.getEndBlock() < Paging.getAllPage() }">
 								<li class="page-item">
-									<a class="page-link" href="hostAskComplete.do?page=${Paging.getAllPage() }" style="color: black;">
+									<a class="page_link" href="searchComAsk.do?page=${Paging.getPage() + 1 }&search_field=${field }&search_name=${name}">	
+										<span aria-hidden="true">&gt;</span>
+									</a>
+									<a class="page_link" href="searchComAsk.do?page=${Paging.getAllPage() }&search_field=${field }&search_name=${name}">
 										<span aria-hidden="true">&raquo;</span>
 									</a>
 								</li>

@@ -1115,16 +1115,16 @@ public class MarketController {
 		map.put("class_pass", class_pass);
 
 		// DB 상의 전체 게시물의 수를 확인하는 작업.
-		totalRecord = this.classDao.countclass_myfrip(map);
+		totalRecord = this.classDao.countclass_myfripWait(map);
 
 		PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 		map.put("dto", dto);
 
-		List<ClassDTO> list = this.classDao.getList_myFrip(map);
+		List<ClassDTO> list = this.classDao.getList_myFripWait(map);
 
 		model.addAttribute("cList", list);
 		model.addAttribute("Paging", dto);
-		System.out.println(list);
+		
 		return "host/hostMyFripWait";
 	}
 
@@ -2018,6 +2018,9 @@ public class MarketController {
 			List<Class_qnaDTO> qnaList = this.class_qnaDao.getTitlesearchList(map);
 			model.addAttribute("qList", qnaList);
 			model.addAttribute("Paging", dto);
+			model.addAttribute("field", field);
+			model.addAttribute("name", name);
+			
 		}
 		return "host/hostAsk";
 	}
@@ -2062,6 +2065,8 @@ public class MarketController {
 			List<Class_qnaDTO> qnaList = this.class_qnaDao.CgetTitlesearchList(map);
 			model.addAttribute("qList", qnaList);
 			model.addAttribute("Paging", dto);
+			model.addAttribute("field", field);
+			model.addAttribute("name", name);
 		}
 		return "host/hostAskComplete";
 	}
