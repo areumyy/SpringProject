@@ -52,7 +52,7 @@
 												<%-- <button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button> --%>
 											</div>
 											<!-- 사진 수정필요(클래스 사진) -->
-											<img alt="${dto.getClass_image() }" src="<%=request.getContextPath() %>/resources/upload/${dto.getClass_image() }" class="class_img">
+											<img alt="${dto.getClass_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto.getClass_image() }" class="class_img">
 										</div>
 										<div class="class_hash">${dto.getClass_hash() }</div>
 										<div class="class_title">${dto.getClass_title() }</div>

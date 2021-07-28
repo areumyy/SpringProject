@@ -121,7 +121,9 @@
 											<div class="host_info_detail1">
 												<span class="host_name">${hostInfo.getMem_name() }</span>
 												<img alt="arrow_icon" src="<%=request.getContextPath() %>/resources/image/like/arrow_icon.svg" class="arrow_icon">
-												<img alt="superHost_badge" src="<%=request.getContextPath() %>/resources/image/like/superHost_badge.svg" class="superHost_badge">
+												<c:if test="${classCount >= 3}">
+													<img alt="superHost_badge" src="<%=request.getContextPath() %>/resources/image/like/superHost_badge.svg" class="superHost_badge">
+												</c:if>
 											</div>
 											<div class="host_info_detail2">
 												<span class="frip_count">프립 ${classCount }</span>
@@ -186,15 +188,15 @@
 											<div class="class_hash">${dto.getClass_hash() }</div>
 											<div class="class_title">${dto.getClass_title() }</div>
 											
-											<c:if test="${hostClassOption[status.index].getOption_editPrice() eq null }">
+											<c:if test="${hostClassOption[status.index].getOption_editPrice() eq 0 || hostClassOption[status.index].getOption_editPrice() eq hostClassOption[status.index].getOption_price()}">
 												<div class="class_price"> 
 													<fmt:formatNumber value="${hostClassOption[status.index].getOption_price() }" />원
 												</div>
 											</c:if>
-											<c:if test="${hostClassOption[status.index].getOption_editPrice() ne null }">
+											<c:if test="${hostClassOption[status.index].getOption_editPrice() ne 0 && hostClassOption[status.index].getOption_editPrice() ne hostClassOption[status.index].getOption_price()}">
 												<div class="class_price"> 
-													<span><fmt:formatNumber value="${hostClassOption[status.index].getOption_price() }" /></span>
-													<span class="class_editPrice"><fmt:formatNumber value="${hostClassOption[status.index].getOption_editPrice() }" />원</span>
+													<span><fmt:formatNumber value="${hostClassOption[status.index].getOption_editPrice() }" /></span>
+													<span class="class_editPrice"><fmt:formatNumber value="${hostClassOption[status.index].getOption_price() }" />원</span>
 												</div>
 											</c:if>
 											
@@ -239,15 +241,15 @@
 							      		<div class="review_cont">${dto2.getReview_cont() }</div>
 							      		<div class="booking_info">
 							      			<div class="class_name">${classReview2[status.index].getClass_title() }</div>
-							      			<c:if test="${classReview2[status.index].getClass_endDate() eq null}">
+							      			<c:if test="${classReview2[status.index].getClass_startDate() eq classReview2[status.index].getClass_endDate() }">
 								      			<div class="class_startDate">
-								      				<span>${classReview2[status.index].getClass_startDate() } 참여</span>
+								      				<span>${classReview2[status.index].getClass_startDate().substring(0,10) } 참여</span>
 								      				<span> | ${classReview3[status.index].getOption_name() }</span>
 								      			</div>
 							      			</c:if>
-							      			<c:if test="${classReview2[status.index].getClass_endDate() ne null}">
+							      			<c:if test="${classReview2[status.index].getClass_startDate() ne classReview2[status.index].getClass_endDate()}">
 								      			<div class="class_startDate">
-								      				<span>${classReview2[status.index].getClass_startDate() } ~ ${classReview2[status.index].getClass_endDate() } 참여</span>
+								      				<span>${classReview2[status.index].getClass_startDate().substring(0,10) } ~ ${classReview2[status.index].getClass_endDate().substring(0,10) } 참여</span>
 								      				<span> | ${classReview3[status.index].getOption_name() }</span>
 								      			</div>
 							      			</c:if>
