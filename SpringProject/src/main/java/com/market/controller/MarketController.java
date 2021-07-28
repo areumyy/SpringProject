@@ -175,19 +175,15 @@ public class MarketController {
 		
 		int mem_num2 = this.memberDao.getMember_memNick(mem_nick); // 닉네임으로 가져온 넘버
 		
-		System.out.println(mem_num2 == mem_num);
 		if (result == 0) {
 			res = "사용 가능합니다.";
 			state = 1;
-			System.out.println("1");
 		}else if(mem_num2 == mem_num) {
 			res = "사용 가능합니다.";
 			state = 1;
-			System.out.println("2");
 		}else {
 			res = "사용 불가능합니다.";
 			state = 2;
-			System.out.println("3");
 		}
 		
 		JSONObject obj = new JSONObject();
@@ -387,8 +383,6 @@ public class MarketController {
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
 
-		System.out.println("로그인 세션 mem_num 값 확인 >>> " + dto.getMem_num());
-
 		// 찜 클래스 목록 가져오는 메서드
 		List<ClassDTO> likeClass = this.likeDao.getLikeClassList(dto.getMem_num());
 		// List<ClassDTO> likeClass = this.likeDao.getLikeClassList(map);
@@ -518,20 +512,13 @@ public class MarketController {
 		map.put("like_writer", dto.getMem_num()); // 로그인한 멤버 번호
 		map.put("like_target", reviewNum); // 좋아요 누른 리뷰 번호
 
-		System.out.println("멤버 번호1 >>> " + dto.getMem_num());
-		System.out.println("리뷰 번호1 >>> " + reviewNum);
-
 		// 해당 리뷰에 대한 좋아요 상태 체크하는 메서드 (0: 안 누른 상태 / 1: 누른 상태)
 		int like_status = this.likeDao.review_status(map);
-		System.out.println("리뷰 좋아요 상태입니다 >>> " + like_status);
 
 		int state = 0;
 		int likeCount = 0;
 
 		if (like_status > 0) { // 좋아요 누른 상태
-
-			System.out.println("멤버 번호2 >>> " + dto.getMem_num());
-			System.out.println("리뷰 번호2 >>> " + reviewNum);
 
 			// 리뷰 좋아요 취소 (-1)
 			int like_minus = this.likeDao.review_like_minus(reviewNum);
@@ -548,9 +535,6 @@ public class MarketController {
 			}
 
 		} else if (like_status == 0) { // 좋아요 안 누른 상태
-
-			System.out.println("멤버 번호3 >>> " + dto.getMem_num());
-			System.out.println("리뷰 번호3 >>> " + reviewNum);
 
 			// 리뷰 좋아요 (+1)
 			int like_plus = this.likeDao.review_like_plus(reviewNum);
@@ -578,9 +562,6 @@ public class MarketController {
 	@RequestMapping("review_sort.do")
 	public String reviewSort(@RequestParam("sort") String sort, @RequestParam("hostMemNum") int host_memNum,
 			HttpServletRequest request, Model model) {
-
-		System.out.println("sort >>> " + sort);
-		System.out.println("host_memNum >>> " + host_memNum);
 
 		// 세션값 가져오기
 		HttpSession session = request.getSession();
@@ -729,11 +710,7 @@ public class MarketController {
 
 		PrintWriter out = response.getWriter();
 
-		System.out.println("프립승인 매핑에 넘어온 클래스 넘버 값입니다 >>> " + class_num);
-
 		int result = this.classDao.fripPass_result(class_num);
-
-		System.out.println("승인완료 result 값 >>> " + result);
 
 		if (result == 1) { // 승인완료 성공
 			out.println("<script>");
@@ -788,8 +765,6 @@ public class MarketController {
 		response.setContentType("text/html; charset=UTF-8");
 
 		PrintWriter out = response.getWriter();
-
-		System.out.println("정산승인 매핑에 넘어온 클래스 넘버 값입니다 >>> " + class_num);
 
 		int result = this.calculateDao.calPass_result(class_num);
 		int result2 = this.calculateDao.calPass_result2(class_num);
@@ -856,9 +831,6 @@ public class MarketController {
 		model.addAttribute("optionDto", optionDto);
 		model.addAttribute("option_price", option_price);
 		
-		System.out.println(usedPoint);
-		System.out.println(payMethod);
-		System.out.println(option_price);
 		return "payment_ok";
 	}
 	@RequestMapping("hostMain.do")
@@ -871,10 +843,8 @@ public class MarketController {
 
 			model.addAttribute("NList", NList);
 			page = "host/hostMain";
-			System.out.println(dto.getMem_status());
 		} else { // 호스트 아닌 사람이 호스트 페이지 접근했을때
 			page = "host/hostInsert";
-			System.out.println(dto.getMem_status());
 		}
 		
 		//총 진행 프립 & 슈퍼호스트 기준
@@ -1036,11 +1006,9 @@ public class MarketController {
 		int result2 = 0;
 		// 옵션 개수
 		int Qtt = Integer.parseInt(request.getParameter("optionQtt"));
-		System.out.println(Qtt);
 		for (int i = 1; i <= Qtt; i++) {
 			odto.setOption_name(request.getParameter("option_name" + i));
 			odto.setOption_price(Integer.parseInt(request.getParameter("option_price" + i)));
-			System.out.println(odto);
 
 			result2 = this.optionDao.insertOption(odto);
 		}
@@ -1337,7 +1305,6 @@ public class MarketController {
 		cdto.setCal_enterNoCount(enterNoCount);
 		cdto.setCal_sal(cal_sal);
 		cdto.setCal_total((int) (cal_sal * 0.9));
-		System.out.println(cdto);
 		int res = this.calculateDao.insertData(cdto);
 
 		if (res == 1) {
@@ -1541,7 +1508,6 @@ public class MarketController {
 		map.put("review_reply", review_reply);
 
 		int res = this.reviewDao.insertReply(map);
-		System.out.println(res);
 
 		return "redirect:hostReview.do?page=" + page;
 	}
@@ -2060,7 +2026,6 @@ public class MarketController {
 		}
 
 		odto.setOption_classNum(dto.getClass_num());
-		System.out.println(dto);
 		int result = this.classDao.UpdateClass(dto);
 
 		// 원래 옵션 개수
@@ -2657,20 +2622,13 @@ public class MarketController {
 		map.put("like_writer", dto.getMem_num()); // 로그인한 멤버 번호
 		map.put("like_target", reviewNum); // 좋아요 누른 리뷰 번호
 
-		System.out.println("멤버 번호1 >>> " + dto.getMem_num());
-		System.out.println("리뷰 번호1 >>> " + reviewNum);
-
 		// 해당 리뷰에 대한 좋아요 상태 체크하는 메서드 (0: 안 누른 상태 / 1: 누른 상태)
 		int like_status = this.likeDao.review_status(map);
-		System.out.println("리뷰 좋아요 상태입니다 >>> " + like_status);
 
 		int state = 0;
 		int likeCount = 0;
 
 		if (like_status > 0) { // 좋아요 누른 상태
-
-			System.out.println("멤버 번호2 >>> " + dto.getMem_num());
-			System.out.println("리뷰 번호2 >>> " + reviewNum);
 
 			// 리뷰 좋아요 취소 (-1)
 			int like_minus = this.likeDao.review_like_minus(reviewNum);
@@ -2687,9 +2645,6 @@ public class MarketController {
 			}
 
 		} else if (like_status == 0) { // 좋아요 안 누른 상태
-
-			System.out.println("멤버 번호3 >>> " + dto.getMem_num());
-			System.out.println("리뷰 번호3 >>> " + reviewNum);
 
 			// 리뷰 좋아요 (+1)
 			int like_plus = this.likeDao.review_like_plus(reviewNum);
@@ -2791,7 +2746,6 @@ public class MarketController {
 	@RequestMapping("search.do")
 	public String search(HttpServletRequest request, Model model) {
 		String search_input = request.getParameter("search_input");
-		System.out.println(search_input);
 		
 		HttpSession session = request.getSession();
 		int mem_num = 0;
@@ -2844,7 +2798,6 @@ public class MarketController {
 
         obj.put("clist", ja);
 
-        System.out.println(like_list);
         response.getWriter().print(obj);
     }
 }

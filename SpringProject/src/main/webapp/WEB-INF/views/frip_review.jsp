@@ -43,9 +43,6 @@ $(document).ready(function() {
 	// 리뷰 좋아요 버튼 클릭시 실행함수
 	function like_btn(reviewNum) {
 		
-		console.log('스크립트 호출 성공!');
-		console.log('리뷰번호 >>> ' + reviewNum);
-		
         $.ajax({
             type : "post",
             url : '/controller/class_like_status.do', 
