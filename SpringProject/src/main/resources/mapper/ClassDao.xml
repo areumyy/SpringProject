@@ -538,4 +538,21 @@
 			order by c.class_regdate desc
 		]]>
 	</select>
+	
+	<select id="getMonthFrip" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) 
+			from frip_class 
+			where class_startdate > TO_CHAR(TRUNC(SYSDATE,'mm') ,'yyyy/mm/dd')
+			and class_startdate < TO_CHAR(LAST_DAY(SYSDATE) ,'yyyy/mm/dd')
+			and class_memnum = #{mem_num}
+		]]>
+	</select>
+	
+	<select id="countClass_memnum2" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) from frip_class where class_memnum = #{mem_num}
+			and class_startdate < sysdate
+		]]>
+	</select>
 </mapper>

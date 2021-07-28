@@ -244,4 +244,13 @@ public class ClassDAOImpl implements ClassDAO {
 		return this.sqlSession.selectList("all_sale_list");
 	}
 	
+	public int getMonthFrip(int mem_num) {
+		return this.sqlSession.selectOne("getMonthFrip", mem_num);
+	}
+
+	@Override
+	public int countClass_memnum(int mem_num) {
+		return this.sqlSession.selectOne("countClass_memnum2", mem_num);
+	}
+	
 }

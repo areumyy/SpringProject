@@ -22,4 +22,6 @@ public interface Class_qnaDAO {
 	public int CgetTitleSearchCount(HashMap<String, Object> map);
 	public List<Class_qnaDTO> CgetNamesearchList(HashMap<String, Object> map);
 	public List<Class_qnaDTO> CgetTitlesearchList(HashMap<String, Object> map);
+	
+	public int getallCount(int mem_num);
 }

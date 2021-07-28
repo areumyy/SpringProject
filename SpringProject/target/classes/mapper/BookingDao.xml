@@ -37,6 +37,14 @@
 		select count(*) from frip_booking where booking_option = #{option_num}
 	</select>
 	
+	<select id="getcount_memnum" parameterType="int" resultType="int">
+		select count(*) 
+		from frip_booking 
+		where booking_classnum 
+		in (select class_num 
+		from frip_class where class_memnum = #{mem_num})
+	</select>
+	
 	<insert id="insert_booking" parameterType="com.market.model.BookingDTO">
 		<selectKey keyProperty="booking_num" resultType="int" order="BEFORE">
 			select count(*) + 1 from frip_booking

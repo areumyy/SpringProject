@@ -42,4 +42,8 @@ public interface MemberDAO {
 	public void usePoint(HashMap<String, Integer> map);
 	
 	public void addPoint(HashMap<String, Integer> map);
+	
+	public int getMember_memNick(String mem_nick);
+	
+	public int updateInfo(MemberDTO dto);
 }

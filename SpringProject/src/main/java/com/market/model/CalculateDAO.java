@@ -29,4 +29,7 @@ public interface CalculateDAO {
 	public int calPass_finish_count();				// 승인완료 건수
 	public int calPass_result(int class_num);		// 클래스 테이블 class_cal = '1' -> '2' 로 변경
 	public int calPass_result2(int class_num);		// 정산 테이블 cal_status = '1' -> '2' 로 변경 + 승일일자 업데이트
+
+	public int getMsales(int mem_num); //월매출
+	public int getSales(int mem_num);
 }

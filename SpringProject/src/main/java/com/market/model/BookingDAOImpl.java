@@ -44,6 +44,10 @@ public class BookingDAOImpl implements BookingDAO {
 	}
 
 	@Override
+	public int getcount_memnum(int mem_num) {
+		return this.sqlSession.selectOne("getcount_memnum", mem_num);
+	}
+	@Override
 	public void insertBooking(BookingDTO dto) {
 		this.sqlSession.insert("insert_booking", dto);
 	}

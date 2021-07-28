@@ -130,4 +130,18 @@ public class MemberDAOImpl implements MemberDAO {
 		this.sqlSession.update("add_point", map);
 	}
 
+	@Override
+	public int getMember_memNick(String mem_nick) {
+		if(this.sqlSession.selectOne("getMember_memNick", mem_nick) != null) {
+			return this.sqlSession.selectOne("getMember_memNick", mem_nick);
+		}else {
+			return 0;
+		}
+	}
+
+	@Override
+	public int updateInfo(MemberDTO dto) {
+		return this.sqlSession.update("updateInfo", dto);
+	}
+
 }

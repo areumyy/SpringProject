@@ -99,4 +99,22 @@
 	<update id="calPass_result2" parameterType="int">
 		update frip_calculate set cal_status = 2, cal_okdate = sysdate where cal_classnum = #{class_num}
 	</update>
+	
+	<select id="getMsales" parameterType="int" resultType="int">
+		<![CDATA[
+			select sum(cal_total)
+			from frip_calculate 
+			where cal_regdate > TO_CHAR(TRUNC(SYSDATE,'mm') ,'yyyy/mm/dd')
+			and cal_regdate < TO_CHAR(LAST_DAY(SYSDATE) ,'yyyy/mm/dd')
+			and cal_classnum 
+			in(select class_num from frip_class where class_memnum = #{mem_num})
+		]]>
+	</select>
+	
+	<select id="getSales" parameterType="int" resultType="int">
+		<![CDATA[
+			select sum(cal_total) from frip_calculate 
+			where cal_classnum in(select class_num from frip_class where class_memnum = #{mem_num})
+		]]>
+	</select>
 </mapper>

@@ -56,4 +56,8 @@ public interface ClassDAO {
 	public List<ClassDTO> getBestListAll();
 	public List<ClassDTO> getNewListAll();
 	public List<ClassDTO> getSaleListAll();
+	
+	public int getMonthFrip(int mem_num); 					// 이번달 진행프립
+	public int countClass_memnum(int mem_num);				// 진행프립 오늘 전까지만
+
 }

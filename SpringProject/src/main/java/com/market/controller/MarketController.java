@@ -17,6 +17,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -144,7 +145,7 @@ public class MarketController {
 		response.setContentType("text/html; charset=UTF-8");
 		String res = null;
 		int state = 0;
-
+		
 		int result = this.memberDao.checkNick(mem_nick);
 		if (result > 0) {
 			res = "사용 불가능합니다.";
@@ -158,6 +159,41 @@ public class MarketController {
 		obj.put("res", res);
 		obj.put("state", state);
 
+		response.getWriter().print(obj);
+	}
+	@RequestMapping(value = "/updateNickCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public void UpdateNickCheck(HttpServletResponse response, @RequestParam("mem_nick") String mem_nick, HttpServletRequest request) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		
+		int mem_num = getMem_num(request);
+		String res = null;
+		int state = 0;
+		
+		 
+		int result = this.memberDao.checkNick(mem_nick);
+		
+		int mem_num2 = this.memberDao.getMember_memNick(mem_nick); // 닉네임으로 가져온 넘버
+		
+		System.out.println(mem_num2 == mem_num);
+		if (result == 0) {
+			res = "사용 가능합니다.";
+			state = 1;
+			System.out.println("1");
+		}else if(mem_num2 == mem_num) {
+			res = "사용 가능합니다.";
+			state = 1;
+			System.out.println("2");
+		}else {
+			res = "사용 불가능합니다.";
+			state = 2;
+			System.out.println("3");
+		}
+		
+		JSONObject obj = new JSONObject();
+		obj.put("res", res);
+		obj.put("state", state);
+		
 		response.getWriter().print(obj);
 	}
 
@@ -825,7 +861,6 @@ public class MarketController {
 		System.out.println(option_price);
 		return "payment_ok";
 	}
-
 	@RequestMapping("hostMain.do")
 	public String hostMain(Model model, @RequestParam("loginNum") int loginNum) {
 		String page = null;
@@ -841,7 +876,41 @@ public class MarketController {
 			page = "host/hostInsert";
 			System.out.println(dto.getMem_status());
 		}
-
+		
+		//총 진행 프립 & 슈퍼호스트 기준
+		int classCount = this.classDao.countClass_memnum(loginNum);
+		//이번 달 매출 구하h는 메서드
+		int mSales = this.calculateDao.getMsales(loginNum);
+		//총 매출 구하는 메서드 
+		int Sales = this.calculateDao.getSales(loginNum);
+		//이번달 진행 프립
+		int mFrip = this.classDao.getMonthFrip(loginNum);
+		// 전체 신청 완료
+		int allBooking = this.bookingDao.getcount_memnum(loginNum);
+		// 후기 
+		List<ReviewDTO> rList = this.reviewDao.getReviewList_memnum(loginNum);
+		// 남겨진 후기
+		int review = rList.size();
+		// 평균 평점
+		int sum = 0;
+		for(int i=0; i<review; i++) {
+			sum += rList.get(i).getReview_score();
+		}
+		double average = (double)sum/rList.size();
+		//Q&A응답률
+		int allQna = this.class_qnaDao.getallCount(loginNum);
+		int passQna = this.class_qnaDao.getCountComplete(loginNum);
+		double QnaRate = (double)passQna/allQna * 100;
+		
+		model.addAttribute("classCount", classCount);
+		model.addAttribute("mSales", mSales);
+		model.addAttribute("Sales", Sales);
+		model.addAttribute("mFrip", mFrip);
+		model.addAttribute("allBooking", allBooking);
+		model.addAttribute("review", review);
+		model.addAttribute("average", average);
+		model.addAttribute("QnaRate", QnaRate);
+		
 		return page;
 	}
 
@@ -2322,8 +2391,9 @@ public class MarketController {
 	}
 
 	@RequestMapping("frip_content.do")
-	public String frip_content(@RequestParam("num") int class_num, @RequestParam("memnum") int class_memnum,
-			Model model) {
+	public String frip_content(@RequestParam("num") int class_num,
+			Model model,HttpServletRequest request) {
+		int class_memnum = getMem_num(request);
 		
 		// 프립 리뷰 평점 평균 / 리뷰 갯수
 		ReviewDTO reviewInfo = this.reviewDao.reviewInfo(class_num);
@@ -2407,5 +2477,28 @@ public class MarketController {
 		}
 		
 		return "frip_all";
+	}
+	
+	@RequestMapping("hostUpdateMem.do")
+	public String hostUpdateMem(HttpServletRequest request, Model model) {
+		int mem_num = getMem_num(request);
+		HostDTO dto = this.hostDao.getInfo_memnum(mem_num);
+		
+		model.addAttribute("dto", dto);
+		
+		return "host/hostUpdateMem";
+	}
+	
+	@RequestMapping("hostUpdateMemOk.do")
+	public String hostUpdateMemOk(HostDTO hdto, MemberDTO mdto,
+									HttpServletRequest request) {
+		int mem_num = getMem_num(request);
+		hdto.setHost_memNum(mem_num);
+		mdto.setMem_num(mem_num);
+		
+		int result = this.memberDao.updateInfo(mdto);
+		int result2 =this.hostDao.updateHostInfo(hdto);
+		
+		return "redirect:hostMain.do";
 	}
 }

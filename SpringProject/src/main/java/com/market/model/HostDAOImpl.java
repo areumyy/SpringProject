@@ -14,4 +14,14 @@ public class HostDAOImpl implements HostDAO {
 	public int insertHost(HostDTO dto) {
 		return this.sqlSession.insert("insert_host", dto);
 	}
+
+	@Override
+	public HostDTO getInfo_memnum(int mem_num) {
+		return this.sqlSession.selectOne("getInfo_memnum", mem_num);
+	}
+
+	@Override
+	public int updateHostInfo(HostDTO dto) {
+		return this.sqlSession.update("updateHostInfo", dto);
+	}
 }
