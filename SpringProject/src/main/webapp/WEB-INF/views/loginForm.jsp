@@ -30,7 +30,7 @@
 			<div class="article">
 				<div class="login_join_box">
 					<div class="max_inner">
-						<button type="button" class="back_btn"><img class="back_icon" alt="back_icon" src="resources/image/login/back_icon.svg"></button>
+						<button type="button" class="back_btn" onclick="window.history.back();"><img class="back_icon" alt="back_icon" src="resources/image/login/back_icon.svg"></button>
 						<h3 class="login_join_title">로그인</h3>
 					</div>
 					<div class="login_join_inner">

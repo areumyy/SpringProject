@@ -1096,7 +1096,11 @@ div[Attributes Style] {
     margin-right: 2px;
 }
 
-
+@media (max-width: 768px){
+    .navbar{
+        visibility: hidden !important;
+    }
+}
 
 
 

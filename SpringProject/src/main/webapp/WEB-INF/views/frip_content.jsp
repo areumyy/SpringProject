@@ -21,11 +21,12 @@
 $(function(){
 	<% HttpSession session =request.getSession();
 		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
-		System.out.println(dto);
 	%>
 	
 })
+
 </script>
+
 <body>
 
 	<div id="app">

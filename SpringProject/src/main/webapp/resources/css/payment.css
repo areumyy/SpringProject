@@ -512,4 +512,7 @@ button {
 	.notice_item {
 		font-size: 11px;
 	}
+    .navbar{
+        visibility: hidden !important;
+    }
 }
