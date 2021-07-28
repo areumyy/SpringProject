@@ -15,15 +15,17 @@
 	<!-- 최고평점 비율(%)  -->
 	<select id="reviewPercent" parameterType="int" resultType="int">
 		<![CDATA[
-			select floor((select count(*) max_count
-	        from frip_review
-	        where review_score = (select Max(review_score)
-	                              from frip_review
-	                              where review_classnum = #{num})
-	                              and review_classnum = #{num}) /
-	        (select count(*) total_count
-	        from frip_review
-	        where review_classnum = 1)*100) max_percent
+			select NVL((select count(*)
+              from frip_review
+              where review_score = (select Max(review_score)
+                              		from frip_review
+                              		where review_classnum = #{num})
+                              		and review_classnum = #{num}) / 
+              DECODE((select count(*)
+                      from frip_review
+                      where review_classnum = #{num}),0,null,(select count(*)
+                                                          from frip_review
+                                                          where review_classnum = #{num})),0) * 100 max_percent
 			from dual
 		]]>
 	</select>

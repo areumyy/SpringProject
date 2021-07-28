@@ -48,6 +48,11 @@
 		update frip_class_qna set class_ans_cont = #{ans_cont}, class_ans_regdate = sysdate 
 		where class_qna_num = #{qna_num}
 	</update>
+	
+	
+	<select id="classqnalist" parameterType="int" resultType="com.market.model.Class_qnaDTO">
+		select * from frip_class_qna where class_qna_classnum = #{num}
+	</select>
 </mapper>
 
 

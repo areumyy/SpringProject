@@ -1728,7 +1728,7 @@ public class MarketController {
 	
 	@RequestMapping("frip_content.do")
 	public String frip_content(@RequestParam("num") int class_num,
-			@RequestParam("memnum") int class_memnum, Model model) {
+			@RequestParam("memnum") int class_memnum, @RequestParam("cate_num") int category_num, Model model) {
 		
 		// 프립 리뷰 평점 평균 / 리뷰 갯수
 		ReviewDTO reviewInfo = this.reviewDao.reviewInfo(class_num);
@@ -1764,6 +1764,16 @@ public class MarketController {
 		List<ReviewDTO> reviewList = this.reviewDao.getReviewList(class_num);
 		
 		model.addAttribute("ReviewList", reviewList);
+		
+		// 인기 프립 리스트 가져오기
+		List<ClassDTO> bestclassallList = this.classDao.getBestClassAllList(category_num);
+				
+		model.addAttribute("BestAllList", bestclassallList);
+		
+		List<Class_qnaDTO> classQnaList = this.class_qnaDao.getclassQnaList(class_num);
+		
+		model.addAttribute("ClassQnaList", classQnaList);
+		
 		
 		return "frip_content";
 	}

@@ -37,4 +37,10 @@ public class Class_qnaDAOImpl implements Class_qnaDAO {
 	public int insertAnswer(HashMap<String, Object> map) {
 		return this.sqlSession.update("insertAnswer", map);
 	}
+
+	@Override
+	public List<Class_qnaDTO> getclassQnaList(int num) {
+		
+		return this.sqlSession.selectList("classqnalist", num);
+	}
 }

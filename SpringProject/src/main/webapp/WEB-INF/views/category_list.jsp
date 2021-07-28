@@ -76,7 +76,7 @@
 													<c:forEach items="${list }" var="dto" begin="0" end="4">
 													
 														<div class="Category_List2">
-															<a class="Category_List3" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }">
+															<a class="Category_List3" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }&cate_num=${cate_name.getCate_num() }">
 																<div class="Category_List4">
 																	<div class="Category_List5">
 																		<div class="Category_List6">
@@ -156,7 +156,7 @@
 													<c:forEach items="${list }" var="dto" begin="0" end="4">
 													
 														<div class="Category_List2">
-															<a class="Category_List3" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }">
+															<a class="Category_List3" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }&cate_num=${cate_name.getCate_num() }">
 																<div class="Category_List4">
 																	<div class="Category_List5">
 																		<div class="Category_List6">
@@ -236,7 +236,7 @@
 													<c:forEach items="${list }" var="dto" begin="0" end="4">
 													
 														<div class="Category_List2">
-															<a class="Category_List3" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }">
+															<a class="Category_List3" href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }&memnum=${dto.getClass_memNum() }&cate_num=${cate_name.getCate_num() }">
 																<div class="Category_List4">
 																	<div class="Category_List5">
 																		<div class="Category_List6">
