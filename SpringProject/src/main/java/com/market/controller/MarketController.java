@@ -630,9 +630,15 @@ public class MarketController {
 
 	@RequestMapping("option_select.do")
 	public String optionSel(@RequestParam("class_num") int class_num, Model model) {
-
-		model.addAttribute("class_num", class_num);
-
+		
+		ClassDTO cdto = this.classDao.getList_classNum(class_num);
+		List<OptionDTO> odto = this.optionDao.getOptionList(class_num);
+		int bookingCount = this.bookingDao.getCount(class_num);
+		
+		model.addAttribute("cdto", cdto);
+		model.addAttribute("odto", odto);
+		model.addAttribute("bookingCount", bookingCount);
+		
 		return "option_select";
 	}
 
@@ -750,20 +756,22 @@ public class MarketController {
 	}
 
 	@RequestMapping("payment.do")
-	public String pay(Model model) {
-		BookingDTO bookDto = new BookingDTO();
-		bookDto.setBooking_writer(4);
-		bookDto.setBooking_classNum(1);
-		bookDto.setBooking_option(1);
-		bookDto.setBooking_enterCheck("no");
+	public String pay(HttpServletRequest request, Model model) {
+		int mem_num = getMem_num(request);
+		
+		BookingDTO bdto = new BookingDTO();
+		bdto.setBooking_classNum(Integer.parseInt(request.getParameter("class_num")));
+		bdto.setBooking_option(Integer.parseInt(request.getParameter("option_num")));
+		bdto.setBooking_enterCheck("no");
+		bdto.setBooking_writer(mem_num);
+		
+		ClassDTO classDto = this.classDao.getclassCont(bdto.getBooking_classNum());
+		OptionDTO optionDto = this.optionDao.getOptionCont(bdto.getBooking_option());
 
-		ClassDTO classDto = this.classDao.getclassCont(bookDto.getBooking_classNum());
-		OptionDTO optionDto = this.optionDao.getOptionCont(bookDto.getBooking_option());
-
-		model.addAttribute("bookDto", bookDto);
+		model.addAttribute("bookDto", bdto);
 		model.addAttribute("classDto", classDto);
 		model.addAttribute("optionDto", optionDto);
-
+		
 		return "payment";
 	}
 
@@ -2288,7 +2296,7 @@ public class MarketController {
 	@RequestMapping("frip_content.do")
 	public String frip_content(@RequestParam("num") int class_num, @RequestParam("memnum") int class_memnum,
 			Model model) {
-
+		
 		// 프립 상세 내용 호출 메서드
 		ClassDTO fripInfo = this.classDao.getclassCont(class_num);
 
