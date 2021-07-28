@@ -55,7 +55,9 @@
 												<div class="host_info_detail1">
 													<span class="host_name">${hostInfo[status.index].getMem_name() }</span>
 													<img alt="arrow_icon" src="<%=request.getContextPath() %>/resources/image/like/arrow_icon.svg" class="arrow_icon">
-													<img alt="superHost_badge" src="<%=request.getContextPath() %>/resources/image/like/superHost_badge.svg">
+													<c:if test="${classCount[status.index]  >= 3}">
+														<img alt="superHost_badge" src="<%=request.getContextPath() %>/resources/image/like/superHost_badge.svg">
+													</c:if>
 												</div>
 												<div class="host_info_detail2">
 													<span class="frip_count">프립 ${classCount[status.index] }</span>

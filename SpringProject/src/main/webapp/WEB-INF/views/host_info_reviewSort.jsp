@@ -120,7 +120,9 @@
 											<div class="host_info_detail1">
 												<span class="host_name">${hostInfo.getMem_name() }</span>
 												<img alt="arrow_icon" src="<%=request.getContextPath() %>/resources/image/like/arrow_icon.svg" class="arrow_icon">
-												<img alt="superHost_badge" src="<%=request.getContextPath() %>/resources/image/like/superHost_badge.svg" class="superHost_badge">
+												<c:if test="${classCount >= 3}">
+													<img alt="superHost_badge" src="<%=request.getContextPath() %>/resources/image/like/superHost_badge.svg" class="superHost_badge">
+												</c:if>
 											</div>
 											<div class="host_info_detail2">
 												<span class="frip_count">프립 ${classCount }</span>
@@ -184,15 +186,15 @@
 											<div class="class_hash">${dto.getClass_hash() }</div>
 											<div class="class_title">${dto.getClass_title() }</div>
 											
-											<c:if test="${hostClassOption[status.index].getOption_editPrice() eq null }">
+											<c:if test="${hostClassOption[status.index].getOption_editPrice() eq 0 || hostClassOption[status.index].getOption_editPrice() eq hostClassOption[status.index].getOption_price()}">
 												<div class="class_price"> 
 													<fmt:formatNumber value="${hostClassOption[status.index].getOption_price() }" />원
 												</div>
 											</c:if>
-											<c:if test="${hostClassOption[status.index].getOption_editPrice() ne null }">
+											<c:if test="${hostClassOption[status.index].getOption_editPrice() ne 0 && hostClassOption[status.index].getOption_editPrice() ne hostClassOption[status.index].getOption_price()}">
 												<div class="class_price"> 
-													<span><fmt:formatNumber value="${hostClassOption[status.index].getOption_price() }" /></span>
-													<span class="class_editPrice"><fmt:formatNumber value="${hostClassOption[status.index].getOption_editPrice() }" />원</span>
+													<span><fmt:formatNumber value="${hostClassOption[status.index].getOption_editPrice() }" /></span>
+													<span class="class_editPrice"><fmt:formatNumber value="${hostClassOption[status.index].getOption_price() }" />원</span>
 												</div>
 											</c:if>
 											
@@ -212,8 +214,8 @@
 					 	<!-- 후기 탭 -->
 					 	<div class="contbox cont02">
 					 		<!-- key값 받기 -->
-					 		<c:set var="classReview1" value="${classReview1 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일/시작날짜/끝날짜) -->
-					 		<c:set var="classReview2" value="${classReview2 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명) -->
+					 		<c:set var="classReview1" value="${classReview1 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드1 (회원이름/회원프로필/리뷰내용/리뷰작성일) -->
+					 		<c:set var="classReview2" value="${classReview2 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드2 (클래스명/시작날짜/끝날짜) -->
 					 		<c:set var="classReview3" value="${classReview3 }" />	<!-- 호스트가 운영하는 클래스 모든 리뷰 가져오는 메서드3 (옵션명) -->
 					 		<c:set var="likeList" value="${like_list }" />			<!-- 좋아요 누른 리뷰번호 리스트 가져오기 -->
 					 		<c:set var="sort" value="${sort }" />	
@@ -230,22 +232,22 @@
 							      				<div class="user_name">${dto2.getMem_name() }</div>
 							      				<div>
 							      					<c:forEach begin="1" end="${dto2.getReview_score() }"><img alt="review_score" src="<%=request.getContextPath() %>/resources/image/like/review_star_icon.svg"></c:forEach>
-							      					<span class="review_regdate">${dto2.getReview_regdate() } 작성</span>
+							      					<span class="review_regdate">${dto2.getReview_regdate().substring(0,10) } 작성</span>
 							      				</div>
 							      			</div>
 							      		</div>
 							      		<div class="review_cont">${dto2.getReview_cont() }</div>
 							      		<div class="booking_info">
 							      			<div class="class_name">${classReview2[status.index].getClass_title() }</div>
-							     			<c:if test="${classReview2[status.index].getClass_endDate() eq null}">
+							     			<c:if test="${classReview2[status.index].getClass_startDate() eq classReview2[status.index].getClass_endDate() }">
 								      			<div class="class_startDate">
-								      				<span>${classReview2[status.index].getClass_startDate() } 참여</span>
+								      				<span>${classReview2[status.index].getClass_startDate().substring(0,10) } 참여</span>
 								      				<span> | ${classReview3[status.index].getOption_name() }</span>
 								      			</div>
 							      			</c:if>
-							      			<c:if test="${classReview2[status.index].getClass_endDate() ne null}">
+							      			<c:if test="${classReview2[status.index].getClass_startDate() ne classReview2[status.index].getClass_endDate()}">
 								      			<div class="class_startDate">
-								      				<span>${classReview2[status.index].getClass_startDate() } ~ ${classReview2[status.index].getClass_endDate() } 참여</span>
+								      				<span>${classReview2[status.index].getClass_startDate().substring(0,10) } ~ ${classReview2[status.index].getClass_endDate().substring(0,10) } 참여</span>
 								      				<span> | ${classReview3[status.index].getOption_name() }</span>
 								      			</div>
 							      			</c:if>

@@ -74,7 +74,7 @@
 	
 	<!-- 찜 호스트가 운영하는 클래스 개수 -->
 	<select id="like_classCount" parameterType="int" resultType="Integer">
-		select count(*), class_memnum from frip_class 
+		select NVL(count(*), 0), class_memnum from frip_class 
 		where class_memnum in(select host_memnum from frip_host 
 		where host_num in(select like_target from frip_like 
 		where like_writer = #{mem_num} and like_flag = 2)) group by class_memnum
@@ -82,7 +82,7 @@
 	
 	<!-- 찜 호스트 후기 개수 -->
 	<select id="like_reviewCount" parameterType="int" resultType="Integer">
-		select  count(r.review_classnum), c.class_memnum
+		select  NVL(count(r.review_classnum), 0), c.class_memnum
 		from frip_class c join frip_review r 
 		on c.class_num = r.review_classnum
 		where class_memnum in(select host_memnum from frip_host
@@ -96,7 +96,7 @@
 	
 	<!-- 찜 호스트 찜 개수 -->
 	<select id="like_likeCount" parameterType="int" resultType="Integer">
-		select count(like_target) from frip_like where like_target in(select like_target from frip_like 
+		select NVL(count(like_target), 0) from frip_like where like_target in(select like_target from frip_like 
 		where like_writer = #{mem_num} and like_flag = 2) and like_flag = 2 group by like_target
 	</select>
 	
