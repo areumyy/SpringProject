@@ -781,7 +781,44 @@ public class MarketController {
 			page = "host/hostInsert";
 			System.out.println(dto.getMem_status());
 		}
-
+		
+		//총 진행 프립 & 슈퍼호스트 기준
+		int classCount = this.classDao.countClass(loginNum);
+		//이번 달 매출 구하는 메서드
+		int mSales = this.calculateDao.getMsales(loginNum);
+		//총 매출 구하는 메서드 
+		int Sales = this.calculateDao.getSales(loginNum);
+		//이번달 진행 프립
+		int mFrip = this.classDao.getMonthFrip(loginNum);
+		// 전체 신청 완료
+		int allBooking = this.bookingDao.getcount_memnum(loginNum);
+		// 후기 
+		List<ReviewDTO> rList = this.reviewDao.getList_memnum(loginNum);
+		// 남겨진 후기
+		int review = rList.size();
+		// 평균 평점
+		int sum = 0;
+		for(int i=0; i<review; i++) {
+			sum += rList.get(i).getReview_score();
+		}
+		double average = (double)sum/rList.size();
+		
+		//Q&A응답률
+		int allQna = this.class_qnaDao.getallCount(loginNum);
+		int passQna = this.class_qnaDao.getCountComplete(loginNum);
+		System.out.println(allQna);
+		System.out.println(passQna);
+		double QnaRate = (double)passQna/allQna * 100;
+		System.out.println(QnaRate);
+		model.addAttribute("classCount", classCount);
+		model.addAttribute("mSales", mSales);
+		model.addAttribute("Sales", Sales);
+		model.addAttribute("mFrip", mFrip);
+		model.addAttribute("allBooking", allBooking);
+		model.addAttribute("review", review);
+		model.addAttribute("average", average);
+		model.addAttribute("QnaRate", QnaRate);
+		
 		return page;
 	}
 

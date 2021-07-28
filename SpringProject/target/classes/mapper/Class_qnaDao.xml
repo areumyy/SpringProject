@@ -181,6 +181,13 @@
 	</select>
 	<!-- 클래스명 검색end -->
 	<!-- 답변 안한 문의 검색 end-->
+	
+	<select id="getallCount" parameterType="int" resultType="int">
+		select count(*) 
+		from frip_class_qna 
+		where class_qna_classNum 
+		in(select class_num from frip_class where class_memnum = #{mem_num}) 
+	</select>
 </mapper>
 
 

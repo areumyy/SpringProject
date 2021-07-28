@@ -85,6 +85,11 @@ public class Class_qnaDAOImpl implements Class_qnaDAO {
 		return this.sqlSession.selectList("CgetTitlesearchList", map);
 	}
 
+	@Override
+	public int getallCount(int mem_num) {
+		return this.sqlSession.selectOne("getallCount", mem_num);
+	}
+
 
 	
 }

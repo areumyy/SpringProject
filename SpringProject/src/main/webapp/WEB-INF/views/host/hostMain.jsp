@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +38,12 @@
 									</h2>
 									<div class="hostInfo_hostGrade">
 										<!-- 회원의 호스트 등급 -->
-										일반 호스트
+										<c:if test="${classCount < 3 }">
+											일반 호스트
+										</c:if>
+										<c:if test="${classCount >= 3 }">
+											슈퍼 호스트
+										</c:if>
 									</div>
 								</div>
 								<a class="hostInfo_infoUpdate">
@@ -48,8 +54,10 @@
 								<a href="https://www.notion.so/7cefbac56d5a49548bc5f35e3ec035f7" target="_blank">
 									<button class="hostmenual_button">호스트 매뉴얼</button>
 								</a>
+								<c:if test="${classCount < 3 }">
 								<a class="superHost" href="/super-host">
-								<button class="superHostButton">나도 슈퍼호스트!</button></a>
+									<button class="superHostButton">나도 슈퍼호스트!</button></a>
+								</c:if>
 							</div>
 						</section>
 						
@@ -97,15 +105,15 @@
 										이번달 진행 프립
 									</div>
 									<div class="hostStats_cont_stats">
-										0
+										${mFrip }
 									</div>
 								</div>
 								<div class="hostStats_cont">
 									<div class="hostStats_cont_title">
-										이번 달 호스트 취소
+										전체 진행 프립
 									</div>
 									<div class="hostStats_cont_stats">
-										0
+										${classCount }
 									</div>
 								</div>
 								<div class="hostStats_cont">
@@ -113,7 +121,7 @@
 										전체 신청 완료
 									</div>
 									<div class="hostStats_cont_stats">
-										0
+										${allBooking }
 									</div>
 								</div>
 							</div>
@@ -124,7 +132,7 @@
 										남겨진 후기
 									</div>
 									<div class="hostStats_cont_stats">
-										0
+										${review }
 									</div>
 								</div>
 								<div class="hostStats_cont">
@@ -132,7 +140,7 @@
 										평균 평점
 									</div>
 									<div class="hostStats_cont_stats">
-										0
+										<fmt:formatNumber value="${average }" pattern=".00"/>
 									</div>
 								</div>
 								<div class="hostStats_cont">
@@ -140,7 +148,7 @@
 										Q&A 응답률
 									</div>
 									<div class="hostStats_cont_stats">
-										0
+										<fmt:formatNumber value="${QnaRate }" pattern=".00"/>%
 									</div>
 								</div>
 							</div>
@@ -150,13 +158,17 @@
 							<div class="hostStats">
 								<div class="hostStats_Sales">
 									<div class="hostStats_Sales_title">이번 달 매출액</div>
-									<div class="hostStats_Sales_stats">0</div>
+									<div class="hostStats_Sales_stats">
+										<fmt:formatNumber value="${mSales }" type="number"/>원
+									</div>
 								</div>
 							</div>
 							<div class="hostStats">
 								<div class="hostStats_Sales">
 									<div class="hostStats_Sales_title">전체 매출액</div>
-									<div class="hostStats_Sales_stats">0</div>
+									<div class="hostStats_Sales_stats">
+										<fmt:formatNumber value="${Sales }"  type="number"/>원
+									</div>
 								</div>
 							</div>
 						</section>

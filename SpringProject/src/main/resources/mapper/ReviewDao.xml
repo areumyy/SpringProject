@@ -36,5 +36,11 @@
 		set review_reply = #{review_reply}, review_replydate = sysdate 
 		where review_num = #{review_num}
 	</update>
+	
+	<select id="getReviewList_memnum" parameterType="int" resultType="com.market.model.ReviewDTO">
+		select * from frip_review 
+		where review_classnum 
+		in (select class_num from frip_class where class_memnum = #{mem_num})
+	</select>
 
 </mapper>

@@ -28,4 +28,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return this.sqlSession.update("insertReply", map);
 	}
 
+	@Override
+	public List<ReviewDTO> getList_memnum(int mem_num) {
+		return this.sqlSession.selectList("getList_memnum", mem_num);
+	}
+
 }

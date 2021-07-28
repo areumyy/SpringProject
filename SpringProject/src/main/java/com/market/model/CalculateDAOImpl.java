@@ -142,4 +142,14 @@ public class CalculateDAOImpl implements CalculateDAO {
 		
 		return this.sqlSession.update("calPass_result2", class_num);
 	}
+
+	@Override
+	public int getMsales(int mem_num) {
+		return this.sqlSession.selectOne("getMsales", mem_num);
+	}
+
+	@Override
+	public int getSales(int mem_num) {
+		return this.sqlSession.selectOne("getSales", mem_num);
+	}
 }

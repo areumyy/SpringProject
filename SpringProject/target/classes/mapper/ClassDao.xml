@@ -475,4 +475,13 @@
 		where class_num = #{num}
 	</select>
 	
+	<select id="getMonthFrip" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) 
+			from frip_class 
+			where class_startdate > TO_CHAR(TRUNC(SYSDATE,'mm') ,'yyyy/mm/dd')
+			and class_startdate < TO_CHAR(LAST_DAY(SYSDATE) ,'yyyy/mm/dd')
+			and class_memnum = #{mem_num}
+		]]>
+	</select>
 </mapper>

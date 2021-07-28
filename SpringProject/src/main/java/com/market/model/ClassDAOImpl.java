@@ -229,6 +229,11 @@ public class ClassDAOImpl implements ClassDAO {
 		return this.sqlSession.update("fripPass_result", class_num);
 	}
 
+	@Override
+	public int getMonthFrip(int mem_num) {
+		return this.sqlSession.selectOne("getMonthFrip", mem_num);
+	}
+
 	
 	
 	

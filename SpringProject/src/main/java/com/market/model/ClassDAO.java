@@ -53,4 +53,6 @@ public interface ClassDAO {
 	
 	public ClassDTO getclassCont(int num);						// 프립 상세 내용 호출 추상메서드.
 	
+	public int getMonthFrip(int mem_num); 					// 이번달 진행프립
+
 }
