@@ -32,4 +32,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public int insert_review(ReviewDTO dto) {
 		return this.sqlSession.insert("insert_review", dto);
 	}
+	
+	@Override
+	public ReviewDTO get_review(int review_num) {
+		return this.sqlSession.selectOne("get_review", review_num);
+	}
 }

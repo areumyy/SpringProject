@@ -25,9 +25,12 @@
 		select count(*) from frip_booking where booking_classNum = #{class_num} and booking_enterCheck = 'yes'
 	</select>
 	
-
 	<select id="get_booking_works" parameterType="int" resultType="com.market.model.BookingDTO">
 		select * from frip_booking where booking_writer = #{booking_writer} and booking_enterCheck = 'no'
+	</select>
+	
+	<select id="get_booking_works_end" parameterType="int" resultType="com.market.model.BookingDTO">
+		select * from frip_booking where booking_writer = #{booking_writer} and booking_enterCheck = 'yes'
 	</select>
 	
 	<select id="count_booking_works" parameterType="int" resultType="int">

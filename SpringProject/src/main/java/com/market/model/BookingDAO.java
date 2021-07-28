@@ -11,6 +11,7 @@ public interface BookingDAO {
 	public int getcount_option_num(int option_num);
 	public int getCountEnter(int class_num);
 	public List<BookingDTO> getBookingWorks(int booking_writer);
+	public List<BookingDTO> getBookingWorksEnd(int booking_writer);
 	public int getCountWorks(int booking_writer);
 	public void insertBooking(BookingDTO dto);
 

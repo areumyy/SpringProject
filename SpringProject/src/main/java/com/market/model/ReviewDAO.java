@@ -12,4 +12,6 @@ public interface ReviewDAO {
 	public int insertReply(HashMap<String, Object> map);
 	
 	public int insert_review(ReviewDTO dto);
+
+	public ReviewDTO get_review(int review_num);
 }
