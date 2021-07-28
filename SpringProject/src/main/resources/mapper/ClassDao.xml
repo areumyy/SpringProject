@@ -601,4 +601,23 @@
 		]]>
 	</select>
 	
+	<select id="countclass_myfripWait" parameterType="java.util.Map" resultType="int">
+		select count(*) from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass} 
+			and class_delcheck = 'no'
+	</select>
+	
+	<select id="getList_myFripWait" parameterType="java.util.Map" resultType="com.market.model.ClassDTO">
+		<![CDATA[
+			select * from (select distinct f.*,
+			row_number() over(order by class_num) rnum
+			from frip_class f
+			where class_memnum = #{mem_num}
+			and class_pass = #{class_pass}
+			and class_delcheck = 'no') 
+			where rnum >= #{dto.startNo} and rnum <= #{dto.endNo}
+		]]>
+	</select>
+	
 </mapper>

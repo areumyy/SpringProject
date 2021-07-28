@@ -62,4 +62,6 @@ public interface ClassDAO {
 	public int countClass_memnum(int mem_num);				// 진행프립 오늘 전까지만
 	public List<ClassDTO> getSearchClassList(HashMap<String, Object> map);  // 검색리스트
 	public int getSearchListCount(String search_input);
+	public int countclass_myfripWait(HashMap<String, Object> map);
+	public List<ClassDTO> getList_myFripWait(HashMap<String, Object> map);
 }

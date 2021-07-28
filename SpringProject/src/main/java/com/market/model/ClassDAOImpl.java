@@ -281,4 +281,15 @@ public class ClassDAOImpl implements ClassDAO {
 			return 0;
 		}
 	}
+
+	@Override
+	public int countclass_myfripWait(HashMap<String, Object> map) {
+		return this.sqlSession.selectOne("countclass_myfripWait", map);
+	}
+
+	@Override
+	public List<ClassDTO> getList_myFripWait(HashMap<String, Object> map) {
+		return this.sqlSession.selectList("getList_myFripWait", map);
+	}
+
 }
