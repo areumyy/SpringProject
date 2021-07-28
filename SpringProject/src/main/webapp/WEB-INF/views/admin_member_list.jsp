@@ -113,7 +113,14 @@ function checkDel(){
 											<div>${dto.getMem_email() }</div>
 											<div class="nick">
 												<span class="profile_section">
-													<img class="profile_img" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto.getMem_profileimg()}">
+													<c:choose>
+														<c:when test="${dto.getMem_profileimg() == null}">
+															<img class="profile_img" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+														</c:when>
+														<c:otherwise>
+															<img class="profile_img" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto.getMem_profileimg()}">
+														</c:otherwise>
+													</c:choose>
 												</span>	
 												<span>${dto.getMem_nick() }</span>
 											</div>
