@@ -23,4 +23,10 @@ public class ReviewDTO {
 	private String option_name;			// 추가 (옵션명)
 	private String option_startDate;	// 추가 (옵션 시작날짜)
 	private String option_endDate;		// 추가 (옵션 끝날짜)
+	
+	private float review_avg;			// 추가(리뷰 평균 별점)
+	private int review_count;			// 추가(리뷰 갯수)
+	private int review_max;				// 추가(리뷰 최고 별점)
+	private String mem_nick;			// 추가(회원 닉네임)
+	private int review_like_count;		// 추가(리뷰 좋아요 갯수)
 }
