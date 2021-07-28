@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.market.model.ReviewDAO">
+	
+	<!-- 프립 리뷰 평점 평균 / 리뷰 갯수 -->
+	<select id="reviewInfo" parameterType="int" resultType="com.market.model.ReviewDTO">
+		select round(avg(review_score), 1) review_avg, count(*) review_count, Max(review_score) review_max
+		from frip_review
+		where review_classnum = #{num}
+	</select>
+	
+	<!-- 최고평점 비율(%)  -->
+	<select id="reviewPercent" parameterType="int" resultType="int">
+		<![CDATA[
+			select floor((select count(*) max_count
+	        from frip_review
+	        where review_score = (select Max(review_score)
+	                              from frip_review
+	                              where review_classnum = #{num})
+	                              and review_classnum = #{num}) /
+	        (select count(*) total_count
+	        from frip_review
+	        where review_classnum = 1)*100) max_percent
+			from dual
+		]]>
+	</select>
+	
+	<!-- 프립후기 리스트 -->
+	<select id="reviewlist" parameterType="int" resultType="com.market.model.ReviewDTO">
+		select *
+		from frip_review r
+		left outer join frip_member m
+		on r.review_writer = m.mem_num
+		left outer join (select like_target, count(*) review_like_count
+		                 from frip_like
+		                 where like_flag = 3
+		                 group by like_target) l
+		on r.review_num = l.like_target
+		where review_classnum = #{num}
+		order by review_regdate desc, review_num asc
+	</select>
+
+</mapper>

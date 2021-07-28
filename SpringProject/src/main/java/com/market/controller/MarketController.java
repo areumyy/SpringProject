@@ -47,6 +47,7 @@ import com.market.model.OptionDTO;
 import com.market.model.PageDTO;
 import com.market.model.QnaDAO;
 import com.market.model.QnaDTO;
+import com.market.model.ReviewDAO;
 import com.market.model.ReviewDTO;
 import com.market.model.Upload;
 
@@ -80,6 +81,8 @@ public class MarketController {
 	private Class_qnaDAO class_qnaDao;
 	@Autowired
 	private CalculateDAO calculateDao;
+	@Autowired
+	private ReviewDAO reviewDao;
 
 	@RequestMapping("main.do")
 	public String main() {
@@ -1727,6 +1730,14 @@ public class MarketController {
 	public String frip_content(@RequestParam("num") int class_num,
 			@RequestParam("memnum") int class_memnum, Model model) {
 		
+		// 프립 리뷰 평점 평균 / 리뷰 갯수
+		ReviewDTO reviewInfo = this.reviewDao.reviewInfo(class_num);
+		// 최고평점 비율(%)
+		int reviewPercent = this.reviewDao.reviewPercent(class_num);
+		
+		model.addAttribute("reviewInfo", reviewInfo);
+		model.addAttribute("reviewPercent", reviewPercent);
+		
 		// 프립 상세 내용 호출 메서드
 		ClassDTO fripInfo = this.classDao.getclassCont(class_num);
 		
@@ -1734,16 +1745,12 @@ public class MarketController {
 		
 		// 호스트 상세정보 가져오는 메서드
 		MemberDTO hostInfo = this.likeDao.hostInfo(class_memnum);
-
 		// 호스트 소개 가져오는 메서드
 		HostDTO hostCont = this.likeDao.hostCont(class_memnum);
-
 		// 호스트가 운영하는 클래스 개수 가져오는 메서드
 		int classCount = this.likeDao.class_count(class_memnum);
-
 		// 호스트 후기 개수 가져오는 메서드
 		int reviewCount = this.likeDao.review_count(class_memnum);
-
 		// 호스트 찜 개수 가져오는 메서드
 		int likeCount = this.likeDao.like_count(class_memnum);
 
@@ -1752,6 +1759,11 @@ public class MarketController {
 		model.addAttribute("classCount", classCount);
 		model.addAttribute("reviewCount", reviewCount);
 		model.addAttribute("likeCount", likeCount);
+		
+		// 프립후기 리스트를 가져오는 메서드
+		List<ReviewDTO> reviewList = this.reviewDao.getReviewList(class_num);
+		
+		model.addAttribute("ReviewList", reviewList);
 		
 		return "frip_content";
 	}
