@@ -57,6 +57,29 @@
 										<div class="information_info_title">가입일</div>
 										<div class="information_info_content edit_style" disabled>${dto.getMem_regdate().substring(0,10) }</div>
 									</div>
+									<div class="information_info_wrapper sm-hidden">
+										<div class="information_info_title_blue">
+											<a href="<%=request.getContextPath() %>/hostMain.do?loginNum=${loginDto.getMem_num() }" target="_blank">호스트 센터</a>
+										</div>
+									</div>
+									<div class="information_info_wrapper sm-hidden">
+										<div class="information_info_title_blue">
+											<a href="<%=request.getContextPath() %>/qna_list.do">자주 묻는 질문</a>
+										</div>
+									</div>
+									<div class="information_info_wrapper sm-hidden">
+										<div class="information_info_title_blue">
+											<a href="<%=request.getContextPath() %>/notice_list.do">공지사항</a>
+										</div>
+									</div>
+									<div class="information_info_wrapper sm-hidden">
+										<div class="information_info_title_red">
+											<a href="<%=request.getContextPath() %>/logout.do">로그아웃</a>
+										</div>
+									</div>
+
+
+									
 								</div>
 							</c:if>
 						</form>
