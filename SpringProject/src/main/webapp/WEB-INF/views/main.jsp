@@ -65,7 +65,7 @@
 					<div class="cateImg_list">
 						<div class="cateImg_list_div1" style="opacity: 1; display: block;">
 							<div class="cateImg_list_div2">
-								<a href="#">
+								<a href="<%=request.getContextPath()%>/category_list.do?num=1">
 									<div class="cateImg_item">
 										<div class="cateImg_item_div">
 											<div class="cateImg_list_div1" style="opacity: 1; display: block;">
@@ -81,7 +81,7 @@
 										<span>서핑OPEN</span>
 									</div>
 								</a>
-								<a href="#">
+								<a href="<%=request.getContextPath() %>/category_list.do?num=2">
 									<div class="cateImg_item">
 										<div class="cateImg_item_div">
 											<div class="cateImg_list_div1" style="opacity: 1; display: block;">
@@ -97,7 +97,7 @@
 										<span>캠핑</span>
 									</div>
 								</a>
-								<a href="#">
+								<a href="<%=request.getContextPath() %>/category_list.do?num=3">
 									<div class="cateImg_item">
 										<div class="cateImg_item_div">
 											<div class="cateImg_list_div1" style="opacity: 1; display: block;">
@@ -113,7 +113,7 @@
 										<span>등산·트레킹</span>
 									</div>
 								</a>
-								<a href="#">
+								<a href="<%=request.getContextPath() %>/category_all_list.do?num=14">
 									<div class="cateImg_item">
 										<div class="cateImg_item_div">
 											<div class="cateImg_list_div1" style="opacity: 1; display: block;">
@@ -129,7 +129,7 @@
 										<span>공예</span>
 									</div>
 								</a>
-								<a href="#">
+								<a href="<%=request.getContextPath() %>/category_all_list.do?num=11">
 									<div class="cateImg_item">
 										<div class="cateImg_item_div">
 											<div class="cateImg_list_div1" style="opacity: 1; display: block;">

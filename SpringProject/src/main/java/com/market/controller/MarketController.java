@@ -93,7 +93,7 @@ public class MarketController {
 		if(session.getAttribute("loginDto") != null) {
 			MemberDTO dto = (MemberDTO)session.getAttribute("loginDto");
 			mem_num= dto.getMem_num();
-		} 
+		}
 		
 		List<ClassDTO> likeList = this.likeDao.getLikeClassList(mem_num);
 		List<ClassDTO> nolikeList = this.likeDao.getNoLikeClassList(mem_num);
