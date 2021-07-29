@@ -184,6 +184,7 @@
 			      group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+			order by b.count desc nulls last, c.class_num asc
 		]]>
 	</select>
 	
@@ -208,6 +209,7 @@
 			                 from frip_review
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
+			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
 			order by b.count desc, c.class_num asc
 		]]>
 	</select>
@@ -346,6 +348,7 @@
 			      group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			order by b.count desc nulls last, c.class_num asc
 		]]>
 	</select>
 	

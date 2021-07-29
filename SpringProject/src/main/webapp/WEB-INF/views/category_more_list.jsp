@@ -153,9 +153,7 @@
 									</div>
 								</div>
 								
-								<div class="Category_List_All2" font-size="13px">
-									<a class="Category_List_All3" href="#">${TotalCount }개의 ${cate_name.getClass_category2() } 전체보기</a>
-								</div>
+								
 							</div>
 						</div>
 					</div>
