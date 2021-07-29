@@ -36,7 +36,7 @@
 										<div class="notice_item_title" data-bs-toggle="collapse" data-bs-target="#collapse${dto.getNotice_num() }" aria-expanded="true">${dto.getNotice_title() }</div>
 										<div class="notice_item_regdate">${dto.getNotice_regdate() }</div>
 									</div>
-									<div class="notice_list_item_ans accordion-collapse collapse" id="collapse${dto.getNotice_num() }" data-bs-parent="#accordionExample">
+									<div class="notice_list_item_ans accordion-collapse collapse" style='white-space: pre-line;' id="collapse${dto.getNotice_num() }" data-bs-parent="#accordionExample">
 										${dto.getNotice_cont() }
 									</div>
 								</li>

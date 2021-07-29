@@ -37,7 +37,7 @@
 							<c:forEach items="${list }" var="dto">
 								<li>
 									<div class="qna_list_item" data-bs-toggle="collapse" data-bs-target="#collapse${dto.getQna_num() }" aria-expanded="true">${dto.getQna_title() }</div>
-									<div class="qna_list_item_ans accordion-collapse collapse" id="collapse${dto.getQna_num() }" data-bs-parent="#accordionExample">
+									<div class="qna_list_item_ans accordion-collapse collapse" style='white-space: pre-line;' id="collapse${dto.getQna_num() }" data-bs-parent="#accordionExample">
 										${dto.getQna_cont() }
 									</div>
 								</li>
