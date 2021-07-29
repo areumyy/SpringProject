@@ -23,6 +23,11 @@
 <!-- CSS 파일 -->
 <link href="<%=request.getContextPath()%>/resources/css/hostExam.css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/resources/css/admin_notice.css" rel="stylesheet" />
+<script language="javascript">
+	document.title = "관리자 공지사항" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 </head>
 <script type="text/javascript">
 window.onload = function(){

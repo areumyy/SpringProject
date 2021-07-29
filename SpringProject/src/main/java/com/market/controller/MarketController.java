@@ -907,6 +907,9 @@ public class MarketController {
 		int passQna = this.class_qnaDao.getCountComplete(loginNum);
 		double QnaRate = (double)passQna/allQna * 100;
 		
+		if(allQna == 0 ) {
+			QnaRate = 0;
+		}
 		model.addAttribute("classCount", classCount);
 		model.addAttribute("mSales", mSales);
 		model.addAttribute("Sales", Sales);

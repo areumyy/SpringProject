@@ -18,6 +18,12 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath()%>/resources/css/hostExam.css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/resources/css/hostCalculateOk.css" rel="stylesheet" />
+<script language="javascript">
+	document.title = "정산" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
+</head>
 </head>
 <body>
 	<div class="mainFrame">

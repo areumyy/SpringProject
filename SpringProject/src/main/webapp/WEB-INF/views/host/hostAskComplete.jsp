@@ -45,6 +45,12 @@
 	});
 
 </script>
+<script language="javascript">
+	document.title = "클래스 문의" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
+</head>
 </head>
 <body>
 	<div class="mainFrame">

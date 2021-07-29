@@ -20,6 +20,11 @@
 <!-- CSS 파일 -->
 <link href="<%=request.getContextPath()%>/resources/css/hostExam.css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/resources/css/admin_notice_insertForm.css" rel="stylesheet" />
+<script language="javascript">
+	document.title = "관리자 공지사항 추가" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 </head>
 <script type="text/javascript">
 function insertCheck(){

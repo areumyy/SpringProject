@@ -18,7 +18,11 @@
 <!-- CSS 파일 -->
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/like.css" rel="stylesheet"/>
-
+<script language="javascript">
+	document.title = "호스트 정보" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 <script type="text/javascript">
 
 	// 호스트 소개 더보기.. 실행함수

@@ -19,6 +19,11 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/resources/css/searchAll.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
+<script language="javascript">
+	document.title = "검색 프립 리스트" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 </head>
 <body>
 
