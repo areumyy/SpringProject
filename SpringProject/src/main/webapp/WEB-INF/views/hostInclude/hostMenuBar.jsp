@@ -25,7 +25,7 @@
 						</c:if>
 						<c:if test="${loginDto.getMem_profileimg() != null}">
 							<img class="img_style"
-								src="<%=request.getContextPath() %>/resources/image/mypage/profile/${loginDto.getMem_profileimg() }">
+								src="<%=request.getContextPath() %>/resources/image/mypage/profile/${loginDto.getMem_profileimg() }" width="50px" height="50px" style="border-radius: 50px;">
 						</c:if>
 					${loginDto.getMem_nick() }
 				</a>
