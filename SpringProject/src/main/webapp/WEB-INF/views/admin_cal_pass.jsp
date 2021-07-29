@@ -108,8 +108,8 @@
 															<!-- 프립을 소개해 주세요 -->
 															<div class="cal_modal">
 																<div class="section01">
-																	<!-- 사진 수정필요 (클래스 사진) -->
-																	<div><img alt="${wait_host[status.index].getClass_image() }" src="<%=request.getContextPath() %>/resources/image/like/${wait_host[status.index].getClass_image() }" class="frip_img"></div>
+																	<!-- (클래스 사진) -->
+																	<div><img alt="${wait_host[status.index].getClass_image() }" src="<%=request.getContextPath() %>/resources/upload/${wait_host[status.index].getClass_image() }" class="frip_img"></div>
 																	<div class="frip_info">
 																		<div>
 																			<div class="frip_no">Class No.${dto.getCal_classNum() }</div>
@@ -236,8 +236,8 @@
 														<!-- 프립을 소개해 주세요 -->
 														<div class="cal_modal">
 															<div class="section01">
-																<!-- 사진 수정필요 (클래스 사진) -->
-																<div><img alt="${finish_host[status.index].getClass_image() }" src="<%=request.getContextPath() %>/resources/image/like/${finish_host[status.index].getClass_image() }" class="frip_img"></div>
+																<!-- (클래스 사진) -->
+																<div><img alt="${finish_host[status.index].getClass_image() }" src="<%=request.getContextPath() %>/resources/upload/${finish_host[status.index].getClass_image() }" class="frip_img"></div>
 																<div class="frip_info">
 																	<div>
 																		<div class="frip_no">Class No.${dto2.getCal_classNum() }</div>

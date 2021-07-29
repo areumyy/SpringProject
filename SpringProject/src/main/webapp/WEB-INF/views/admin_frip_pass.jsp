@@ -103,8 +103,8 @@
 																<div class="final_confirm">
 																	<div class="final_confirm_frame">
 																		<div class="confirm_img_box">
-																			<!-- 사진 수정필요(클래스 사진) -->
-																			<img alt="${dto.getClass_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto.getClass_image() }" name="confirm_img" class="confirm_img">
+																			<!-- (클래스 사진) -->
+																			<img alt="${dto.getClass_image() }" src="<%=request.getContextPath() %>/resources/upload/${dto.getClass_image() }" name="confirm_img" class="confirm_img">
 																		</div>
 																		<div class="final_frip_info">
 																			<section class="info_section">
@@ -117,8 +117,15 @@
 																			</section>
 																			<section class="info_section1">
 																				<div class="info_hostInfo">
-																					<!-- 사진 수정필요(호스트=유저 사진) -->
-																					<img width="56px" height="56px" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto.getMem_profileImg() }" >
+																					 <!-- (호스트 사진) -->
+														                              <c:choose>
+																					  	  <c:when test="${dto.getMem_profileImg() == null}">
+																							  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png" class="profile_img">
+																						  </c:when>
+																						  <c:otherwise>
+																							  <img alt="${dto.getMem_profileImg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto.getMem_profileImg() }" class="profile_img">
+																						  </c:otherwise>										
+																					  </c:choose>
 																					<div class="info_hostInfo_text">
 																						<div>${dto.getMem_name() } ></div>
 																						<div class="count_example">프립 14 | 후기 14 | 저장 342</div>
@@ -265,8 +272,8 @@
 																	<div class="final_confirm">
 																		<div class="final_confirm_frame">
 																			<div class="confirm_img_box">
-																				<!-- 사진 수정필요(클래스 사진) -->
-																				<img alt="${dto2.getClass_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto2.getClass_image() }" name="confirm_img" class="confirm_img">
+																				<!-- (클래스 사진) -->
+																				<img alt="${dto2.getClass_image() }" src="<%=request.getContextPath() %>/resources/upload/${dto2.getClass_image() }" name="confirm_img" class="confirm_img">
 																			</div>
 																			<div class="final_frip_info">
 																				<section class="info_section">
@@ -279,8 +286,15 @@
 																				</section>
 																				<section class="info_section1">
 																					<div class="info_hostInfo">
-																						<!-- 사진 수정필요(호스트=유저 사진) -->
-																						<img width="56px" height="56px" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto2.getMem_profileImg() }" >
+																						<!-- (호스트 사진) -->
+															                              <c:choose>
+																						  	  <c:when test="${dto2.getMem_profileImg() == null}">
+																								  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png" class="profile_img">
+																							  </c:when>
+																							  <c:otherwise>
+																								  <img alt="${dto2.getMem_profileImg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto2.getMem_profileImg() }" class="profile_img">
+																							  </c:otherwise>										
+																						  </c:choose>
 																						<div class="info_hostInfo_text">
 																							<div>${dto2.getMem_name() } ></div>
 																						<div class="count_example">프립 14 | 후기 14 | 저장 342</div>

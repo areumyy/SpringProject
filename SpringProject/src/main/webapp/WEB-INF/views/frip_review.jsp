@@ -106,7 +106,7 @@
 			                           <div class="user_img_box">
 			                              <!-- (유저 사진) -->
 			                              <c:choose>
-										  	  <c:when test="${dto.getMem_profileimg() == null}">
+										  	  <c:when test="${dto.getMem_profileImg() == null}">
 												  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png" class="user_img">
 											  </c:when>
 											  <c:otherwise>
