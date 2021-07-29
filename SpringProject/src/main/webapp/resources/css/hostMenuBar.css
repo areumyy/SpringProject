@@ -1,5 +1,23 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Open+Sans&display=swap');
 
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../fonts/NotoSansKR-Regular.otf") format("opentype");
+  font-style: normal;
+}
+
+/* 숫자는 폰트 OpenSans로 지정 */
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("../fonts/OpenSans-SemiBold.ttf") format("truetype");
+  unicode-range: U+0030-0039;
+  font-style: normal;
+}
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
 .hostMenuBar {
     position: fixed;
     top: 0px;
@@ -28,7 +46,12 @@
 	color: white;
 	text-decoration: none;
 }
-
+.img_style {
+	display: initial;
+	border-radius: 5px;
+	width: 40px;
+	height: 40px;
+}
 @media (max-width: 768px) {
 	.hostMenuBar{
 		display:none;

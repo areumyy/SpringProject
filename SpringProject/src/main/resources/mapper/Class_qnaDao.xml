@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="getClassQnaCountComplete" parameterType="int" resultType="int">
-		select count(*) 
+		select nvl(count(*),0) 
 		from frip_class_qna 
 		where class_ans_cont is not null 
 		and class_qna_classNum 
@@ -184,7 +184,7 @@
 	<!-- 답변 안한 문의 검색 end-->
 	
 	<select id="getallCount" parameterType="int" resultType="int">
-		select count(*) 
+		select nvl(count(*),0) 
 		from frip_class_qna 
 		where class_qna_classNum 
 		in(select class_num from frip_class where class_memnum = #{mem_num}) 

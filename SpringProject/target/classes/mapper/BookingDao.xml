@@ -47,7 +47,7 @@
 	</select>
 	
 	<select id="getcount_memnum" parameterType="int" resultType="int">
-		select count(*) 
+		select nvl(count(*),0) 
 		from frip_booking 
 		where booking_classnum 
 		in (select class_num 

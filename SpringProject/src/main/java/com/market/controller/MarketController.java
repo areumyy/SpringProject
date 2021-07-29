@@ -39,6 +39,7 @@ import com.market.model.Class_qnaDTO;
 import com.market.model.HostDAO;
 import com.market.model.HostDTO;
 import com.market.model.LikeDAO;
+import com.market.model.LikeDTO;
 import com.market.model.MemberDAO;
 import com.market.model.MemberDTO;
 import com.market.model.NoticeDAO;
@@ -114,7 +115,8 @@ public class MarketController {
 	public String join() {
 		return "joinForm";
 	}
-
+		
+	
 	@RequestMapping(value = "/emailCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public void emailCheck(HttpServletResponse response, @RequestParam("mem_email") String mem_email)
@@ -897,6 +899,9 @@ public class MarketController {
 			sum += rList.get(i).getReview_score();
 		}
 		double average = (double)sum/rList.size();
+		if(rList.size() == 0) {
+			average = 0;
+		}
 		//Q&A응답률
 		int allQna = this.class_qnaDao.getallCount(loginNum);
 		int passQna = this.class_qnaDao.getCountComplete(loginNum);
@@ -2221,10 +2226,12 @@ public class MarketController {
 	public int getMem_num(HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-
-		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
+		int mem_num = 0;
 		
-		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
+		if(session.getAttribute("loginDto") != null) {
+			MemberDTO dto = (MemberDTO)session.getAttribute("loginDto");
+			mem_num= dto.getMem_num();
+		}
 		
 		return mem_num;
 	}
@@ -2829,5 +2836,22 @@ public class MarketController {
 		model.addAttribute("search_input", search_input);
 		
 		return "searchAll";
+	}
+	
+	@RequestMapping(value = "/class_like_list.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void emailCheck(HttpServletResponse response, HttpServletRequest request) throws IOException {
+		int mem_num = getMem_num(request);
+		
+		List<LikeDTO> like_list = this.reviewDao.getTarget(mem_num);
+		
+		JSONObject obj = new JSONObject();
+
+		JSONArray ja = JSONArray.fromObject(like_list);
+
+		obj.put("clist", ja);
+
+		System.out.println(like_list);
+		response.getWriter().print(obj);
 	}
 }

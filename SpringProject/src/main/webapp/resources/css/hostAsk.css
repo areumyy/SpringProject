@@ -54,7 +54,6 @@
 }
 .info_frame{
 	-webkit-box-flex: 1;
-    flex: 1 1 auto;
     background-color: white;
     display: flex;
     flex-flow: column nowrap;

@@ -160,7 +160,6 @@ function check(su) {
 								   </div>
 								  </div>
 								  </c:forEach>
-						   		</c:if>
 						   </div> <!-- 아코디언 end  -->
 						   
 						   <!-- 페이징  -->
@@ -196,6 +195,11 @@ function check(su) {
 									</c:if>
 								</ul>
 							</nav>
+						   		</c:if>
+						   		
+						   		<c:if test="${empty list }">
+						   			<span class="nonReview">관리할 후기가 없습니다.</span>
+						   		</c:if>
 						</div>
 					</div>
 				</div> <!-- class="Main" end -->

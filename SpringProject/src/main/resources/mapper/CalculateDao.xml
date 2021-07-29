@@ -102,7 +102,7 @@
 	
 	<select id="getMsales" parameterType="int" resultType="int">
 		<![CDATA[
-			select sum(cal_total)
+			select nvl(sum(cal_total),0)
 			from frip_calculate 
 			where cal_regdate > TO_CHAR(TRUNC(SYSDATE,'mm') ,'yyyy/mm/dd')
 			and cal_regdate < TO_CHAR(LAST_DAY(SYSDATE) ,'yyyy/mm/dd')
@@ -113,7 +113,7 @@
 	
 	<select id="getSales" parameterType="int" resultType="int">
 		<![CDATA[
-			select sum(cal_total) from frip_calculate 
+			select nvl(sum(cal_total),0) from frip_calculate 
 			where cal_classnum in(select class_num from frip_class where class_memnum = #{mem_num})
 		]]>
 	</select>
