@@ -2801,8 +2801,14 @@ public class MarketController {
 	@RequestMapping(value = "/class_like_list.do", method = RequestMethod.POST)
     @ResponseBody
     public void checkLikeList(HttpServletResponse response, HttpServletRequest request) throws IOException {
-        int mem_num = getMem_num(request);
-
+		int mem_num = 0;
+		HttpSession session1 = request.getSession();
+		
+		if(session1.getAttribute("loginDto") != null) {
+			MemberDTO dto = (MemberDTO)session1.getAttribute("loginDto");
+			mem_num= dto.getMem_num();
+		}
+        
         List<LikeDTO> like_list = this.reviewDao.getTarget(mem_num);
 
         JSONObject obj = new JSONObject();
