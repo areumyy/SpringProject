@@ -60,7 +60,7 @@ $(function(){
 								<c:set var="likeCount" value="${likeCount }" />				<!-- 호스트 찜 개수 -->
 							
 							
-								<div class="Content_Head1_Img1" style="margin: 0 50px;">
+								<div class="Content_Head1_Img1">
 									<div class="image-slider Content_Head1_Img2 image-initialized" dir="ltr">
 										<div class="image-list">
 											<div>

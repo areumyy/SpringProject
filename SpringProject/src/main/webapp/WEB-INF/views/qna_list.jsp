@@ -26,7 +26,10 @@
 			<div class="article">
 
 				<div class="qna_list_page">
-					<h1 class="qna_list_title">자주 묻는 질문</h1>
+					<div style="display: flex;">
+						<button type="button" class="back_btn" onclick="window.history.back();"><img class="back_icon" alt="back_icon" src="resources/image/login/back_icon.svg"></button>
+						<h1 class="qna_list_title">자주 묻는 질문</h1>
+					</div>
 					<form class="qna_search_form" method="post" action="<%=request.getContextPath()%>/qna_search.do">
 						<img src="<%=request.getContextPath() %>/resources/image/menu/search.svg" class="qna_search_img">
 						<input type="text" placeholder="키워드를 입력하세요" value="" name="keyword" autocomplete="off">

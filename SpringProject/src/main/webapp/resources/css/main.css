@@ -321,4 +321,7 @@
 	.last_class {
 		display: none;
 	}
+	.class_group>div:nth-child(5) {
+		display: none;
+	}
 }

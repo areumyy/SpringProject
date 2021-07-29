@@ -227,30 +227,30 @@ $(function(){
 				<img src="<%=request.getContextPath() %>/resources/image/menu/category.svg" alt="카테고리 메뉴">카테고리
 			</span>
 		</a>
-		<ul class="dropdown-menu category_list1" aria-labelledby="category_btn1">
+		<ul class="dropdown-menu category_list11" aria-labelledby="category_btn1">
 			<div>
-			    <li><a class="dropdown-item" href="#">아웃도어</a>
+			    <li><a class="dropdown-item" href="<%=request.getContextPath() %>/category_all_list.do?num=1">아웃도어</a>
 			    	<ul>
-			    		<li><a href="#">서핑</a></li>
-			    		<li><a href="<%=request.getContextPath() %>/frip_content.do">캠핑</a></li>
-			    		<li><a href="#">등산/트래킹</a></li>
-			    		<li><a href="#">기타</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=1">서핑</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=2">캠핑</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=3">등산/트래킹</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=4">기타</a></li>
 			    	</ul>
 			    </li>
-			    <li><a class="dropdown-item" href="#">피트니스</a>
+			    <li><a class="dropdown-item" href="<%=request.getContextPath() %>/category_all_list.do?num=5">피트니스</a>
 			    	<ul>
-			    		<li><a href="#">요가</a></li>
-			    		<li><a href="#">필라테스</a></li>
-			    		<li><a href="#">헬스/PT/GX</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=5">요가</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=6">필라테스</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=7">헬스/PT/GX</a></li>
 			    	</ul>
 			    </li>
 		    </div>
 		    <div>
-			    <li><a class="dropdown-item" href="#">스포츠</a>
+			    <li><a class="dropdown-item" href="<%=request.getContextPath() %>/category_all_list.do?num=8">스포츠</a>
 			    	<ul>
-			    		<li><a href="#">클라이밍</a></li>
-			    		<li><a href="#">구기스포츠</a></li>
-			    		<li><a href="#">수영</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=8">클라이밍</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=9">구기스포츠</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=10">수영</a></li>
 			    	</ul>
 			    </li>
 			    <li><a class="dropdown-item" href="<%=request.getContextPath() %>/category_all_list.do?num=11">쿠킹</a>
@@ -262,18 +262,18 @@ $(function(){
 			    </li>
 		    </div>
 		    <div>
-			    <li><a class="dropdown-item" href="#">공예</a>
+			    <li><a class="dropdown-item" href="<%=request.getContextPath() %>/category_all_list.do?num=14">공예</a>
 			    	<ul>
-			    		<li><a href="#">도자기</a></li>
-			    		<li><a href="#">비누</a></li>
-			    		<li><a href="#">비즈</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=14">도자기</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=15">비누</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=16">비즈</a></li>
 			    	</ul>
 			    </li>
-			    <li><a class="dropdown-item" href="#">여행</a>
+			    <li><a class="dropdown-item" href="<%=request.getContextPath() %>/category_all_list.do?num=17">여행</a>
 			    	<ul>
-			    		<li><a href="#">펜션/풀빌라</a></li>
-			    		<li><a href="#">투어</a></li>
-			    		<li><a href="#">제주여행</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=17">펜션/풀빌라</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=18">투어</a></li>
+			    		<li><a href="<%=request.getContextPath() %>/category_list.do?num=19">제주여행</a></li>
 			    	</ul>
 			    </li>
 		    </div>

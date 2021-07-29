@@ -26,7 +26,10 @@
 			<div class="article">
 
 				<div class="notice_list_page">
-					<h1 class="notice_list_title">공지사항</h1>
+					<div style="display: flex;">
+						<button type="button" class="back_btn" onclick="window.history.back();"><img class="back_icon" alt="back_icon" src="resources/image/login/back_icon.svg"></button>
+						<h1 class="notice_list_title">공지사항</h1>
+					</div>
 					<div class="accordion" id="accordionExample">
 					<ul class="notice_list">
 						<c:if test="${!empty list }">
