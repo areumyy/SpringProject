@@ -74,7 +74,7 @@ $(function() {
 								<span>사진 첨부하기</span>
 								</label>
 							</div>
-							<img src="<%=request.getContextPath() %>/resources/reviewUpload/${rlist.getReview_image() }" width="200" height="200" >
+							<img src="/reviewUpload/${rlist.getReview_image() }" width="200" height="200" >
 							<div class="mypage_reviewWrite_footer">
 								<input type="submit" class="reviewWrite_button" value="수정하기">
 							</div>
