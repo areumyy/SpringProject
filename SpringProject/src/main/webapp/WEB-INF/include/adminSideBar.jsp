@@ -96,7 +96,7 @@
 					</div>
 					
 					<div class="ul logout">
-						<button>로그아웃</button>
+						<button onclick="location.href='logout.do'">로그아웃</button>
 					</div>
 	  			</div>  
 			</div>
@@ -161,7 +161,7 @@
 				</ul>
 			</div>
 			<div class="menuName logout">
-				<button>로그아웃</button>
+				<button onclick="location.href='logout.do'">로그아웃</button>
 			</div>
 		</nav>
 		<div class="black">	</div>

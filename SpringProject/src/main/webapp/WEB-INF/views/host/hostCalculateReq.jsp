@@ -89,7 +89,7 @@ $(function(){
 									<div>상태</div>
 								</div>
 								<c:if test="${!empty list }">
-									<c:forEach items="${list }" var="dto" varStatus="status">
+									<c:forEach items="${list }" var="dto">
 										<div class="cal_item">
 											<div>${dto.getCal_startDate().substring(0,10) }</div>
 											<div class="item_title"><p>${dto.getCal_name() }</p></div>
