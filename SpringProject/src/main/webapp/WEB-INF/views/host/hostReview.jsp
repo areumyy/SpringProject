@@ -74,7 +74,15 @@ function check(su) {
 								        <div class="host_review_box">
 								      		<div class="user_info">
 								      			<div class="user_img_box">
-								      				<img alt="user_img" src="<%=request.getContextPath() %>/resources/image/like/${dto.getMem_profileimg()}" class="user_img">
+								      			<%-- <c:if test="${loginDto.getMem_profileimg() == null}">
+													<img class="img_style"
+														src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+												</c:if>
+												<c:if test="${loginDto.getMem_profileimg() != null}">
+													<img class="img_style"
+														<img alt="user_img" src="<%=request.getContextPath() %>/resources/image/like/${dto.getMem_profileimg()}" class="user_img">
+												</c:if> --%>
+								      				
 								      			</div>
 								      			<div class="user_detail">
 								      				<div class="user_name">
@@ -98,7 +106,15 @@ function check(su) {
 								      				<span>${dto.getReview_regdate() }</span>
 								      			</div>
 								      		</div>
+								      		
 								      		<div class="review_footer_box">
+								      			<c:if test="${dto.getReview_image() == null}">
+								      				<img alt="review_image" src="<%=request.getContextPath() %>/resources/logo/menulogo.PNG" class="review_image">
+									      		</c:if>	
+									      		<c:if test="${dto.getReview_image() != null}">
+								      				<img alt="review_image" src="<%=request.getContextPath() %>/resources/image/like/${dto.getReview_image()}" class="review_image">
+									      		</c:if>	
+									      		
 									      			<div class="reply_btn_box">
 									      				<!-- 답변하기 모달창 -->
 									      				<!-- Button trigger modal -->
