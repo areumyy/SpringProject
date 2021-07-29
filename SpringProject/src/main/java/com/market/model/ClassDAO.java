@@ -64,4 +64,5 @@ public interface ClassDAO {
 	public int getSearchListCount(String search_input);
 	public int countclass_myfripWait(HashMap<String, Object> map);
 	public List<ClassDTO> getList_myFripWait(HashMap<String, Object> map);
+	
 }

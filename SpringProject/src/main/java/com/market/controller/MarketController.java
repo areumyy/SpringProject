@@ -2638,12 +2638,13 @@ public class MarketController {
 		int reviewCount = this.likeDao.review_count(class_memnum);
 		// 호스트 찜 개수 가져오는 메서드
 		int likeCount = this.likeDao.like_count(class_memnum);
-
+		
 		model.addAttribute("hostInfo", hostInfo);
 		model.addAttribute("hostCont", hostCont);
 		model.addAttribute("classCount", classCount);
 		model.addAttribute("reviewCount", reviewCount);
 		model.addAttribute("likeCount", likeCount);
+		
 		
 		// 프립후기 리스트를 가져오는 메서드
 		List<ReviewDTO> reviewList = this.reviewDao.getReviewList(class_num);

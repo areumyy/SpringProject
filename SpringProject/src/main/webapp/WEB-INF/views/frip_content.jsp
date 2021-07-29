@@ -187,7 +187,6 @@ function host_like_btn(host_num) {
 															alt="찜하기">
 													</button>
 												<%} %>
-												
 											</div>
 										</div>
 									</section>
