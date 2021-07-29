@@ -82,15 +82,15 @@ function handleImgFileSelect(e) {
 										<div class="mypage_img_wrapper">
 											<div class="img_cont">
 												<c:choose>
-													<c:when test="${dto.getMem_profileimg() == null}">
-														<img alt="프로필 이미지" class="img_style"
-															src="/profile/profile_no_img.png">
-													</c:when>
-													<c:otherwise>
-														<img alt="프로필 이미지" class="img_style" id="uploadImge"
-															src="/profile/${dto.getMem_profileimg() }">
-													</c:otherwise>
-												</c:choose>
+                                                    <c:when test="${dto.getMem_profileimg() == null}">
+                                                        <img alt="프로필 이미지" class="img_style"
+                                                            src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img alt="프로필 이미지" class="img_style" id="uploadImge"
+                                                            src="/profile/${dto.getMem_profileimg() }">
+                                                    </c:otherwise>
+                                                </c:choose>
 											</div>
 										</div>
 										<button id="profile-upload-btn" form="mypage_profile_img" >
