@@ -34,11 +34,6 @@
 				<div class="my_page">
 					<div class="mypage_info_wrapper"><!-- 프로필바 -->
 						<c:set var="dto" value="${list }" />
-						<c:set var="blist" value="${blist }" />
-						<c:set var="clist" value="${clist }" />
-						<c:set var="olist" value="${olist }" />
-						<c:if test="${!empty list }">
-						
 
 								<div class="customer_info_wrapper">
 									<!-- 개인 정보 -->
@@ -78,16 +73,16 @@
 									<!-- 개인 카드 -->
 									<div class="customer_box_wrapper">
 										<div class="customer_info_box">
-											<a href="<%=request.getContextPath() %>/mypage_energy.do"
+											<a <%-- href="<%=request.getContextPath() %>/mypage_energy.do" --%>
 												class="customer_txt_style">
 												<div class="customer_box_txt">
 													에너지<img class="box_arrow"
 														src="<%=request.getContextPath() %>/resources/image/mypage/arrow.svg">
-												</div> 0
+												</div> ${dto.getMem_point() }
 											</a>
 										</div>
 										<div class="customer_info_box">
-											<a href="<%=request.getContextPath() %>/mypage_coupon.do"
+											<a <%-- href="<%=request.getContextPath() %>/mypage_coupon.do" --%>
 												class="customer_txt_style">
 												<div class="customer_box_txt">
 													쿠폰<img class="box_arrow"
@@ -107,7 +102,7 @@
 										</div>
 									</div>
 								</div>
-						</c:if>
+					
 					</div><!-- /프로필바 -->
 					
 					
@@ -117,7 +112,7 @@
 								<a href="<%=request.getContextPath() %>/mypage.do">
 									<button class="nav_button">
 										<div>
-											사용가능<span class="nav_cont">0</span>
+											사용가능<span class="nav_cont">${countWorks }</span>
 										</div>
 									</button>
 								</a>
@@ -133,60 +128,74 @@
 							
 							<div class="mypage_nav_cont">
 								<div class="full_wrapper">
+									<c:if test="${!empty blist}">
+									<c:forEach items="${blist }" var="dto" varStatus="status">
 									<div class="pgCard_wrapper">
-										<div class="pgCard_date">
-											${blist.getBooking_regdate()} 결제
-										</div>
+										<div class="pgCard_date">${dto.getBooking_regdate()} 결제</div>
 										<div class="pgCard_product_wrapper">
 											<div class="pgCard_product_header">
 												<div class="pgCard_img_wrapper">
 													<div class="pgCard_product_img_wrapper">
-														<img class="product_img" src="<%=request.getContextPath() %>/resources/upload/${clist.getClass_image()}">
+														<img class="product_img" src="<%=request.getContextPath() %>/resources/upload/${clist[status.index].getClass_image()}">
 													</div>
 												</div>
 												<div class="pgCard_product_info">
-													<div class="pgCard_header_product_title">${clist.getClass_title()}</div>
+													<div class="pgCard_header_product_title">${clist[status.index].getClass_title()}</div>
 												</div>
 											</div>
 										</div>
 										<div class="pgCard_footer_wrapper">
 											<div class="pgCard_footer_info">
-												<span class="mypage_footer_txt_bottom">${olist.getOption_name()}</span>
+												<span class="mypage_footer_txt_bottom">${olist[status.index].getOption_name()}</span>
 												<span class="color_gray">사용가능</span>
 											</div>
-											<a href="<%=request.getContextPath()%>/mypage_reviewWrite.do?no=${blist.getBooking_num()}"
-												class="mypage_reviewWrite_button"> 후기 작성
+											<a href="<%=request.getContextPath()%>/mypage_reviewInsert.do?no=${dto.getBooking_num()}"
+												class="mypage_reviewWrite_button"> 후기 생성
+											</a>
+											<a href="<%=request.getContextPath()%>/mypage_reviewWrite.do?no=${dto.getBooking_num()}"
+												class="mypage_reviewWrite_button"> 후기 수정
 											</a>
 										</div>
 										<div class="mypage_productDetail_wrapper">
-											<a href="<%=request.getContextPath()%>/mypage_productDetail.do?no=${blist.getBooking_num()}"
+											<a href="<%=request.getContextPath()%>/mypage_productDetail.do?no=${dto.getBooking_num()}"
 												class="mypage__productDetail_button"> 상세 정보 
 											</a>
 										</div>
 									</div>
+								</c:forEach>
+							</c:if>
 									
-									<nav aria-label="Page navigation example" class="coupon_footer">
-									<ul class="pagination">
-										<li class="page-item"><a class="page-link" href="#" aria-label="Previous" style="color: black;"> 
-										<span aria-hidden="true">&laquo;</span></a>
-										</li>
-										
-										<li class="page-item active"><a class="page-link" href="#" style="color: white;">1</a></li>
-										<li class="page-item"><a class="page-link" href="#" style="color: black;">2</a></li>
-										<li class="page-item"><a class="page-link" href="#" style="color: black;">3</a></li>
-										
-										<li class="page-item"><a class="page-link" href="#" aria-label="Next" style="color: black;"> 
-										<span aria-hidden="true">&raquo;</span></a>
-										</li>
-									</ul>
-								</nav>
+									<!-- <nav aria-label="Page navigation example" class="coupon_footer">
+										<ul class="pagination">
+											<li class="page-item"><a class="page-link" href="#"
+												aria-label="Previous" style="color: black;"> <span
+													aria-hidden="true">&laquo;</span></a></li>
+	
+											<li class="page-item active"><a class="page-link"
+												href="#" style="color: white;">1</a></li>
+											<li class="page-item"><a class="page-link" href="#"
+												style="color: black;">2</a></li>
+											<li class="page-item"><a class="page-link" href="#"
+												style="color: black;">3</a></li>
+	
+											<li class="page-item"><a class="page-link" href="#"
+												aria-label="Next" style="color: black;"> <span
+													aria-hidden="true">&raquo;</span></a></li>
+										</ul>
+									</nav> -->
 								</div>
 								
-								<!-- 내용이 없을경우 -->
-								<%-- <div class="empty_wrapper">
-									<img class="empty_icon" src="<%=request.getContextPath() %>/resources/image/mypage/emtpy.svg">
-									<div class="empty_txt">사용 가능한 프립이 없어요</div>
-								</div> --%>
+								
+								
+								<c:if test="${empty blist}">
+									<!-- 내용이 없을경우 -->
+									<div class="empty_wrapper">
+										<img class="empty_icon" src="<%=request.getContextPath() %>/resources/image/mypage/emtpy.svg">
+										<div class="empty_txt">사용 가능한 프립이 없어요</div>
+									</div>
+								</c:if>
+								
+								
 							</div>
 						</div>
 					</div><!-- /내역 -->

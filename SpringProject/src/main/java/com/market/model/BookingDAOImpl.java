@@ -42,6 +42,11 @@ public class BookingDAOImpl implements BookingDAO {
 	public List<BookingDTO> getBookingWorks(int booking_writer) {
 		return this.sqlSession.selectList("get_booking_works", booking_writer);
 	}
+	
+	@Override
+	public List<BookingDTO> getBookingWorksEnd(int booking_writer) {
+		return this.sqlSession.selectList("get_booking_works_end", booking_writer);
+	}
 
 	@Override
 	public int getCountWorks(int booking_writer) {

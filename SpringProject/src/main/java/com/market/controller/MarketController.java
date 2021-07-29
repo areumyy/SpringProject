@@ -668,15 +668,15 @@ public class MarketController {
 
 	@RequestMapping("option_select.do")
 	public String optionSel(@RequestParam("class_num") int class_num, Model model) {
-		
+
 		ClassDTO cdto = this.classDao.getList_classNum(class_num);
 		List<OptionDTO> odto = this.optionDao.getOptionList(class_num);
 		int bookingCount = this.bookingDao.getCount(class_num);
-		
+
 		model.addAttribute("cdto", cdto);
 		model.addAttribute("odto", odto);
 		model.addAttribute("bookingCount", bookingCount);
-		
+
 		return "option_select";
 	}
 
@@ -790,36 +790,36 @@ public class MarketController {
 	@RequestMapping("payment.do")
 	public String pay(HttpServletRequest request, Model model) {
 		int mem_num = getMem_num(request);
-		
+
 		BookingDTO bdto = new BookingDTO();
 		bdto.setBooking_classNum(Integer.parseInt(request.getParameter("class_num")));
 		bdto.setBooking_option(Integer.parseInt(request.getParameter("option_num")));
 		bdto.setBooking_enterCheck("no");
 		bdto.setBooking_writer(mem_num);
-		
+
 		ClassDTO classDto = this.classDao.getclassCont(bdto.getBooking_classNum());
 		OptionDTO optionDto = this.optionDao.getOptionCont(bdto.getBooking_option());
 
 		model.addAttribute("bookDto", bdto);
 		model.addAttribute("classDto", classDto);
 		model.addAttribute("optionDto", optionDto);
-		
+
 		return "payment";
 	}
-	
+
 	@RequestMapping("payment_ok.do")
 	public String payOk(BookingDTO dto, Model model, HttpServletRequest request) {
 		int usedPoint = Integer.parseInt(request.getParameter("usedPoint"));
 		String payMethod = request.getParameter("payMethod");
 		int option_price = Integer.parseInt(request.getParameter("option_price"));
-		
+
 		this.bookingDao.insertBooking(dto);
 
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("mem_num", dto.getBooking_writer());
 		map.put("usedPoint", usedPoint);
-		map.put("addPoint", (int)Math.round((option_price * 0.1)));
-		
+		map.put("addPoint", (int) Math.round((option_price * 0.1)));
+
 		this.memberDao.usePoint(map);
 
 		this.memberDao.addPoint(map);
@@ -1322,73 +1322,73 @@ public class MarketController {
 	}
 
 	@RequestMapping("hostCalculateReq.do")
-    public String hostCalReq(HttpServletRequest request, Model model, @RequestParam("type") String type) {
-        HttpSession session = request.getSession();
+	public String hostCalReq(HttpServletRequest request, Model model, @RequestParam("type") String type) {
+		HttpSession session = request.getSession();
 
-        MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
 
-        int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
+		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
 
-        int totalRecord = 0;
-        int rowsize = 3;
-        int page = 0; // 현재 페이지 변수
+		int totalRecord = 0;
+		int rowsize = 3;
+		int page = 0; // 현재 페이지 변수
 
-        if (request.getParameter("page") != null) {
-            page = Integer.parseInt(request.getParameter("page"));
-        } else {
-            page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
-        }
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		} else {
+			page = 1; // 처음으로 "게시물 전체 목록" 태그를 클릭한 경우
+		}
 
-        List<CalculateDTO> calList = new ArrayList<CalculateDTO>();
+		List<CalculateDTO> calList = new ArrayList<CalculateDTO>();
 
-        if (type.equals("total")) {
-            totalRecord = this.calculateDao.getCountAll(mem_num);
-            PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+		if (type.equals("total")) {
+			totalRecord = this.calculateDao.getCountAll(mem_num);
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
-            HashMap<String, Integer> map = new HashMap<String, Integer>();
-            map.put("mem_num", mem_num);
-            map.put("status", 0);
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			map.put("mem_num", mem_num);
+			map.put("status", 0);
 
-            List<ClassDTO> classList = this.classDao.getList_endOkAll(map); // 종료확인된 클래스 리스트
-            calList = this.calculateDao.getListAll(classList);
-            model.addAttribute("Paging", dto);
-        } else if (type.equals("before")) {
-            totalRecord = this.calculateDao.getCountBefore(mem_num);
-            PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			List<ClassDTO> classList = this.classDao.getList_endOkAll(map); // 종료확인된 클래스 리스트
+			calList = this.calculateDao.getListAll(classList);
+			model.addAttribute("Paging", dto);
+		} else if (type.equals("before")) {
+			totalRecord = this.calculateDao.getCountBefore(mem_num);
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
-            HashMap<String, Integer> map = new HashMap<String, Integer>();
-            map.put("mem_num", mem_num);
-            map.put("status", 3);
-            List<ClassDTO> classList = this.classDao.getList_endOk(map);
-            calList = this.calculateDao.getListBefore(classList);
-            model.addAttribute("Paging", dto);
-        } else if (type.equals("ing")) {
-            totalRecord = this.calculateDao.getCountIng(mem_num);
-            PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			map.put("mem_num", mem_num);
+			map.put("status", 3);
+			List<ClassDTO> classList = this.classDao.getList_endOk(map);
+			calList = this.calculateDao.getListBefore(classList);
+			model.addAttribute("Paging", dto);
+		} else if (type.equals("ing")) {
+			totalRecord = this.calculateDao.getCountIng(mem_num);
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
-            HashMap<String, Integer> map = new HashMap<String, Integer>();
-            map.put("mem_num", mem_num);
-            map.put("status", 1);
-            List<ClassDTO> classList = this.classDao.getList_endOk(map); // 종료된 클래스 리스트
-            calList = this.calculateDao.getListIng(classList);
-            model.addAttribute("Paging", dto);
-        } else if (type.equals("after")) {
-            totalRecord = this.calculateDao.getCountAfter(mem_num);
-            PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			map.put("mem_num", mem_num);
+			map.put("status", 1);
+			List<ClassDTO> classList = this.classDao.getList_endOk(map); // 종료된 클래스 리스트
+			calList = this.calculateDao.getListIng(classList);
+			model.addAttribute("Paging", dto);
+		} else if (type.equals("after")) {
+			totalRecord = this.calculateDao.getCountAfter(mem_num);
+			PageDTO dto = new PageDTO(page, rowsize, totalRecord, 3);
 
-            HashMap<String, Integer> map = new HashMap<String, Integer>();
-            map.put("mem_num", mem_num);
-            map.put("status", 2);
-            List<ClassDTO> classList = this.classDao.getList_endOk(map); // 종료된 클래스 리스트
-            calList = this.calculateDao.getListAfter(classList);
-            model.addAttribute("Paging", dto);
-        }
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			map.put("mem_num", mem_num);
+			map.put("status", 2);
+			List<ClassDTO> classList = this.classDao.getList_endOk(map); // 종료된 클래스 리스트
+			calList = this.calculateDao.getListAfter(classList);
+			model.addAttribute("Paging", dto);
+		}
 
-        model.addAttribute("list", calList);
-        model.addAttribute("type", type);
+		model.addAttribute("list", calList);
+		model.addAttribute("type", type);
 
-        return "host/hostCalculateReq";
-    }
+		return "host/hostCalculateReq";
+	}
 
 	@RequestMapping(value = "/cal_req", method = RequestMethod.POST)
 	@ResponseBody
@@ -1526,33 +1526,25 @@ public class MarketController {
 
 		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
 
-		// 회원 번호에 맞는 회원의 정보를 받아오는 메서드
 		MemberDTO list = this.memberDao.getMember(dto.getMem_num());
-		
-		// frip_booking 테이블에서 회원의 예약정보 받아옴.
+
 		List<BookingDTO> blist = this.bookingDao.getBookingWorks(dto.getMem_num());
-		
-		// 클래스 번호에 맞는 정보를 받아오는 메서드 
-		// ClassDTO clist = this.classDao.getList_classNum(blist.getBooking_classNum());
+
 		List<ClassDTO> clist = this.classDao.getList_classNum(blist);
-		
+
 		List<OptionDTO> olist = this.optionDao.getOptionCheck(blist);
 
-		
-		
-		List<Object> test = new ArrayList<Object>();
-		test.add(list);
-		test.add(blist);
-		test.add(clist);
-		test.add(olist);
-		
-		model.addAttribute("test",test);
+		// 예약한 플립의 수
+		int countWorks = this.bookingDao.getCountWorks(dto.getMem_num());
+
+		model.addAttribute("countWorks", countWorks);
 		model.addAttribute("list", list);
 		model.addAttribute("blist", blist);
 		model.addAttribute("clist", clist);
 		model.addAttribute("olist", olist);
-		
+
 		return "mypage";
+
 	}
 
 	@RequestMapping("mypage_edit.do")
@@ -1568,15 +1560,41 @@ public class MarketController {
 
 		return "mypage_edit";
 	}
+	
+	@RequestMapping("edit_profile.do")
+	public String myPageEdit(MemberDTO dto, HttpServletRequest request, Model model, MultipartHttpServletRequest mRequest) {
+		HttpSession session = request.getSession();
+
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto");
+		
+		dto.setMem_profileimg(upload.profileUpload(mRequest)); // 파일 이름으로 변환
+		dto.setMem_num(loginDto.getMem_num());
+		
+		this.memberDao.updateImgMember(dto);
+		
+		return "redirect:mypage.do";
+	}
+	
+	
 
 	@RequestMapping("mypage_edit_ok.do")
-	public void myPageEditOk(MemberDTO dto, HttpServletResponse response, @RequestParam("mem_nick") String mem_nick,
-			Model model) throws IOException {
+	public void myPageEditOk(MemberDTO dto, HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("mem_nick") String mem_nick, Model model) throws IOException {
 
 		response.setContentType("text/html; charset-UTF-8");
 
+		HttpSession session = request.getSession();
+
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto");
+
+		int mem_num = loginDto.getMem_num();
+
+		dto.setMem_num(mem_num);
+		dto.setMem_nick(mem_nick);
+
 		PrintWriter out = response.getWriter();
 
+		// 닉네임 중복을 확인하는 메서드
 		int result = this.memberDao.checkNick(mem_nick);
 
 		if (result > 0) { // 하나 이상 중복되는 닉네임이 있을 경우
@@ -1594,44 +1612,125 @@ public class MarketController {
 
 	}
 
-	@RequestMapping("mypage_coupon.do")
-	public String myPageCoupon() {
-		return "mypage_coupon";
-	}
+	@RequestMapping("mypage_purchases.do")
+	public String myPagePurchases(HttpServletRequest request, Model model) {
 
-	/*
-	 * @RequestMapping("mypage_purchases.do") public String
-	 * myPagePurchases(HttpServletRequest request, Model model) {
-	 * 
-	 * HttpSession session = request.getSession();
-	 * 
-	 * MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
-	 * 
-	 * // 회원 번호에 맞는 회원의 정보를 받아오는 메서드 MemberDTO list =
-	 * this.memberDao.getMember(dto.getMem_num());
-	 * 
-	 * // frip_booking 테이블에서 회원의 예약정보 받아옴. BookingDTO blist =
-	 * this.bookingDao.getBookingWorks(dto.getMem_num());
-	 * 
-	 * // 클래스 번호에 맞는 정보를 받아오는 메서드 ClassDTO clist =
-	 * this.classDao.getList_classNum(blist.getBooking_classNum());
-	 * 
-	 * OptionDTO olist = this.optionDao.getOptionCheck(clist.getClass_num());
-	 * 
-	 * model.addAttribute("list", list); model.addAttribute("blist", blist);
-	 * model.addAttribute("clist", clist); model.addAttribute("olist", olist);
-	 * 
-	 * return "mypage_purchases"; }
-	 */
+		HttpSession session = request.getSession();
 
-	@RequestMapping("mypage_energy.do")
-	public String myPageEnergy() {
-		return "mypage_energy";
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+
+		MemberDTO list = this.memberDao.getMember(dto.getMem_num());
+
+		List<BookingDTO> blist = this.bookingDao.getBookingWorksEnd(dto.getMem_num());
+
+		List<ClassDTO> clist = this.classDao.getList_classNum(blist);
+
+		List<OptionDTO> olist = this.optionDao.getOptionCheck(blist);
+
+		// 예약한 플립의 수
+		int countWorks = this.bookingDao.getCountWorks(dto.getMem_num());
+
+		model.addAttribute("countWorks", countWorks);
+		model.addAttribute("list", list);
+		model.addAttribute("blist", blist);
+		model.addAttribute("clist", clist);
+		model.addAttribute("olist", olist);
+
+		return "mypage_purchases";
 	}
 
 	@RequestMapping("mypage_review.do")
 	public String myPageReview() {
 		return "mypage_review";
+	}
+	
+	@RequestMapping("mypage_reviewInsert.do")
+	public String myPageReviewInsert(@RequestParam("no") int booking_num, Model model) {
+
+		System.out.println("예약 번호 >>>" + booking_num);
+
+		ClassDTO clist = this.classDao.getList_classNum(booking_num);
+
+		model.addAttribute("clist", clist);
+		model.addAttribute("booking_num", booking_num);
+		
+		return "mypage_reviewInsert";
+
+	}
+	
+	@RequestMapping("mypage_reviewInsertOk.do")
+	public void myPageReviewInsertOk(ReviewDTO dto, HttpServletResponse response, HttpServletRequest request, MultipartHttpServletRequest mRequest,
+			@RequestParam("booking_num") int booking_num, Model model) throws IOException {
+
+		response.setContentType("text/html; charset-UTF-8");
+		
+		HttpSession session = request.getSession();
+
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto");
+
+		dto.setReview_num(booking_num);
+		dto.setReview_writer(loginDto.getMem_num());
+		dto.setReview_image(upload.reviewUpload(mRequest)); // 파일 이름으로 변환
+		
+		int check = this.reviewDao.insert_review(dto);
+
+		PrintWriter out = response.getWriter();
+
+		if (check > 0) { 
+			out.println("<script>");
+			out.println("alert('후기를 등록하였습니다.')");
+			out.println("location.href='mypage_purchases.do'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('후기 등록을 실패하였습니다')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+
+	}
+
+	@RequestMapping("mypage_reviewWrite.do")
+	public String myPageReviewWrite(@RequestParam("no") int booking_num, Model model) {
+
+		System.out.println("예약 번호 >>>" + booking_num);
+
+		ClassDTO clist = this.classDao.getList_classNum(booking_num);
+
+		ReviewDTO rlist = this.reviewDao.get_review(booking_num);
+
+		model.addAttribute("clist", clist);
+		model.addAttribute("rlist", rlist);
+		model.addAttribute("booking_num", booking_num);
+		
+		return "mypage_reviewWrite";
+
+	}
+
+	@RequestMapping("mypage_reviewWriteOk.do")
+	public void myPageReviewWriteOk(ReviewDTO dto, HttpServletResponse response, MultipartHttpServletRequest mRequest,
+			@RequestParam("booking_num") int booking_num, Model model) throws IOException {
+		
+		response.setContentType("text/html; charset-UTF-8");
+
+		dto.setReview_num(booking_num);
+		dto.setReview_image(upload.reviewUpload(mRequest)); // 파일 이름으로 변환
+		
+		int check = this.reviewDao.update_review(dto);
+
+		PrintWriter out = response.getWriter();
+
+		if (check > 0) { 
+			out.println("<script>");
+			out.println("alert('후기를 수정하였습니다')");
+			out.println("location.href='mypage_reviewWrite.do?no="+booking_num+"'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('후기 수정을 실패하였습니다')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
 	}
 
 	/*
@@ -1658,37 +1757,14 @@ public class MarketController {
 	 * return "mypage_productDetail"; }
 	 */
 
-	/*
-	 * @RequestMapping("mypage_reviewWrite.do") public String
-	 * myPageReviewWrite(HttpServletRequest request, @RequestParam("no") int
-	 * booking_num, Model model) {
-	 * 
-	 * HttpSession session = request.getSession();
-	 * 
-	 * MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
-	 * 
-	 * // 회원 번호에 맞는 회원의 정보를 받아오는 메서드 MemberDTO list =
-	 * this.memberDao.getMember(dto.getMem_num());
-	 * 
-	 * // frip_booking 테이블에서 회원의 예약정보 받아옴. BookingDTO blist =
-	 * this.bookingDao.getBookingWorks(dto.getMem_num());
-	 * 
-	 * // 클래스 번호에 맞는 정보를 받아오는 메서드 ClassDTO clist =
-	 * this.classDao.getList_classNum(blist.getBooking_classNum());
-	 * 
-	 * model.addAttribute("clist", clist);
-	 * 
-	 * return "mypage_reviewWrite";
-	 * 
-	 * // booking_num = review_num }
-	 */
-	@RequestMapping("mypage_reviewWriteOk.do")
-	public String myPageReviewWriteOk(ReviewDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
-			HttpServletRequest request, HttpServletResponse response, @RequestParam("no") int booking_num, Model model) {
-		
-		
-		
-		return "mypage_reviewWrite";
+	@RequestMapping("mypage_coupon.do")
+	public String myPageCoupon() {
+		return "mypage_coupon";
+	}
+
+	@RequestMapping("mypage_energy.do")
+	public String myPageEnergy() {
+		return "mypage_energy";
 	}
 
 	@RequestMapping("admin_notice.do")
@@ -2202,7 +2278,6 @@ public class MarketController {
 		
 		return mem_num;
 	}
-
 
 	// 선택 카테고리 전체 리스트
 	@RequestMapping("category_all_list.do")

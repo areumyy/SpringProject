@@ -123,7 +123,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int updateMember(MemberDTO dto) {
 		return this.sqlSession.update("update_nick", dto);
-
+	}
+	
+	@Override
+	public int updateImgMember(MemberDTO dto) {
+		return this.sqlSession.update("update_img", dto);
 	}
 
 	public void usePoint(HashMap<String, Integer> map) {

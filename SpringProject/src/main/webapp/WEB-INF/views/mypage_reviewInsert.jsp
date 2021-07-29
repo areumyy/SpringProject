@@ -16,11 +16,6 @@
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/mypageCommon.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/mypageReviewWrite.css" rel="stylesheet"/>
-<script language="javascript">
-	document.title = "마이페이지 리뷰쓰기" ;
-</script>
-<link rel="shortcut icon" type="image/x-icon" 
-	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 <script type="text/javascript">
 $(function() {
     $('#content').keyup(function (e){
@@ -40,7 +35,7 @@ $(function() {
 
 				<div class="pg_main">
 					<div class="pg_wrapper">
-						<form class="pg_container" method="post" action="<%=request.getContextPath()%>/mypage_reviewWriteOk.do" enctype="multipart/form-data">
+						<form class="pg_container" method="post" action="<%=request.getContextPath()%>/mypage_reviewInsertOk.do" enctype="multipart/form-data">
 							<input type="hidden" name="booking_num" value="${booking_num }">
 							<header class="mypage_reviewWrite_header_wrapper">
 								<h1 class="pg_header_txt">후기 편집하기</h1>
@@ -56,8 +51,7 @@ $(function() {
 								</h3>
 								<div class="reviewWrite_star">
 									<div id="dataReview" style="font-size: 1.5em;"
-										data-rating-stars="5" data-rating-value="${rlist.getReview_score() }"
-										data-rating-input="#dataInput"></div>
+										data-rating-stars="5" data-rating-input="#dataInput"></div>
 										 <input type="text" readonly id="dataInput" name="review_score" style="display: none;">
 
 									<p class="reviewWrite_comment">선택해주세요.</p>
@@ -65,7 +59,7 @@ $(function() {
 								</div>
 							</div>
 							<div class="mypage_reviewWrite_textarea">
-								<textarea placeholder="15글자 이상의 사진후기를 작성해주시면 500에너지가 적립됩니다.&#13;&#10;무분별한 비방 또는 욕설이 포함된 후기는 사전고지 없이 삭제될 수 있습니다." maxlength="1000" class="textarea_style" id="content" name="review_cont">${rlist.getReview_cont() }</textarea>
+								<textarea placeholder="15글자 이상의 사진후기를 작성해주시면 500에너지가 적립됩니다.&#13;&#10;무분별한 비방 또는 욕설이 포함된 후기는 사전고지 없이 삭제될 수 있습니다." maxlength="1000" class="textarea_style" id="content" name="review_cont"></textarea>
 								<p class="textarea_count" id="counter"></p>
 							</div>
 							<div>
@@ -74,7 +68,7 @@ $(function() {
 								<span>사진 첨부하기</span>
 								</label>
 							</div>
-							<img src="<%=request.getContextPath() %>/resources/reviewUpload/${rlist.getReview_image() }" width="200" height="200" >
+							<%-- <img src="<%=request.getContextPath() %>/resources/reviewUpload/${rlist.getReview_image() }" width="200" height="200" > --%>
 							<div class="mypage_reviewWrite_footer">
 								<input type="submit" class="reviewWrite_button" value="수정하기">
 							</div>

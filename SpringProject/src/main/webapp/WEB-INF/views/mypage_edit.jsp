@@ -43,8 +43,7 @@
 									<div class="information_info_wrapper">
 										<div class="information_info_title">닉네임</div>
 										<div class="information_info_content">
-											<input class="mem_nick" name="mem_nick"
-												value="${dto.getMem_nick() }" placeholder="입력">
+											<input class="mem_nick" name="mem_nick" value="${dto.getMem_nick() }" placeholder="입력">
 										</div>
 									</div>
 									<div class="information_info_wrapper">

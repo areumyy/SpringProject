@@ -18,6 +18,8 @@ public interface MemberDAO {
 	public int insertMember(MemberDTO dto);
 	
 	public int updateMember(MemberDTO dto);
+	
+	public int updateImgMember(MemberDTO dto);
 
 	public int getAllCount();
 

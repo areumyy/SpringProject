@@ -1,5 +1,7 @@
 package com.market.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -15,4 +17,5 @@ public class MemberDTO {
 	private String mem_regdate;
 	private int mem_status;
 	private String mem_profileimg;
+	private MultipartFile mem_profileimg2;
 }

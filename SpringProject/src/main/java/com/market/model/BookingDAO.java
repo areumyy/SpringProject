@@ -13,6 +13,7 @@ public interface BookingDAO {
 	public int getcount_memnum(int mem_num); // 전체 신청완료
 	
 	public List<BookingDTO> getBookingWorks(int booking_writer);
+	public List<BookingDTO> getBookingWorksEnd(int booking_writer);
 	public int getCountWorks(int booking_writer);
 	public void insertBooking(BookingDTO dto);
 

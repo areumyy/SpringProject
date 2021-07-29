@@ -82,4 +82,15 @@ public class ReviewDAOImpl implements ReviewDAO {
     public List<LikeDTO> getTarget(int mem_num) {
         return this.sqlSession.selectList("getTarget", mem_num);
     }
+	
+	@Override
+	public ReviewDTO get_review(int review_num) {
+		return this.sqlSession.selectOne("get_review", review_num);
+	}
+	
+	@Override
+	public int update_review(ReviewDTO dto) {
+		return this.sqlSession.update("update_review", dto);
+
+	}
 }

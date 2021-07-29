@@ -20,6 +20,39 @@
 </script>
 <link rel="shortcut icon" type="image/x-icon" 
 	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
+<script>
+/* 사진 업로드 버튼*/
+$(function() {
+
+	$('#profile-upload-btn').click(function(e) {
+		e.preventDefault();
+		$('#profileImge').click();
+	});
+});
+
+/* 이미지 미리보기 기능 */
+var sel_file;
+$(function() {
+	$("#profileImge").on("change", handleImgFileSelect);
+});
+
+function handleImgFileSelect(e) {
+	var files = e.target.files;
+	var filesArr = Array.prototype.slice.call(files);
+	
+	filesArr.forEach(function(f) {
+		
+		sel_file = f;
+		
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$("form").submit();
+			$("#uploadImge").attr("src", e.target.result);
+		}
+		reader.readAsDataURL(f);
+	});
+}
+</script>
 </head>
 <body>
 
@@ -28,15 +61,9 @@
 			<jsp:include page="../include/menu.jsp" />
 			<div class="article">
 
-
-
-
 				<div class="my_page">
 					<div class="mypage_info_wrapper"><!-- 프로필바 -->
 						<c:set var="dto" value="${list }" />
-
-						<c:if test="${!empty list }">
-								
 								<div class="customer_info_wrapper">
 									<!-- 개인 정보 -->
 									<div class="customer_info">
@@ -50,24 +77,27 @@
 										<div class="customer_account_type">카카오 연동 계정</div>
 									</div>
 									
-									<form method="post" enctype="multipart/form-data" class="mypage_profile_img">
+									<form method="post" enctype="multipart/form-data" class="mypage_profile_img" id="mypage_profile_img"
+									 action="<%=request.getContextPath()%>/edit_profile.do">
 										<div class="mypage_img_wrapper">
 											<div class="img_cont">
 												<c:choose>
 													<c:when test="${dto.getMem_profileimg() == null}">
 														<img alt="프로필 이미지" class="img_style"
-															src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+															src="/profile/profile_no_img.png">
 													</c:when>
 													<c:otherwise>
-														<img alt="프로필 이미지" class="img_style"
-															src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto.getMem_profileimg() }">
+														<img alt="프로필 이미지" class="img_style" id="uploadImge"
+															src="/profile/${dto.getMem_profileimg() }">
 													</c:otherwise>
-												
 												</c:choose>
 											</div>
 										</div>
+										<button id="profile-upload-btn" form="mypage_profile_img" >
 										<img alt="수정 아이콘" class="img_modify"
 											src="<%=request.getContextPath() %>/resources/image/mypage/modify.svg">
+										</button>
+										<input type="file" name="mem_profileimg2" id="profileImge" accept="image/gif, image/jpeg, image/jpg, image/png" style="display:none;"/>
 									</form>
 								</div>
 
@@ -75,21 +105,10 @@
 									<!-- 개인 카드 -->
 									<div class="customer_box_wrapper">
 										<div class="customer_info_box">
-											<a href="<%=request.getContextPath() %>/mypage_energy.do"
-												class="customer_txt_style">
+											<a class="customer_txt_style">
 												<div class="customer_box_txt">
-													에너지<img class="box_arrow"
-														src="<%=request.getContextPath() %>/resources/image/mypage/arrow.svg">
-												</div> 0
-											</a>
-										</div>
-										<div class="customer_info_box">
-											<a href="<%=request.getContextPath() %>/mypage_coupon.do"
-												class="customer_txt_style">
-												<div class="customer_box_txt">
-													쿠폰<img class="box_arrow"
-														src="<%=request.getContextPath() %>/resources/image/mypage/arrow.svg">
-												</div> 3
+													에너지
+												</div> ${dto.getMem_point() }
 											</a>
 										</div>
 										<div class="customer_info_box">
@@ -104,7 +123,6 @@
 										</div>
 									</div>
 								</div>
-						</c:if>
 					</div><!-- /프로필바 -->
 
 
@@ -117,7 +135,7 @@
 								<a href="<%=request.getContextPath() %>/mypage.do">
 									<button class="nav_button select">
 										<div>
-											사용가능<span class="nav_cont">0</span>
+											사용가능<span class="nav_cont">${countWorks }</span>
 										</div>
 									</button>
 								</a> <a href="<%=request.getContextPath() %>/mypage_purchases.do">
@@ -128,9 +146,9 @@
 							</div>
 
 							<div class="mypage_nav_cont">
-								<c:if test="${!empty blist}">
-									<c:forEach items="${blist }" var="dto" varStatus="status">
-										<div class="full_wrapper">
+								<div class="full_wrapper">
+									<c:if test="${!empty blist}">
+										<c:forEach items="${blist }" var="dto" varStatus="status">
 											<div class="pgCard_wrapper">
 												<div class="pgCard_date">${dto.getBooking_regdate()} 결제</div>
 												<div class="pgCard_product_wrapper">
@@ -161,29 +179,29 @@
 													</div>
 												</div>
 											</div>
-		
-											<nav aria-label="Page navigation example" class="coupon_footer">
-												<ul class="pagination">
-													<li class="page-item"><a class="page-link" href="#"
-														aria-label="Previous" style="color: black;"> <span
-															aria-hidden="true">&laquo;</span></a></li>
-		
-													<li class="page-item active"><a class="page-link"
-														href="#" style="color: white;">1</a></li>
-													<li class="page-item"><a class="page-link" href="#"
-														style="color: black;">2</a></li>
-													<li class="page-item"><a class="page-link" href="#"
-														style="color: black;">3</a></li>
-		
-													<li class="page-item"><a class="page-link" href="#"
-														aria-label="Next" style="color: black;"> <span
-															aria-hidden="true">&raquo;</span></a></li>
-												</ul>
-											</nav>
-										</div>
 									</c:forEach>
 								</c:if>
 								
+		
+									<!-- <nav aria-label="Page navigation example" class="coupon_footer">
+										<ul class="pagination">
+											<li class="page-item"><a class="page-link" href="#"
+												aria-label="Previous" style="color: black;"> <span
+													aria-hidden="true">&laquo;</span></a></li>
+	
+											<li class="page-item active"><a class="page-link"
+												href="#" style="color: white;">1</a></li>
+											<li class="page-item"><a class="page-link" href="#"
+												style="color: black;">2</a></li>
+											<li class="page-item"><a class="page-link" href="#"
+												style="color: black;">3</a></li>
+	
+											<li class="page-item"><a class="page-link" href="#"
+												aria-label="Next" style="color: black;"> <span
+													aria-hidden="true">&raquo;</span></a></li>
+										</ul>
+									</nav> -->
+								</div>
 								
 								<c:if test="${empty blist}">
 									<!-- 내용이 없을경우 -->
