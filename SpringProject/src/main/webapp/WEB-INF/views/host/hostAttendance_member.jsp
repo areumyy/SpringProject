@@ -17,6 +17,12 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath()%>/resources/css/hostAttendance.css"
 	rel="stylesheet" />
+<script language="javascript">
+	document.title = "회원 출석 관리" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
+</head>
 </head>
 <body>
 	<div class="mainFrame">

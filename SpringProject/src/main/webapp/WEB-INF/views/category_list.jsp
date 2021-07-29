@@ -17,7 +17,11 @@
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/category_list.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<script language="javascript">
+	document.title = "카테고리별 리스트" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 </head>
 <body>
 

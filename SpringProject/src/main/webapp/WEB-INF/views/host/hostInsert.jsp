@@ -18,6 +18,11 @@
 <link href="<%=request.getContextPath()%>/resources/css/hostMain.css"
 	rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/resources/css/hostInsert.css" rel="stylesheet" />
+<script language="javascript">
+	document.title = "호스트 등록" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 </head>
 <body>
 	<div class="mainFrame">

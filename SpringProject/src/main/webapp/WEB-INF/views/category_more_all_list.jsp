@@ -16,6 +16,11 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/category_list.css" rel="stylesheet"/>
+<script language="javascript">
+	document.title = "선택 카테고리 전체 리스트" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 </head>
 <body>
 

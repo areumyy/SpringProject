@@ -18,6 +18,11 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/option_select.css" rel="stylesheet"/>
+<script language="javascript">
+	document.title = "옵션 선택" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 <script>
 	function Option(index) {
 		

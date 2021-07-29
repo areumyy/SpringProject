@@ -17,6 +17,11 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath()%>/resources/css/hostExam.css" rel="stylesheet" />
 <link href="<%=request.getContextPath()%>/resources/css/hostQna_list.css" rel="stylesheet" />
+<script language="javascript">
+	document.title = "호스트 Qna" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 </head>
 <body>
 

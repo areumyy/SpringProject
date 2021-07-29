@@ -24,7 +24,11 @@
  <script src="./resources/summernote/summernote-lite.js"></script>
 <script src="./resources/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="./resources/summernote/summernote-lite.css">
-
+<script language="javascript">
+	document.title = "프립 수정" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 </head>
 <body>
 	<div class="mainFrame">

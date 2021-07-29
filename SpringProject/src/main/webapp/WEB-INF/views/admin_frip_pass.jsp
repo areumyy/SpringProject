@@ -18,7 +18,11 @@
 <!-- CSS 파일 -->
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath()%>/resources/css/admin_frip_pass.css" rel="stylesheet" />
-
+<script language="javascript">
+	document.title = "관리자 프립 승인" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 <script type="text/javascript">
 
 	/* $('.modal').on('hidden.bs.modal', function(e) {

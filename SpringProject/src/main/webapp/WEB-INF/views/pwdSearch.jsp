@@ -20,6 +20,11 @@
 <!-- CSS 파일 -->
 <link href="<%=request.getContextPath() %>/resources/css/style.css" rel="stylesheet"/>
 <link href="<%=request.getContextPath() %>/resources/css/login.css" rel="stylesheet"/>
+<script language="javascript">
+	document.title = "비밀번호 찾기" ;
+</script>
+<link rel="shortcut icon" type="image/x-icon" 
+	href="<%=request.getContextPath()%>/resources/logo/titlelogo.png">
 <script type="text/javascript">
 function findPwd() {
     var mem_email = $("#mem_email").val();
