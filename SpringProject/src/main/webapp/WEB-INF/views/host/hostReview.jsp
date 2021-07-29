@@ -74,7 +74,7 @@ function check(su) {
 								        <div class="host_review_box">
 								      		<div class="user_info">
 								      			<div class="user_img_box">
-								      				<img alt="user_img" src="<%=request.getContextPath() %>/resources/image/like/user_img.jpg" class="user_img">
+								      				<img alt="user_img" src="<%=request.getContextPath() %>/resources/image/like/${dto.getMem_profileimg()}" class="user_img">
 								      			</div>
 								      			<div class="user_detail">
 								      				<div class="user_name">
@@ -99,8 +99,6 @@ function check(su) {
 								      			</div>
 								      		</div>
 								      		<div class="review_footer_box">
-								      			<img alt="review_image" src="<%=request.getContextPath() %>/resources/image/like/review_image.jpg" class="review_image">
-								      			
 									      			<div class="reply_btn_box">
 									      				<!-- 답변하기 모달창 -->
 									      				<!-- Button trigger modal -->
@@ -150,7 +148,7 @@ function check(su) {
 								        <div class="host_reply_box">
 								      		<div class="host_info">
 								      			<div class="host_img_box">
-								      				<img alt="host_img" src="<%=request.getContextPath() %>/resources/image/like/user_img.jpg" class="user_img">
+								      				<img alt="host_img" src="<%=request.getContextPath() %>/resources/image/like/${loginDto.getMem_profileimg()}" class="user_img">
 								      			</div>
 								      			<div class="host_detail">
 								      				<div class="host_name">
