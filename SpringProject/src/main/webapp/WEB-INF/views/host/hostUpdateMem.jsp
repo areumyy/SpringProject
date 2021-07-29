@@ -88,32 +88,32 @@ function submitCheck(){
 	
 		<div class="Frame"> 
 			<div class="Frame_Frame">
+				<jsp:include page="../hostInclude/hostSideBar.jsp"></jsp:include>
 				<div class="Main">
 					<div class="login_join_box">
 						<div class="login_join_inner">
 							<form method="post" action="<%=request.getContextPath() %>/hostUpdateMemOk.do" onsubmit="return submitCheck();">
 									<ul class="joinForm">
 										<li>
-											<span class="txt">아이디:</span> <input type="text" id="input_email" name="mem_email" class="joinForm_txt" readonly value="${loginDto.getMem_email() }">
+											<span class="txt" style="margin-right:30px">아이디 :</span> <input type="text" id="input_email" name="mem_email" class="joinForm_txt" readonly value="${loginDto.getMem_email() }">
 											<div class="email_check_area">
 												<span id="email_res" style="margin-left: 10px;"></span>
 											</div>
 										</li>
 										<li>
-											비밀번호 :<input type="password" id="pwd" name="mem_pwd" class="joinForm_txt" placeholder="비밀번호" required>
+											<span class="txt" style="margin-right:20px">비밀번호 :</span><input type="password" id="pwd" name="mem_pwd" class="joinForm_txt" placeholder="비밀번호" required>
 											<span class="notice">대/소문자, 숫자, 특수문자 중 2가지 이상의 조합으로 10자 이상</span>
 										</li>
-								
 										<li>
-											<span class="txt">비밀번호 :</span><input type="password" id="pwd_check" name="mem_pwd_check" onkeyup="pwdCheck();" class="joinForm_txt" placeholder="비밀번호 확인" required>
+											<span class="txt" style="margin-right:20px">비밀번호 :</span><input type="password" id="pwd_check" name="mem_pwd_check" onkeyup="pwdCheck();" class="joinForm_txt" placeholder="비밀번호 확인" required>
 										</li>
 										<li>
 											<span id="pwd_res"></span>
 										</li>
-										<li><span class="txt">이 름 :</span>
+										<li><span class="txt" style="margin-right:40px">이 름 :</span>
 											<input type="text" id="name" name="mem_name" class="joinForm_txt" placeholder="이름" readonly value="${loginDto.getMem_name() }" ></li>
 										<li>
-											<span class="txt">닉네임 :</span>
+											<span class="txt" style="margin-right:30px">닉네임 :</span>
 											<input type="text" id="input_nick" name="mem_nick" class="joinForm_txt" placeholder="닉네임" required value="${loginDto.getMem_nick() }">
 											<div class="email_check_area">
 												<input type="button" value="중복확인" onclick="nickCheck();">
@@ -122,17 +122,16 @@ function submitCheck(){
 										</li>
 										<li><span class="txt">핸드폰 번호 :</span><input type="text" id="input_phone" name="mem_phone" class="joinForm_txt" placeholder="핸드폰 번호" required value="${loginDto.getMem_phone() }"></li>
 										<li><span class="txt">호스트 소개 </span></li>
-										<li><textarea rows="6" cols="42" style='white-space: pre-line;' name="host_cont">${dto.getHost_cont() }</textarea>
+										<li><textarea rows="6" cols="38" style='white-space: pre-line;' name="host_cont">${dto.getHost_cont() }</textarea>
 									</ul>
+									<input type="button" value="취소" class="submit_btn">
 									<input type="submit" value="수정하기" class="submit_btn">
 								</form>
 							</div>
 						</div>
 				</div>
 			</div>
-	
 		</div>
-		
 	<jsp:include page="../hostInclude/hostFooter.jsp"></jsp:include>
 	</div>
 </body>

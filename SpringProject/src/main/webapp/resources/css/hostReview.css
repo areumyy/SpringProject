@@ -60,7 +60,6 @@
 }
 .info_frame{
 	-webkit-box-flex: 1;
-    flex: 1 1 auto;
     background-color: white;
     display: flex;
     flex-flow: column nowrap;
@@ -280,6 +279,10 @@ textarea{
 
 .page_link:hover {
 	background-color: #dedede;
+}
+
+.nonReview {
+	padding-left : 30px;
 }
 /* 반응형 */
 @media (max-width: 768px){

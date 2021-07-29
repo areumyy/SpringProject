@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +18,15 @@
 				width="80px" height="30px" alt="?"> 호스트 관리 페이지
 			</a>
 			<div class="userInfo">
-				<a class="userName" href="<%=request.getContextPath()%>/hostInfo.do">
-					<%-- <img src="프로필사진"
-							width="30px" height="30px">--%>
+				<a class="userName" href="<%=request.getContextPath() %>/hostUpdateMem.do">
+						<c:if test="${loginDto.getMem_profileimg() == null}">
+							<img class="img_style"
+								src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+						</c:if>
+						<c:if test="${loginDto.getMem_profileimg() != null}">
+							<img class="img_style"
+								src="<%=request.getContextPath() %>/resources/image/mypage/profile/${loginDto.getMem_profileimg() }">
+						</c:if>
 					${loginDto.getMem_nick() }
 				</a>
 			</div>
