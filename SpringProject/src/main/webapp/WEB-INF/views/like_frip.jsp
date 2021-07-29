@@ -49,7 +49,7 @@
 							<c:forEach items="${classList }" var="dto" varStatus="status">
 								<div class="list_inner">
 									<!-- ★ 클래스 상세보기 경로수정 필요 -->
-									<a href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }">
+									<a>
 										<div class="class_info">
 											<div class="place_like">
 												<span class="class_place">${dto.getClass_endArea() }</span>
