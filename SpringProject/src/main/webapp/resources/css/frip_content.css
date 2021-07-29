@@ -883,7 +883,7 @@ div[Attributes Style] {
 .Frip_Pick {
 	padding: 0px;
 	margin-right: 20px;
-	height: 48px;
+	vertical-align: middle;
 	display: flex;
 	flex-direction: column;
 	-webkit-box-align: center;
@@ -1087,4 +1087,12 @@ div[Attributes Style] {
 	.Content_Head1_Img1 {
 		margin: 0px;
 	}
+}
+
+.nopush {
+	color: white;
+}
+
+.push {
+	color: rgb(255, 102, 102);
 }
