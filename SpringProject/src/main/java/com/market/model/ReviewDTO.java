@@ -1,5 +1,7 @@
 package com.market.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -13,6 +15,7 @@ public class ReviewDTO {
 	private String review_cont;
 	private String review_regdate;
 	private String review_image;
+	private MultipartFile review_image2;
 	private String review_reply;				
 	private String review_replyDate;
 	private String mem_name;			// 추가 (회원명)

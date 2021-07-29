@@ -39,13 +39,22 @@
 	</update>
 	
 	<insert id="insert_review" parameterType="com.market.model.ReviewDTO">
+		<selectKey resultType="int" keyProperty="review_num" order="BEFORE">
+			select count(*)+1 from frip_review
+		</selectKey>
+		
 		insert into frip_review
 		values(#{review_num},#{review_writer},#{review_classNum},default,#{review_score}
-		,#{review_cont},sysdate,null,null,null)
+		,#{review_cont},sysdate,#{review_image},null,null)
 	</insert>
 	
 	<select id="get_review" parameterType="int" resultType="com.market.model.ReviewDTO">
 		select * from frip_review where review_num = #{review_num}
 	</select>
+	
+	<update id="update_review" parameterType="com.market.model.ReviewDTO">
+		update frip_review set review_score = #{review_score}, review_cont = #{review_cont}, review_image = #{review_image}
+		where review_num = #{review_num}
+	</update>
 
 </mapper>

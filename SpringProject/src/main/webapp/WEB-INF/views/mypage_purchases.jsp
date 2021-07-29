@@ -144,11 +144,11 @@
 												<span class="mypage_footer_txt_bottom">${olist[status.index].getOption_name()}</span>
 												<span class="color_gray">사용가능</span>
 											</div>
-											<a href="<%=request.getContextPath()%>/mypage_reviewWrite.do?no=${dto.getBooking_num()}"
-												class="mypage_reviewWrite_button"> 후기 작성
+											<a href="<%=request.getContextPath()%>/mypage_reviewInsert.do?no=${dto.getBooking_num()}"
+												class="mypage_reviewWrite_button"> 후기 생성
 											</a>
-											<a href="<%=request.getContextPath()%>/mypage_reviewRead.do?no=${dto.getBooking_num()}"
-												class="mypage_reviewWrite_button"> 후기 확인
+											<a href="<%=request.getContextPath()%>/mypage_reviewWrite.do?no=${dto.getBooking_num()}"
+												class="mypage_reviewWrite_button"> 후기 수정
 											</a>
 										</div>
 										<div class="mypage_productDetail_wrapper">

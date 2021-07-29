@@ -1498,6 +1498,24 @@ public class MarketController {
 
 		return "mypage_edit";
 	}
+	
+	/*@RequestMapping("edit_profile.do")
+	public String myPageEdit(MemberDTO dto, HttpServletRequest request, Model model, MultipartHttpServletRequest mRequest) {
+		System.out.println(dto);
+		HttpSession session = request.getSession();
+
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto");
+		
+		dto.setMem_profileImg(upload.profileUpload(mRequest)); // 파일 이름으로 변환
+		
+		this.memberDao.updateImgMember(dto);
+		
+
+
+		return "redirect:mypage.do";
+	}*/
+	
+	
 
 	@RequestMapping("mypage_edit_ok.do")
 	public void myPageEditOk(MemberDTO dto, HttpServletRequest request, HttpServletResponse response,
@@ -1565,51 +1583,95 @@ public class MarketController {
 	public String myPageReview() {
 		return "mypage_review";
 	}
+	
+	@RequestMapping("mypage_reviewInsert.do")
+	public String myPageReviewInsert(@RequestParam("no") int booking_num, Model model) {
 
-	/*
-	 * @RequestMapping("mypage_reviewWrite.do") public String
-	 * myPageReviewWrite(HttpServletRequest request, @RequestParam("no") int
-	 * booking_num, Model model) {
-	 * 
-	 * HttpSession session = request.getSession();
-	 * 
-	 * MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
-	 * 
-	 * // 회원 번호에 맞는 회원의 정보를 받아오는 메서드 MemberDTO list =
-	 * this.memberDao.getMember(dto.getMem_num());
-	 * 
-	 * // frip_booking 테이블에서 회원의 예약정보 받아옴. BookingDTO blist =
-	 * this.bookingDao.getBookingWorks(dto.getMem_num());
-	 * 
-	 * // 클래스 번호에 맞는 정보를 받아오는 메서드 ClassDTO clist =
-	 * this.classDao.getList_classNum(blist.getBooking_classNum());
-	 * 
-	 * model.addAttribute("clist", clist);
-	 * 
-	 * return "mypage_reviewWrite";
-	 * 
-	 * }
-	 */
+		System.out.println("예약 번호 >>>" + booking_num);
+
+		ClassDTO clist = this.classDao.getList_classNum(booking_num);
+
+		model.addAttribute("clist", clist);
+		model.addAttribute("booking_num", booking_num);
+		
+		return "mypage_reviewInsert";
+
+	}
 	
-	
-	  @RequestMapping("mypage_reviewRead.do") public String
-	  myPageReviewWrite(HttpServletRequest request, @RequestParam("no") int
-	  booking_num, Model model) {
-	  
-	  HttpSession session = request.getSession();
-	  
-	  MemberDTO dto = (MemberDTO) session.getAttribute("ldoginDto");
-	  
-	  ClassDTO clist = this.classDao.getList_classNum(booking_num);
-	  ReviewDTO rlist = this.reviewDao.get_review(booking_num);
-	  model.addAttribute("clist", clist);
-	  model.addAttribute("rlist", rlist);
-	  
-	  return "mypage_reviewRead";
-	  
-	  }
-	 
-	
+	@RequestMapping("mypage_reviewInsertOk.do")
+	public void myPageReviewInsertOk(ReviewDTO dto, HttpServletResponse response, HttpServletRequest request, MultipartHttpServletRequest mRequest,
+			@RequestParam("booking_num") int booking_num, Model model) throws IOException {
+
+		response.setContentType("text/html; charset-UTF-8");
+		
+		HttpSession session = request.getSession();
+
+		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto");
+
+		dto.setReview_num(booking_num);
+		dto.setReview_writer(loginDto.getMem_num());
+		dto.setReview_image(upload.reviewUpload(mRequest)); // 파일 이름으로 변환
+		
+		int check = this.reviewDao.insert_review(dto);
+
+		PrintWriter out = response.getWriter();
+
+		if (check > 0) { 
+			out.println("<script>");
+			out.println("alert('후기를 등록하였습니다.')");
+			out.println("location.href='mypage_purchases.do'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('후기 등록을 실패하였습니다')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+
+	}
+
+	@RequestMapping("mypage_reviewWrite.do")
+	public String myPageReviewWrite(@RequestParam("no") int booking_num, Model model) {
+
+		System.out.println("예약 번호 >>>" + booking_num);
+
+		ClassDTO clist = this.classDao.getList_classNum(booking_num);
+
+		ReviewDTO rlist = this.reviewDao.get_review(booking_num);
+
+		model.addAttribute("clist", clist);
+		model.addAttribute("rlist", rlist);
+		model.addAttribute("booking_num", booking_num);
+		
+		return "mypage_reviewWrite";
+
+	}
+
+	@RequestMapping("mypage_reviewWriteOk.do")
+	public void myPageReviewWriteOk(ReviewDTO dto, HttpServletResponse response, MultipartHttpServletRequest mRequest,
+			@RequestParam("booking_num") int booking_num, Model model) throws IOException {
+		
+		response.setContentType("text/html; charset-UTF-8");
+
+		dto.setReview_num(booking_num);
+		dto.setReview_image(upload.reviewUpload(mRequest)); // 파일 이름으로 변환
+		
+		int check = this.reviewDao.update_review(dto);
+
+		PrintWriter out = response.getWriter();
+
+		if (check > 0) { 
+			out.println("<script>");
+			out.println("alert('후기를 수정하였습니다')");
+			out.println("location.href='mypage_reviewWrite.do?no="+booking_num+"'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('후기 수정을 실패하였습니다')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+	}
 
 	/*
 	 * @RequestMapping("mypage_productDetail.do") public String
@@ -1643,14 +1705,6 @@ public class MarketController {
 	@RequestMapping("mypage_energy.do")
 	public String myPageEnergy() {
 		return "mypage_energy";
-	}
-
-	@RequestMapping("mypage_reviewWriteOk.do")
-	public String myPageReviewWriteOk(ReviewDTO dto, OptionDTO odto, MultipartHttpServletRequest mRequest,
-			HttpServletRequest request, HttpServletResponse response, @RequestParam("no") int booking_num,
-			Model model) {
-
-		return "mypage_reviewWrite";
 	}
 
 	@RequestMapping("admin_notice.do")

@@ -47,7 +47,6 @@ function handleImgFileSelect(e) {
 	});
 }
 </script>
-</script>
 </head>
 <body>
 

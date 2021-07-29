@@ -14,4 +14,6 @@ public interface ReviewDAO {
 	public int insert_review(ReviewDTO dto);
 
 	public ReviewDTO get_review(int review_num);
+	
+	public int update_review(ReviewDTO dto);
 }

@@ -51,7 +51,7 @@ public class Upload {
 	public String fileUpload(MultipartHttpServletRequest mRequest) {
 		String result = "";
 		String uploadPath = 
-				"C:\\Users\\SOS\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\upload\\";
+				"C:\\Users\\leehe\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\upload\\";
 		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
@@ -99,6 +99,122 @@ public class Upload {
 					e.printStackTrace();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			break;
+		}  // while 문 end
+		
+		return result;
+	}
+	
+	public String reviewUpload(MultipartHttpServletRequest mRequest) {
+		String result = "";
+		String uploadPath = 
+				"C:\\Users\\leehe\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\reviewUpload\\";
+		
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) + 1;
+		int day = cal.get(Calendar.DATE);
+		
+		Iterator<String> iterator = mRequest.getFileNames();
+
+		while(iterator.hasNext()) {
+			String uploadFileName = iterator.next();
+			
+			// 톰캣에 있는 임시 파일임.
+			MultipartFile mFile = mRequest.getFile(uploadFileName);
+			
+			// 업로드한 파일의 이름을 구하는 메서드
+			String originalFileName = mFile.getOriginalFilename();
+			
+			// 실제적으로 물리적인 파일의 저장이 필요함. - 일단은 폴더를 만들자.
+			// homedir = ........\\resources\\upload\\2021-07-06
+			String homedir = uploadPath + year + "-" + month + "-" + day;
+			
+			File path1 = new File(homedir);
+			
+			if(!path1.exists()) {
+				path1.mkdirs();
+			}
+			
+			// 실제적으로 파일을 만들어 보자.
+			String saveFileName = originalFileName;
+			
+			if(saveFileName != null && !saveFileName.equals("")) {
+				saveFileName = 
+						System.currentTimeMillis() + "_" + saveFileName;
+				
+				result = year + "-" + month + "-" + day + "/"+saveFileName;
+				try {
+					// ........\\resources\\upload\\2021-07-06\\실제파일
+					File origin = new File(homedir+"/"+saveFileName);
+					
+					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드.
+					mFile.transferTo(origin);
+
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			break;
+		}  // while 문 end
+		
+		return result;
+	}
+	
+	public String profileUpload(MultipartHttpServletRequest mRequest) {
+		String result = "";
+		String uploadPath = 
+				"C:\\Users\\leehe\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\image\\mypage\\profile";
+		
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) + 1;
+		int day = cal.get(Calendar.DATE);
+		
+		Iterator<String> iterator = mRequest.getFileNames();
+
+		while(iterator.hasNext()) {
+			String uploadFileName = iterator.next();
+			
+			// 톰캣에 있는 임시 파일임.
+			MultipartFile mFile = mRequest.getFile(uploadFileName);
+			
+			// 업로드한 파일의 이름을 구하는 메서드
+			String originalFileName = mFile.getOriginalFilename();
+			
+			// 실제적으로 물리적인 파일의 저장이 필요함. - 일단은 폴더를 만들자.
+			// homedir = ........\\resources\\upload\\2021-07-06
+			String homedir = uploadPath + year + "-" + month + "-" + day;
+			
+			File path1 = new File(homedir);
+			
+			if(!path1.exists()) {
+				path1.mkdirs();
+			}
+			
+			// 실제적으로 파일을 만들어 보자.
+			String saveFileName = originalFileName;
+			
+			if(saveFileName != null && !saveFileName.equals("")) {
+				saveFileName = 
+						System.currentTimeMillis() + "_" + saveFileName;
+				
+				result = year + "-" + month + "-" + day + "/"+saveFileName;
+				try {
+					// ........\\resources\\upload\\2021-07-06\\실제파일
+					File origin = new File(homedir+"/"+saveFileName);
+					
+					// transferTo() : 파일 데이터를 지정한 폴더로 실제 저장시키는 메서드.
+					mFile.transferTo(origin);
+
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
