@@ -44,15 +44,16 @@
 						<c:if test="${!empty classList }">
 							<c:forEach items="${classList }" var="dto" varStatus="status">
 								<div class="list_inner">
-									<a href="#">
+									<!-- ★ 클래스 상세보기 경로수정 필요 -->
+									<a href="<%=request.getContextPath() %>/frip_content.do?num=${dto.getClass_num() }">
 										<div class="class_info">
 											<div class="place_like">
 												<span class="class_place">${dto.getClass_endArea() }</span>
 												<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"></button>
 												<%-- <button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button> --%>
 											</div>
-											<!-- 사진 수정필요(클래스 사진) -->
-											<img alt="${dto.getClass_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto.getClass_image() }" class="class_img">
+											<!-- (클래스 사진) -->
+											<img alt="${dto.getClass_image() }" src="<%=request.getContextPath() %>/resources/upload/${dto.getClass_image() }" class="class_img">
 										</div>
 										<div class="class_hash">${dto.getClass_hash() }</div>
 										<div class="class_title">${dto.getClass_title() }</div>

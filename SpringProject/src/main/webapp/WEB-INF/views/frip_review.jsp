@@ -104,8 +104,15 @@
 								<div class="host_review_box">
 			                        <div class="user_info">
 			                           <div class="user_img_box">
-			                              <!-- 사진 수정필요(유저 사진) -->
-			                              <img alt="${dto.getMem_profileImg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto.getMem_profileImg() }" class="user_img">
+			                              <!-- (유저 사진) -->
+			                              <c:choose>
+										  	  <c:when test="${dto.getMem_profileimg() == null}">
+												  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png" class="user_img">
+											  </c:when>
+											  <c:otherwise>
+												  <img alt="${dto.getMem_profileImg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto.getMem_profileImg() }" class="user_img">
+											  </c:otherwise>										
+										  </c:choose>
 			                           </div>
 			                           <div class="user_detail">
 			                              <div class="user_name">${dto.getMem_nick() }</div>
@@ -159,8 +166,11 @@
 				                        </div>
 				                    <%} %>
 			                        <div class="review_image_box">
-			                           <!-- 사진 수정필요 (후기 사진)-->
-			                           <img alt="${dto.getReview_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto.getReview_image() }" class="review_image">
+			                           <!-- (후기 사진)-->
+			                           <c:if test="${!empty dto.getReview_image() }">
+			                           		<img alt="${dto.getReview_image() }" src="<%=request.getContextPath() %>/resources/reviewUpload /${dto.getReview_image() }" class="review_image">
+			                        	</c:if>
+			                        	<c:if test="${empty dto.getReview_image() }"></c:if>
 			                        </div>
 			                     </div>
 							</div>

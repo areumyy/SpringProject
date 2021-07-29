@@ -48,8 +48,15 @@
 									<div class="inner_box">
 										<a href="<%=request.getContextPath() %>/host_info.do?hostMemNum=${dto.getHost_memNum() }" class="host_link">
 											<div>
-												<!-- 사진 수정필요(호스트 사진) -->
-												<img alt="${hostInfo[status.index].getMem_profileimg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo[status.index].getMem_profileimg() }" class="host_img">
+											  <!-- (호스트 사진) -->
+				                              <c:choose>
+											  	  <c:when test="${hostInfo[status.index].getMem_profileimg() == null}">
+													  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png" class="user_img">
+												  </c:when>
+												  <c:otherwise>
+													  <img alt="${hostInfo[status.index].getMem_profileimg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo[status.index].getMem_profileimg() }" class="host_img">
+												  </c:otherwise>										
+											  </c:choose>
 											</div>
 											<div class="host_info">
 												<div class="host_info_detail1">
