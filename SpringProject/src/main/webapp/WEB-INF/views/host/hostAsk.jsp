@@ -17,7 +17,34 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath()%>/resources/css/hostAsk.css"
 	rel="stylesheet" />
+<script>
+	$(document).ready(function() {
+		var mql = window.matchMedia("screen and (max-width: 768px)");
+		if(mql.matches) {
+	       var length =  $(".arcodion_title").length;
+	    	
+	       for(var i=0; i<length; i++) {
+	    	   if($(".arcodion_title").eq(i).text().length >= 5) {
+	    			$(".arcodion_title").eq(i).text($(".arcodion_title").eq(i).text().substring(0,5));   
+	    	   }
+	    	}
+	    } 
+	});
 	
+	var mql = window.matchMedia("screen and (max-width: 768px)");
+
+	mql.addListener(function(e) {
+	    if(e.matches) {
+	       var length =  $(".arcodion_title").length;
+	    	for(var i=0; i<length; i++) {
+	    		if($(".arcodion_title").eq(i).text().length >= 5) {
+	    			$(".arcodion_title").eq(i).text($(".arcodion_title").eq(i).text().substring(0,5));   
+	    	   }
+	    	}
+	    }
+	});
+
+</script>	
 </head>
 <body>
 	<div class="mainFrame">

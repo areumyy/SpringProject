@@ -114,7 +114,8 @@ public class MarketController {
 	public String join() {
 		return "joinForm";
 	}
-
+		
+	
 	@RequestMapping(value = "/emailCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public void emailCheck(HttpServletResponse response, @RequestParam("mem_email") String mem_email)
@@ -2186,10 +2187,12 @@ public class MarketController {
 	public int getMem_num(HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-
-		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto"); // 로그인정보
+		int mem_num = 0;
 		
-		int mem_num = loginDto.getMem_num(); // 로그인 회원 번호
+		if(session.getAttribute("loginDto") != null) {
+			MemberDTO dto = (MemberDTO)session.getAttribute("loginDto");
+			mem_num= dto.getMem_num();
+		}
 		
 		return mem_num;
 	}
@@ -2787,7 +2790,7 @@ public class MarketController {
 	
 	@RequestMapping(value = "/class_like_list.do", method = RequestMethod.POST)
     @ResponseBody
-    public void emailCheck(HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void checkLikeList(HttpServletResponse response, HttpServletRequest request) throws IOException {
         int mem_num = getMem_num(request);
 
         List<LikeDTO> like_list = this.reviewDao.getTarget(mem_num);

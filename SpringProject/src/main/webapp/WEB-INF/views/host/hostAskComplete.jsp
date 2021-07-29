@@ -18,13 +18,29 @@
 <link href="<%=request.getContextPath()%>/resources/css/hostAsk.css"
 	rel="stylesheet" />
 <script>
+	$(document).ready(function() {
+		var mql = window.matchMedia("screen and (max-width: 768px)");
+		if(mql.matches) {
+	       var length =  $(".arcodion_title").length;
+	    	
+	       for(var i=0; i<length; i++) {
+	    	   if($(".arcodion_title").eq(i).text().length >= 5) {
+	    			$(".arcodion_title").eq(i).text($(".arcodion_title").eq(i).text().substring(0,5));   
+	    	   }
+	    	}
+	    } 
+	});
+	
 	var mql = window.matchMedia("screen and (max-width: 768px)");
 
 	mql.addListener(function(e) {
 	    if(e.matches) {
-	        console.log('모바일 화면 입니다.');
-	    } else {
-	        console.log('데스크탑 화면 입니다.');
+	       var length =  $(".arcodion_title").length;
+	    	for(var i=0; i<length; i++) {
+	    		if($(".arcodion_title").eq(i).text().length >= 5) {
+	    			$(".arcodion_title").eq(i).text($(".arcodion_title").eq(i).text().substring(0,5));   
+	    	   }
+	    	}
 	    }
 	});
 

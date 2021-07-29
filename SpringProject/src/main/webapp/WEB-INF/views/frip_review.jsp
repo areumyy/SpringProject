@@ -39,7 +39,6 @@ $(document).ready(function() {
            }
        });
 });
-
 	// 리뷰 좋아요 버튼 클릭시 실행함수
 	function like_btn(reviewNum) {
 		
