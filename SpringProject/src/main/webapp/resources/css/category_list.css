@@ -7,6 +7,10 @@
 	-webkit-text-decoration-skip: objects;
 }
 
+a {
+	color: black; 
+}
+
 button {
 	appearance: auto;
 	-webkit-writing-mode: horizontal-tb !important;
@@ -70,7 +74,6 @@ button, input, select, textarea {
 }
 
 .Category_Main1 a:-webkit-any-link {
-	color: -webkit-link;
 	cursor: pointer;
 }
 
