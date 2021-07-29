@@ -125,7 +125,7 @@
 			<button onclick="showMenu()">
 				<i class="fa fa-align-justify" aria-hidden="true" style="color:white;"></i>
 			</button>
-			<a class="mobileLogo" href="<%=request.getContextPath()%>/hostMain.do">
+			<a class="mobileLogo" href="<%=request.getContextPath()%>/hostMain.do?loginNum=${loginDto.getMem_num()}">
 				<img src="<%=request.getContextPath()%>/resources/logo/logo.png"
 				width="80px" height="30px" alt="?">
 			</a>
@@ -135,7 +135,7 @@
 		
 		<nav class="mobileNav">
 			<header class="menuBarHeader">
-				<a class="homeButton" href="<%=request.getContextPath()%>/hostMain.do">
+				<a class="homeButton" href="<%=request.getContextPath()%>/hostMain.do?loginNum=${loginDto.getMem_num()}">
 					<img src="<%=request.getContextPath()%>/resources/logo/menulogo.PNG"
 					width="60px" height="30px" alt="?"> 호스트 관리 페이지
 				</a>
@@ -176,8 +176,8 @@
 					<span class="glyphicon glyphicon-question-sign"  aria-hidden="true"></span>
 				</div>
 				<ul class="menuList">
-					<li class="menutext"><a href="#">공지사항</a></li>
-					<li class="menutext"><a href="#">자주 묻는 질문</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostNotice_list.do">공지사항</a></li>
+					<li class="menutext"><a href="<%=request.getContextPath() %>/hostQna_list.do">자주 묻는 질문</a></li>
 				</ul>
 			</div>
 			<div class="menuName logout">

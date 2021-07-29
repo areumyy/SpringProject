@@ -224,6 +224,12 @@
     overflow-y: auto;
 }
 
+.profile_img {
+	width: 56px;
+	height: 56px;
+	border-radius: 50px;
+}
+
 /* 반응형 */
 @media (max-width: 768px){
 	.MainFrame{

@@ -554,18 +554,20 @@
 	
 	<select id="getMonthFrip" parameterType="int" resultType="int">
 		<![CDATA[
-			select count(*) 
+			select nvl(count(*),0) 
 			from frip_class 
 			where class_startdate > TO_CHAR(TRUNC(SYSDATE,'mm') ,'yyyy/mm/dd')
 			and class_startdate < TO_CHAR(LAST_DAY(SYSDATE) ,'yyyy/mm/dd')
 			and class_memnum = #{mem_num}
+			and class_pass = 1
 		]]>
 	</select>
 	
 	<select id="countClass_memnum2" parameterType="int" resultType="int">
 		<![CDATA[
-			select count(*) from frip_class where class_memnum = #{mem_num}
+			select nvl(count(*),0) from frip_class where class_memnum = #{mem_num}
 			and class_startdate < sysdate
+			and class_pass = 1
 		]]>
 	</select>
 	

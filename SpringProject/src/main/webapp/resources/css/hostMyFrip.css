@@ -30,6 +30,7 @@
     flex-flow: column nowrap;
     align-content: flex-start;
     height:95vh;
+    margin-bottom:100px;
 }
 
 .Main_title {
@@ -125,7 +126,7 @@
 
 .class_group {
 	display: flex;
-	/* flex-flow: row wrap; */
+	flex-flow: row wrap;
 	min-height: 1px;
 	margin-top: 20px;
 	margin-left: 50px;
@@ -143,7 +144,7 @@
 .class_group>* {
 	margin-right: 20px;
 	margin-bottom: 30px;
-	width: calc(25% - 11.25px) !important;
+	width: calc(23% - 11.25px) !important;
 }
 
 .class_item_link {
@@ -242,7 +243,8 @@
 	background-color:rgb(51, 153, 255);
 	color:white;
 	font-size:12px;
-	margin-left:45%;
+	width:100%;
+	text-align:center;
 	margin-top:10px;
 }
 .list_footer {
@@ -302,5 +304,6 @@
 	    display: flex;
 	    flex-flow: column nowrap;
 	    align-content: flex-start;
+	    margin-bottom: 100px;
 	}
 }
