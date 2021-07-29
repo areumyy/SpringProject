@@ -2201,7 +2201,9 @@ public class MarketController {
 	// 선택 카테고리 전체 리스트
 	@RequestMapping("category_all_list.do")
 	public String category_all_list(@RequestParam("num") int category_num, Model model) {
-
+		
+		model.addAttribute("category_num", category_num);
+		
 		// 카테고리의 전체 프립 수
 		int totalallcount = this.classDao.getAllListCount(category_num);
 		// 카테고리의 금주의 프립 수
@@ -2238,7 +2240,9 @@ public class MarketController {
 	// 선택 카테고리 리스트
 	@RequestMapping("category_list.do")
 	public String category_list(@RequestParam("num") int category_num, Model model) {
-
+		
+		model.addAttribute("category_num", category_num);
+		
 		// 카테고리의 전체 프립 수
 		int totalcount = this.classDao.getListCount(category_num);
 		// 카테고리의 금주의 프립 수

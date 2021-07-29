@@ -31,11 +31,11 @@
 					<div class="Category_Name">
 						<span>${cate_name.getClass_category1() }</span>
 					</div>
-					
+					<c:set var="category_num" value="${category_num }" />
 					<div>
 						<!-- 소분류 -->
 						<div class="Small_Category">
-							<a href="<%=request.getContextPath() %>/category_all_list.do?num=${cate_name.getCate_num() }">전체</a>
+							<a href="<%=request.getContextPath() %>/category_all_list.do?num=${category_num }">전체</a>
 							<c:set var="list" value="${CategoryNameList }" />
 							<c:if test="${!empty list }">
 								<c:forEach items="${list }" var="dto">
@@ -44,6 +44,7 @@
 							</c:if>
 						</div>
 					</div>
+					
 					
 					<div class="Category_Main3">
 						<br><br>
@@ -58,12 +59,21 @@
 											<h2 class="Category_Title2">인기 ${cate_name.getClass_category2() }</h2>
 											<span class="Category_Title_Count">${TotalCount }</span>
 										</div>
-										<div class="Category_List_All">
-											<a class="Category_List_All1"
-												href="<%=request.getContextPath() %>/category_more_bestlist.do?num=${cate_name.getCate_num() }&title1=인기&title2=프립">
-												전체 보기
-											</a>
-										</div>
+										<c:if test="${TotalCount == 0 }">
+											<div class="Category_List_All">
+												<a class="Category_List_All1" href="#">
+													전체 보기
+												</a>
+											</div>
+										</c:if>
+										<c:if test="${TotalCount != 0 }">
+											<div class="Category_List_All">
+												<a class="Category_List_All1"
+													href="<%=request.getContextPath() %>/category_more_bestlist.do?num=${cate_name.getCate_num() }&title1=인기&title2=프립">
+													전체 보기
+												</a>
+											</div>
+										</c:if>
 									</div>
 									
 									<div class="Category_Main2" style="opacity: 1; display: block;">
@@ -144,10 +154,17 @@
 											<h2 class="Category_Title2">금주의 ${cate_name.getClass_category2() }</h2>
 											<span class="Category_Title_Count">${WeekCount }</span>
 										</div>
-										<div class="Category_List_All">
-											<a class="Category_List_All1"
-												href="<%=request.getContextPath() %>/category_more_weeklist.do?num=${cate_name.getCate_num() }&title1=금주의&title2=프립">전체 보기</a>
-										</div>
+										<c:if test="${WeekCount == 0 }">
+											<div class="Category_List_All">
+												<a class="Category_List_All1" href="#">전체 보기</a>
+											</div>
+										</c:if>
+										<c:if test="${WeekCount != 0 }">
+											<div class="Category_List_All">
+												<a class="Category_List_All1"
+													href="<%=request.getContextPath() %>/category_more_weeklist.do?num=${cate_name.getCate_num() }&title1=금주의&title2=프립">전체 보기</a>
+											</div>
+										</c:if>
 									</div>
 									<div class="Category_Main2" style="opacity: 1; display: block;">
 										<section class="Category_List">
@@ -224,10 +241,17 @@
 											<h2 class="Category_Title2">신규 ${cate_name.getClass_category2() }</h2>
 											<span class="Category_Title_Count">${NewCount }</span>
 										</div>
-										<div class="Category_List_All">
-											<a class="Category_List_All1"
-												href="<%=request.getContextPath() %>/category_more_newlist.do?num=${cate_name.getCate_num() }&title1=신규&title2=프립">전체 보기</a>
-										</div>
+										<c:if test="${NewCount == 0 }">
+											<div class="Category_List_All">
+												<a class="Category_List_All1" href="#">전체 보기</a>
+											</div>
+										</c:if>
+										<c:if test="${NewCount != 0 }">
+											<div class="Category_List_All">
+												<a class="Category_List_All1"
+													href="<%=request.getContextPath() %>/category_more_newlist.do?num=${cate_name.getCate_num() }&title1=신규&title2=프립">전체 보기</a>
+											</div>
+										</c:if>
 									</div>
 									<div class="Category_Main2" style="opacity: 1; display: block;">
 										<section class="Category_List">
@@ -297,12 +321,21 @@
 									</div>
 								</div>
 	      						
-								<div class="Category_List_All2" font-size="13px">
-									<a class="Category_List_All3"
-										href="<%=request.getContextPath() %>/category_more_list.do?num=${cate_name.getCate_num() }&title1=전체&title2=프립">
-										${TotalCount }개의 ${cate_name.getClass_category2() } 전체보기
-									</a>
-								</div>
+	      						<c:if test="${TotalCount == 0 }">
+									<div class="Category_List_All2" font-size="13px">
+										<a class="Category_List_All3" href="#">
+											${TotalCount }개의 ${cate_name.getClass_category2() } 전체보기
+										</a>
+									</div>
+								</c:if>
+								<c:if test="${TotalCount != 0 }">
+									<div class="Category_List_All2" font-size="13px">
+										<a class="Category_List_All3"
+											href="<%=request.getContextPath() %>/category_more_list.do?num=${cate_name.getCate_num() }&title1=전체&title2=프립">
+											${TotalCount }개의 ${cate_name.getClass_category2() } 전체보기
+										</a>
+									</div>
+								</c:if>
 							</div>
 						</div>
 					</div>

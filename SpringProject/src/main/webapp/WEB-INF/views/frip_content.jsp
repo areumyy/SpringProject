@@ -120,11 +120,19 @@ $(function(){
 														<span class="Host_Profile6">프립 ${classCount }<span>|</span>후기 ${reviewCount }<span>|</span>저장 ${likeCount }</span>
 													</div>
 												</div>
-												<button class="Host_Pick" width="32px" height="32px">
-													<img
-														src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' viewBox='0 0 32 32'%3E %3Cpath fill='%23F4F4F4' stroke='%23CCC' stroke-width='1.5' d='M15.043 19.962l-.028.02-.027.021-7.571 6.384V5.827c0-1.273 1.155-2.41 2.73-2.41h11.706c1.57 0 2.73 1.138 2.73 2.41v20.56l-7.571-6.384-.027-.022-.028-.02c-.291-.203-.633-.293-.957-.293-.323 0-.665.09-.957.294z'/%3E %3C/svg%3E"
-														alt="찜하기">
-												</button>
+												<%if(dto != null) {%>
+													<button class="Host_Pick" width="32px" height="32px">
+														<img
+															src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' viewBox='0 0 32 32'%3E %3Cpath fill='%23F4F4F4' stroke='%23CCC' stroke-width='1.5' d='M15.043 19.962l-.028.02-.027.021-7.571 6.384V5.827c0-1.273 1.155-2.41 2.73-2.41h11.706c1.57 0 2.73 1.138 2.73 2.41v20.56l-7.571-6.384-.027-.022-.028-.02c-.291-.203-.633-.293-.957-.293-.323 0-.665.09-.957.294z'/%3E %3C/svg%3E"
+															alt="찜하기">
+													</button>
+												<%} else if(dto == null) {%>
+													<button class="Host_Pick" width="32px" height="32px" onclick="location.href='<%=request.getContextPath() %>/login.do'">
+														<img
+															src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' viewBox='0 0 32 32'%3E %3Cpath fill='%23F4F4F4' stroke='%23CCC' stroke-width='1.5' d='M15.043 19.962l-.028.02-.027.021-7.571 6.384V5.827c0-1.273 1.155-2.41 2.73-2.41h11.706c1.57 0 2.73 1.138 2.73 2.41v20.56l-7.571-6.384-.027-.022-.028-.02c-.291-.203-.633-.293-.957-.293-.323 0-.665.09-.957.294z'/%3E %3C/svg%3E"
+															alt="찜하기">
+													</button>
+												<%} %>
 											</div>
 										</div>
 									</section>
@@ -443,13 +451,21 @@ $(function(){
 									</div>
 								</div>
 								
-								
-								<a class="Content_Main15" href="#">문의하기
-									<img
-										style="padding-right: 20px;"
-										src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath d='M18 0H0v18h18z'/%3E %3Cpath stroke='%23000' stroke-width='1.5' d='M7 5l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"
-										alt="/products/151306/qnas">
-								</a>
+								<%if(dto != null) {%>
+									<a class="Content_Main15" href="#">문의하기
+										<img
+											style="padding-right: 20px;"
+											src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath d='M18 0H0v18h18z'/%3E %3Cpath stroke='%23000' stroke-width='1.5' d='M7 5l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"
+											alt="/products/151306/qnas">
+									</a>
+								<%} else if(dto == null) {%>
+									<a class="Content_Main15" href="<%=request.getContextPath() %>/login.do">문의하기
+										<img
+											style="padding-right: 20px;"
+											src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath d='M18 0H0v18h18z'/%3E %3Cpath stroke='%23000' stroke-width='1.5' d='M7 5l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"
+											alt="/products/151306/qnas">
+									</a>
+								<%} %>
 								
 								<div class="accordion" id="accordionExample">
 									<div class="Content_Qna1">
@@ -494,12 +510,22 @@ $(function(){
 						</div>
 						<div class="Under_Bar1">
 							<div class="Under_Bar2">
-								<button class="Frip_Pick" type="button">
-									<img
-										src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' viewBox='0 0 32 32'%3E %3Cpath stroke='%23333' stroke-width='1.5' d='M15.043 19.962l-.028.02-.027.021-7.571 6.384V5.827c0-1.273 1.155-2.41 2.73-2.41h11.706c1.569 0 2.73 1.138 2.73 2.41v20.56l-7.571-6.384-.027-.022-.028-.02c-.291-.203-.634-.293-.957-.293-.323 0-.665.09-.957.294z'/%3E %3C/svg%3E"
-										alt="상품 저장">
-									<span class="Frip_Pick_Count">135</span>
-								</button>
+								<%if(dto != null) {%>
+									<button class="Frip_Pick" type="button">
+										<img
+											src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' viewBox='0 0 32 32'%3E %3Cpath stroke='%23333' stroke-width='1.5' d='M15.043 19.962l-.028.02-.027.021-7.571 6.384V5.827c0-1.273 1.155-2.41 2.73-2.41h11.706c1.569 0 2.73 1.138 2.73 2.41v20.56l-7.571-6.384-.027-.022-.028-.02c-.291-.203-.634-.293-.957-.293-.323 0-.665.09-.957.294z'/%3E %3C/svg%3E"
+											alt="상품 저장">
+										<span class="Frip_Pick_Count">135</span>
+									</button>
+								<%} else if(dto == null) {%>
+									<button class="Frip_Pick" type="button" onclick="location.href='<%=request.getContextPath() %>/login.do'">
+										<img
+											src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' viewBox='0 0 32 32'%3E %3Cpath stroke='%23333' stroke-width='1.5' d='M15.043 19.962l-.028.02-.027.021-7.571 6.384V5.827c0-1.273 1.155-2.41 2.73-2.41h11.706c1.569 0 2.73 1.138 2.73 2.41v20.56l-7.571-6.384-.027-.022-.028-.02c-.291-.203-.634-.293-.957-.293-.323 0-.665.09-.957.294z'/%3E %3C/svg%3E"
+											alt="상품 저장">
+										<span class="Frip_Pick_Count">135</span>
+									</button>
+								<%} %>
+								
 								<%if(dto != null) {%>
 									<button class="Under_Bar3 Under_Bar4" width="100%" height="56px" color="white" font-size="16px"
 										onclick="location.href='<%=request.getContextPath() %>/option_select.do?class_num=${fripInfo.getClass_num() }'">
