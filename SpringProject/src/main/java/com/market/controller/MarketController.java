@@ -899,6 +899,9 @@ public class MarketController {
 			sum += rList.get(i).getReview_score();
 		}
 		double average = (double)sum/rList.size();
+		if(rList.size() == 0) {
+			average = 0;
+		}
 		//Q&A응답률
 		int allQna = this.class_qnaDao.getallCount(loginNum);
 		int passQna = this.class_qnaDao.getCountComplete(loginNum);
