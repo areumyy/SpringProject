@@ -114,8 +114,15 @@
 								<div class="hosfInfo_box">
 									<div class="host_link">
 										<div class="hostInfo_img">
-											<!-- 사진수정 필요(호스트=유저 사진) -->
-											<img alt="${hostInfo.getMem_profileimg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo.getMem_profileimg() }" class="host_img" >
+											<!-- (호스트 사진) -->
+				                              <c:choose>
+											  	  <c:when test="${hostInfo.getMem_profileimg() == null}">
+													  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png" class="user_img">
+												  </c:when>
+												  <c:otherwise>
+													  <img alt="${hostInfo.getMem_profileimg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo.getMem_profileimg() }" class="host_img">
+												  </c:otherwise>										
+											  </c:choose>
 										</div>
 										<div class="hostInfo_detail">
 											<div class="host_info_detail1">
@@ -182,8 +189,8 @@
 													<button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"></button>
 													<%-- <button type="button" class="like_btn"><img alt="class_like" src="<%=request.getContextPath() %>/resources/image/like/like_off.svg"></button> --%>
 												</div>
-												<!-- 사진 수정필요(클래스 사진) -->
-												<img alt="${dto.getClass_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto.getClass_image() }" class="class_img">
+												<!-- (클래스 사진) -->
+												<img alt="${dto.getClass_image() }" src="<%=request.getContextPath() %>/resources/upload/${dto.getClass_image() }" class="class_img">
 											</div>
 											<div class="class_hash">${dto.getClass_hash() }</div>
 											<div class="class_title">${dto.getClass_title() }</div>
@@ -227,8 +234,15 @@
 							 		<div class="host_review_box">
 							      		<div class="user_info">
 							      			<div class="user_img_box">
-							      				<!-- 사진 수정필요(유저 사진) -->
-							      				<img alt="${dto2.getMem_profileImg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto2.getMem_profileImg() }" class="user_img">
+							      				<!-- (유저 사진) -->
+							      				<c:choose>
+											  	  <c:when test="${dto2.getMem_profileImg() == null}">
+													  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png" class="user_img">
+												  </c:when>
+												  <c:otherwise>
+													  <img alt="${dto2.getMem_profileImg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto2.getMem_profileImg() }" class="user_img">
+												  </c:otherwise>										
+											  </c:choose>
 							      			</div>
 							      			<div class="user_detail">
 							      				<div class="user_name">${dto2.getMem_name() }</div>
@@ -269,8 +283,11 @@
 								      		</c:if>
 							      		</div>
 							      		<div class="review_image_box">
-							      			<!-- 사진 수정필요 (후기 사진)-->
-							      			<img alt="${dto2.getReview_image() }" src="<%=request.getContextPath() %>/resources/image/like/${dto2.getReview_image() }" class="review_image">
+							      			<!-- (후기 사진) -->
+							      			<c:if test="${!empty dto2.getReview_image() }">
+							      				<img alt="${dto2.getReview_image() }" src="<%=request.getContextPath() %>/resources/reviewUpload/${dto2.getReview_image() }" class="review_image">
+							      			</c:if>
+							      			<c:if test="${empty dto2.getReview_image() }"></c:if>
 							      		</div>
 							      	</div>
 							      </c:forEach>
