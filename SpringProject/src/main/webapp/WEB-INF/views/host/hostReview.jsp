@@ -164,7 +164,14 @@ function check(su) {
 								        <div class="host_reply_box">
 								      		<div class="host_info">
 								      			<div class="host_img_box">
-								      				<img alt="host_img" src="<%=request.getContextPath() %>/resources/image/like/${loginDto.getMem_profileimg()}" class="user_img">
+								      				<c:if test="${loginDto.getMem_profileimg() == null}">
+							                            <img class="user_img"
+							                                src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+							                        </c:if>
+							                        <c:if test="${loginDto.getMem_profileimg() != null}">
+							                            <img class="user_img"
+							                                src="<%=request.getContextPath() %>/resources/image/mypage/profile/${loginDto.getMem_profileimg() }">
+							                        </c:if>
 								      			</div>
 								      			<div class="host_detail">
 								      				<div class="host_name">
