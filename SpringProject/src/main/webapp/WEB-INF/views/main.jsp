@@ -199,7 +199,7 @@
 														<div class="class_item_title"><p class="main-block-desc">${dto.getClass_title() }</p></div>
 														<div class="class_item_price">
 															<c:if test="${dto.getOption_price() == dto.getOption_editprice()}">
-																<span class="class_price_before">${dto.getOption_price() }원</span>
+																<span class="class_price_after">${dto.getOption_price() }원</span>
 															</c:if>
 															<c:if test="${dto.getOption_price() != dto.getOption_editprice()}">
 																<span class="class_price_after">${dto.getOption_editprice() }원</span>
