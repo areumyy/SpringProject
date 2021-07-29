@@ -82,7 +82,7 @@
 	</update>
 	
 	<update id="update_img" parameterType="com.market.model.MemberDTO">
-		update frip_member set mem_profileImg = #{mem_profileImg} where mem_num = #{mem_num}
+		update frip_member set mem_profileImg = #{mem_profileimg} where mem_num = #{mem_num}
 	</update>
 	
 	<update id="update_del" parameterType="int">

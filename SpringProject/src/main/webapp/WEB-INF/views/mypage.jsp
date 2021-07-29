@@ -41,6 +41,7 @@ function handleImgFileSelect(e) {
 		
 		var reader = new FileReader();
 		reader.onload = function(e) {
+			$("form").submit();
 			$("#uploadImge").attr("src", e.target.result);
 		}
 		reader.readAsDataURL(f);
@@ -74,26 +75,27 @@ function handleImgFileSelect(e) {
 										<div class="customer_account_type">카카오 연동 계정</div>
 									</div>
 									
-									<form method="post" enctype="multipart/form-data" class="mypage_profile_img" id="mypage_profile_img">
+									<form method="post" enctype="multipart/form-data" class="mypage_profile_img" id="mypage_profile_img"
+									 action="<%=request.getContextPath()%>/edit_profile.do">
 										<div class="mypage_img_wrapper">
 											<div class="img_cont">
 												<c:choose>
 													<c:when test="${dto.getMem_profileimg() == null}">
 														<img alt="프로필 이미지" class="img_style"
-															src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+															src="/profile/profile_no_img.png">
 													</c:when>
 													<c:otherwise>
 														<img alt="프로필 이미지" class="img_style" id="uploadImge"
-															src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto.getMem_profileimg() }">
+															src="/profile/${dto.getMem_profileimg() }">
 													</c:otherwise>
 												</c:choose>
 											</div>
 										</div>
-										<button id="profile-upload-btn" type="submit" form="mypage_profile_img" >
+										<button id="profile-upload-btn" form="mypage_profile_img" >
 										<img alt="수정 아이콘" class="img_modify"
 											src="<%=request.getContextPath() %>/resources/image/mypage/modify.svg">
 										</button>
-										<input type="file" name="files" id="profileImge" accept="image/gif, image/jpeg, image/jpg, image/png" style="display:none;"/>
+										<input type="file" name="mem_profileimg2" id="profileImge" accept="image/gif, image/jpeg, image/jpg, image/png" style="display:none;"/>
 									</form>
 								</div>
 

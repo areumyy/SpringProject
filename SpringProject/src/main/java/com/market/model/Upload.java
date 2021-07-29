@@ -51,7 +51,7 @@ public class Upload {
 	public String fileUpload(MultipartHttpServletRequest mRequest) {
 		String result = "";
 		String uploadPath = 
-				"C:\\Users\\leehe\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\upload\\";
+				"C:\\Users\\kmsol\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\upload\\";
 		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
@@ -111,7 +111,7 @@ public class Upload {
 	public String reviewUpload(MultipartHttpServletRequest mRequest) {
 		String result = "";
 		String uploadPath = 
-				"C:\\Users\\leehe\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\reviewUpload\\";
+				"C:\\Users\\kmsol\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\upload\\";
 		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
@@ -169,7 +169,7 @@ public class Upload {
 	public String profileUpload(MultipartHttpServletRequest mRequest) {
 		String result = "";
 		String uploadPath = 
-				"C:\\Users\\leehe\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\image\\mypage\\profile";
+				"C:\\Users\\kmsol\\git\\SpringProject\\SpringProject\\src\\main\\webapp\\resources\\upload\\";
 		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);

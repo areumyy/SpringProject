@@ -1499,21 +1499,19 @@ public class MarketController {
 		return "mypage_edit";
 	}
 	
-	/*@RequestMapping("edit_profile.do")
+	@RequestMapping("edit_profile.do")
 	public String myPageEdit(MemberDTO dto, HttpServletRequest request, Model model, MultipartHttpServletRequest mRequest) {
-		System.out.println(dto);
 		HttpSession session = request.getSession();
 
 		MemberDTO loginDto = (MemberDTO) session.getAttribute("loginDto");
 		
-		dto.setMem_profileImg(upload.profileUpload(mRequest)); // 파일 이름으로 변환
+		dto.setMem_profileimg(upload.profileUpload(mRequest)); // 파일 이름으로 변환
+		dto.setMem_num(loginDto.getMem_num());
 		
 		this.memberDao.updateImgMember(dto);
 		
-
-
 		return "redirect:mypage.do";
-	}*/
+	}
 	
 	
 
