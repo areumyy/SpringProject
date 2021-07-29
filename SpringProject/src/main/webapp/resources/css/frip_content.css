@@ -884,19 +884,11 @@ div[Attributes Style] {
 .Frip_Pick {
     padding: 0px;
     margin-right: 20px;
-    height: 48px;
+    vertical-align: middle;
     display: flex;
     flex-direction: column;
     -webkit-box-align: center;
     align-items: center;
-}
-
-.Frip_Pick_Count {
-    font-size: 12px;
-    line-height: 16px;
-    color: rgb(51, 51, 51);
-    white-space: nowrap;
-    margin-top: -4px;
 }
 
 .Under_Bar4 {
@@ -1087,7 +1079,13 @@ div[Attributes Style] {
     }
 }
 
+.nopush {
+	color: white;
+}
 
+.push {
+	color: rgb(255, 102, 102);
+}
 
 
 

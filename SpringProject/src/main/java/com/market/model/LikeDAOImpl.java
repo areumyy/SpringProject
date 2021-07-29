@@ -301,5 +301,42 @@ public class LikeDAOImpl implements LikeDAO {
 		return this.sqlSession.selectList("nolikeClass", mem_num);
 	}
 
+	
+	@Override
+	public int class_status(HashMap<String, Integer> map) {
+		
+		return this.sqlSession.selectOne("class_status", map);
+	}
+
+	@Override
+	public int class_like_add(HashMap<String, Integer> map) {
+		
+		return this.sqlSession.insert("class_add", map);
+	}
+
+	@Override
+	public int class_like_del(HashMap<String, Integer> map) {
+
+		return this.sqlSession.delete("class_del", map);
+	}
+
+	@Override
+	public int host_status(HashMap<String, Integer> map) {
+
+		return this.sqlSession.selectOne("host_status", map);
+	}
+
+	@Override
+	public int host_like_add(HashMap<String, Integer> map) {
+
+		return this.sqlSession.insert("host_add", map);
+	}
+
+	@Override
+	public int host_like_del(HashMap<String, Integer> map) {
+
+		return this.sqlSession.delete("host_del", map);
+	}
+
 
 }

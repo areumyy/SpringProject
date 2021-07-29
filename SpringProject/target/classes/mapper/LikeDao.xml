@@ -365,4 +365,40 @@
 	<select id="getTarget" parameterType="int" resultType="com.market.model.LikeDTO">
 		select like_target from frip_like where like_writer = #{mem_num} and like_flag = 3
 	</select>
+	
+	
+	<!-- 클래스 찜 관련 -->
+	<!-- 좋아요 상태 -->
+	<select id="class_status" parameterType="java.util.Map" resultType="int">
+		select count(*) from frip_like where like_writer = #{like_writer} and like_target = #{like_target} and like_flag = 1
+	</select>
+	
+	<!-- 좋아요 DB 추가 -->
+	<insert id="class_add" parameterType="java.util.Map">
+		insert into frip_like values(#{like_writer}, #{like_target}, 1)
+	</insert>
+	
+	<!-- 좋아요 DB 삭제 -->
+	<delete id="class_del" parameterType="java.util.Map">
+		delete from frip_like where like_writer = #{like_writer} and like_target = #{like_target} and like_flag = 1
+	</delete>
+	
+	
+	<!-- 호스트 찜 관련 -->
+	<!-- 좋아요 상태 -->
+	<select id="host_status" parameterType="java.util.Map" resultType="int">
+		select count(*) from frip_like where like_writer = #{like_writer} and like_target = #{like_target} and like_flag = 2
+	</select>
+	
+	<!-- 좋아요 DB 추가 -->
+	<insert id="host_add" parameterType="java.util.Map">
+		insert into frip_like values(#{like_writer}, #{like_target}, 2)
+	</insert>
+	
+	<!-- 좋아요 DB 삭제 -->
+	<delete id="host_del" parameterType="java.util.Map">
+		delete from frip_like where like_writer = #{like_writer} and like_target = #{like_target} and like_flag = 2
+	</delete>
+	
+	
 </mapper>

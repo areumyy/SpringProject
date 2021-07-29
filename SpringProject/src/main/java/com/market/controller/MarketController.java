@@ -2518,7 +2518,21 @@ public class MarketController {
 
 	@RequestMapping("frip_content.do")
 	public String frip_content(@RequestParam("num") int class_num,
-			@RequestParam("memnum") int class_memnum, @RequestParam("cate_num") int category_num, Model model) {
+			@RequestParam("memnum") int class_memnum, @RequestParam("cate_num") int category_num, Model model, HttpServletRequest request) {
+		
+		int mem_num = 0;
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("loginDto") != null) {
+			MemberDTO dto = (MemberDTO)session.getAttribute("loginDto");
+			mem_num= dto.getMem_num();
+		}
+		
+		List<ClassDTO> likeList = this.likeDao.getLikeClassList(mem_num);
+		List<ClassDTO> nolikeList = this.likeDao.getNoLikeClassList(mem_num);
+		
+		model.addAttribute("likeList", likeList);
+		model.addAttribute("nolikeList", nolikeList);
 		
 		// 프립 리뷰 평점 평균 / 리뷰 갯수
 		ReviewDTO reviewInfo = this.reviewDao.reviewInfo(class_num);
@@ -2807,4 +2821,88 @@ public class MarketController {
 
         response.getWriter().print(obj);
     }
+	
+	
+	
+	// 프립 좋아요 매핑
+	@RequestMapping(value = "/classlike_status.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void classlikeStatus(HttpServletResponse response, @RequestParam("class_num") int class_num,
+			HttpServletRequest request) throws IOException {
+
+		response.setContentType("text/html; charset=UTF-8");
+
+		// 세션값 가져오기
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("like_writer", dto.getMem_num()); // 로그인한 멤버 번호
+		map.put("like_target", class_num); // 좋아요 누른 프립 번호
+
+		// 해당 프립에 대한 좋아요 상태 체크하는 메서드 (0: 안 누른 상태 / 1: 누른 상태)
+		int like_status = this.likeDao.class_status(map);
+
+		int state = 0;
+
+		if (like_status > 0) { // 좋아요 누른 상태
+
+			// 좋아요 DB 삭제
+			this.likeDao.class_like_del(map);
+			state = 1;
+
+		} else if (like_status == 0) { // 좋아요 안 누른 상태
+
+			// 좋아요 DB 추가
+			this.likeDao.class_like_add(map);
+			state = 2;
+		}
+
+		JSONObject obj = new JSONObject();
+		obj.put("state", state);
+
+		response.getWriter().print(obj);
+	}
+	
+	
+	// 호스트 좋아요 매핑
+	@RequestMapping(value = "/hostlike_status.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void hostlikeStatus(HttpServletResponse response, @RequestParam("host_num") int host_num,
+			HttpServletRequest request) throws IOException {
+
+		response.setContentType("text/html; charset=UTF-8");
+
+		// 세션값 가져오기
+		HttpSession session = request.getSession();
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginDto");
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("like_writer", dto.getMem_num()); // 로그인한 멤버 번호
+		map.put("like_target", host_num); // 좋아요 누른 호스트 번호
+
+		// 해당 프립에 대한 좋아요 상태 체크하는 메서드 (0: 안 누른 상태 / 1: 누른 상태)
+		int like_status = this.likeDao.host_status(map);
+
+		int state = 0;
+
+		if (like_status > 0) { // 좋아요 누른 상태
+
+			// 좋아요 DB 삭제
+			this.likeDao.host_like_del(map);
+			state = 1;
+
+		} else if (like_status == 0) { // 좋아요 안 누른 상태
+
+			// 좋아요 DB 추가
+			this.likeDao.host_like_add(map);
+			state = 2;
+		}
+
+		JSONObject obj = new JSONObject();
+		obj.put("state", state);
+
+		response.getWriter().print(obj);
+	}
+	
 }

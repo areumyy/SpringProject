@@ -33,6 +33,54 @@ $(function(){
 	
 })
 
+// 프립 클래스 좋아요 버튼 클릭시 실행함수
+function class_like_btn(class_num) {
+	
+	$.ajax({
+        type : "post",
+        url : '/controller/classlike_status.do', 
+        data : {"class_num": class_num},
+        dataType: 'json',
+        error : function(error) {
+            console.log("error");
+        },
+        success : function(data) {
+            var state = data.state;
+            
+            if(state == 1) {
+            	$("#class_like_btn_img" + class_num).attr("src", "./resources/image/like/like.JPG");
+            	
+            } else if(state == 2) {
+            	$("#class_like_btn_img" + class_num).attr("src", "./resources/image/like/like_on.svg");
+            }
+        }
+    }); 
+}
+
+// 호스트 좋아요 버튼 클릭시 실행함수
+function host_like_btn(host_num) {
+	
+	$.ajax({
+        type : "post",
+        url : '/controller/hostlike_status.do', 
+        data : {"host_num": host_num},
+        dataType: 'json',
+        error : function(error) {
+            console.log("error");
+        },
+        success : function(data) {
+            var state = data.state;
+            
+            if(state == 1) {
+            	$("#host_like_btn_img" + host_num).attr("src", "./resources/image/like/like.JPG");
+            	
+            } else if(state == 2) {
+            	$("#host_like_btn_img" + host_num).attr("src", "./resources/image/like/like_on.svg");
+            }
+        }
+    }); 
+}
+
 </script>
 
 <body>
@@ -120,19 +168,21 @@ $(function(){
 														<span class="Host_Profile6">프립 ${classCount }<span>|</span>후기 ${reviewCount }<span>|</span>저장 ${likeCount }</span>
 													</div>
 												</div>
+
 												<%if(dto != null) {%>
-													<button class="Host_Pick" width="32px" height="32px">
-														<img
-															src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' viewBox='0 0 32 32'%3E %3Cpath fill='%23F4F4F4' stroke='%23CCC' stroke-width='1.5' d='M15.043 19.962l-.028.02-.027.021-7.571 6.384V5.827c0-1.273 1.155-2.41 2.73-2.41h11.706c1.57 0 2.73 1.138 2.73 2.41v20.56l-7.571-6.384-.027-.022-.028-.02c-.291-.203-.633-.293-.957-.293-.323 0-.665.09-.957.294z'/%3E %3C/svg%3E"
+													<button class="Host_Pick" width="32px" height="32px" onclick="host_like_btn(${hostInfo.getMem_num()})">
+														<img id="host_like_btn_img${hostInfo.getMem_num()}"
+															src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"
 															alt="찜하기">
 													</button>
 												<%} else if(dto == null) {%>
 													<button class="Host_Pick" width="32px" height="32px" onclick="location.href='<%=request.getContextPath() %>/login.do'">
-														<img
-															src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' viewBox='0 0 32 32'%3E %3Cpath fill='%23F4F4F4' stroke='%23CCC' stroke-width='1.5' d='M15.043 19.962l-.028.02-.027.021-7.571 6.384V5.827c0-1.273 1.155-2.41 2.73-2.41h11.706c1.57 0 2.73 1.138 2.73 2.41v20.56l-7.571-6.384-.027-.022-.028-.02c-.291-.203-.633-.293-.957-.293-.323 0-.665.09-.957.294z'/%3E %3C/svg%3E"
+														<img id="host_like_btn_img${hostInfo.getMem_num()}"
+															src="<%=request.getContextPath() %>/resources/image/like/like.JPG"
 															alt="찜하기">
 													</button>
 												<%} %>
+												
 											</div>
 										</div>
 									</section>
@@ -510,19 +560,19 @@ $(function(){
 						</div>
 						<div class="Under_Bar1">
 							<div class="Under_Bar2">
-								<%if(dto != null) {%>
-									<button class="Frip_Pick" type="button">
-										<img
-											src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' viewBox='0 0 32 32'%3E %3Cpath stroke='%23333' stroke-width='1.5' d='M15.043 19.962l-.028.02-.027.021-7.571 6.384V5.827c0-1.273 1.155-2.41 2.73-2.41h11.706c1.569 0 2.73 1.138 2.73 2.41v20.56l-7.571-6.384-.027-.022-.028-.02c-.291-.203-.634-.293-.957-.293-.323 0-.665.09-.957.294z'/%3E %3C/svg%3E"
+								<%
+									if (dto != null) {
+								%>
+									<button class="Frip_Pick" type="button" onclick="class_like_btn(${fripInfo.getClass_num() })">
+										<img id="class_like_btn_img${fripInfo.getClass_num() }" width="24px" height="28px"
+											src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"
 											alt="상품 저장">
-										<span class="Frip_Pick_Count">135</span>
 									</button>
 								<%} else if(dto == null) {%>
 									<button class="Frip_Pick" type="button" onclick="location.href='<%=request.getContextPath() %>/login.do'">
-										<img
-											src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='none' viewBox='0 0 32 32'%3E %3Cpath stroke='%23333' stroke-width='1.5' d='M15.043 19.962l-.028.02-.027.021-7.571 6.384V5.827c0-1.273 1.155-2.41 2.73-2.41h11.706c1.569 0 2.73 1.138 2.73 2.41v20.56l-7.571-6.384-.027-.022-.028-.02c-.291-.203-.634-.293-.957-.293-.323 0-.665.09-.957.294z'/%3E %3C/svg%3E"
+										<img id="class_like_btn_img${fripInfo.getClass_num() }" width="40px" height="28px"
+											src="<%=request.getContextPath() %>/resources/image/like/like.JPG"
 											alt="상품 저장">
-										<span class="Frip_Pick_Count">135</span>
 									</button>
 								<%} %>
 								
@@ -566,7 +616,7 @@ $(function(){
 													</div>
 													<div class="Content_Img1">
 														<img class="Content_Img2" width="192"
-															src="<%=request.getContextPath() %>/resources/image/class/${dto.getClass_image() }">
+															src="<%=request.getContextPath() %>/resources/upload/${dto.getClass_image() }">
 														<div class="Content_Main2"
 															style="opacity: 1; display: block;">
 															<div style="display: block;">
@@ -575,7 +625,7 @@ $(function(){
 																	<div
 																		style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																		<img class="Content_Img3" width="192"
-																			src="<%=request.getContextPath() %>/resources/image/class/${dto.getClass_image() }">
+																			src="<%=request.getContextPath() %>/resources/upload/${dto.getClass_image() }">
 																	</div>
 																</div>
 															</div>

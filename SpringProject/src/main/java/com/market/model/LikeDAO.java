@@ -69,7 +69,15 @@ public interface LikeDAO {
 	public List<Integer> likeScore_like_list(HashMap<String, Integer> map);		
 	
 	
+	// 클래스 찜
+	public int class_status(HashMap<String, Integer> map);					// 좋아요 상태
+	public int class_like_add(HashMap<String, Integer> map);				// 좋아요 DB 추가
+	public int class_like_del(HashMap<String, Integer> map);				// 좋아요 DB 삭제
 	
+	// 호스트 찜
+	public int host_status(HashMap<String, Integer> map);					// 좋아요 상태
+	public int host_like_add(HashMap<String, Integer> map);					// 좋아요 DB 추가
+	public int host_like_del(HashMap<String, Integer> map);					// 좋아요 DB 삭제
 	
 	
 }

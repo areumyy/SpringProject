@@ -109,14 +109,14 @@
 																		</div>
 																		<div class="Category_List7">
 																			<img class="Category_List_Img" width="192"
-																				src="<%=request.getContextPath() %>/resources/image/class/${dto.getClass_image() }">
+																				src="<%=request.getContextPath() %>/resources/upload/${dto.getClass_image() }">
 																			<div class="Category_Main2" style="opacity: 1; display: block;">
 																				<div style="display: block;">
 																					<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 																						<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																							<img
 																								class="Category_List_Img1" width="192"
-																								src="<%=request.getContextPath() %>/resources/image/class/${dto.getClass_image() }">
+																								src="<%=request.getContextPath() %>/resources/upload/${dto.getClass_image() }">
 																						</div>
 																					</div>
 																				</div>
