@@ -95,4 +95,9 @@ public class Class_qnaDAOImpl implements Class_qnaDAO {
 		
 		return this.sqlSession.selectList("classqnalist", num);
 	}
+
+	@Override
+	public int insertQna(Class_qnaDTO dto) {
+		return this.sqlSession.insert("qna_insert1", dto);
+	}
 }

@@ -2807,4 +2807,57 @@ public class MarketController {
 
         response.getWriter().print(obj);
     }
+	
+	@RequestMapping("frip_qna_list.do")
+	public String fripQnaAll(@RequestParam("class_num") int class_num, Model model) {
+		
+		// 클래스 문의 리스트
+		List<Class_qnaDTO> list = this.class_qnaDao.getclassQnaList(class_num);
+		
+		List<MemberDTO> memList = new ArrayList<MemberDTO>();
+		
+		for(int i = 0; i<list.size(); i++) {
+			int target = list.get(i).getClass_qna_writer();
+			memList.add(this.memberDao.getMember(target));
+		}
+		ClassDTO dto = this.classDao.getclassCont(class_num);
+		MemberDTO host = this.memberDao.getMember(dto.getClass_memNum());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("memList", memList);
+		model.addAttribute("host", host);
+		model.addAttribute("class_num", class_num);
+		
+		return "frip_qna_list";
+	}
+	
+	@RequestMapping("qna_insert.do")
+	public String fripQnaInsert(@RequestParam("class_num") int class_num, @RequestParam("mem_num") int mem_num, Model model) {
+		
+		model.addAttribute("class_num", class_num);
+		model.addAttribute("mem_num", mem_num);
+		
+		return "frip_qna_insert";
+	}
+	
+	@RequestMapping("qna_insert_ok.do")
+	public void fripQnaInsertOk(Class_qnaDTO dto, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; chatset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		
+		int res = this.class_qnaDao.insertQna(dto);
+		
+		if (res > 0) {
+			out.println("<script>");
+			out.println("location.href='frip_qna_list.do?class_num=" + dto.getClass_qna_classNum() + "'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('문의 등록이 실패했습니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+		
+	}
 }

@@ -192,8 +192,16 @@
 	
 	
 	<select id="classqnalist" parameterType="int" resultType="com.market.model.Class_qnaDTO">
-		select * from frip_class_qna where class_qna_classnum = #{num}
+		select * from frip_class_qna where class_qna_classnum = #{num} order by class_qna_regdate desc
 	</select>
+	
+	<insert id="qna_insert1" parameterType="com.market.model.Class_qnaDTO">
+		<selectKey resultType="int" keyProperty="class_qna_num" order="BEFORE">
+			select count(*) + 1 from frip_class_qna
+		</selectKey>
+		
+		insert into frip_class_qna values(#{class_qna_num},#{class_qna_classNum},#{class_qna_writer},#{class_qna_cont},sysdate,default,default,#{class_qna_pri})
+	</insert>
 </mapper>
 
 

@@ -420,39 +420,8 @@ $(function(){
 									</div>
 								</section>
 								
-								<div class="accordion" id="accordionExample">
-									<div class="Content_Qna1">
-										<div class="Content_Qna2" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true">
-											자주 묻는 질문
-										</div>
-										<div class="accordion-collapse collapse" id="collapse1" data-bs-parent="#accordionExample" style="background-color: rgb(239, 247, 255);">
-											
-											<c:set var="list" value="${ClassQnaList }" />
-											<c:if test="${!empty list }">
-												<c:forEach items="${list }" var="dto" begin="0" end="8">
-													<div class="accordion-body">
-														<div class="Content_Main13">
-															<img
-																src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M3 9.112C3 5.329 5.831 3 8.992 3 12.169 3 15 5.33 15 9.112c0 1.652-.543 3.023-1.432 4.047l1.4 1.553L13.468 16l-1.432-1.586a6.2 6.2 0 0 1-3.045.793C5.832 15.207 3 12.878 3 9.112zm2.354-.017c0 2.643 1.844 3.899 3.638 3.899.51 0 1.037-.1 1.498-.298l-1.827-2.015 1.514-1.305 1.827 2.048c.395-.594.642-1.37.642-2.329 0-2.643-1.844-3.898-3.654-3.898-1.794 0-3.638 1.255-3.638 3.898z'/%3E %3C/g%3E %3C/svg%3E"
-																class="Content_Main14">
-															<div>${dto.getClass_qna_cont() }</div>
-														</div>
-														<div class="Content_Main13">
-															<img
-																src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-rule='nonzero' d='M0 0h18v18H0z'/%3E %3Cpath fill='%23000' d='M12.436 15l-1.009-2.742H6.504L5.496 15H3L7.65 3h2.735L15 15h-2.564zm-3.47-9.41L7.29 10.126h3.35L8.966 5.59z'/%3E %3C/g%3E %3C/svg%3E"
-																class="Content_Main14">
-															<div>${dto.getClass_ans_cont() }</div>
-														</div>
-													</div>
-												</c:forEach>
-											</c:if>
-											
-										</div>
-									</div>
-								</div>
-								
 								<%if(dto != null) {%>
-									<a class="Content_Main15" href="#">문의하기
+									<a class="Content_Main15" href="<%=request.getContextPath() %>/frip_qna_list.do?class_num=${fripInfo.getClass_num()}">문의하기
 										<img
 											style="padding-right: 20px;"
 											src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 18 18'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath d='M18 0H0v18h18z'/%3E %3Cpath stroke='%23000' stroke-width='1.5' d='M7 5l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"

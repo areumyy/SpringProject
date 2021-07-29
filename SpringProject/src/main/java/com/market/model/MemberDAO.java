@@ -48,4 +48,5 @@ public interface MemberDAO {
 	public int getMember_memNick(String mem_nick);
 	
 	public int updateInfo(MemberDTO dto);
+	
 }

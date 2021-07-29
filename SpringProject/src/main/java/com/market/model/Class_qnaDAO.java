@@ -26,4 +26,6 @@ public interface Class_qnaDAO {
 	
 	public int getallCount(int mem_num);
 	public List<Class_qnaDTO> getclassQnaList(int num);
+	
+	public int insertQna(Class_qnaDTO dto);
 }
