@@ -88,7 +88,7 @@ function handleImgFileSelect(e) {
                                                     </c:when>
                                                     <c:otherwise>
                                                         <img alt="프로필 이미지" class="img_style" id="uploadImge"
-                                                            src="/profile/${dto.getMem_profileimg() }">
+                                                            src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto.getMem_profileimg() }">
                                                     </c:otherwise>
                                                 </c:choose>
 											</div>

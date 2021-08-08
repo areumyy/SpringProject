@@ -2609,12 +2609,6 @@ public class MarketController {
 			mem_num= dto.getMem_num();
 		}
 		
-		List<ClassDTO> likeList = this.likeDao.getLikeClassList(mem_num);
-		List<ClassDTO> nolikeList = this.likeDao.getNoLikeClassList(mem_num);
-		
-		model.addAttribute("likeList", likeList);
-		model.addAttribute("nolikeList", nolikeList);
-		
 		// 프립 리뷰 평점 평균 / 리뷰 갯수
 		ReviewDTO reviewInfo = this.reviewDao.reviewInfo(class_num);
 		// 최고평점 비율(%)
@@ -2660,6 +2654,21 @@ public class MarketController {
 		
 		model.addAttribute("ClassQnaList", classQnaList);
 		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("like_target", class_num);
+		map.put("like_writer", mem_num);
+		
+		// 해당 게시물 좋아요 눌렀는지 판단
+		int class_status = this.likeDao.class_status(map);
+		
+		map.remove("like_target");
+		map.put("like_target", class_memnum);
+		
+		// 해당 호스트 좋아요 눌렀는지 판단
+		int host_status = this.likeDao.host_status(map);
+		
+		model.addAttribute("class_status", class_status);
+		model.addAttribute("host_status", host_status);
 		
 		return "frip_content";
 	}

@@ -400,5 +400,7 @@
 		delete from frip_like where like_writer = #{like_writer} and like_target = #{like_target} and like_flag = 2
 	</delete>
 	
-	
+	<select id="class_like_status" parameterType="java.util.Map" resultType="int">
+		select count(*) from frip_like where like_writer = #{like_writer} and like_target = #{like_target} and like_flag = 1
+	</select>
 </mapper>

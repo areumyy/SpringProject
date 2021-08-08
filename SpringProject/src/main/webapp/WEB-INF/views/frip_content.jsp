@@ -150,8 +150,18 @@ function host_like_btn(host_num) {
 																	<div style="display: block;">
 																		<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 																			<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
-																				<img alt="호스트 프로필 이미지" width="56" height="56"
-																					src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo.getMem_profileimg() }">
+																				<c:choose>
+								                                                    <c:when test="${dto.getMem_profileimg() == null}">
+								                                                        <img alt="호스트 프로필 이미지" width="56" height="56"
+								                                                            src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+								                                                    </c:when>
+								                                                    <c:otherwise>
+								                                                        <img alt="호스트 프로필 이미지" width="56" height="56"
+								                                                            src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo.getMem_profileimg() }">
+								                                                    </c:otherwise>
+								                                                </c:choose>
+																				<%-- <img alt="호스트 프로필 이미지" width="56" height="56"
+																					src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo.getMem_profileimg() }"> --%>
 																			</div>
 																		</div>
 																	</div>
@@ -175,13 +185,22 @@ function host_like_btn(host_num) {
 												</div>
 
 												<%if(dto != null) {%>
-													<button class="Host_Pick" width="32px" height="32px" onclick="host_like_btn(${hostInfo.getMem_num()})">
+													<c:if test="${host_status > 0 }">
+														<button class="Host_Pick" onclick="host_like_btn(${hostInfo.getMem_num()})">
+															<img id="host_like_btn_img${hostInfo.getMem_num()}"
+																src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"
+																alt="찜하기">
+														</button>
+													</c:if>
+													<c:if test="${host_status == 0 }">
+														<button class="Host_Pick" onclick="host_like_btn(${hostInfo.getMem_num()})">
 														<img id="host_like_btn_img${hostInfo.getMem_num()}"
-															src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"
+															src="<%=request.getContextPath() %>/resources/image/like/like.JPG"
 															alt="찜하기">
 													</button>
+													</c:if>
 												<%} else if(dto == null) {%>
-													<button class="Host_Pick" width="32px" height="32px" onclick="location.href='<%=request.getContextPath() %>/login.do'">
+													<button class="Host_Pick" onclick="location.href='<%=request.getContextPath() %>/login.do'">
 														<img id="host_like_btn_img${hostInfo.getMem_num()}"
 															src="<%=request.getContextPath() %>/resources/image/like/like.JPG"
 															alt="찜하기">
@@ -536,26 +555,35 @@ function host_like_btn(host_num) {
 								<%
 									if (dto != null) {
 								%>
-									<button class="Frip_Pick" type="button" onclick="class_like_btn(${fripInfo.getClass_num() })">
-										<img id="class_like_btn_img${fripInfo.getClass_num() }" width="24px" height="28px"
-											src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"
-											alt="상품 저장">
-									</button>
+									<c:if test="${class_status > 0 }">
+										<button class="Frip_Pick" type="button" onclick="class_like_btn(${fripInfo.getClass_num() })">
+											<img id="class_like_btn_img${fripInfo.getClass_num() }"
+												src="<%=request.getContextPath() %>/resources/image/like/like_on.svg"
+												alt="상품 저장">
+										</button>
+									</c:if>
+									<c:if test="${class_status == 0 }">
+										<button class="Frip_Pick" type="button" onclick="class_like_btn(${fripInfo.getClass_num() })">
+											<img id="class_like_btn_img${fripInfo.getClass_num() }"
+												src="<%=request.getContextPath() %>/resources/image/like/like.JPG"
+												alt="상품 저장">
+										</button>
+									</c:if>
 								<%} else if(dto == null) {%>
 									<button class="Frip_Pick" type="button" onclick="location.href='<%=request.getContextPath() %>/login.do'">
-										<img id="class_like_btn_img${fripInfo.getClass_num() }" width="40px" height="28px"
+										<img id="class_like_btn_img${fripInfo.getClass_num() }"
 											src="<%=request.getContextPath() %>/resources/image/like/like.JPG"
 											alt="상품 저장">
 									</button>
 								<%} %>
 								
 								<%if(dto != null) {%>
-									<button class="Under_Bar3 Under_Bar4" width="100%" height="56px" color="white" font-size="16px"
+									<button class="Under_Bar3 Under_Bar4"
 										onclick="location.href='<%=request.getContextPath() %>/option_select.do?class_num=${fripInfo.getClass_num() }'">
 										<div class="Under_Bar5">참여하기</div>
 									</button>
 								<%} else if(dto == null) {%>
-									<button class="Under_Bar3 Under_Bar4" width="100%" height="56px" color="white" font-size="16px"
+									<button class="Under_Bar3 Under_Bar4"
 										onclick="location.href='<%=request.getContextPath() %>/login.do'">
 										<div class="Under_Bar5">참여하기</div>
 									</button>

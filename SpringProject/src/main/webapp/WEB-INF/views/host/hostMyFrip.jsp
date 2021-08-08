@@ -37,7 +37,7 @@
 					<div class="info_frame">
 						<div class="state">
 							<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-							  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="location.href='hostMyFrip.do'">
+							  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked onclick="location.href='hostMyFrip.do'">
 							  <label class="btn btn-outline-primary" for="btnradio1">판매중</label>
 							
 							  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="location.href='hostMyFripWait.do'">

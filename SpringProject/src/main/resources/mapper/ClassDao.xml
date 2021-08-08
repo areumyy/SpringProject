@@ -503,6 +503,7 @@
 			                 from frip_review
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
+			where class_pass = 1
 			order by b.count desc, c.class_num asc
 		]]>
 	</select>
@@ -519,7 +520,8 @@
 			on c.class_num = o.option_classNum
 			join (select class_num, count(*) count
 			                 from frip_class
-			                 where class_regdate
+			                 where class_pass = 1
+			                 and class_regdate
 			                 between (select to_char(sysdate + (interval '-7' day), 'YYYY/MM/DD') from dual)
 			                 and sysdate
 			                 group by class_num
@@ -529,6 +531,7 @@
 			                 from frip_review
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
+			where class_pass = 1
 			order by c.class_regdate desc, c.class_num asc
 		]]>
 	</select>
@@ -548,6 +551,7 @@
 			                 from frip_review
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
+			where class_pass = 1
 			order by c.class_regdate desc
 		]]>
 	</select>
