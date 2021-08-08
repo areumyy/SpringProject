@@ -73,7 +73,7 @@
 																</c:forEach>
 															</div>
 															<div class="class_item_image">
-																<img class="class_img" src="<%=request.getContextPath() %>/resources/upload/${dto.getClass_image()}">
+																<img class="class_img" style="width: 224px; height: 224px;" src="<%=request.getContextPath() %>/resources/upload/${dto.getClass_image()}">
 															</div>
 														</div>
 														<div class="class_item_hash">${dto.getClass_hash() }</div>

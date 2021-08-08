@@ -2972,6 +2972,30 @@ public class MarketController {
 		
 	}
 	
+	@RequestMapping("qna_delete.do")
+	public void fripQnaDelete(@RequestParam("class_qna_num") int class_qna_num, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		Class_qnaDTO dto = this.class_qnaDao.getContent(class_qna_num);
+		
+		int class_num = dto.getClass_qna_classNum();
+		int res = this.class_qnaDao.deleteQna(class_qna_num);
+		
+		
+		if (res > 0) {
+			this.class_qnaDao.setQnaNum(class_qna_num);
+			
+			out.println("<script>");
+			out.println("location.href='frip_qna_list.do?class_num=" + class_num + "'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('문의 삭제에 실패했습니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+	}
 	// 프립 좋아요 매핑
 	@RequestMapping(value = "/classlike_status.do", method = RequestMethod.POST)
 	@ResponseBody

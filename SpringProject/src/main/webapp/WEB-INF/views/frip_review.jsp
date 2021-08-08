@@ -128,7 +128,7 @@ $(document).ready(function() {
 			                              <!-- (유저 사진) -->
 			                              <c:choose>
 										  	  <c:when test="${dto.getMem_profileImg() == null}">
-												  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png" class="user_img">
+												  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.jpg" class="user_img">
 											  </c:when>
 											  <c:otherwise>
 												  <img alt="${dto.getMem_profileImg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto.getMem_profileImg() }" class="user_img">

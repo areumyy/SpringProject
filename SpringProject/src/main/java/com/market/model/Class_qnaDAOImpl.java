@@ -100,4 +100,14 @@ public class Class_qnaDAOImpl implements Class_qnaDAO {
 	public int insertQna(Class_qnaDTO dto) {
 		return this.sqlSession.insert("qna_insert1", dto);
 	}
+
+	@Override
+	public int deleteQna(int class_qna_num) {
+		return this.sqlSession.delete("qna_delete", class_qna_num);
+	}
+
+	@Override
+	public void setQnaNum(int class_qna_num) {
+		this.sqlSession.update("setQnaNum", class_qna_num);
+	}
 }

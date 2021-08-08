@@ -27,6 +27,13 @@ $(function() {
 	MemberDTO dto = (MemberDTO)session1.getAttribute("loginDto");
 	%>
 })
+
+function deleteQna(target){
+	const result = confirm('해당 질문을 삭제하시겠습니까?');
+	if(result > 0) {
+		location.href="qna_delete.do?class_qna_num=" + target;
+	}
+}
 </script>
 </head>
 <body>
@@ -62,7 +69,7 @@ $(function() {
 				                              <!-- (유저 사진) -->
 				                              <c:choose>
 											  	  <c:when test="${memList[status.index].getMem_profileimg() == null}">
-													  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png" class="user_img">
+													  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.jpg" class="user_img">
 												  </c:when>
 												  <c:otherwise>
 													  <img alt="${memList[status.index].getMem_profileimg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${memList[status.index].getMem_profileimg() }" class="user_img">
@@ -70,7 +77,20 @@ $(function() {
 											  </c:choose>
 				                           </div>
 				                           <div class="user_detail">
-				                              <div class="user_name">${memList[status.index].getMem_nick() }</div>
+				                           	<div style="display: flex; justify-content: space-between;">
+				                              	<c:if test="${dto.getClass_qna_writer() == loginDto.getMem_num() }">
+				                              		<div class="user_name">${memList[status.index].getMem_nick() }</div>
+				                              		<div style="cursor: pointer; color: #dc3545;" onclick="deleteQna(${dto.getClass_qna_num()})">삭제</div>
+				                              	</c:if>
+				                              	<c:if test="${dto.getClass_qna_writer() != loginDto.getMem_num() }">
+				                              		<div class="user_name">
+				                              			${memList[status.index].getMem_nick().substring(0,1) }
+				                              			<c:forEach begin="2" end="${memList[status.index].getMem_nick().length() }">
+				                              			*
+				                              			</c:forEach>
+				                              		</div>
+				                              	</c:if>
+				                            </div>
 				                              <div>
 				                                 <span class="review_regdate">${dto.getClass_qna_regdate() } 작성<c:if test="${dto.getClass_qna_pri() == 0 }">| 비공개</c:if></span>
 				                              </div>
@@ -80,7 +100,12 @@ $(function() {
 				                        	<div class="review_cont">${dto.getClass_qna_cont() }</div>
 				                        </c:if>
 				                        <c:if test="${dto.getClass_qna_pri() == 0 }">
-				                        	<div class="review_cont">비밀글</div>
+				                        	<c:if test="${dto.getClass_qna_writer() == loginDto.getMem_num() }">
+				                        		<div class="review_cont">${dto.getClass_qna_cont() }</div>
+				                        	</c:if>
+				                        	<c:if test="${dto.getClass_qna_writer() != loginDto.getMem_num() }">
+				                        		<div class="review_cont">비밀글</div>
+				                        	</c:if>
 				                        </c:if>
 				                        
 				                        <!-- 답변이 있을때 -->
@@ -91,7 +116,7 @@ $(function() {
 					                        			<div class="host_img_section">
 					                        				<c:choose>
 														  	  <c:when test="${host.getMem_profileimg() == null}">
-																  <img class="host_img" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+																  <img class="host_img" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.jpg">
 															  </c:when>
 															  <c:otherwise>
 																  <img class="host_img" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${host.getMem_profileimg() }">
@@ -99,7 +124,7 @@ $(function() {
 															</c:choose>
 					                        			</div>
 														<div>
-															<div class="user_name">스노우볼</div>
+															<div class="user_name">${host.getMem_nick() }</div>
 															<div class="review_regdate">${dto.getClass_ans_regdate() }작성<c:if test="${dto.getClass_qna_pri() == 0 }">| 비공개</c:if></div>
 														</div>
 													</div>
@@ -107,7 +132,12 @@ $(function() {
 							                        	<div class="review_cont">${dto.getClass_ans_cont() }</div>
 							                        </c:if>
 							                        <c:if test="${dto.getClass_qna_pri() == 0 }">
-							                        	<div class="review_cont">비밀글</div>
+							                        	<c:if test="${dto.getClass_qna_writer() == loginDto.getMem_num() }">
+							                        		<div class="review_cont">${dto.getClass_qna_cont() }</div>
+							                        	</c:if>
+							                        	<c:if test="${dto.getClass_qna_writer() != loginDto.getMem_num() }">
+							                        		<div class="review_cont">비밀글</div>
+							                        	</c:if>
 							                        </c:if>
 					                        	</div>
 					                        </div>

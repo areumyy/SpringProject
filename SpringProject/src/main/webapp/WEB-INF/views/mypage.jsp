@@ -84,7 +84,7 @@ function handleImgFileSelect(e) {
 												<c:choose>
                                                     <c:when test="${dto.getMem_profileimg() == null}">
                                                         <img alt="프로필 이미지" class="img_style"
-                                                            src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+                                                            src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.jpg">
                                                     </c:when>
                                                     <c:otherwise>
                                                         <img alt="프로필 이미지" class="img_style" id="uploadImge"

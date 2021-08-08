@@ -55,7 +55,7 @@
 											  <!-- (호스트 사진) -->
 				                              <c:choose>
 											  	  <c:when test="${hostInfo[status.index].getMem_profileimg() == null}">
-													  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png" class="user_img">
+													  <img alt="프로필 이미지" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.jpg" class="user_img">
 												  </c:when>
 												  <c:otherwise>
 													  <img alt="${hostInfo[status.index].getMem_profileimg() }" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo[status.index].getMem_profileimg() }" class="host_img">

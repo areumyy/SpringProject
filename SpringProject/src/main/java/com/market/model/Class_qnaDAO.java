@@ -28,4 +28,6 @@ public interface Class_qnaDAO {
 	public List<Class_qnaDTO> getclassQnaList(int num);
 	
 	public int insertQna(Class_qnaDTO dto);
+	public int deleteQna(int class_qna_num);
+	public void setQnaNum(int class_qna_num);
 }

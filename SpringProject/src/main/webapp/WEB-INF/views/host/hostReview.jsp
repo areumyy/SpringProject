@@ -166,7 +166,7 @@ function check(su) {
 								      			<div class="host_img_box">
 								      				<c:if test="${loginDto.getMem_profileimg() == null}">
 							                            <img class="user_img"
-							                                src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+							                                src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.jpg">
 							                        </c:if>
 							                        <c:if test="${loginDto.getMem_profileimg() != null}">
 							                            <img class="user_img"

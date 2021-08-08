@@ -202,6 +202,16 @@
 		
 		insert into frip_class_qna values(#{class_qna_num},#{class_qna_classNum},#{class_qna_writer},#{class_qna_cont},sysdate,default,default,#{class_qna_pri})
 	</insert>
+	
+	<delete id="qna_delete" parameterType="int">
+		delete from frip_class_qna where class_qna_num = #{class_qna_num}
+	</delete>
+	
+	<update id="setQnaNum" parameterType="int">
+	<![CDATA[
+		update frip_class_qna set class_qna_num = class_qna_num - 1 where class_qna_num > #{class_qna_num}
+	]]>
+	</update>
 </mapper>
 
 

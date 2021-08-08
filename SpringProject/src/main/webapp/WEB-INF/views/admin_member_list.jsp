@@ -120,7 +120,7 @@ function checkDel(){
 												<span class="profile_section">
 													<c:choose>
 														<c:when test="${dto.getMem_profileimg() == null}">
-															<img class="profile_img" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+															<img class="profile_img" src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.jpg">
 														</c:when>
 														<c:otherwise>
 															<img class="profile_img" src="<%=request.getContextPath() %>/resources/image/mypage/profile/${dto.getMem_profileimg()}">

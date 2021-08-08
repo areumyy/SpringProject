@@ -118,7 +118,7 @@ function host_like_btn(host_num) {
 										<div class="image-list">
 											<div>
 												<img class= Content_Img3" alt="상품이미지" style="height:500px; width:500px;"
-													src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,q_auto,r_0,w_768/1622920435587-0_hwpjzs">
+													src="<%=request.getContextPath() %>/resources/upload/${fripInfo.getClass_image()}">
 											</div>
 										</div>
 									</div>
@@ -144,24 +144,20 @@ function host_like_btn(host_num) {
 													<div class="Host_Profile_Img">
 														<a href="<%=request.getContextPath() %>/host_info.do?hostMemNum=${hostInfo.getMem_num()}">
 															<div class="Content_Img1">
-																<img class="Content_Img2" width="56" height="56"
-																	src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_1.0,f_auto,h_56,q_auto,w_56/Host_15379_25981_1624984289">
 																<div class="Content_Main2" style="opacity: 1; display: block;">
 																	<div style="display: block;">
 																		<div style="height: 0px; position: relative; width: 100%; padding-top: 100%;">
 																			<div style="height: 100%; left: 0px; position: absolute; top: 0px; width: 100%;">
 																				<c:choose>
-								                                                    <c:when test="${dto.getMem_profileimg() == null}">
+								                                                    <c:when test="${hostInfo.getMem_profileimg() == null}">
 								                                                        <img alt="호스트 프로필 이미지" width="56" height="56"
-								                                                            src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.png">
+								                                                            src="<%=request.getContextPath() %>/resources/image/mypage/profile/profile_no_img.jpg">
 								                                                    </c:when>
 								                                                    <c:otherwise>
 								                                                        <img alt="호스트 프로필 이미지" width="56" height="56"
 								                                                            src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo.getMem_profileimg() }">
 								                                                    </c:otherwise>
 								                                                </c:choose>
-																				<%-- <img alt="호스트 프로필 이미지" width="56" height="56"
-																					src="<%=request.getContextPath() %>/resources/image/mypage/profile/${hostInfo.getMem_profileimg() }"> --%>
 																			</div>
 																		</div>
 																	</div>

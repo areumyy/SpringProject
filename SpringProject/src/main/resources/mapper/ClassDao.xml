@@ -117,7 +117,7 @@
 	<!-- 전체 프립 수 -->
 	<select id="totalallcount" parameterType="int" resultType="int">
 		<![CDATA[
-			select count(*) from frip_class where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+			select count(*) from frip_class where class_startdate > sysdate and class_category1 = (select cate_one from frip_category where cate_num = #{num})
 		]]>
 	</select>
 	
@@ -139,6 +139,7 @@
 			                 order by count desc) b 
 			on c.class_num = b.booking_classNum
 			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+			and class_startdate > sysdate
 		]]>
 	</select>
 	
@@ -160,6 +161,7 @@
 			                 order by count desc) b 
 			on c.class_num = b.class_num
 			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+			and class_startdate > sysdate
 		]]>
 	</select>
 	
@@ -184,6 +186,7 @@
 			      group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+			and class_startdate > sysdate
 			order by b.count desc nulls last, c.class_num asc
 		]]>
 	</select>
@@ -210,6 +213,7 @@
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+			and class_startdate > sysdate
 			order by b.count desc, c.class_num asc
 		]]>
 	</select>
@@ -236,6 +240,7 @@
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_category1 = (select cate_one from frip_category where cate_num = #{num})
+			and class_startdate > sysdate
 			order by c.class_regdate, c.class_num asc
 		]]>
 	</select>
@@ -283,7 +288,7 @@
 	<!-- 하위카테고리 전체 프립 수 -->
 	<select id="totalcount" parameterType="int" resultType="int">
 		<![CDATA[
-			select count(*) from frip_class where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			select count(*) from frip_class where class_startdate > sysdate and class_category2 = (select cate_two from frip_category where cate_num = #{num})
 		]]>
 	</select>
 	
@@ -305,6 +310,7 @@
 			                 order by count desc) b 
 			on c.class_num = b.booking_classNum
 			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			and class_startdate > sysdate
 		]]>
 	</select>
 	
@@ -326,6 +332,7 @@
 			                 order by count desc) b 
 			on c.class_num = b.class_num
 			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			and class_startdate > sysdate
 		]]>
 	</select>
 	
@@ -348,6 +355,7 @@
 			      group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			and class_startdate > sysdate
 			order by b.count desc nulls last, c.class_num asc
 		]]>
 	</select>
@@ -374,6 +382,7 @@
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			and class_startdate > sysdate
 			order by b.count desc, c.class_num asc
 		]]>
 	</select>
@@ -400,6 +409,7 @@
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			and class_startdate > sysdate
 			order by c.class_regdate, c.class_num asc
 		]]>
 	</select>
@@ -418,6 +428,7 @@
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_category2 = (select cate_two from frip_category where cate_num = #{num})
+			and class_startdate > sysdate
 			order by c.class_regdate desc
 		]]>
 	</select>
@@ -504,6 +515,7 @@
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_pass = 1
+			and class_startdate > sysdate
 			order by b.count desc, c.class_num asc
 		]]>
 	</select>
@@ -532,6 +544,7 @@
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_pass = 1
+			and class_startdate > sysdate
 			order by c.class_regdate desc, c.class_num asc
 		]]>
 	</select>
@@ -552,6 +565,7 @@
 			                 group by review_classNum) r 
 			on c.class_num = r.review_classNum
 			where class_pass = 1
+			and class_startdate > sysdate
 			order by c.class_regdate desc
 		]]>
 	</select>
