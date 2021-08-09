@@ -35,7 +35,6 @@
 			
 				<div class="main_page">
 				
-					<!-- 이번주 픽 -->
 					<jsp:useBean id="weekago" class="java.util.Date" />
 					<jsp:setProperty name="weekago" property="time" value="${weekago.time - 60*60*24*1000*7}"/>
 					<fmt:formatDate var="weekago1" value="${weekago }" pattern="yyyy-MM-dd HH:mm:ss" />
@@ -100,6 +99,9 @@
 												</a>
 											</div>
 										</c:forEach>
+									</c:if>
+									<c:if test="${empty list }">
+										<h3>등록된 프립이 없습니다.</h3>
 									</c:if>
 								</div>
 							</section>

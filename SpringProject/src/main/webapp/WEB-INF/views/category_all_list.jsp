@@ -144,6 +144,9 @@
 														
 													</c:forEach>
 												</c:if>
+												<c:if test="${empty list }">
+													<h3>등록된 프립이 없습니다.</h3>
+												</c:if>
 											</div>
 										</section>
 									</div>
@@ -235,7 +238,9 @@
 														
 													</c:forEach>
 												</c:if>
-												
+												<c:if test="${empty list }">
+													<h3>등록된 프립이 없습니다.</h3>
+												</c:if>
 											</div>
 										</section>
 									</div>
@@ -326,7 +331,9 @@
 														
 													</c:forEach>
 												</c:if>
-												
+												<c:if test="${empty list }">
+													<h3>등록된 프립이 없습니다.</h3>
+												</c:if>
 											</div>
 										</section>
 									</div>

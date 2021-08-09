@@ -252,6 +252,11 @@ div {
 	width: calc(20% - 12px) !important;
 }
 
+.category_List1>h3{
+	width: 100% !important;
+	color: #c9c9c9;
+}
+
 .Category_List1>:nth-child(5n) {
 	margin-right: 0px;
 }

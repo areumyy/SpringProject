@@ -220,6 +220,9 @@
 											</div>
 										</c:forEach>
 									</c:if>
+									<c:if test="${empty weekBestList }">
+										<h3>등록된 프립이 없습니다.</h3>
+									</c:if>
 								</div>
 							</section>
 						</div>
@@ -288,6 +291,9 @@
 											</div>
 										</c:forEach>
 									</c:if>
+									<c:if test="${empty newList }">
+										<h3>등록된 프립이 없습니다.</h3>
+									</c:if>
 								</div>
 							</section>
 						</div>
@@ -355,6 +361,9 @@
 												</a>
 											</div>
 										</c:forEach>
+									</c:if>
+									<c:if test="${empty saleList }">
+										<h3>등록된 프립이 없습니다.</h3>
 									</c:if>
 								</div>
 							</section>

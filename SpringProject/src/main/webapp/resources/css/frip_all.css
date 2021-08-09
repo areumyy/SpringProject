@@ -158,6 +158,11 @@
 	width: 224px;
 }
 
+.class_group>h3 {
+	width: 100%;
+	color: #c9c9c9;	
+}
+
 .class_item_link {
 	min-height: 1px;
 }

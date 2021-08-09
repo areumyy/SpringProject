@@ -661,11 +661,6 @@ public class MarketController {
 		return "host_info_reviewSort";
 	}
 
-	/*
-	 * @RequestMapping("category_list.do") public String cateList() { return
-	 * "category_list"; }
-	 */
-
 	@RequestMapping("option_select.do")
 	public String optionSel(@RequestParam("class_num") int class_num, Model model) {
 

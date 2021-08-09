@@ -33,7 +33,7 @@
 			<div class="Category_Main1">
 				<div class="Category_Main2" style="opacity: 1; display: block;">
 					<div class="Category_Name">
-						<span>${cate_name.getClass_category1() }</span>
+						<span>${cate_name.getClass_category2() }</span>
 					</div>
 					<c:set var="category_num" value="${category_num }" />
 					<div>
@@ -145,6 +145,9 @@
 														
 													</c:forEach>
 												</c:if>
+												<c:if test="${empty list }">
+													<h3>등록된 프립이 없습니다.</h3>
+												</c:if>
 											</div>
 										</section>
 									</div>
@@ -232,7 +235,9 @@
 														
 													</c:forEach>
 												</c:if>
-												
+												<c:if test="${empty list }">
+													<h3>등록된 프립이 없습니다.</h3>
+												</c:if>
 											</div>
 										</section>
 									</div>
@@ -316,10 +321,11 @@
 																</div>
 															</a>
 														</div>
-														
 													</c:forEach>
 												</c:if>
-												
+												<c:if test="${empty list }">
+													<h3>등록된 프립이 없습니다.</h3>
+												</c:if>
 											</div>
 										</section>
 									</div>

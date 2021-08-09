@@ -34,7 +34,6 @@
 			
 				<div class="main_page">
 
-					<!-- 이번주 픽 -->
 					<jsp:useBean id="weekago" class="java.util.Date" />
 					<jsp:setProperty name="weekago" property="time" value="${weekago.time - 60*60*24*1000*7}"/>
 					<fmt:formatDate var="weekago1" value="${weekago }" pattern="yyyy-MM-dd HH:mm:ss" />
@@ -46,7 +45,7 @@
 										<h2 class="class_list_title">"${search_input}" &nbsp;검색결과</h2>
 									</div>
 									<div class="class_list_all">
-										<a class="class_list_all_link" href="<%=request.getContextPath() %>/frip_all.do?type=best">전체보기</a>
+										<a class="class_list_all_link" href="<%=request.getContextPath() %>/main.do">메인으로</a>
 									</div>
 								</div>
 									<div class="class_group">
