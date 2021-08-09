@@ -21,4 +21,9 @@ public class CategoryDAOImpl implements CategoryDAO {
 	public List<CategoryDTO> getCate_two(String cate_one) {
 		return this.sqlSession.selectList("cate_two_list", cate_one);
 	}
+
+	@Override
+	public CategoryDTO getCategoryCont(int category_num) {
+		return this.sqlSession.selectOne("cate_cont", category_num);
+	}
 }

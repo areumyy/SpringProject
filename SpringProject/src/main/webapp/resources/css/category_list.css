@@ -443,3 +443,8 @@ div {
 	font-size: 13px;
 	text-align: center;
 }
+
+.active {
+	font-weight: bold;
+	color: rgb(51, 151, 255) !important;
+}

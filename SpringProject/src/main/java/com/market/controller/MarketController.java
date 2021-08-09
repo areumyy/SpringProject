@@ -2292,7 +2292,9 @@ public class MarketController {
 		model.addAttribute("NewAllCount", newallcount);
 
 		// 카테고리 이름
-		ClassDTO categoryname = this.classDao.getCategoryName(category_num);
+		// ClassDTO categoryname = this.classDao.getCategoryName(category_num);
+		CategoryDTO categoryname = this.categoryDao.getCategoryCont(category_num);
+		
 		// 하위카테고리 이름 리스트 가져오기
 		List<ClassDTO> categorynameList = this.classDao.getCategoryNameList(category_num);
 
@@ -2331,7 +2333,9 @@ public class MarketController {
 		model.addAttribute("NewCount", newcount);
 
 		// 카테고리 이름
-		ClassDTO categoryname = this.classDao.getCategoryName(category_num);
+		//ClassDTO categoryname = this.classDao.getCategoryName(category_num);
+		CategoryDTO categoryname = this.categoryDao.getCategoryCont(category_num);
+		
 		// 하위카테고리 이름 리스트 가져오기
 		List<ClassDTO> categorynameList = this.classDao.getCategoryNameList(category_num);
 

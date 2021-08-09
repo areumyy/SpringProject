@@ -33,7 +33,7 @@
 			<div class="Category_Main1">
 				<div class="Category_Main2" style="opacity: 1; display: block;">
 					<div class="Category_Name">
-						<span>${cate_name.getClass_category2() }</span>
+						<span>${cate_name.getCate_two() }</span>
 					</div>
 					<c:set var="category_num" value="${category_num }" />
 					<div>
@@ -43,7 +43,12 @@
 							<c:set var="list" value="${CategoryNameList }" />
 							<c:if test="${!empty list }">
 								<c:forEach items="${list }" var="dto">
-									<a href="<%=request.getContextPath() %>/category_list.do?num=${dto.getCate_num() }">${dto.getCate_two() }</a>
+									<c:if test="${cate_name.getCate_two() == dto.getCate_two() }">
+										<a href="<%=request.getContextPath() %>/category_list.do?num=${dto.getCate_num() }" class="active">${dto.getCate_two() }</a>
+									</c:if>
+									<c:if test="${cate_name.getCate_two() != dto.getCate_two() }">
+										<a href="<%=request.getContextPath() %>/category_list.do?num=${dto.getCate_num() }">${dto.getCate_two() }</a>
+									</c:if>
 								</c:forEach>
 							</c:if>
 						</div>
@@ -60,7 +65,7 @@
 								<div>
 									<div class="Category_Title" font-size="14px">
 										<div class="Category_Title1" font-size="18">
-											<h2 class="Category_Title2">인기 ${cate_name.getClass_category2() }</h2>
+											<h2 class="Category_Title2">인기 ${cate_name.getCate_two() }</h2>
 											<span class="Category_Title_Count">${TotalCount }</span>
 										</div>
 										<c:if test="${TotalCount == 0 }">
@@ -158,7 +163,7 @@
 									<div font-size="14px"
 										class="Category_Title">
 										<div font-size="18" class="Category_Title1">
-											<h2 class="Category_Title2">금주의 ${cate_name.getClass_category2() }</h2>
+											<h2 class="Category_Title2">금주의 ${cate_name.getCate_two() }</h2>
 											<span class="Category_Title_Count">${WeekCount }</span>
 										</div>
 										<c:if test="${WeekCount == 0 }">
@@ -247,7 +252,7 @@
 								<div>
 									<div class="Category_Title" font-size="14px">
 										<div class="Category_Title1" font-size="18">
-											<h2 class="Category_Title2">신규 ${cate_name.getClass_category2() }</h2>
+											<h2 class="Category_Title2">신규 ${cate_name.getCate_two() }</h2>
 											<span class="Category_Title_Count">${NewCount }</span>
 										</div>
 										<c:if test="${NewCount == 0 }">
@@ -334,7 +339,7 @@
 	      						<c:if test="${TotalCount == 0 }">
 									<div class="Category_List_All2" font-size="13px">
 										<a class="Category_List_All3" href="#">
-											${TotalCount }개의 ${cate_name.getClass_category2() } 전체보기
+											${TotalCount }개의 ${cate_name.getCate_two() } 전체보기
 										</a>
 									</div>
 								</c:if>
@@ -342,7 +347,7 @@
 									<div class="Category_List_All2" font-size="13px">
 										<a class="Category_List_All3"
 											href="<%=request.getContextPath() %>/category_more_list.do?num=${cate_name.getCate_num() }&title1=전체&title2=프립">
-											${TotalCount }개의 ${cate_name.getClass_category2() } 전체보기
+											${TotalCount }개의 ${cate_name.getCate_two() } 전체보기
 										</a>
 									</div>
 								</c:if>

@@ -485,7 +485,7 @@ function host_like_btn(host_num) {
 										<h4 class="Content_Intro4">진행 장소</h4>
 									</header>
 									<div class="Content_Intro5">
-										${fn:replace(fripInfo.getClass_endAreaDetail(), cn, br) }
+										${fripInfo.getClass_endArea()}
 									</div>
 								</section>
 								

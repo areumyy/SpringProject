@@ -13,4 +13,7 @@
 		select cate_two from frip_category where cate_one = #{cate_one}
 	</select>
 	
+	<select id="cate_cont" parameterType="int" resultType="com.market.model.CategoryDTO">
+		select * from frip_category where cate_num = #{cate_num}
+	</select>
 </mapper>
